@@ -40,7 +40,6 @@ namespace BankReplication
 
         public static BindingSource bds_dspm = new BindingSource(); // giữa bdsPM khi đăng nhập 
 
-        // TODO create public property for form main
 
         [STAThread]
         static void Main()

@@ -16,16 +16,32 @@ namespace BankReplication.form
         public formDangNhap()
         {
             InitializeComponent();
+            AfterLoad();
         }
 
+        private void AfterLoad()
+        {
+
+            // Make chi nhanh non editable
+            cmbChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.btnDangNhap.Appearance.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnDangNhap.Appearance.Options.UseBackColor = true;
+
+        }
         private void fDangNhap_Load(object sender, EventArgs e)
         {
+            StartPosition = FormStartPosition.CenterScreen; 
+            // Make form content center of parrent mdi
+            panelContainer.Location = new Point(
+                this.ClientSize.Width / 2 - panelContainer.Size.Width / 2,
+                this.ClientSize.Height / 2 - panelContainer.Size.Height / 2);
+            panelContainer.Anchor = AnchorStyles.None;
+
         }
 
 
         public static int KetNoiCSDLGoc()
         {
-            //TODO: rebuild this for form dang nhap
             // Close old connection avoid system close connection time out 
             if(Program.conn !=null && Program.conn.State == System.Data.ConnectionState.Open)
             {
@@ -54,6 +70,16 @@ namespace BankReplication.form
         private void textEdit1_EditValueChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void panelControl4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnThoat_CheckedChanged(object sender, EventArgs e)
+        {
+            MdiParent.Close();
         }
     }
 }

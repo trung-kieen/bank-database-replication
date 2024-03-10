@@ -48,11 +48,11 @@
             this.NHOM = new System.Windows.Forms.ToolStripStatusLabel();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
-            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.rbChuyenKhoan = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbKhachHang = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbNhanVien = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
+            this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
@@ -78,7 +78,7 @@
             this.rbQuanLy,
             this.rbGiaoDich,
             this.rbBaoCao});
-            this.rbControl.Size = new System.Drawing.Size(1516, 231);
+            this.rbControl.Size = new System.Drawing.Size(1312, 231);
             this.rbControl.Click += new System.EventHandler(this.rbControl_Click);
             // 
             // barButtonItem1
@@ -161,9 +161,9 @@
             this.MANV,
             this.HOTEN,
             this.NHOM});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 662);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 812);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1516, 30);
+            this.statusStrip1.Size = new System.Drawing.Size(1312, 30);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
@@ -196,14 +196,6 @@
             // 
             this.xtraTabbedMdiManager1.MdiParent = null;
             // 
-            // documentManager1
-            // 
-            this.documentManager1.MdiParent = this;
-            this.documentManager1.MenuManager = this.rbControl;
-            this.documentManager1.View = this.tabbedView1;
-            this.documentManager1.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] {
-            this.tabbedView1});
-            // 
             // rbChuyenKhoan
             // 
             this.rbChuyenKhoan.Name = "rbChuyenKhoan";
@@ -219,12 +211,20 @@
             this.rbNhanVien.Name = "rbNhanVien";
             this.rbNhanVien.Text = "Nhân viên";
             // 
+            // documentManager1
+            // 
+            this.documentManager1.MdiParent = this;
+            this.documentManager1.MenuManager = this.rbControl;
+            this.documentManager1.View = this.tabbedView1;
+            this.documentManager1.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] {
+            this.tabbedView1});
+            // 
             // formMain
             // 
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1516, 692);
+            this.ClientSize = new System.Drawing.Size(1312, 842);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.rbControl);
             this.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -232,7 +232,6 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "formMain";
             this.Ribbon = this.rbControl;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "formMain";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).EndInit();
@@ -263,14 +262,14 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
-        private DevExpress.XtraBars.Docking2010.DocumentManager documentManager1;
-        private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
         private DevExpress.XtraBars.BarButtonItem btnDangNhap;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbChuyenKhoan;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbKhachHang;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbNhanVien;
         private DevExpress.XtraBars.BarButtonItem btnDangXuat;
+        private DevExpress.XtraBars.Docking2010.DocumentManager documentManager1;
+        private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
     }
 }
 
