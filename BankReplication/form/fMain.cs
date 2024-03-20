@@ -15,10 +15,10 @@ namespace BankReplication
         public formMain()
         {
             InitializeComponent();
-            AfterLoad();
+            CustomLoad();
         }
         
-        private void AfterLoad()
+        private void CustomLoad()
         {
             StartPosition = FormStartPosition.CenterScreen;
             btnDangNhap.PerformClick();

@@ -22,5 +22,15 @@ namespace BankReplication.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=TM\\NGANHANG;Initial Catalog=NGANHANG;User ID=sa;Password=kc")]
+        public string NGANHANGConnectionString {
+            get {
+                return ((string)(this["NGANHANGConnectionString"]));
+            }
+        }
     }
 }

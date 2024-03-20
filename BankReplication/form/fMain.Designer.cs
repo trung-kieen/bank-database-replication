@@ -62,6 +62,9 @@
             // 
             // rbControl
             // 
+            // 
+            // 
+            // 
             this.rbControl.ExpandCollapseItem.Id = 0;
             this.rbControl.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.rbControl.ExpandCollapseItem,
@@ -112,8 +115,6 @@
             // 
             // ribbonPageGroup3
             // 
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnDangNhap);
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnDangXuat);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             // 
             // rbQuanLy
@@ -161,9 +162,9 @@
             this.MANV,
             this.HOTEN,
             this.NHOM});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 812);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 810);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1312, 30);
+            this.statusStrip1.Size = new System.Drawing.Size(1312, 32);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);

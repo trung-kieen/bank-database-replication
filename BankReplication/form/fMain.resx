@@ -117,11 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="rbControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnDangNhap.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAHipJREFUeF7t3VusbWd53+Ftgh2qYMDEci/apAJHPd3ENCBV6umiym0VGxNBojoN
+        EgAACxIB0t1+/AAAHipJREFUeF7t3VusbWd53+Ftgh2qYMDEci/apAJHPd3ENCBV6umiym0VGxNBojoN
         RY0qVaUYKxcFjE3TEk5O1aZtbkiEOPimuaioY9L2IqGgFmIStz4QqeWQKKIY8AFoC6bF7ftt423vvf9r
         73WYa8wxvvf5SY+E1j7hMd7xfWPNOdecZ6RT7rry6nJnubt8pnyhPFa+U/4fQFNjDRxr4VgT7ytjjRxr
         5Vgzx9opba5XlrvKg+WpkgYfgIONtXOsoe8rP1ak1XZ1ua18tqRhBuD4Hi5vLmOtlVbRS8svlPEwVhpa
@@ -384,12 +387,12 @@
 </value>
   </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, -9</value>
+    <value>160, 17</value>
   </metadata>
   <metadata name="xtraTabbedMdiManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>175, 17</value>
+    <value>320, 17</value>
   </metadata>
   <metadata name="documentManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>444, 17</value>
+    <value>585, 17</value>
   </metadata>
 </root>

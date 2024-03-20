@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtPassword = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.inputPassword = new System.Windows.Forms.TextBox();
@@ -36,10 +37,14 @@
             this.txtTaiKhoan = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.cmbChiNhanh = new System.Windows.Forms.ComboBox();
+            this.NGANHANGDATASET = new BankReplication.NGANHANGDataSet();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.uvGetSubcribersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnDangNhap = new DevExpress.XtraEditors.CheckButton();
             this.btnThoat = new DevExpress.XtraEditors.CheckButton();
             this.panelContainer = new DevExpress.XtraEditors.PanelControl();
+            this.uv_GetSubcribersTableAdapter = new BankReplication.NGANHANGDataSetTableAdapters.uv_GetSubcribersTableAdapter();
+            this.uvGetSubcribersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -47,8 +52,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.inputTaiKhoan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NGANHANGDATASET)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelContainer)).BeginInit();
             this.panelContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPassword
@@ -115,11 +123,20 @@
             // 
             // cmbChiNhanh
             // 
+            //            this.cmbChiNhanh.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.uvGetSubcribersBindingSource1, "TENCN", true));
+            this.cmbChiNhanh.DataSource = this.uvGetSubcribersBindingSource;
+            this.cmbChiNhanh.DisplayMember = "TENCN";
             this.cmbChiNhanh.FormattingEnabled = true;
             this.cmbChiNhanh.Location = new System.Drawing.Point(96, 2);
             this.cmbChiNhanh.Name = "cmbChiNhanh";
             this.cmbChiNhanh.Size = new System.Drawing.Size(329, 27);
             this.cmbChiNhanh.TabIndex = 1;
+            this.cmbChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmbChiNhanh_SelectedIndexChanged);
+            // 
+            // NGANHANGDATASET
+            // 
+            this.NGANHANGDATASET.DataSetName = "NGANHANGDataSet";
+            this.NGANHANGDATASET.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // labelControl1
             // 
@@ -162,6 +179,15 @@
             this.panelContainer.TabIndex = 0;
             this.panelContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl4_Paint);
             // 
+            // uv_GetSubcribersTableAdapter
+            // 
+            this.uv_GetSubcribersTableAdapter.ClearBeforeFill = true;
+            // 
+            // uvGetSubcribersBindingSource1
+            // 
+            this.uvGetSubcribersBindingSource1.DataMember = "uv_GetSubcribers";
+            this.uvGetSubcribersBindingSource1.DataSource = this.NGANHANGDATASET;
+            // 
             // formDangNhap
             // 
             this.Appearance.Options.UseFont = true;
@@ -184,8 +210,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NGANHANGDATASET)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelContainer)).EndInit();
             this.panelContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -203,5 +232,9 @@
         private DevExpress.XtraEditors.CheckButton btnDangNhap;
         private DevExpress.XtraEditors.CheckButton btnThoat;
         private DevExpress.XtraEditors.PanelControl panelContainer;
+        private NGANHANGDataSet NGANHANGDATASET;
+        private System.Windows.Forms.BindingSource uvGetSubcribersBindingSource;
+        private NGANHANGDataSetTableAdapters.uv_GetSubcribersTableAdapter uv_GetSubcribersTableAdapter;
+        private System.Windows.Forms.BindingSource uvGetSubcribersBindingSource1;
     }
 }
