@@ -92,7 +92,7 @@ namespace BankReplication
             try
             {
                 myReader = sqlcmd.ExecuteReader();
-                Program.conn.Close();
+                // Do not close connection here, it cause myReader unable to read
                 return myReader;
             }
             catch (Exception e)
@@ -160,6 +160,7 @@ namespace BankReplication
             }
 
         }
+
 
     }
 

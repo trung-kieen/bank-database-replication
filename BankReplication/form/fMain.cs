@@ -16,7 +16,10 @@ namespace BankReplication
         {
             InitializeComponent();
             CustomLoad();
+
         }
+
+        
         
         private void CustomLoad()
         {
@@ -26,7 +29,6 @@ namespace BankReplication
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            RbVisible(false);
         }
 
 
@@ -48,28 +50,16 @@ namespace BankReplication
 
         }
         
-        private void RbVisible(bool isDisplay)
+        private void RbVisible(bool displayState)
         {
-            rbBaoCao.Visible = isDisplay;
-            rbChuyenKhoan.Visible = isDisplay;
-            rbHeThong.Visible = isDisplay;
-            rbQuanLy.Visible = isDisplay;
+            rbBaoCao.Visible = displayState;
+            rbChuyenKhoan.Visible = displayState;
+            rbHeThong.Visible = displayState;
+            rbGiaoDich.Visible = displayState;
+            rbQuanLy.Visible = displayState;
         }
 
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
 
-        }
-
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rbControl_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnDangNhap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -85,6 +75,25 @@ namespace BankReplication
             }
 
 
+            // Reset element when user login
+            this.MANV.Text = "MÃ NV";
+            this.HOTEN.Text = "HỌ TÊN";
+            this.NHOM.Text = "NHÓM";
+            RbVisible(false);
+
         }
+
+
+
+        public void HienThiMenu()
+        {
+            MANV.Text = "MÃ NV: " + Program.username;
+            HOTEN.Text = "HỌ TÊN: " + Program.mHoTen;
+            NHOM.Text = "NHÓM: " + Program.mGroup;
+            RbVisible(true);
+            rbControl.SelectPage(this.rbHeThong);
+
+        }
+
     }
 }

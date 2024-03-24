@@ -37,9 +37,9 @@
             this.txtTaiKhoan = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.cmbChiNhanh = new System.Windows.Forms.ComboBox();
-            this.NGANHANGDATASET = new BankReplication.NGANHANGDataSet();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.uvGetSubcribersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.NGANHANGDATASET = new BankReplication.NGANHANGDataSet();
             this.btnDangNhap = new DevExpress.XtraEditors.CheckButton();
             this.btnThoat = new DevExpress.XtraEditors.CheckButton();
             this.panelContainer = new DevExpress.XtraEditors.PanelControl();
@@ -52,8 +52,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.inputTaiKhoan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NGANHANGDATASET)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGANHANGDATASET)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelContainer)).BeginInit();
             this.panelContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource1)).BeginInit();
@@ -66,7 +66,6 @@
             this.txtPassword.Size = new System.Drawing.Size(64, 19);
             this.txtPassword.TabIndex = 0;
             this.txtPassword.Text = "Mật khẩu";
-            this.txtPassword.Click += new System.EventHandler(this.labelControl2_Click);
             // 
             // panelControl1
             // 
@@ -85,6 +84,7 @@
             this.inputPassword.PasswordChar = '*';
             this.inputPassword.Size = new System.Drawing.Size(329, 27);
             this.inputPassword.TabIndex = 3;
+            this.inputPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputPassword_KeyDown);
             // 
             // panelControl2
             // 
@@ -102,6 +102,7 @@
             this.inputTaiKhoan.Name = "inputTaiKhoan";
             this.inputTaiKhoan.Size = new System.Drawing.Size(329, 28);
             this.inputTaiKhoan.TabIndex = 2;
+            this.inputTaiKhoan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.inputTaiKhoan_KeyDown);
             // 
             // txtTaiKhoan
             // 
@@ -123,7 +124,6 @@
             // 
             // cmbChiNhanh
             // 
-            //            this.cmbChiNhanh.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.uvGetSubcribersBindingSource1, "TENCN", true));
             this.cmbChiNhanh.DataSource = this.uvGetSubcribersBindingSource;
             this.cmbChiNhanh.DisplayMember = "TENCN";
             this.cmbChiNhanh.FormattingEnabled = true;
@@ -133,11 +133,6 @@
             this.cmbChiNhanh.TabIndex = 1;
             this.cmbChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmbChiNhanh_SelectedIndexChanged);
             // 
-            // NGANHANGDATASET
-            // 
-            this.NGANHANGDATASET.DataSetName = "NGANHANGDataSet";
-            this.NGANHANGDATASET.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // labelControl1
             // 
             this.labelControl1.Location = new System.Drawing.Point(5, 5);
@@ -145,6 +140,11 @@
             this.labelControl1.Size = new System.Drawing.Size(74, 19);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Chi Nhánh";
+            // 
+            // NGANHANGDATASET
+            // 
+            this.NGANHANGDATASET.DataSetName = "NGANHANGDataSet";
+            this.NGANHANGDATASET.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnDangNhap
             // 
@@ -154,6 +154,7 @@
             this.btnDangNhap.TabIndex = 1;
             this.btnDangNhap.TabStop = false;
             this.btnDangNhap.Text = "Đăng nhập";
+            this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);
             // 
             // btnThoat
             // 
@@ -163,7 +164,7 @@
             this.btnThoat.TabIndex = 0;
             this.btnThoat.TabStop = false;
             this.btnThoat.Text = "Thoát";
-            this.btnThoat.CheckedChanged += new System.EventHandler(this.btnThoat_CheckedChanged);
+            this.btnThoat.CheckedChanged += new System.EventHandler(this.btnThoat_Click);
             // 
             // panelContainer
             // 
@@ -177,7 +178,6 @@
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(529, 303);
             this.panelContainer.TabIndex = 0;
-            this.panelContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl4_Paint);
             // 
             // uv_GetSubcribersTableAdapter
             // 
@@ -210,8 +210,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NGANHANGDATASET)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NGANHANGDATASET)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelContainer)).EndInit();
             this.panelContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource1)).EndInit();

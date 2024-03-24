@@ -31,12 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
             this.rbControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnDangNhap = new DevExpress.XtraBars.BarButtonItem();
             this.btnDangXuat = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddAccount = new DevExpress.XtraBars.BarButtonItem();
             this.rbHeThong = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.loginManagerPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.addAccountRbPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbQuanLy = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbGiaoDich = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rbMoTaiKhoan = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbGuiRut = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -53,48 +55,42 @@
             this.rbNhanVien = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             this.SuspendLayout();
             // 
             // rbControl
-            // 
-            // 
-            // 
             // 
             this.rbControl.ExpandCollapseItem.Id = 0;
             this.rbControl.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.rbControl.ExpandCollapseItem,
             this.rbControl.SearchEditItem,
-            this.barButtonItem1,
             this.btnDangNhap,
-            this.btnDangXuat});
+            this.btnDangXuat,
+            this.btnAddAccount});
+            this.rbControl.LargeImages = this.imageCollection1;
             this.rbControl.Location = new System.Drawing.Point(0, 0);
             this.rbControl.Margin = new System.Windows.Forms.Padding(5);
-            this.rbControl.MaxItemId = 6;
+            this.rbControl.MaxItemId = 8;
             this.rbControl.Name = "rbControl";
             this.rbControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.rbHeThong,
             this.rbQuanLy,
             this.rbGiaoDich,
             this.rbBaoCao});
-            this.rbControl.Size = new System.Drawing.Size(1312, 231);
-            this.rbControl.Click += new System.EventHandler(this.rbControl_Click);
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "barButtonItem1";
-            this.barButtonItem1.Id = 2;
-            this.barButtonItem1.Name = "barButtonItem1";
+            this.rbControl.Size = new System.Drawing.Size(1312, 200);
             // 
             // btnDangNhap
             // 
             this.btnDangNhap.Caption = "Đăng nhập";
             this.btnDangNhap.Id = 4;
-            this.btnDangNhap.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDangNhap.ImageOptions.Image")));
+            this.btnDangNhap.ImageOptions.LargeImageIndex = 1;
             this.btnDangNhap.Name = "btnDangNhap";
             this.btnDangNhap.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDangNhap_ItemClick);
             // 
@@ -102,26 +98,49 @@
             // 
             this.btnDangXuat.Caption = "Đăng xuất";
             this.btnDangXuat.Id = 5;
-            this.btnDangXuat.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDangXuat.ImageOptions.Image")));
+            this.btnDangXuat.ImageOptions.LargeImageIndex = 2;
             this.btnDangXuat.Name = "btnDangXuat";
+            // 
+            // btnAddAccount
+            // 
+            this.btnAddAccount.Caption = "Tạo tài khoản";
+            this.btnAddAccount.Id = 7;
+            this.btnAddAccount.ImageOptions.LargeImageIndex = 0;
+            this.btnAddAccount.Name = "btnAddAccount";
             // 
             // rbHeThong
             // 
             this.rbHeThong.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup3});
+            this.loginManagerPageGroup,
+            this.addAccountRbPageGroup});
             this.rbHeThong.Name = "rbHeThong";
             this.rbHeThong.Text = "Hệ thống";
             this.rbHeThong.Visible = false;
             // 
-            // ribbonPageGroup3
+            // loginManagerPageGroup
             // 
-            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.loginManagerPageGroup.ItemLinks.Add(this.btnDangNhap);
+            this.loginManagerPageGroup.ItemLinks.Add(this.btnDangXuat, true);
+            this.loginManagerPageGroup.Name = "loginManagerPageGroup";
+            // 
+            // addAccountRbPageGroup
+            // 
+            this.addAccountRbPageGroup.ImageOptions.Image = global::BankReplication.Properties.Resources.add_account;
+            this.addAccountRbPageGroup.ItemLinks.Add(this.btnAddAccount);
+            this.addAccountRbPageGroup.Name = "addAccountRbPageGroup";
             // 
             // rbQuanLy
             // 
+            this.rbQuanLy.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup4});
             this.rbQuanLy.Name = "rbQuanLy";
             this.rbQuanLy.Text = "Quản lý";
             this.rbQuanLy.Visible = false;
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "ribbonPageGroup4";
             // 
             // rbGiaoDich
             // 
@@ -162,31 +181,29 @@
             this.MANV,
             this.HOTEN,
             this.NHOM});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 810);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 812);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1312, 32);
+            this.statusStrip1.Size = new System.Drawing.Size(1312, 30);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
-            this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
             // 
             // MANV
             // 
             this.MANV.Name = "MANV";
-            this.MANV.Size = new System.Drawing.Size(64, 25);
-            this.MANV.Text = "MANV";
-            this.MANV.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            this.MANV.Size = new System.Drawing.Size(69, 25);
+            this.MANV.Text = "MÃ NV";
             // 
             // HOTEN
             // 
             this.HOTEN.Name = "HOTEN";
-            this.HOTEN.Size = new System.Drawing.Size(69, 25);
-            this.HOTEN.Text = "HOTEN";
+            this.HOTEN.Size = new System.Drawing.Size(75, 25);
+            this.HOTEN.Text = "HỌ TÊN";
             // 
             // NHOM
             // 
             this.NHOM.Name = "NHOM";
             this.NHOM.Size = new System.Drawing.Size(68, 25);
-            this.NHOM.Text = "NHOM";
+            this.NHOM.Text = "NHÓM";
             // 
             // ribbonPageGroup1
             // 
@@ -220,6 +237,20 @@
             this.documentManager1.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] {
             this.tabbedView1});
             // 
+            // imageCollection1
+            // 
+            this.imageCollection1.ImageSize = new System.Drawing.Size(40, 40);
+            this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
+            this.imageCollection1.Images.SetKeyName(0, "add_account.png");
+            this.imageCollection1.Images.SetKeyName(1, "login.png");
+            this.imageCollection1.Images.SetKeyName(2, "logout.png");
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // formMain
             // 
             this.Appearance.Options.UseFont = true;
@@ -233,7 +264,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "formMain";
             this.Ribbon = this.rbControl;
-            this.Text = "formMain";
+            this.Text = "";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).EndInit();
             this.statusStrip1.ResumeLayout(false);
@@ -241,6 +272,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,16 +293,20 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPage rbBaoCao;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
         private DevExpress.XtraBars.BarButtonItem btnDangNhap;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup loginManagerPageGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbChuyenKhoan;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbKhachHang;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbNhanVien;
         private DevExpress.XtraBars.BarButtonItem btnDangXuat;
         private DevExpress.XtraBars.Docking2010.DocumentManager documentManager1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private DevExpress.XtraBars.BarButtonItem btnAddAccount;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup addAccountRbPageGroup;
+        private DevExpress.Utils.ImageCollection imageCollection1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 
