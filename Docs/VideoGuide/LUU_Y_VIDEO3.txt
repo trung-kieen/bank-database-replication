@@ -1,0 +1,1 @@
+LƯU Ý: T SP_LayThongTinNhanVien, SP_TaoLogin ở site chính rồi phân mảnh sang các site con bằng dịch vụ agent nên trong video số 3 có một chút nhầm lẫn khi tạo SP ở trong site con!
