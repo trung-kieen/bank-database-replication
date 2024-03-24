@@ -178,8 +178,9 @@ namespace BankReplication.form
                 }
             try
             {
-            Program.mHoTen = Program.myReader.GetString(1) != null ?  Program.myReader.GetString(1) : "" ;
-            Program.mGroup = Program.myReader.GetString(2) != null ?  Program.myReader.GetString(2) : "" ;
+
+            Program.mHoTen = Program.myReader.GetString(1) == null ? "" :  Program.myReader.GetString(1)  ;
+            Program.mGroup = Program.myReader.GetString(2) == null ? "" :  Program.myReader.GetString(2) ;
             }
             catch
             {
