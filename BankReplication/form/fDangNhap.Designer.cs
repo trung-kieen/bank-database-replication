@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.txtPassword = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.inputPassword = new System.Windows.Forms.TextBox();
@@ -38,12 +37,9 @@
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.cmbChiNhanh = new System.Windows.Forms.ComboBox();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.NhanVienDS= new BankReplication.NhanVienDS();
             this.btnDangNhap = new DevExpress.XtraEditors.CheckButton();
             this.btnThoat = new DevExpress.XtraEditors.CheckButton();
             this.panelContainer = new DevExpress.XtraEditors.PanelControl();
-            this.uvGetSubcribersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.uvGetSubcribersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -51,11 +47,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.inputTaiKhoan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NhanVienDS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelContainer)).BeginInit();
             this.panelContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uvGetSubcribersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPassword
@@ -123,7 +116,6 @@
             // 
             // cmbChiNhanh
             // 
-            this.cmbChiNhanh.DataSource = this.uvGetSubcribersBindingSource;
             this.cmbChiNhanh.DisplayMember = "TENCN";
             this.cmbChiNhanh.FormattingEnabled = true;
             this.cmbChiNhanh.Location = new System.Drawing.Point(96, 2);
@@ -139,11 +131,6 @@
             this.labelControl1.Size = new System.Drawing.Size(74, 19);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Chi Nhánh";
-            // 
-            // NhanVienDS
-            // 
-            this.NhanVienDS.DataSetName = "NhanVienDS";
-            this.NhanVienDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // btnDangNhap
             // 
@@ -178,11 +165,6 @@
             this.panelContainer.Size = new System.Drawing.Size(529, 303);
             this.panelContainer.TabIndex = 0;
             // 
-            // uvGetSubcribersBindingSource1
-            // 
-            this.uvGetSubcribersBindingSource1.DataMember = "uv_GetSubcribers";
-            this.uvGetSubcribersBindingSource1.DataSource = this.NhanVienDS;
-            // 
             // formDangNhap
             // 
             this.Appearance.Options.UseFont = true;
@@ -205,7 +187,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NhanVienDS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelContainer)).EndInit();
             this.panelContainer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -225,8 +206,8 @@
         private DevExpress.XtraEditors.CheckButton btnDangNhap;
         private DevExpress.XtraEditors.CheckButton btnThoat;
         private DevExpress.XtraEditors.PanelControl panelContainer;
-        private NhanVienDS NhanVienDS;
-        private System.Windows.Forms.BindingSource uvGetSubcribersBindingSource;
-        private System.Windows.Forms.BindingSource uvGetSubcribersBindingSource1;
+//        private NhanVienDS NhanVienDS;
+//        private System.Windows.Forms.BindingSource uvGetSubcribersBindingSource;
+//        private System.Windows.Forms.BindingSource uvGetSubcribersBindingSource1;
     }
 }

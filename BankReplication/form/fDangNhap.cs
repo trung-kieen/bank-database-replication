@@ -28,9 +28,10 @@ namespace BankReplication.form
                 // Success
                 return 1;
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message, "", MessageBoxButtons.OK);
+//                MessageBox.Show(e.State);
+                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n" +  e.Message , "", MessageBoxButtons.OK);
                 // Error
                 return 0;
             }
@@ -128,7 +129,8 @@ namespace BankReplication.form
             Program.mlogin = inputTaiKhoan.Text;
             Program.password = inputPassword.Text;
 
-            if (Program.KetNoi() == 0)
+            String errorDescribe = "Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password và kết nối tới máy chủ.\n ";
+            if (Program.KetNoi(errorDescribe) == 0)
             {
                 return;
             }
@@ -174,28 +176,6 @@ namespace BankReplication.form
         // ==================> Ultis method <===================
 
 
-        private SqlDataReader ExecSqlDataReader(String cmd)
-        {
-            SqlDataReader myReader;
-            SqlCommand sqlcmd = new SqlCommand(cmd, conn_publisher);
-            sqlcmd.CommandType = CommandType.Text;
-            if (conn_publisher.State == ConnectionState.Closed)
-            {
-                conn_publisher.Open();
-            }
-            try
-            {
-                myReader = sqlcmd.ExecuteReader();
-                conn_publisher.Close();
-                return myReader;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message, "", MessageBoxButtons.OK);
-                conn_publisher.Close();
-                return null;
-            }
-        }
 
         // Improve form movement 
 

@@ -35,7 +35,9 @@ namespace BankReplication
         public static String mGroup = "";
         public static String mHoTen = "";
 
+        // Selected index at login form
         public static int mChiNhanh = 0;
+
         public static formMain frmChinh;
 
         public static BindingSource bds_dspm = new BindingSource(); // giữa bdsPM khi đăng nhập 
@@ -52,7 +54,7 @@ namespace BankReplication
         }
 
 
-        public static int KetNoi()
+        public static int KetNoi(String errorMessage = "Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " )
         {
             // Close old connection avoid system close connection time out 
             if(Program.conn !=null && Program.conn.State == System.Data.ConnectionState.Open)
@@ -69,11 +71,15 @@ namespace BankReplication
                 Program.conn.Open();
                 return 1;
             }
-            catch (Exception e) {
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message, "", MessageBoxButtons.OK);
+            catch (Exception e)
+            {
+                MessageBox.Show(errorMessage + e.Message, "", MessageBoxButtons.OK);
                 return 0;
             }
         }
+
+
+
         public static SqlDataReader ExecSqlDataReader(String cmd)
         ///<summary>
         /// Use for read data only command
