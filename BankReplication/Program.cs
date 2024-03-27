@@ -19,7 +19,7 @@ namespace BankReplication
 
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
-        public static String connstr_publisher = "Data Source=TM;Initial Catalog=NganHang;Integrated Security=True";
+        public static String connstr_publisher = "Data Source=TM\\NGANHANG;Initial Catalog=NGANHANG;Integrated Security=True";
         public static SqlDataReader myReader;
         public static String servername = "TM\\NGANHANG";
         public static String username = "sa";

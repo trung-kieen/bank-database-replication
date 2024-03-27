@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace BankReplication.form
 {
@@ -18,28 +12,24 @@ namespace BankReplication.form
 
         // Connection for this login form only 
         private SqlConnection conn_publisher = new SqlConnection();
-        private String conn_connection_string = ""; 
 
 
         public int KetNoiCSDLGoc()
         {
             // Close old connection avoid system close connection time out 
-            if(conn_publisher !=null && conn_publisher .State == System.Data.ConnectionState.Open)
+            if (conn_publisher != null && conn_publisher.State == System.Data.ConnectionState.Open)
             {
-                conn_publisher.Close(); 
+                conn_publisher.Close();
             }
             try
             {
-                conn_connection_string = "Data Source=" + Program.servername
-                                + ";Initial Catalog=" + Program.database
-                                + ";User ID=" + Program.mlogin
-                                + ";password=" + Program.password;
-                conn_publisher.ConnectionString = conn_connection_string;
+                conn_publisher.ConnectionString = Program.connstr_publisher;
                 conn_publisher.Open();
                 // Success
                 return 1;
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message, "", MessageBoxButtons.OK);
                 // Error
                 return 0;
@@ -47,10 +37,10 @@ namespace BankReplication.form
         }
 
 
-        private int LayDSPM(String cmd )
+        private int LayDSPM(String cmd)
         {
             DataTable dataTable = new DataTable();
-            if(conn_publisher.State == ConnectionState.Closed)
+            if (conn_publisher.State == ConnectionState.Closed)
             {
                 conn_publisher.Open();
             }
@@ -58,18 +48,19 @@ namespace BankReplication.form
             try
             {
 
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd, conn_publisher);
-            dataAdapter.Fill(dataTable);
-            conn_publisher.Close();
-            Program.bds_dspm.DataSource = dataTable;
-            cmbChiNhanh.DataSource = dataTable;
-            cmbChiNhanh.DisplayMember = "TENCN";
-            cmbChiNhanh.ValueMember = "TENSERVER";
-            return 1;
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd, conn_publisher);
+                dataAdapter.Fill(dataTable);
+                Program.bds_dspm.DataSource = dataTable;
+                cmbChiNhanh.DataSource = dataTable;
+                cmbChiNhanh.DisplayMember = "TENCN";
+                cmbChiNhanh.ValueMember = "TENSERVER";
+                conn_publisher.Close();
+                return 1;
             }
             catch (Exception e)
             {
-                MessageBox.Show("Lỗi lấy danh sách các chi nhánh\nHãy kiểm tra bảng ảo uv_GetSubscribers trong cơ sở dữ liệu");
+                // Kiểm tra bảng ảo uv_GetSubscribers trong cơ sở dữ liệu
+                MessageBox.Show("Lỗi lấy danh sách các chi nhánh" + e.Message.ToString());
                 conn_publisher.Close();
                 return 0;
             }
@@ -77,46 +68,24 @@ namespace BankReplication.form
         public formDangNhap()
         {
             InitializeComponent();
-
             CustomLoad();
         }
 
-        private void CustomLoad()
-        {
-
-            // Make chi nhanh non editable
-            cmbChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.btnDangNhap.Appearance.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btnDangNhap.Appearance.Options.UseBackColor = true;
-
-
-        }
         private void fDangNhap_Load(object sender, EventArgs e)
-            // Lay danh sach cac phan manh len combo box 
+        // Lay danh sach cac phan manh len combo box 
         {
-            StartPosition = FormStartPosition.CenterScreen; 
-            // Make form content center of parrent mdi
-            panelContainer.Location = new Point(
-                this.ClientSize.Width / 2 - panelContainer.Size.Width / 2,
-                this.ClientSize.Height / 2 - panelContainer.Size.Height / 2);
-            panelContainer.Anchor = AnchorStyles.None;
 
-
-          if(Program.bds_dspm.DataSource == null)
-            {
-           LoadChiNhanh();
-            }
-
+                LoadChiNhanh();
 
         }
 
         private void LoadChiNhanh()
         {
             if (KetNoiCSDLGoc() == 0) return;
-            if(LayDSPM("SELECT * FROM uv_GetSubcribers") == 1)
+            if (LayDSPM("SELECT * FROM uv_GetSubcribers") == 1)
             {
-            cmbChiNhanh.SelectedIndex = 1;
-            cmbChiNhanh.SelectedIndex = 0;
+                cmbChiNhanh.SelectedIndex = 1;
+                cmbChiNhanh.SelectedIndex = 0;
             }
 
         }
@@ -136,10 +105,11 @@ namespace BankReplication.form
             {
                 Program.servername = cmbChiNhanh.SelectedValue.ToString();
             }
-            catch  {
+            catch
+            {
                 MessageBox.Show("Lỗi thiết lập tên server");
             }
-        
+
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
@@ -147,8 +117,9 @@ namespace BankReplication.form
             HandleSubmitLogin();
         }
         private void HandleSubmitLogin()
+           
         {
-            if(inputTaiKhoan.Text.Trim() == "" || inputPassword.Text.Trim() == "" )
+            if (inputTaiKhoan.Text.Trim() == "" || inputPassword.Text.Trim() == "")
             {
                 MessageBox.Show("Tài khoản và mật khẩu không được để trống");
                 return;
@@ -157,13 +128,13 @@ namespace BankReplication.form
             Program.mlogin = inputTaiKhoan.Text;
             Program.password = inputPassword.Text;
 
-            if(Program.KetNoi() == 0)
+            if (Program.KetNoi() == 0)
             {
                 return;
             }
             Program.mChiNhanh = cmbChiNhanh.SelectedIndex;
-                        Program.mloginDN = Program.mlogin;
-                        Program.passwordDN = Program.password;
+            Program.mloginDN = Program.mlogin;
+            Program.passwordDN = Program.password;
 
             String cmd = "EXEC SP_LayThongTinNhanVien '" + inputTaiKhoan.Text + "'";
             Program.myReader = Program.ExecSqlDataReader(cmd);
@@ -172,15 +143,16 @@ namespace BankReplication.form
 
             Program.username = Program.myReader.GetString(0);
             if (Convert.IsDBNull(Program.username))
-                {
-                    MessageBox.Show("Tài khoản không có quyền truy cập dữ liệu. Bạn kiểm tra lại tài khoản và mật khẩu");
-                    return;
-                }
+            {
+                MessageBox.Show("Tài khoản không có quyền truy cập dữ liệu. Bạn kiểm tra lại tài khoản và mật khẩu");
+                return;
+            }
             try
             {
 
-            Program.mHoTen = Program.myReader.GetString(1) == null ? "" :  Program.myReader.GetString(1)  ;
-            Program.mGroup = Program.myReader.GetString(2) == null ? "" :  Program.myReader.GetString(2) ;
+                // TODO: remove this for security reason? 
+                Program.mHoTen = Program.myReader.GetString(1) == null ? "" : Program.myReader.GetString(1);
+                Program.mGroup = Program.myReader.GetString(2) == null ? "" : Program.myReader.GetString(2);
             }
             catch
             {
@@ -190,16 +162,24 @@ namespace BankReplication.form
             Program.conn.Close();
             Program.frmChinh.HienThiMenu();
 
-    
+
+
+            // Close login tab leave mdi screen blank
+            this.Close();
+
         }
 
 
-        private  SqlDataReader ExecSqlDataReader(String cmd)
+
+        // ==================> Ultis method <===================
+
+
+        private SqlDataReader ExecSqlDataReader(String cmd)
         {
             SqlDataReader myReader;
             SqlCommand sqlcmd = new SqlCommand(cmd, conn_publisher);
             sqlcmd.CommandType = CommandType.Text;
-            if(conn_publisher.State == ConnectionState.Closed)
+            if (conn_publisher.State == ConnectionState.Closed)
             {
                 conn_publisher.Open();
             }
@@ -217,16 +197,17 @@ namespace BankReplication.form
             }
         }
 
+        // Improve form movement 
 
         private void inputPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if(inputTaiKhoan.Text == "" && inputPassword.Text != "")
+                if (inputTaiKhoan.Text == "" && inputPassword.Text != "")
                 {
                     inputTaiKhoan.Focus();
                 }
-                if(inputTaiKhoan.Text != "" && inputPassword.Text != "")
+                if (inputTaiKhoan.Text != "" && inputPassword.Text != "")
                 {
                     HandleSubmitLogin();
                 }
@@ -235,23 +216,48 @@ namespace BankReplication.form
 
 
         }
+
+        // Improve form movement 
 
         private void inputTaiKhoan_KeyDown(object sender, KeyEventArgs e)
         {
-            
+
             if (e.KeyCode == Keys.Enter)
             {
-                if(inputTaiKhoan.Text != "" && inputPassword.Text == "")
+                if (inputTaiKhoan.Text != "" && inputPassword.Text == "")
                 {
                     inputPassword.Focus();
                 }
-                if(inputTaiKhoan.Text != "" && inputPassword.Text != "")
+                if (inputTaiKhoan.Text != "" && inputPassword.Text != "")
                 {
                     HandleSubmitLogin();
                 }
             }
         }
 
+        // Improve UI
+
+        private void CustomLoad()
+        {
+
+            // Make chi nhanh non editable
+            cmbChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.btnDangNhap.Appearance.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnDangNhap.Appearance.Options.UseBackColor = true;
+
+            // Make user unable to close tab
+            this.ControlBox = false;
+
+            StartPosition = FormStartPosition.CenterScreen;
+            // Make form content center of parrent mdi
+            panelContainer.Location = new Point(
+                this.ClientSize.Width / 2 - panelContainer.Size.Width / 2,
+                this.ClientSize.Height / 2 - panelContainer.Size.Height / 2);
+            panelContainer.Anchor = AnchorStyles.None;
+        }
     }
+
+
+
 
 }
