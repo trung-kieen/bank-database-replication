@@ -18,7 +18,7 @@ namespace BankReplication.utils
         public static void validateMANV(String ma)
         {
             notNull(ma);
-            if (parser(ma).Length != 10) throw new Exception("Chuỗi phải gồm 10 ký tự không tính khoảng trắng");
+            exactLength(ma, 10);
             validateUnicodeChar(ma);
 
         }
@@ -26,6 +26,7 @@ namespace BankReplication.utils
         public static void validateHo(String ho)
         {
             notNull(ho);
+            minLength(ho, 3);
             stringRange(ho, 50);
             validateNcharNotDigit(ho);
 
@@ -33,6 +34,7 @@ namespace BankReplication.utils
         public static void validateTen(String ten)
         {
             notNull(ten);
+            minLength(ten, 3);
             stringRange(ten, 10);
             validateNcharNotDigit(parser(ten));
         }
@@ -42,7 +44,7 @@ namespace BankReplication.utils
         {
             notNull(address);
             stringRange(address, 100);
-            validateUnicodeChar(parser(address));
+            validateStreet(parser(address));
         }
 
 
@@ -76,7 +78,8 @@ namespace BankReplication.utils
 
         public static void validateSDT(String sdt)
         {
-            validateDigit(parser(sdt));
+            notNull(sdt);
+            validatePhoneNum(parser(sdt));
             if (parser(sdt).Length > 15) throw new Exception("Không được quá 15 ký tự");
         }
 
@@ -84,7 +87,7 @@ namespace BankReplication.utils
 
         private static void stringRange(String s, int  size )
         {
-            if (parser(s).Length > size) throw new Exception("Chiều dài chuỗi phải nhỏ hơn " + size);
+            maxLength(s, size);
             if (parser(s).Length == 0) throw new Exception("Chuỗi không được trống");
         }
 
@@ -95,26 +98,47 @@ namespace BankReplication.utils
         /// <param name="s"></param>
         private static void validateNcharNotDigit (String s)
         {
-            if (!Regex.IsMatch(s, @"^[a-zA-Z\sàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]+$")) throw new Exception("Chuỗi chỉ được chứa ký tự chữ cái trong bảng chữa cái unicode hoặc dấu cách");
+            if (!Regex.IsMatch(s, @"^[a-zA-Z\sàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]*$")) throw new Exception("Chuỗi chỉ được chứa ký tự chữ cái trong bảng chữa cái unicode hoặc dấu cách");
                
         }
         private static void validateUnicodeChar(String s)
         {
-            if (!Regex.IsMatch(parser(s), @"^[a-zA-Z0-9\sàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]+$")) throw new Exception("Chuỗi chỉ được chứa ký tự trong bảng chữa cái, số hoặc dấu cách");
+            if (!Regex.IsMatch(parser(s), @"^[a-zA-Z0-9\sàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]*$")) throw new Exception("Chuỗi chỉ được chứa ký tự trong bảng chữa cái, số hoặc dấu cách");
+               
+        }
+        private static void validateStreet(String s)
+        {
+            if (!Regex.IsMatch(parser(s), @"^[\/\#\-a-zA-Z0-9\sàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]*$")) throw new Exception("Chuỗi chỉ được chứa ký tự trong bảng chữa cái, số hoặc dấu cách và các ký tự '#', '/', '-'");
                
         }
 
         private static void validateDigit(String s)
         {
 
-            if (!Regex.IsMatch(parser(s), @"^[0-9]+$")) throw new Exception("Chuỗi chỉ được chứa các ký tự là số");
+            if (!Regex.IsMatch(parser(s), @"^[0-9]*$")) throw new Exception("Chuỗi chỉ được chứa các ký tự là số");
+        }
+        private static void validatePhoneNum(String s)
+        {
+
+            if (!Regex.IsMatch(parser(s), @"^+?[0-9]*$")) throw new Exception("Chuỗi chỉ được chứa các ký tự là số, đây không phải là số điện thoại hợp lệ");
+        }
+        private static void minLength(String s, int length)
+        {
+            if (parser(s).Length < length) throw new Exception("Chuỗi không được có độ dài nhỏ hơn " + length + " ký tự");
         }
 
+        private static void maxLength(String s, int length)
+        {
+            if (parser(s).Length > length) throw new Exception("Chuỗi không được có độ dài lớn hơn " + length + " ký tự");
+        }
+        private static void exactLength(String s, int length)
+        {
+            if (parser(s).Length != length) throw new Exception("Chuỗi phải có độ dài chính xác là " + length + " ký tự");
+        }
         private static void notNull(String s)
         {
-            if (parser(s).Length.Equals("")) throw new Exception("Không được để trống");
+            if (parser(s).Length== 0 ) throw new Exception("Không được để trống");
         }
-
         public static String parser(String s) {
             return s.ToString().Trim();
         }

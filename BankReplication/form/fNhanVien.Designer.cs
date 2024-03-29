@@ -36,13 +36,14 @@
             System.Windows.Forms.Label dIACHILabel;
             System.Windows.Forms.Label sODTLabel;
             System.Windows.Forms.Label mACNLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formNhanVien));
             System.Windows.Forms.Label pHAILabel1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formNhanVien));
             this.sidePanel = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.trangThaiXoaCheckBox = new System.Windows.Forms.CheckBox();
+            this.pHAIComboBox = new System.Windows.Forms.ComboBox();
             this.nhanVienBds = new System.Windows.Forms.BindingSource(this.components);
             this.nhanVienDS1 = new BankReplication.NhanVienDS();
+            this.btnXong = new DevExpress.XtraEditors.SimpleButton();
+            this.trangThaiXoaCheckBox = new System.Windows.Forms.CheckBox();
             this.mACNTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.sODTTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.dIACHITextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -81,7 +82,7 @@
             this.gD_CHUYENTIENBds = new System.Windows.Forms.BindingSource(this.components);
             this.gD_GOIRUTBds = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.pHAIComboBox = new System.Windows.Forms.ComboBox();
+            this.btnHuy = new DevExpress.XtraEditors.SimpleButton();
             mANVLabel = new System.Windows.Forms.Label();
             hOLabel = new System.Windows.Forms.Label();
             tENLabel = new System.Windows.Forms.Label();
@@ -178,14 +179,24 @@
             mACNLabel.TabIndex = 14;
             mACNLabel.Text = "MACN:";
             // 
+            // pHAILabel1
+            // 
+            pHAILabel1.AutoSize = true;
+            pHAILabel1.Location = new System.Drawing.Point(73, 320);
+            pHAILabel1.Name = "pHAILabel1";
+            pHAILabel1.Size = new System.Drawing.Size(52, 19);
+            pHAILabel1.TabIndex = 18;
+            pHAILabel1.Text = "PHAI:";
+            // 
             // sidePanel
             // 
             this.sidePanel.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.sidePanel.Appearance.BackColor2 = System.Drawing.Color.Transparent;
             this.sidePanel.Appearance.Options.UseBackColor = true;
+            this.sidePanel.Controls.Add(this.btnHuy);
             this.sidePanel.Controls.Add(pHAILabel1);
             this.sidePanel.Controls.Add(this.pHAIComboBox);
-            this.sidePanel.Controls.Add(this.simpleButton1);
+            this.sidePanel.Controls.Add(this.btnXong);
             this.sidePanel.Controls.Add(this.trangThaiXoaCheckBox);
             this.sidePanel.Controls.Add(mACNLabel);
             this.sidePanel.Controls.Add(this.mACNTextEdit);
@@ -207,28 +218,16 @@
             this.sidePanel.Size = new System.Drawing.Size(389, 965);
             this.sidePanel.TabIndex = 0;
             this.sidePanel.Visible = false;
+            this.sidePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.sidePanel_Paint);
             // 
-            // simpleButton1
+            // pHAIComboBox
             // 
-            this.simpleButton1.AutoSize = true;
-            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButton1.Location = new System.Drawing.Point(122, 525);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(101, 52);
-            this.simpleButton1.TabIndex = 18;
-            this.simpleButton1.Text = "Thêm";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
-            // trangThaiXoaCheckBox
-            // 
-            this.trangThaiXoaCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.nhanVienBds, "TrangThaiXoa", true));
-            this.trangThaiXoaCheckBox.Enabled = false;
-            this.trangThaiXoaCheckBox.Location = new System.Drawing.Point(92, 468);
-            this.trangThaiXoaCheckBox.Name = "trangThaiXoaCheckBox";
-            this.trangThaiXoaCheckBox.Size = new System.Drawing.Size(171, 34);
-            this.trangThaiXoaCheckBox.TabIndex = 17;
-            this.trangThaiXoaCheckBox.Text = "TRANG THAI XOA";
-            this.trangThaiXoaCheckBox.UseVisualStyleBackColor = true;
+            this.pHAIComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.nhanVienBds, "PHAI", true));
+            this.pHAIComboBox.FormattingEnabled = true;
+            this.pHAIComboBox.Location = new System.Drawing.Point(132, 317);
+            this.pHAIComboBox.Name = "pHAIComboBox";
+            this.pHAIComboBox.Size = new System.Drawing.Size(150, 27);
+            this.pHAIComboBox.TabIndex = 19;
             // 
             // nhanVienBds
             // 
@@ -240,6 +239,28 @@
             // 
             this.nhanVienDS1.DataSetName = "NhanVienDS";
             this.nhanVienDS1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // btnXong
+            // 
+            this.btnXong.AutoSize = true;
+            this.btnXong.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage1")));
+            this.btnXong.Location = new System.Drawing.Point(60, 574);
+            this.btnXong.Name = "btnXong";
+            this.btnXong.Size = new System.Drawing.Size(96, 52);
+            this.btnXong.TabIndex = 18;
+            this.btnXong.Text = "Xong";
+            this.btnXong.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
+            // trangThaiXoaCheckBox
+            // 
+            this.trangThaiXoaCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.nhanVienBds, "TrangThaiXoa", true));
+            this.trangThaiXoaCheckBox.Enabled = false;
+            this.trangThaiXoaCheckBox.Location = new System.Drawing.Point(92, 468);
+            this.trangThaiXoaCheckBox.Name = "trangThaiXoaCheckBox";
+            this.trangThaiXoaCheckBox.Size = new System.Drawing.Size(171, 34);
+            this.trangThaiXoaCheckBox.TabIndex = 17;
+            this.trangThaiXoaCheckBox.Text = "TRANG THAI XOA";
+            this.trangThaiXoaCheckBox.UseVisualStyleBackColor = true;
             // 
             // mACNTextEdit
             // 
@@ -477,6 +498,7 @@
             this.gridView1.FixedLineWidth = 1;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
             // 
             // colMANV
             // 
@@ -600,23 +622,15 @@
             this.panelControl1.Size = new System.Drawing.Size(1918, 969);
             this.panelControl1.TabIndex = 3;
             // 
-            // pHAILabel1
+            // btnHuy
             // 
-            pHAILabel1.AutoSize = true;
-            pHAILabel1.Location = new System.Drawing.Point(73, 320);
-            pHAILabel1.Name = "pHAILabel1";
-            pHAILabel1.Size = new System.Drawing.Size(52, 19);
-            pHAILabel1.TabIndex = 18;
-            pHAILabel1.Text = "PHAI:";
-            // 
-            // pHAIComboBox
-            // 
-            this.pHAIComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.nhanVienBds, "PHAI", true));
-            this.pHAIComboBox.FormattingEnabled = true;
-            this.pHAIComboBox.Location = new System.Drawing.Point(132, 317);
-            this.pHAIComboBox.Name = "pHAIComboBox";
-            this.pHAIComboBox.Size = new System.Drawing.Size(150, 27);
-            this.pHAIComboBox.TabIndex = 19;
+            this.btnHuy.AutoSize = true;
+            this.btnHuy.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.btnHuy.Location = new System.Drawing.Point(200, 574);
+            this.btnHuy.Name = "btnHuy";
+            this.btnHuy.Size = new System.Drawing.Size(96, 52);
+            this.btnHuy.TabIndex = 20;
+            this.btnHuy.Text = "Xong";
             // 
             // formNhanVien
             // 
@@ -702,8 +716,9 @@
         private DevExpress.XtraEditors.SimpleButton btnReload;
         private DevExpress.XtraEditors.SimpleButton btnRedo;
         private DevExpress.XtraEditors.SimpleButton btnExit;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton btnXong;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private System.Windows.Forms.ComboBox pHAIComboBox;
+        private DevExpress.XtraEditors.SimpleButton btnHuy;
     }
 }

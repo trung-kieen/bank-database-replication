@@ -3,13 +3,17 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using BankReplication.utils;
 
 namespace BankReplication.form
 {
+//    public partial class formDangNhap : SimpleForm
     public partial class formDangNhap : DevExpress.XtraEditors.XtraForm
     {
 
 
+
+//        public override void AddHandle() { }
         // Connection for this login form only 
         private SqlConnection conn_publisher = new SqlConnection();
 

@@ -10,7 +10,7 @@ using BankReplication.form;
 
 namespace BankReplication
 {
-    static class Program
+    public static partial  class Program
     
     {
         /// <summary>
@@ -80,7 +80,7 @@ namespace BankReplication
 
 
 
-        public static SqlDataReader ExecSqlDataReader(String cmd)
+        public static SqlDataReader ExecSqlDataReader(String cmd, Boolean forceNoMessageBox = false)
         ///<summary>
         /// Use for read data only command
         ///<para>command string</para>
@@ -103,7 +103,10 @@ namespace BankReplication
             }
             catch (Exception e)
             {
+                if (!forceNoMessageBox)
+                {
                 MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message, "", MessageBoxButtons.OK);
+                }
                 Program.conn.Close();
                 return null;
             }

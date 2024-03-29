@@ -1,18 +1,32 @@
-﻿using System;
+﻿using BankReplication.utils;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-
 using static BankReplication.utils.Validate;
 enum FormAction { None, Add, Edit };
 
 namespace BankReplication.form
 {
-    public partial class formNhanVien : DevExpress.XtraEditors.XtraForm
+    public partial class formNhanVien : SimpleForm
+    //    public partial class formNhanVien : DevExpress.XtraEditors.XtraForm
     {
         private String macn;
         private int vitri;
-        private FormAction actionState;
+        private FormAction formAction;
+        public override void HandleAdd()
+        {
+            if (ValidateAdd())
+            {
+                nhanVienBds.EndEdit();
+                // Reread current selected item and display in to grid 
+                nhanVienBds.ResetCurrentItem();
+                nhanVienTableAdapter1.Connection.ConnectionString = Program.connstr;
+                nhanVienTableAdapter1.Update(nhanVienDS1.NhanVien);
+                setFormState(FormAction.None);
+            }
+        }
+
         public formNhanVien()
         {
             InitializeComponent();
@@ -76,7 +90,7 @@ namespace BankReplication.form
 
                 {
                     String result;
-                    manv= ((DataRowView)nhanVienBds[nhanVienBds.Position])["MANV"].ToString();
+                    manv = ((DataRowView)nhanVienBds[nhanVienBds.Position])["MANV"].ToString();
                     nhanVienBds.RemoveCurrent();
                     nhanVienTableAdapter1.Connection.ConnectionString = Program.connstr;
                     nhanVienTableAdapter1.Update(nhanVienDS1.NhanVien);
@@ -100,13 +114,13 @@ namespace BankReplication.form
             mACNTextEdit.Text = macn;
             trangThaiXoaCheckBox.Checked = false;
 
-            if(pHAIComboBox.DataSource == null)
+            if (pHAIComboBox.DataSource == null)
             {
 
-            List<string> gioiTinh= new List<string>();
-            String[] x = { "Nam", "Nữ" };
-            gioiTinh.AddRange(x);
-            pHAIComboBox.DataSource = gioiTinh; 
+                List<string> gioiTinh = new List<string>();
+                String[] x = { "Nam", "Nữ" };
+                gioiTinh.AddRange(x);
+                pHAIComboBox.DataSource = gioiTinh;
             }
 
 
@@ -115,7 +129,6 @@ namespace BankReplication.form
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-
             macn = getMACN();
             if (macn.ToString().Trim() == "") return;
 
@@ -134,7 +147,10 @@ namespace BankReplication.form
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-
+            if(formAction == FormAction.Add)
+            {
+                HandleAdd();
+            }
         }
         private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -184,7 +200,7 @@ namespace BankReplication.form
                 if (Program.KetNoi() == 0) return "";
                 try
                 {
-                    macn = fetchMACNFromDB();
+                    macn = Program.FetchMACNFromDB();
                 }
                 catch (Exception ex)
                 {
@@ -194,20 +210,10 @@ namespace BankReplication.form
             return macn;
         }
 
-        private String fetchMACNFromDB()
-        {
-            Program.myReader = Program.ExecSqlDataReader("SELECT MACN FROM ChiNhanh");
-            if (Program.myReader == null) throw new Exception("Chinh nhanh khong ton tai");
-            Program.myReader.Read();
-
-            String macn = Program.myReader.GetString(0);
-            Program.myReader.Close();
-            return macn;
-        }
 
         private void setFormState(FormAction state)
         {
-            actionState = state;
+            formAction = state;
             setFormState();
         }
         private void setFormState()
@@ -237,7 +243,7 @@ namespace BankReplication.form
             else
             {
 
-                if (actionState == FormAction.Add)
+                if (formAction == FormAction.Add)
                 {
 
                     sidePanel.Visible = true;
@@ -248,10 +254,10 @@ namespace BankReplication.form
                     btnLuu.Enabled = true;
                     btnThem.Enabled = false;
                     btnSua.Enabled = false;
-                   
+
                 }
 
-                if (actionState == FormAction.Edit)
+                if (formAction == FormAction.Edit)
                 {
                     btnXoa.Enabled = false;
                     btnLuu.Enabled = true;
@@ -289,106 +295,85 @@ namespace BankReplication.form
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (validateThem())
+
+            if(formAction == FormAction.Add)
             {
-
-
-            nhanVienBds.EndEdit();
-            // Reread current selected item and display in to grid 
-            nhanVienBds.ResetCurrentItem();
-            nhanVienTableAdapter1.Connection.ConnectionString = Program.connstr;
-            nhanVienTableAdapter1.Update(nhanVienDS1.NhanVien);
-            setFormState(FormAction.None);
+                HandleAdd();
             }
-
         }
 
-        private Boolean validateThem()
+        private Boolean LogError(System.Windows.Forms.ComboBox comboBox, String fieldName, Action<String> validatePerform)
         {
-
             try
             {
-                validateMANV(mANVTextEdit.Text);
+                validatePerform(comboBox.SelectedValue.ToString());
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Mã nhân viên - " +  ex.Message, "Dữ liệu được nhập không hợp lệ" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mANVTextEdit.Focus();
+                MessageBox.Show("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            return true;
+        }
+        private Boolean LogError(DevExpress.XtraEditors.TextEdit field, String fieldName, Action<String> validatePerform)
+        {
             try
             {
-                validateHo(hOTextEdit.Text);
+                validatePerform(field.Text);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Họ - " +  ex.Message, "Dữ liệu được nhập không hợp lệ" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                hOTextEdit.Focus();
+                MessageBox.Show("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                field.Focus();
+                
                 return false;
             }
-            try
-            {
-                validateTen(tENTextEdit.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Tên - " +  ex.Message, "Dữ liệu được nhập không hợp lệ" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tENTextEdit.Focus();
-                return false;
-            }
-            try
-            {
-            validateCMND(cMNDTextEdit.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("CMND - " +  ex.Message, "Dữ liệu được nhập không hợp lệ" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cMNDTextEdit.Focus();
-                return false;
-            }
-            try
-            {
-            validateDiaChi(dIACHITextEdit.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Địa chỉ - " +  ex.Message, "Dữ liệu được nhập không hợp lệ" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                dIACHITextEdit.Focus();
-                return false;
-            }
-            try
-            {
-           validatePhai(pHAIComboBox.SelectedValue.ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Phái - " +  ex.Message, "Dữ liệu được nhập không hợp lệ" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            try
-            {
-           validateSDT(sODTTextEdit.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Phái - " +  ex.Message, "Dữ liệu được nhập không hợp lệ" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                sODTTextEdit.Focus();
-                return false;
-            }
-            try
-            {
-            validateMACN(mACNTextEdit.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Mã chi nhánh - " +  ex.Message, "Dữ liệu được nhập không hợp lệ" , MessageBoxButtons.OK, MessageBoxIcon.Error);
-                mACNTextEdit.Focus();
-                return false;
-            }
-
+            if (field.Text == null) field.Text = "";
             return true;
         }
 
+        private Boolean ValidateAdd()
+        {
+
+
+
+            // Track not allow to duplicate when add new 
+            if (!LogError(mANVTextEdit, "Mã nhân viên", validateMANV)) return false;
+            if (!LogError(hOTextEdit, "Họ", validateHo)) return false;
+            if (!LogError(tENTextEdit, "Tên", validateTen)) return false;
+
+            // Track not allow to duplicate 
+            if (!LogError(cMNDTextEdit, "Số chứng minh nhân dân", validateCMND)) return false;
+            if (!LogError(dIACHITextEdit, "Địa chỉ", validateDiaChi)) return false;
+            if (!LogError(pHAIComboBox, "Giới tính", validatePhai)) return false;
+
+            // SDT Allow null!!! change db contraint
+            if (!LogError(sODTTextEdit, "Số điện thoại", validateSDT)) return false;
+            if (!LogError(mACNTextEdit, "Mã chi nhánh", validateMACN)) return false;
+
+            if (!LogErrorDupicateMaNV(mANVTextEdit)) return false;
+            
+        
+            return true;
+        }
+
+        private Boolean LogErrorDupicateMaNV(DevExpress.XtraEditors.TextEdit field)
+        {
+            if (Program.KetNoi() == 0)
+            {
+                MessageBox.Show("Lỗi kết nối với với cơ sở dữ liệu", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+                if (Program.IsEmployeeExist(field.Text))
+                {
+                    MessageBox.Show("Mã nhân viên đã tồn tại", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    field.Focus();
+                    return false;
+
+                }
+                return true;
+        }
 
 
         private void btnUndo_Click(object sender, EventArgs e)
@@ -396,6 +381,11 @@ namespace BankReplication.form
 
             // TODO: use stack to reimplement 
             nhanVienBds.CancelEdit();
+
+        }
+
+        private void sidePanel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
 
