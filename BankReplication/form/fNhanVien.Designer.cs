@@ -249,7 +249,7 @@
             this.btnXong.Size = new System.Drawing.Size(96, 52);
             this.btnXong.TabIndex = 18;
             this.btnXong.Text = "Xong";
-            this.btnXong.Click += new System.EventHandler(this.simpleButton1_Click);
+            this.btnXong.Click += new System.EventHandler(this.btnXong_Click);
             // 
             // trangThaiXoaCheckBox
             // 
@@ -494,6 +494,7 @@
             this.colSODT,
             this.colMACN,
             this.colTrangThaiXoa});
+            this.colTrangThaiXoa.Visible = false;
             this.gridView1.DetailHeight = 349;
             this.gridView1.FixedLineWidth = 1;
             this.gridView1.GridControl = this.gridControl1;
