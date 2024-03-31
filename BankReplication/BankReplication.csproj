@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="utils\AddCommand.cs" />
     <Compile Include="utils\ICommand.cs" />
     <Compile Include="QueryHelper.cs" />

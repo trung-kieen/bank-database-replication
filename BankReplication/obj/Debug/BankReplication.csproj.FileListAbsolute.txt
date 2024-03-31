@@ -212,3 +212,4 @@ D:\BankReplication\BankReplication\bin\Debug\ru\DevExpress.XtraTreeList.v19.2.re
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formNhanVien.resources
 D:\BankReplication\BankReplication\bin\Debug\System.dll
 E:\BankReplication\BankReplication\bin\Debug\System.dll
+D:\BankReplication\BankReplication\obj\Debug\BankReplication.utils.SimpleForm.resources

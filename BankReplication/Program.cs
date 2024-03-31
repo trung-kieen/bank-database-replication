@@ -7,6 +7,7 @@ using DevExpress.Skins;
 using System.Data;
 using System.Data.SqlClient;
 using BankReplication.form;
+using BankReplication.Properties;
 
 namespace BankReplication
 {
@@ -19,16 +20,16 @@ namespace BankReplication
 
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
-        public static String connstr_publisher = "Data Source=TM\\NGANHANG;Initial Catalog=NGANHANG;Integrated Security=True";
+        public static String connstr_publisher = "Data Source=" + Settings.servername + ";Initial Catalog=" + Settings.databasename + " ;Integrated Security=True";
         public static SqlDataReader myReader;
-        public static String servername = "TM\\NGANHANG";
+        public static String servername = Settings.servername;
         public static String username = "sa";
         public static String mlogin = "sa";
-        public static String password = "kc";
+        public static String password = Settings.sa_password;
 
-        public static String database = "NGANHANG";
+        public static String database = Settings.databasename;
         public static String remotelogin = "htkn";
-        public static String remotepassword = "123456";
+        public static String remotepassword = Settings.htkn_password;
 
         public static String mloginDN = "";
         public static String passwordDN = "";
