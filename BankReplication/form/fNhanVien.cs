@@ -11,6 +11,7 @@ namespace BankReplication.form
     public partial class formNhanVien : SimpleForm
     //    public partial class formNhanVien : DevExpress.XtraEditors.XtraForm
     {
+        private Invoker commandController = new Invoker();
         private String macn;
         private int vitri;
         private FormAction formAction;
@@ -18,8 +19,6 @@ namespace BankReplication.form
         public formNhanVien()
         {
             InitializeComponent();
-
-
         }
 
 
@@ -31,39 +30,23 @@ namespace BankReplication.form
             nhanVienDS1.EnforceConstraints = false;
 
             // Load data base on user login connection avoid using login and password in dataset 
-            loadNhanVien(Program.connstr);
+            LoadNhanVien(Program.connstr);
+            LoadCmbChiNhanh();
 
-            this.cmbChiNhanh.DataSource = Program.bds_dspm;
-            this.cmbChiNhanh.DisplayMember = "TENCN";
-            this.cmbChiNhanh.ValueMember = "TENSERVER";
-            this.cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
-
-            if (Program.mGroup.ToUpper() == "NGANHANG")
-            {
-                // Make chi nhanh non editable
-                cmbChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
-                // Can change server to load data 
-                cmbChiNhanh.Enabled = true;
-            }
-            else
-            {
-                cmbChiNhanh.Enabled = false;
-            }
             setFormState();
 
         }
 
 
-
-        private void resetSideBarForm()
+        private void ResetSideBar()
         {
             mANVTextEdit.Focus();
             mACNTextEdit.Text = macn;
             trangThaiXoaCheckBox.Checked = false;
 
-            if (pHAIComboBox.SelectedValue.ToString() == "System.Data.DataRowView")
+            Boolean cmbIsNotLoadGender = pHAIComboBox.DisplayMember == "";
+            if (cmbIsNotLoadGender)
             {
-
                 List<string> gioiTinh = new List<string>();
                 String[] x = { "Nam", "Nữ" };
                 gioiTinh.AddRange(x);
@@ -71,7 +54,15 @@ namespace BankReplication.form
             }
         }
 
-        private void btnThem_Click(object sender, EventArgs e)
+        public void Duplicate()
+        {
+            DataRowView currentRow = (DataRowView) nhanVienBds.Current;
+            commandController.Execute(new AddCommand(nhanVienBds, currentRow));
+            gvNhanVien.Focus();
+
+        }
+        public void OpenCreationSideBar()
+            // Mở form thêm dữ liệu chưa lưu lại
         {
             macn = getMaCN();
             if (macn.ToString().Trim() == "") return;
@@ -79,8 +70,13 @@ namespace BankReplication.form
             // Track point cusor when undo action
             vitri = nhanVienBds.Position;
             setFormState(FormAction.Add);
-            nhanVienBds.AddNew();
-            resetSideBarForm();
+            var row  = nhanVienBds.AddNew();
+            nhanVienBds.Add(row);
+            ResetSideBar();
+        }
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            OpenCreationSideBar();
         }
 
         public override void HandleAdd()
@@ -119,7 +115,6 @@ namespace BankReplication.form
             {
                 try
                 {
-                    String result;
                     manv = ((DataRowView)nhanVienBds[nhanVienBds.Position])["MANV"].ToString();
                     nhanVienBds.RemoveCurrent();
                     nhanVienTableAdapter1.Connection.ConnectionString = Program.connstr;
@@ -135,10 +130,6 @@ namespace BankReplication.form
         }
 
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         private void btnXong_Click(object sender, EventArgs e)
         {
@@ -170,7 +161,7 @@ namespace BankReplication.form
             else
             {
                 // Load data
-                loadNhanVien(Program.connstr);
+                LoadNhanVien(Program.connstr);
             }
 
         }
@@ -224,7 +215,7 @@ namespace BankReplication.form
             btnReload.Enabled = true;
 
             sidePanel.Visible = false;
-            gridControl1.Enabled = true;
+            gcNhanVien.Enabled = true;
 
             if (Program.mGroup.ToUpper() == "NGANHANG")
             {
@@ -242,7 +233,7 @@ namespace BankReplication.form
                 {
 
                     sidePanel.Visible = true;
-                    gridControl1.Enabled = false;
+                    gcNhanVien.Enabled = false;
 
 
                     btnXoa.Enabled = false;
@@ -267,38 +258,12 @@ namespace BankReplication.form
         }
 
 
-        private void loadNhanVien(String connstr)
-        {
-            nhanVienTableAdapter1.Connection.ConnectionString = connstr;
-            gD_GOIRUTTableAdapter.Connection.ConnectionString = connstr;
-            gD_CHUYENTIENTableAdapter.Connection.ConnectionString = connstr;
 
-            // Must fill NhanVien first 
-            nhanVienTableAdapter1.Fill(nhanVienDS1.NhanVien);
-
-
-            this.gD_GOIRUTTableAdapter.Fill(this.nhanVienDS1.GD_GOIRUT);
-            this.gD_CHUYENTIENTableAdapter.Fill(this.nhanVienDS1.GD_CHUYENTIEN);
-
-        }
-
-        private void btnReload_Click(object sender, EventArgs e)
-        {
-            loadNhanVien(Program.connstr);
-            // TODO: Reload will reset cusor position
-        }
-
-        private void btnLuu_Click(object sender, EventArgs e)
-        {
-
-            if(formAction == FormAction.Add)
-            {
-                HandleAdd();
-            }
-        }
 
         private Boolean InvalidField(System.Windows.Forms.ComboBox comboBox, String fieldName, Action<String> validatePerform)
         {
+            // Hiển thị thông báo lỗi cho dữ liệu nhập từ ComboBox  lên màn hình, trả về giá trị True
+            // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
             try
             {
                 validatePerform(comboBox.SelectedValue.ToString());
@@ -311,6 +276,8 @@ namespace BankReplication.form
             return false;
         }
         private Boolean InvalidField(DevExpress.XtraEditors.TextEdit field, String fieldName, Action<String> validatePerform)
+            // Hiển thị thông báo lỗi cho dữ liệu nhập từ Field TextEdit lên màn hình, trả về giá trị True
+            // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
         {
             try
             {
@@ -328,8 +295,6 @@ namespace BankReplication.form
 
         private Boolean InvalidNewEmployee()
         {
-
-
 
             if (InvalidField(mANVTextEdit, "Mã nhân viên", validateMANV)) return true;
             if (InvalidField(hOTextEdit, "Họ", validateHo)) return true;
@@ -352,6 +317,8 @@ namespace BankReplication.form
 
         private Boolean InvalidDuplicateEmployeeId(DevExpress.XtraEditors.TextEdit field)
         {
+            // Kiểm tra mã nhân viên đã được sử dụng trước chưa để phục vụ cho việc tạo nhân viên mới
+            // với mã không bị trùng với mã nhân viên của các nhân viên khác 
             if (Program.KetNoi() == 0)
             {
                 MessageBox.Show("Lỗi kết nối với với cơ sở dữ liệu", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -369,21 +336,89 @@ namespace BankReplication.form
         }
 
 
-        private void btnUndo_Click(object sender, EventArgs e)
-        {
 
-            // TODO: use stack to reimplement 
-            nhanVienBds.CancelEdit();
+        // ===============================> Load data <================================
+        
+        private void LoadNhanVien(String connstr)
+        {
+            nhanVienTableAdapter1.Connection.ConnectionString = connstr;
+            gD_GOIRUTTableAdapter.Connection.ConnectionString = connstr;
+            gD_CHUYENTIENTableAdapter.Connection.ConnectionString = connstr;
+
+            // Must fill NhanVien first 
+            nhanVienTableAdapter1.Fill(nhanVienDS1.NhanVien);
+
+
+            this.gD_GOIRUTTableAdapter.Fill(this.nhanVienDS1.GD_GOIRUT);
+            this.gD_CHUYENTIENTableAdapter.Fill(this.nhanVienDS1.GD_CHUYENTIEN);
 
         }
 
-        private void sidePanel_Paint(object sender, PaintEventArgs e)
+
+        private void LoadCmbChiNhanh()
+        {
+            this.cmbChiNhanh.DataSource = Program.bds_dspm;
+            this.cmbChiNhanh.DisplayMember = "TENCN";
+            this.cmbChiNhanh.ValueMember = "TENSERVER";
+            this.cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
+
+            if (Program.mGroup.ToUpper() == "NGANHANG")
+            {
+                // Make chi nhanh non editable
+                cmbChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
+                // Can change server to load data 
+                cmbChiNhanh.Enabled = true;
+            }
+            else
+            {
+                cmbChiNhanh.Enabled = false;
+            }
+
+        }
+        // ===============================> End load data <================================
+
+        #region event_region
+
+
+        private void btnHuy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
         }
 
+        private void btnRedo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
 
-        // =================================> Validate <=========================
+            commandController.Redo();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+            // TODO: Reload will reset cusor position
+            LoadNhanVien(Program.connstr);
+        }
+
+        private void btnExit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            this.Close();
+        }
+
+
+        private void btnUndo_ItemClick(object sender, EventArgs e)
+        {
+            commandController.Undo();
+        }
+
+
+        private void btnLuu_ItemClick(object sender, EventArgs e)
+        {
+
+            if(formAction == FormAction.Add)
+            {
+                HandleAdd();
+            }
+        }
+        #endregion
 
     }
 

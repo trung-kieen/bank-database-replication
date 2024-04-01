@@ -11,16 +11,18 @@ using DevExpress.XtraEditors;
 
 namespace BankReplication.form
 {
-    public partial class SimpleForm : DevExpress.XtraEditors.XtraForm
+    public partial class XtraForm1 : SimpleForm
     {
-        public virtual void HandleAdd() { }
-        public virtual void HandleDelete() { }
-        public SimpleForm()
+
+        public XtraForm1()
         {
+
             InitializeComponent();
         }
-        public void BaseComponent()
+            public void InitializeComponent()
         {
+
+            BaseComponent();
         }
     }
 }
