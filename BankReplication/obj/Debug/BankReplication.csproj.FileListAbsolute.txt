@@ -213,5 +213,4 @@ D:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formNhanVien.r
 D:\BankReplication\BankReplication\bin\Debug\System.dll
 E:\BankReplication\BankReplication\bin\Debug\System.dll
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.utils.SimpleForm.resources
-E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.XtraForm1.resources
 E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.SimpleForm.resources

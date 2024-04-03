@@ -40,7 +40,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formNhanVien));
             this.sidePanel = new DevExpress.XtraEditors.PanelControl();
             this.pHAIComboBox = new System.Windows.Forms.ComboBox();
-            this.nhanVienBds = new System.Windows.Forms.BindingSource(this.components);
+            this.nhanVienBds = new BankReplication.utils.BindingSourceExtends(this.components);
             this.nhanVienDS1 = new BankReplication.NhanVienDS();
             this.trangThaiXoaCheckBox = new System.Windows.Forms.CheckBox();
             this.mACNTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -235,7 +235,7 @@
             this.pHAIComboBox.Location = new System.Drawing.Point(132, 317);
             this.pHAIComboBox.Name = "pHAIComboBox";
             this.pHAIComboBox.Size = new System.Drawing.Size(150, 27);
-            this.pHAIComboBox.TabIndex = 19;
+            this.pHAIComboBox.TabIndex = 10;
             // 
             // nhanVienBds
             // 
@@ -275,7 +275,7 @@
             this.sODTTextEdit.Name = "sODTTextEdit";
             this.sODTTextEdit.Properties.MaxLength = 15;
             this.sODTTextEdit.Size = new System.Drawing.Size(150, 28);
-            this.sODTTextEdit.TabIndex = 13;
+            this.sODTTextEdit.TabIndex = 11;
             // 
             // dIACHITextEdit
             // 
@@ -583,6 +583,7 @@
             this.btnThem.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnThem.ImageOptions.SvgImage")));
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(80, 0);
+            this.btnThem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThem_ItemClick);
             // 
             // btnXoa
             // 
@@ -592,6 +593,7 @@
             this.btnXoa.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnXoa.ImageOptions.SvgImage")));
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(70, 0);
+            this.btnXoa.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXoa_ItemClick);
             // 
             // btnSua
             // 
@@ -787,7 +789,7 @@
 
         private DevExpress.XtraEditors.PanelControl sidePanel;
         private DevExpress.XtraGrid.GridControl gcNhanVien;
-        private System.Windows.Forms.BindingSource nhanVienBds;
+        private BankReplication.utils.BindingSourceExtends nhanVienBds;
         private NhanVienDS nhanVienDS1;
         private DevExpress.XtraGrid.Columns.GridColumn colMANV;
         private DevExpress.XtraGrid.Columns.GridColumn colHO;

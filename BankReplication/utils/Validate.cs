@@ -26,7 +26,7 @@ namespace BankReplication.utils
         public static void validateHo(String ho)
         {
             notNull(ho);
-            minLength(ho, 3);
+            minLength(ho, 2);
             stringRange(ho, 50);
             validateNcharNotDigit(ho);
 

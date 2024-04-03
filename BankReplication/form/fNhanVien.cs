@@ -42,7 +42,11 @@ namespace BankReplication.form
         {
             mANVTextEdit.Focus();
             mACNTextEdit.Text = macn;
+
             trangThaiXoaCheckBox.Checked = false;
+
+
+
 
             Boolean cmbIsNotLoadGender = pHAIComboBox.DisplayMember == "";
             if (cmbIsNotLoadGender)
@@ -71,26 +75,44 @@ namespace BankReplication.form
             vitri = nhanVienBds.Position;
             setFormState(FormAction.Add);
             var row  = nhanVienBds.AddNew();
-            nhanVienBds.Add(row);
             ResetSideBar();
-        }
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-            OpenCreationSideBar();
         }
 
         public override void HandleAdd()
         {
             if (!InvalidNewEmployee())
             {
-                nhanVienBds.EndEdit();
+
+                //                nhanVienBds.EndEdit();
                 // Reread current selected item and display in to grid 
-                nhanVienBds.ResetCurrentItem();
-                nhanVienTableAdapter1.Connection.ConnectionString = Program.connstr;
-                nhanVienTableAdapter1.Update(nhanVienDS1.NhanVien);
+                //                nhanVienBds.ResetCurrentItem();
+
+                SaveViewRowToBindingSource();
+                commandController.Execute(new AddCommand(nhanVienBds, (DataRowView)nhanVienBds.Current));
+                    
+//                nhanVienTableAdapter1.Connection.ConnectionString = Program.connstr;
+//                nhanVienTableAdapter1.Update(nhanVienDS1.NhanVien);
                 setFormState(FormAction.None);
             }
         }
+
+        public void SaveViewRowToBindingSource()
+        {
+            // Make sure data display in side bar form apply to actual row in binding source
+            // May be binding SODT not work as expect or not allow invalid data
+
+            DataRowView current = (DataRowView)nhanVienBds.Current;
+            current.Row["MANV"] = mANVTextEdit.Text;
+            current.Row["HO"] = hOTextEdit.Text;
+            current.Row["TEN"] = tENTextEdit.Text;
+            current.Row["DIACHI"] = dIACHITextEdit.Text;
+            current.Row["CMND"] = cMNDTextEdit.Text;
+            current.Row["PHAI"] = pHAIComboBox.SelectedValue;
+            current.Row["SODT"] = sODTTextEdit.Text;
+            current.Row["MACN"] = mACNTextEdit.Text;
+            current.Row["TrangThaiXoa"] = trangThaiXoaCheckBox.Checked;
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             HandleDelete();
@@ -418,10 +440,19 @@ namespace BankReplication.form
                 HandleAdd();
             }
         }
+        private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            commandController.Execute(new DeleteCommand(nhanVienBds,(DataRowView) nhanVienBds.Current, "MANV"));
+        }
         #endregion
 
+        private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OpenCreationSideBar();
+        }
     }
 
 
 
 }
+
