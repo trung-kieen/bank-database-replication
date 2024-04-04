@@ -1,4 +1,5 @@
-
+# Environment
+[Applications needed](https://drive.google.com/drive/u/1/folders/1mjPyGTe_6Xss2VcwbZpafX74tmE4Waae)
 # Danh sach phan manh
 Tao view table de xem danh sach phan manh tu file `SqlScript/SP/GetSubscribers.sql`.
 
