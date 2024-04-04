@@ -33,7 +33,7 @@ namespace BankReplication.form
             LoadNhanVien(Program.connstr);
             LoadCmbChiNhanh();
 
-            setFormState();
+            SetFormState();
 
         }
 
@@ -41,14 +41,9 @@ namespace BankReplication.form
         private void ResetSideBar()
         {
             mANVTextEdit.Focus();
-            mACNTextEdit.Text = macn;
-
-            trangThaiXoaCheckBox.Checked = false;
-
-
-
 
             Boolean cmbIsNotLoadGender = pHAIComboBox.DisplayMember == "";
+            this.pHAIComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             if (cmbIsNotLoadGender)
             {
                 List<string> gioiTinh = new List<string>();
@@ -68,16 +63,25 @@ namespace BankReplication.form
         public void OpenCreationSideBar()
             // Mở form thêm dữ liệu chưa lưu lại
         {
-            macn = getMaCN();
-            if (macn.ToString().Trim() == "") return;
-
-            // Track point cusor when undo action
-            vitri = nhanVienBds.Position;
-            setFormState(FormAction.Add);
-            var row  = nhanVienBds.AddNew();
+            SetFormState(FormAction.Add);
+            nhanVienBds.AddNew();
             ResetSideBar();
+            InitNewRowData();
+        }
+        public void InitNewRowData()
+        {
+            macn = getMaCN();
+            mACNTextEdit.Text = macn;
+            trangThaiXoaCheckBox.Checked = false;
+            if (macn.ToString().Trim() == "") return;
         }
 
+        public void OpenEditSideBar()
+        {
+            
+            SetFormState(FormAction.Edit);
+            ResetSideBar();
+        }
         public override void HandleAdd()
         {
             if (!InvalidNewEmployee())
@@ -92,7 +96,7 @@ namespace BankReplication.form
                     
 //                nhanVienTableAdapter1.Connection.ConnectionString = Program.connstr;
 //                nhanVienTableAdapter1.Update(nhanVienDS1.NhanVien);
-                setFormState(FormAction.None);
+                SetFormState(FormAction.None);
             }
         }
 
@@ -219,12 +223,12 @@ namespace BankReplication.form
         }
 
 
-        private void setFormState(FormAction state)
+        private void SetFormState(FormAction state)
         {
             formAction = state;
-            setFormState();
+            SetFormState();
         }
-        private void setFormState()
+        private void SetFormState()
         {
             // Reset state 
             btnThem.Enabled = true;
@@ -267,15 +271,21 @@ namespace BankReplication.form
 
                 if (formAction == FormAction.Edit)
                 {
+                    sidePanel.Visible = true;
                     btnXoa.Enabled = false;
                     btnLuu.Enabled = true;
                     btnThem.Enabled = false;
                     btnSua.Enabled = false;
                 }
+                // Final condition require button to become enable 
                 if (nhanVienBds.Count == 0)
-                {
                     btnXoa.Enabled = false;
-                }
+                if (!commandController.Redoable())
+                    btnRedo.Enabled = false;
+                if (!commandController.Undoable())
+                    btnUndo.Enabled = false;
+
+
             }
         }
 
@@ -317,7 +327,6 @@ namespace BankReplication.form
 
         private Boolean InvalidNewEmployee()
         {
-
             if (InvalidField(mANVTextEdit, "Mã nhân viên", validateMANV)) return true;
             if (InvalidField(hOTextEdit, "Họ", validateHo)) return true;
             if (InvalidField(tENTextEdit, "Tên", validateTen)) return true;
@@ -332,8 +341,6 @@ namespace BankReplication.form
             if (InvalidField(mACNTextEdit, "Mã chi nhánh", validateMACN)) return true;
 
             if (InvalidDuplicateEmployeeId(mANVTextEdit)) return true;
-            
-        
             return false;
         }
 
@@ -416,8 +423,22 @@ namespace BankReplication.form
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
+            gcNhanVien.Enabled = false;
+
+            // Track griv view cusor poistion
+            var topRowIndex = gvNhanVien.TopRowIndex;
+            var focusedRowHandle = gvNhanVien.FocusedRowHandle;
+
+
             // TODO: Reload will reset cusor position
             LoadNhanVien(Program.connstr);
+
+            //  
+            gvNhanVien.FocusedRowHandle = focusedRowHandle;
+            gvNhanVien.TopRowIndex = topRowIndex;
+
+            gcNhanVien.Enabled = true;
+            gvNhanVien.Focus(); 
         }
 
         private void btnExit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -439,16 +460,32 @@ namespace BankReplication.form
             {
                 HandleAdd();
             }
+
+            if(formAction == FormAction.None)
+            {
+                CommitChangeNhanVien();
+            }
+        }
+        private void CommitChangeNhanVien()
+        {
+                    nhanVienTableAdapter1.Connection.ConnectionString = Program.connstr;
+                    nhanVienTableAdapter1.Update(nhanVienDS1.NhanVien);
         }
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            commandController.Execute(new DeleteCommand(nhanVienBds,(DataRowView) nhanVienBds.Current, "MANV"));
+            commandController.Execute(new DeleteCommand(nhanVienBds,(DataRowView) nhanVienBds.Current));
         }
         #endregion
 
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             OpenCreationSideBar();
+        }
+
+        private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+            OpenEditSideBar();
         }
     }
 

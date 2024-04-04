@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace BankReplication.utils
 {
@@ -18,7 +19,7 @@ namespace BankReplication.utils
         public static void validateMANV(String ma)
         {
             notNull(ma);
-            exactLength(ma, 10);
+            maxLength(ma, 10);
             validateUnicodeChar(ma);
 
         }
@@ -29,14 +30,15 @@ namespace BankReplication.utils
             minLength(ho, 2);
             stringRange(ho, 50);
             validateNcharNotDigit(ho);
-
+            validateTitleCase(ho);
         }
         public static void validateTen(String ten)
         {
             notNull(ten);
-            minLength(ten, 3);
+//            minLength(ten, 2);
             stringRange(ten, 10);
             validateNcharNotDigit(parser(ten));
+            validateTitleCase(ten);
         }
 
 
@@ -101,6 +103,14 @@ namespace BankReplication.utils
             if (!Regex.IsMatch(s, @"^[a-zA-Z\sàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]*$")) throw new Exception("Chuỗi chỉ được chứa ký tự chữ cái trong bảng chữa cái unicode hoặc dấu cách");
                
         }
+
+
+        public static void validateTitleCase(String text)
+        {
+
+            if (!IsTitleCase(text)) throw new Exception("Chuỗi là tên riêng nên phải viết in hoa chữ cái đầu mỗi chữ cái");
+        }
+
         private static void validateUnicodeChar(String s)
         {
             if (!Regex.IsMatch(parser(s), @"^[a-zA-Z0-9\sàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]*$")) throw new Exception("Chuỗi chỉ được chứa ký tự trong bảng chữa cái, số hoặc dấu cách");
@@ -142,5 +152,13 @@ namespace BankReplication.utils
         public static String parser(String s) {
             return s.ToString().Trim();
         }
+        public static Boolean IsTitleCase(String s)
+        {
+                if (string.IsNullOrEmpty(s))
+                    return false;
+                return s == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
+
+        }
     }
+
 }

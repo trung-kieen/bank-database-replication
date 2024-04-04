@@ -1,4 +1,5 @@
-﻿namespace BankReplication.form
+﻿using System.Windows.Forms;
+namespace BankReplication.form
 {
     partial class formNhanVien
     {
@@ -257,6 +258,7 @@
             this.trangThaiXoaCheckBox.Size = new System.Drawing.Size(171, 34);
             this.trangThaiXoaCheckBox.TabIndex = 17;
             this.trangThaiXoaCheckBox.Text = "TRANG THAI XOA";
+            this.trangThaiXoaCheckBox.Visible = false;
             this.trangThaiXoaCheckBox.UseVisualStyleBackColor = true;
             // 
             // mACNTextEdit
@@ -496,6 +498,7 @@
             this.cmbChiNhanh.Size = new System.Drawing.Size(177, 27);
             this.cmbChiNhanh.TabIndex = 1;
             this.cmbChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmbChiNhanh_SelectedIndexChanged);
+            this.cmbChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // labelControl1
             // 
@@ -601,6 +604,7 @@
             this.btnSua.Id = 11;
             this.btnSua.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSua.ImageOptions.SvgImage")));
             this.btnSua.Name = "btnSua";
+            this.btnSua.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSua_ItemClick);
             // 
             // btnLuu
             // 

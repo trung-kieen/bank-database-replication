@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 
 namespace BankReplication.utils
 {
@@ -36,10 +37,10 @@ namespace BankReplication.utils
         public void Execute()
         {
             bool bdsNotContainNewRow = _bds.IndexOf(_rowView) == -1;
-            if(bdsNotContainNewRow)
+            if (bdsNotContainNewRow)
             {
-            _rowView = (DataRowView)_bds.AddNew();
-            _rowView.Row.ItemArray = _rows;
+                _rowView = (DataRowView)_bds.AddNew();
+                _rowView.Row.ItemArray = _rows;
             }
             else
             {
@@ -52,8 +53,8 @@ namespace BankReplication.utils
         {
             _bds.Focus(_rowView);
             _bds.Remove(_rowView);
-//            if (originPosition > 0) _bds.Position = originPosition - 1;
-//            _bds.Position = originPosition;
+            //            if (originPosition > 0) _bds.Position = originPosition - 1;
+            //            _bds.Position = originPosition;
 
         }
         public void Redo()
@@ -69,21 +70,11 @@ namespace BankReplication.utils
         private DataRowView _rowView;
         private object[] _rows;
         private int originPosition;
-        private String _sortColumn;
-        private DeleteCommand(BankReplication.utils.BindingSourceExtends bds, object[] rows, String sortColumn)
-        {
-            _bds = bds;
-            _rows = rows;
-            originPosition = _bds.Position;
-            _sortColumn = sortColumn;
-        }
-        public DeleteCommand(BankReplication.utils.BindingSourceExtends bds, DataRowView rowView, String sortColumn = null)
+        public DeleteCommand(BankReplication.utils.BindingSourceExtends bds, DataRowView rowView)
         {
             _rowView = rowView;
             _bds = bds;
             originPosition = _bds.Position;
-            _sortColumn = sortColumn;
-            if (_sortColumn != null) _bds.Sort = _sortColumn;
             originPosition = _bds.Position;
         }
         public void Execute()
@@ -99,9 +90,8 @@ namespace BankReplication.utils
         public void Undo()
         {
             _bds.ResetCurrentItem();
-            if (_sortColumn != null) _bds.Sort = _sortColumn;
             DataRowView newRow = (DataRowView)_bds.AddNew();
-            
+
             newRow.Row.ItemArray = _rows;
             _rowView = newRow;
             _bds.Focus(_rowView);
@@ -132,31 +122,61 @@ namespace BankReplication.utils
 
         public void Execute(ICommand command)
         {
-            command.Execute();
-            redoStack.Clear();
-            undoStack.Push(command);
+            try
+            {
+                command.Execute();
+                redoStack.Clear();
+                undoStack.Push(command);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Thao tác không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void Undo()
         {
-            if (undoStack.Count > 0)
+
+            try
             {
-                ICommand cmd = undoStack.Pop();
-                cmd.Undo();
-                redoStack.Push(cmd);
+                if (undoStack.Count > 0)
+                {
+                    ICommand cmd = undoStack.Pop();
+                    cmd.Undo();
+                    redoStack.Push(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Thao tác không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         public void Redo()
         {
-            if (redoStack.Count > 0)
+            try
             {
-                ICommand cmd = redoStack.Pop();
-                cmd.Redo();
-                undoStack.Push(cmd);
+                if (redoStack.Count > 0)
+                {
+                    ICommand cmd = redoStack.Pop();
+                    cmd.Redo();
+                    undoStack.Push(cmd);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Thao tác không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        public Boolean Redoable()
+        {
+            return redoStack.Count > 0;
+        }
 
+        public Boolean Undoable()
+        {
+            return undoStack.Count > 0;
+        }
 
     }
 
