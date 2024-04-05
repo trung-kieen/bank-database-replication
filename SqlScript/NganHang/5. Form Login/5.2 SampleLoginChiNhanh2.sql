@@ -1,7 +1,8 @@
 /*
-Du lieu mau cho cac login va user trong phan manh 2
+Du lieu mau cho cac login va user trong phan manh 1
 */
 USE NGANHANG
-EXEC SP_TaoLogin 'hoang2', '123' , '021', 'NganHang'
-EXEC SP_TaoLogin 'huy2', '123' , '022', 'ChiNhanh'
-EXEC SP_TaoLogin 'lam2', '123' , '023', 'KhachHang'
+GO
+EXEC SP_TaoLogin 'nh2', '123' , '002', 'NganHang'
+EXEC SP_TaoLogin 'cn2', '123' , '006', 'ChiNhanh'
+EXEC SP_TaoLogin 'kh2', '123' , '005', 'KhachHang'

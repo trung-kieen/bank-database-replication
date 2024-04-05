@@ -3,6 +3,7 @@
 --SELECT * FROM sys.sysusers;
 --SELECT * FROM NGANHANG.sys.database_principals;
 
+
 CREATE VIEW login_role
 AS
 SELECT  

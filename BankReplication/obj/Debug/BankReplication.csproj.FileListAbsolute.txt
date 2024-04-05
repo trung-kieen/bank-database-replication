@@ -1,13 +1,6 @@
 E:\BankReplication\BankReplication\bin\Debug\BankReplication.exe.config
 E:\BankReplication\BankReplication\bin\Debug\BankReplication.exe
 E:\BankReplication\BankReplication\bin\Debug\BankReplication.pdb
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.BonusSkins.v19.2.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.Data.v19.2.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.Printing.v19.2.Core.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.Sparkline.v19.2.Core.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.Utils.v19.2.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.XtraBars.v19.2.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.XtraEditors.v19.2.dll
 E:\BankReplication\BankReplication\bin\Debug\DevExpress.Pdf.v19.2.Core.dll
 E:\BankReplication\BankReplication\bin\Debug\DevExpress.Data.v19.2.xml
 E:\BankReplication\BankReplication\bin\Debug\DevExpress.Printing.v19.2.Core.xml
@@ -54,7 +47,6 @@ E:\BankReplication\BankReplication\obj\Debug\BankReplication.csproj.CopyComplete
 E:\BankReplication\BankReplication\obj\Debug\BankReplication.exe
 E:\BankReplication\BankReplication\obj\Debug\BankReplication.pdb
 E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formDangNhap.resources
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.Images.v19.2.dll
 D:\BankReplication\BankReplication\bin\Debug\BankReplication.exe.config
 D:\BankReplication\BankReplication\bin\Debug\BankReplication.exe
 D:\BankReplication\BankReplication\bin\Debug\BankReplication.pdb
@@ -104,9 +96,6 @@ D:\BankReplication\BankReplication\obj\Debug\BankReplication.csproj.CoreCompileI
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.csproj.CopyComplete
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.exe
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.pdb
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.XtraGrid.v19.2.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.XtraLayout.v19.2.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.XtraNavBar.v19.2.dll
 E:\BankReplication\BankReplication\bin\Debug\DevExpress.XtraPrinting.v19.2.dll
 E:\BankReplication\BankReplication\bin\Debug\DevExpress.RichEdit.v19.2.Core.dll
 E:\BankReplication\BankReplication\bin\Debug\DevExpress.XtraTreeList.v19.2.dll
@@ -146,9 +135,6 @@ E:\BankReplication\BankReplication\bin\Debug\de\DevExpress.Office.v19.2.Core.res
 E:\BankReplication\BankReplication\bin\Debug\es\DevExpress.Office.v19.2.Core.resources.dll
 E:\BankReplication\BankReplication\bin\Debug\ja\DevExpress.Office.v19.2.Core.resources.dll
 E:\BankReplication\BankReplication\bin\Debug\ru\DevExpress.Office.v19.2.Core.resources.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.CodeParser.v19.2.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.DataAccess.v19.2.dll
-E:\BankReplication\BankReplication\bin\Debug\DevExpress.Xpo.v19.2.dll
 E:\BankReplication\BankReplication\bin\Debug\DevExpress.DataAccess.v19.2.xml
 E:\BankReplication\BankReplication\bin\Debug\DevExpress.Xpo.v19.2.xml
 E:\BankReplication\BankReplication\bin\Debug\de\DevExpress.DataAccess.v19.2.resources.dll

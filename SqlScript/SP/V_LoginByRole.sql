@@ -1,17 +1,13 @@
 USE [NGANHANG]
 GO
 
-/****** Object:  View [dbo].[uv_LoginByRole]    Script Date: 3/24/2024 3:07:27 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
 
 --SELECT * FROM sys.sysmembers;
 --SELECT * FROM sys.syslogins;
 --SELECT * FROM sys.sysusers;
 --SELECT * FROM NGANHANG.sys.database_principals;
+DROP VIEW [dbo].[uv_LoginByRole]
+GO
 
 CREATE VIEW [dbo].[uv_LoginByRole]
 AS

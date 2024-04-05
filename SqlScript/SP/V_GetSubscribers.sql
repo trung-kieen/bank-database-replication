@@ -4,10 +4,12 @@ SP nen duoc su dung o server chinh
 */
 use [NGANHANG]
 GO
+DROP VIEW [dbo].[uv_GetSubcribers]
+GO 
 CREATE VIEW [dbo].[uv_GetSubcribers]
 AS
 
-SELECT DISTINCT TENCN = p.description, TENSERVER = s.subscriber_server
+SELECT  TENCN = p.description, TENSERVER = s.subscriber_server
 FROM NGANHANG.dbo.sysmergepublications p,  NGANHANG.dbo.sysmergesubscriptions s
 WHERE p.pubid = s.pubid AND s.subscriber_server <> @@SERVERNAME 
  AND s.subscriber_server IS  NOT NULL

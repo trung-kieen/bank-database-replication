@@ -4,6 +4,8 @@ Prerequisite: create role NganHang, ChiNhanh, KhachHang on site
 
 USE NGANHANG 
 GO
+DROP PROC [dbo].[SP_TaoLogin]
+GO
 CREATE PROC [dbo].[SP_TaoLogin]
     @LGNAME VARCHAR(50),
     @PASS VARCHAR(50),

@@ -1,5 +1,7 @@
 USE NGANHANG
 GO
+DROP PROC [dbo].[SP_LayThongTinNhanVien]
+GO
 CREATE  PROC [dbo].[SP_LayThongTinNhanVien]
 @TENLOGIN NVARCHAR (50)
 AS

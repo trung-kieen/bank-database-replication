@@ -1,7 +1,9 @@
 USE NGANHANG
 GO
+DROP PROC SP_TimNhanVien
+GO
 -- SP Tim nhan vien tren cac phan manh
-ALTER PROC SP_TimNhanVien
+CREATE PROC SP_TimNhanVien
     @manv CHAR(10)
 AS
 DECLARE @ho NVARCHAR(50),
