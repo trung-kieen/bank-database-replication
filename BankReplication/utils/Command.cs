@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Utils.DirectXPaint;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
@@ -30,7 +31,7 @@ namespace BankReplication.utils
         public AddCommand(BankReplication.utils.BindingSourceExtends bds, DataRowView rowView)
         {
             _bds = bds;
-            _rows = rowView.Row.ItemArray.Clone() as object[];
+            _rows = ModelMapper.RowViewToRowList(rowView);
             _rowView = rowView;
             originPosition = _bds.Position;
         }
@@ -53,13 +54,16 @@ namespace BankReplication.utils
         {
             _bds.Focus(_rowView);
             _bds.Remove(_rowView);
+
             //            if (originPosition > 0) _bds.Position = originPosition - 1;
             //            _bds.Position = originPosition;
 
         }
         public void Redo()
         {
-            this.Execute();
+//            _bds.Insert(originPosition, _rowView);
+            _bds.Insert(originPosition, _rows);
+  //        this.Execute();
         }
 
     }
@@ -75,13 +79,12 @@ namespace BankReplication.utils
             _rowView = rowView;
             _bds = bds;
             originPosition = _bds.Position;
-            originPosition = _bds.Position;
         }
         public void Execute()
         {
             if (_bds.Count > 0)
             {
-                _rows = _rowView.Row.ItemArray.Clone() as object[];
+                _rows = ModelMapper.RowViewToRowList(_rowView);
                 _bds.Focus(_rowView);
                 _bds.Remove((DataRowView)_rowView);
 
@@ -105,7 +108,40 @@ namespace BankReplication.utils
         }
 
     }
+class EditCommand: ICommand
+    {
+        private BankReplication.utils.BindingSourceExtends _bds;
+        private DataRowView _rowView;
+        private object[] _before;
+        private object[] _after;
+        public EditCommand(BankReplication.utils.BindingSourceExtends bds)
+        {
+            _bds = bds;
+            _before = ModelMapper.RowViewToRowList((DataRowView)_bds.Current);
+            _bds.EndEdit();
+            _after= ModelMapper.RowViewToRowList((DataRowView)_bds.Current);
+            _rowView =(DataRowView) _bds.Current;
+        }
+        public void Execute()
+        {
+            _bds.Update(_bds.IndexOf(_before), _after);
+        }
+        public void Undo()
+        {
+            int position = _bds.IndexOf(_after);
+            _bds.Update(position, _before);
 
+            _bds.Position = position;
+        }
+        public void Redo()
+        {
+            int position = _bds.IndexOf(_before);
+            _bds.Update(position, _after);
+
+            _bds.Position = position;
+        }
+
+    }
 
     // The Invoker is associated with one or several commands. It sends a
     // request to the command.
@@ -180,6 +216,14 @@ namespace BankReplication.utils
 
     }
 
+    public class ModelMapper
+    {
+        public static object[] RowViewToRowList(DataRowView rowView)
+        {
+                return  rowView.Row.ItemArray.Clone() as object[];
+        }
+
+    }
 
 
 

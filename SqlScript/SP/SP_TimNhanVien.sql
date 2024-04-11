@@ -16,7 +16,7 @@ WHERE MANV=@manv))
 BEGIN
     -- Tim tren chi nhanh hien tai 
 
-    SELECT HO, TEN , TENCN = (SELECT TENCN
+    SELECT HO, TEN , TENCN = (SELECT TOP 1 TENCN
         FROM NGANHANG.dbo.ChiNhanh)
     FROM NhanVien
     WHERE MANV LIKE @manv 

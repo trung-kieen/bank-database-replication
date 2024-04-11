@@ -1,4 +1,7 @@
 ﻿using System.Data;
+using System.Security.Permissions;
+using System.Windows.Forms;
+
 
 namespace BankReplication.utils
 {
@@ -49,6 +52,28 @@ namespace BankReplication.utils
             }
             return -1;
         }
+        public void Update(int position, object[] rows)
+        {
+            //            ((DataRowView)this[position]).Row.ItemArray = rows;
+//            DataRowView shallowCopy = (DataRowView)this[position];
+//            shallowCopy.Row[2] = "New data";
+//            shallowCopy.Row.ItemArray = rows;
+//            this.CurrencyManager.List[position] = shallowCopy;
+            foreach(DataRowView element in this)
+            {
+                if(position == 0)
+                {
+                    element.Row.ItemArray = rows; 
+                }
+                position--;
+            }
+             
+//            this[position] = shallowCopy;
+
+//            this.CurrencyManager.List.RemoveAt(Position);
+
+        }
+
         public bool EqualsRowList(object[] a, object[] b)
         {
             try
@@ -73,6 +98,7 @@ namespace BankReplication.utils
             {
                 var elementRow = (DataRowView)this[i];
                 if (EqualsRowList(elementRow.Row.ItemArray, rows)) return i;
+
             }
             return -1;
         }
