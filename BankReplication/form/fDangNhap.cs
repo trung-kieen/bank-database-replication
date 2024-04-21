@@ -133,8 +133,7 @@ namespace BankReplication.form
             Program.mlogin = inputTaiKhoan.Text;
             Program.password = inputPassword.Text;
 
-            String errorDescribe = "Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password và kết nối tới máy chủ.\n ";
-            if (Program.KetNoi(errorDescribe) == 0)
+            if (Program.KetNoi() == Database.Connection.Fail)
             {
                 return;
             }

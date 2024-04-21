@@ -54,11 +54,6 @@ namespace BankReplication.utils
         }
         public void Update(int position, object[] rows)
         {
-            //            ((DataRowView)this[position]).Row.ItemArray = rows;
-//            DataRowView shallowCopy = (DataRowView)this[position];
-//            shallowCopy.Row[2] = "New data";
-//            shallowCopy.Row.ItemArray = rows;
-//            this.CurrencyManager.List[position] = shallowCopy;
             foreach(DataRowView element in this)
             {
                 if(position == 0)
@@ -68,9 +63,6 @@ namespace BankReplication.utils
                 position--;
             }
              
-//            this[position] = shallowCopy;
-
-//            this.CurrencyManager.List.RemoveAt(Position);
 
         }
 

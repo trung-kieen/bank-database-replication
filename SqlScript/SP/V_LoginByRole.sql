@@ -6,10 +6,7 @@ GO
 --SELECT * FROM sys.syslogins;
 --SELECT * FROM sys.sysusers;
 --SELECT * FROM NGANHANG.sys.database_principals;
-DROP VIEW [dbo].[uv_LoginByRole]
-GO
-
-CREATE VIEW [dbo].[uv_LoginByRole]
+CREATE OR ALTER VIEW [dbo].[uv_LoginByRole]
 AS
 SELECT  
  u.name as userid , l.loginname, role.name as rolename

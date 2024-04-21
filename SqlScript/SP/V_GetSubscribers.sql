@@ -4,9 +4,7 @@ SP nen duoc su dung o server chinh
 */
 use [NGANHANG]
 GO
-DROP VIEW [dbo].[uv_GetSubcribers]
-GO 
-CREATE VIEW [dbo].[uv_GetSubcribers]
+CREATE OR ALTER VIEW [dbo].[uv_GetSubcribers]
 AS
 
 SELECT  TENCN = p.description, TENSERVER = s.subscriber_server

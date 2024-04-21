@@ -22,7 +22,6 @@ namespace BankReplication
 
         public static Boolean IsEmployeeExist(String MaNV)
         {
-
             // NOTE: Use method KetNoi to connect to server first
             String cmd = "EXEC SP_TimNhanVien '" + MaNV + "'";
             SqlDataReader myReader;
@@ -38,7 +37,7 @@ namespace BankReplication
                 // Do not close connection here, it cause myReader unable to read
                 if (myReader.Read())
                 {
-                    if ( myReader.GetString(0) != "")  return true;
+                    if (myReader.GetString(0) != "") return true;
                 }
                 myReader.Close();
                 return false;
@@ -51,6 +50,28 @@ namespace BankReplication
             }
         }
 
+        public static String layMaNVChiNhanhKhac(String cmnd)
+        {
+            // Tìm kiếm có tồn tại nhân viên ở chi nhánh còn lại không dựa vào số chứng minh nhân dân
+            try
+            {
+                if (Program.KetNoi() == BankReplication.utils.Database.Connection.Success)
+                {
+                    Program.myReader = Program.ExecSqlDataReader("SELECT MANV FROM LINK1.NGANHANG.dbo.NhanVien WHERE CMND = '" + cmnd + "'");
+                    Program.myReader.Read();
+                    if (Program.myReader != null)
+                    {
+                        String manv = Program.myReader.GetString(0);
+                        Program.myReader.Close();
+                        return manv;
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return null;
+        }
 
     }
 }

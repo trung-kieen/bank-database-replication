@@ -5,9 +5,11 @@ using System.Windows.Forms;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
 using System.Data;
+using BankReplication.utils;
 using System.Data.SqlClient;
 using BankReplication.form;
 using BankReplication.Properties;
+
 
 namespace BankReplication
 {
@@ -55,7 +57,7 @@ namespace BankReplication
         }
 
 
-        public static int KetNoi(String errorMessage = "Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " )
+        public static int KetNoi(Boolean showError = true)
         {
             // Close old connection avoid system close connection time out 
             if(Program.conn !=null && Program.conn.State == System.Data.ConnectionState.Open)
@@ -70,12 +72,16 @@ namespace BankReplication
                                 + ";password=" + Program.password;
                 Program.conn.ConnectionString = Program.connstr;
                 Program.conn.Open();
-                return 1;
+                return Database.Connection.Success;
             }
             catch (Exception e)
             {
+                if (showError)
+                {
+                String errorMessage = "Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n ";
                 MessageBox.Show(errorMessage + e.Message, "", MessageBoxButtons.OK);
-                return 0;
+                }
+                return Database.Connection.Fail;
             }
         }
 
@@ -102,11 +108,11 @@ namespace BankReplication
                 // Do not close connection here, it cause myReader unable to read
                 return myReader;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 if (!forceNoMessageBox)
                 {
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + ex.Message, "", MessageBoxButtons.OK);
                 }
                 Program.conn.Close();
                 return null;
@@ -133,7 +139,8 @@ namespace BankReplication
             {
                 sqlcmd.ExecuteNonQuery();
                 conn.Close();
-                return 0;
+
+                return Database.NoQuery.Success;
             }
             catch (SqlException e)
             {

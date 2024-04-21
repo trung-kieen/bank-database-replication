@@ -1,8 +1,6 @@
 USE NGANHANG 
 GO
-DROP PROC SP_XoaLogin 
-GO
-CREATE PROC SP_XoaLogin 
+CREATE OR ALTER PROC SP_XoaLogin 
 @LGNAME VARCHAR(50)
 AS 
 -- Xoa user tao theo login 

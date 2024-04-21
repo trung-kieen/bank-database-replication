@@ -78,6 +78,7 @@ namespace BankReplication.form
             this.toolBar = new DevExpress.XtraBars.Bar();
             this.btnThem = new DevExpress.XtraBars.BarButtonItem();
             this.btnXoa = new DevExpress.XtraBars.BarButtonItem();
+            this.btnChuyenCN = new DevExpress.XtraBars.BarButtonItem();
             this.btnSua = new DevExpress.XtraBars.BarButtonItem();
             this.btnLuu = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
@@ -95,6 +96,7 @@ namespace BankReplication.form
             this.btnMENU = new DevExpress.XtraBars.BarSubItem();
             this.btnCheDoDonDatHang = new DevExpress.XtraBars.BarButtonItem();
             this.btnCheDoChiTietDonDatHang = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             mANVLabel = new System.Windows.Forms.Label();
             hOLabel = new System.Windows.Forms.Label();
             tENLabel = new System.Windows.Forms.Label();
@@ -103,17 +105,6 @@ namespace BankReplication.form
             sODTLabel = new System.Windows.Forms.Label();
             mACNLabel = new System.Windows.Forms.Label();
             pHAILabel1 = new System.Windows.Forms.Label();
-
-
-            // Event handle input done
-            this.SODTTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            this.CMNDTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            this.MANVTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            this.DIACHITextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            this.TENTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            this.HOTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            this.MACNTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-
             ((System.ComponentModel.ISupportInitialize)(this.sidePanel)).BeginInit();
             this.sidePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nhanVienBds)).BeginInit();
@@ -233,8 +224,8 @@ namespace BankReplication.form
             this.sidePanel.Controls.Add(this.HOTextEdit);
             this.sidePanel.Controls.Add(mANVLabel);
             this.sidePanel.Controls.Add(this.MANVTextEdit);
-            this.sidePanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.sidePanel.Location = new System.Drawing.Point(1527, 2);
+            this.sidePanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sidePanel.Location = new System.Drawing.Point(2, 2);
             this.sidePanel.Name = "sidePanel";
             this.sidePanel.Size = new System.Drawing.Size(389, 939);
             this.sidePanel.TabIndex = 0;
@@ -280,6 +271,7 @@ namespace BankReplication.form
             this.MACNTextEdit.Name = "MACNTextEdit";
             this.MACNTextEdit.Size = new System.Drawing.Size(150, 28);
             this.MACNTextEdit.TabIndex = 15;
+            this.MACNTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
             // 
             // SODTTextEdit
             // 
@@ -289,6 +281,7 @@ namespace BankReplication.form
             this.SODTTextEdit.Properties.MaxLength = 15;
             this.SODTTextEdit.Size = new System.Drawing.Size(150, 28);
             this.SODTTextEdit.TabIndex = 11;
+            this.SODTTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
             // 
             // DIACHITextEdit
             // 
@@ -298,6 +291,7 @@ namespace BankReplication.form
             this.DIACHITextEdit.Properties.MaxLength = 100;
             this.DIACHITextEdit.Size = new System.Drawing.Size(150, 28);
             this.DIACHITextEdit.TabIndex = 9;
+            this.DIACHITextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
             // 
             // CMNDTextEdit
             // 
@@ -307,6 +301,7 @@ namespace BankReplication.form
             this.CMNDTextEdit.Properties.MaxLength = 10;
             this.CMNDTextEdit.Size = new System.Drawing.Size(150, 28);
             this.CMNDTextEdit.TabIndex = 7;
+            this.CMNDTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
             // 
             // TENTextEdit
             // 
@@ -316,6 +311,7 @@ namespace BankReplication.form
             this.TENTextEdit.Properties.MaxLength = 10;
             this.TENTextEdit.Size = new System.Drawing.Size(150, 28);
             this.TENTextEdit.TabIndex = 5;
+            this.TENTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
             // 
             // HOTextEdit
             // 
@@ -325,6 +321,7 @@ namespace BankReplication.form
             this.HOTextEdit.Properties.MaxLength = 50;
             this.HOTextEdit.Size = new System.Drawing.Size(150, 28);
             this.HOTextEdit.TabIndex = 3;
+            this.HOTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
             // 
             // MANVTextEdit
             // 
@@ -334,6 +331,7 @@ namespace BankReplication.form
             this.MANVTextEdit.Properties.MaxLength = 10;
             this.MANVTextEdit.Size = new System.Drawing.Size(150, 28);
             this.MANVTextEdit.TabIndex = 1;
+            this.MANVTextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
             // 
             // gcNhanVien
             // 
@@ -563,9 +561,10 @@ namespace BankReplication.form
             this.btnCheDoChiTietDonDatHang,
             this.btnSua,
             this.btnRedo,
-            this.btnHuy});
+            this.btnHuy,
+            this.btnChuyenCN});
             this.toolBarManager.MainMenu = this.toolBar;
-            this.toolBarManager.MaxItemId = 14;
+            this.toolBarManager.MaxItemId = 15;
             this.toolBarManager.StatusBar = this.bar3;
             // 
             // toolBar
@@ -578,6 +577,7 @@ namespace BankReplication.form
             this.toolBar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnChuyenCN, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSua, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnLuu, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -608,6 +608,14 @@ namespace BankReplication.form
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(70, 0);
             this.btnXoa.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnXoa_ItemClick);
+            // 
+            // btnChuyenCN
+            // 
+            this.btnChuyenCN.Caption = "ChuyenChiNhanh";
+            this.btnChuyenCN.Id = 14;
+            this.btnChuyenCN.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnChuyenCN.ImageOptions.SvgImage")));
+            this.btnChuyenCN.Name = "btnChuyenCN";
+            this.btnChuyenCN.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChuyenCN_ItemClick);
             // 
             // btnSua
             // 
@@ -755,6 +763,14 @@ namespace BankReplication.form
             this.btnCheDoChiTietDonDatHang.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCheDoChiTietDonDatHang.ImageOptions.SvgImage")));
             this.btnCheDoChiTietDonDatHang.Name = "btnCheDoChiTietDonDatHang";
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Làm Mới";
+            this.barButtonItem1.Enabled = false;
+            this.barButtonItem1.Id = 4;
+            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
             // formNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -798,7 +814,6 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
 
         }
 
@@ -863,5 +878,7 @@ namespace BankReplication.form
         private DevExpress.XtraBars.BarButtonItem btnSua;
         private DevExpress.XtraBars.BarButtonItem btnRedo;
         private DevExpress.XtraBars.BarButtonItem btnHuy;
+        private DevExpress.XtraBars.BarButtonItem btnChuyenCN;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }

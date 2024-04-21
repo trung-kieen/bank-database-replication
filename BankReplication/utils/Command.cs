@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using BankReplication;
+using BankReplication.utils;
 
 namespace BankReplication.utils
 {
@@ -42,12 +44,13 @@ namespace BankReplication.utils
             {
                 _rowView = (DataRowView)_bds.AddNew();
                 _rowView.Row.ItemArray = _rows;
+                _bds.Focus(_rowView);
+
             }
             else
             {
             }
             _bds.Focus(_rowView);
-
 
         }
         public void Undo()
@@ -55,15 +58,10 @@ namespace BankReplication.utils
             _bds.Focus(_rowView);
             _bds.Remove(_rowView);
 
-            //            if (originPosition > 0) _bds.Position = originPosition - 1;
-            //            _bds.Position = originPosition;
-
         }
         public void Redo()
         {
-//            _bds.Insert(originPosition, _rowView);
-            _bds.Insert(originPosition, _rows);
-  //        this.Execute();
+            this.Execute();
         }
 
     }
@@ -108,7 +106,7 @@ namespace BankReplication.utils
         }
 
     }
-class EditCommand: ICommand
+    class EditCommand : ICommand
     {
         private BankReplication.utils.BindingSourceExtends _bds;
         private DataRowView _rowView;
@@ -119,8 +117,8 @@ class EditCommand: ICommand
             _bds = bds;
             _before = ModelMapper.RowViewToRowList((DataRowView)_bds.Current);
             _bds.EndEdit();
-            _after= ModelMapper.RowViewToRowList((DataRowView)_bds.Current);
-            _rowView =(DataRowView) _bds.Current;
+            _after = ModelMapper.RowViewToRowList((DataRowView)_bds.Current);
+            _rowView = (DataRowView)_bds.Current;
         }
         public void Execute()
         {
@@ -139,6 +137,93 @@ class EditCommand: ICommand
             _bds.Update(position, _after);
 
             _bds.Position = position;
+        }
+
+    }
+    class ChuyenCNCommand : ICommand
+    {
+        //        private BindingSourceExtends _bds;
+        private String _connString;
+        private String _maNVCu;
+        private String _maNVMoi;
+        private Action _afterAction;
+        public ChuyenCNCommand(BindingSourceExtends bds, String connString, String maNVMoi)
+        {
+            //            _bds = bds;
+            _connString = connString;
+            _maNVCu = ((DataRowView)bds[bds.Position]).Row["MANV"].ToString();
+            _maNVMoi = maNVMoi;
+
+        }
+        public ChuyenCNCommand(String connString,  String maNVCu, String maNVMoi)
+        {
+            _connString = connString;
+            _maNVMoi = maNVMoi;
+            _maNVCu = maNVCu;
+        }
+        public ChuyenCNCommand(String connString,  String maNVCu, String maNVMoi, Action afterAction)
+        {
+            _connString = connString;
+            _maNVMoi = maNVMoi;
+            _maNVCu = maNVCu;
+            _afterAction = afterAction;
+        }
+        public void Execute()
+        {
+            Program.connstr = _connString;
+            if (Program.KetNoi(Database.Connection.NotShowError) == Database.Connection.Fail)
+            {
+                MessageBox.Show("Không thể kết nối tới máy chủ", "", MessageBoxButtons.OK);
+                return;
+            }
+            try
+            {
+
+                String SPName = "SP_ChuyenNhanVien";
+                String cmd = "EXEC " + SPName +  " '" + _maNVCu + "', '" + _maNVMoi + "'";
+                
+                Program.ExecSqlNonQuery(cmd);
+                if(_afterAction != null)
+                    _afterAction();
+
+                MessageBox.Show("Nhân viên đã được chuyển qua chi nhánh mới với mã nhân viên là " + _maNVMoi, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Lỗi khi chuyển nhân viên\n" + ex.Message , "Thao tác không thành công", MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+            }
+
+        }
+        public void Undo()
+        {
+            Program.connstr = _connString;
+            if (Program.KetNoi(Database.Connection.NotShowError) == Database.Connection.Fail)
+            {
+                MessageBox.Show("Không thể kết nối tới máy chủ", "", MessageBoxButtons.OK);
+                return;
+            }
+            try
+            {
+                String SPName = "SP_ChuyenNhanVien_Undo";
+                String cmd = "EXEC " + SPName +  " '" + _maNVCu + "', '" + _maNVMoi + "'";
+                Program.ExecSqlNonQuery(cmd);
+                if(_afterAction != null)
+                    _afterAction();
+                MessageBox.Show("Nhân viên đã được chuyển quay lại chi nhánh cũ", "", MessageBoxButtons.OK);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Lỗi khi chuyển nhân viên\n" + ex.Message , "Thao tác không thành công", MessageBoxButtons.OK);
+
+            }
+
+        }
+
+        public void Redo()
+        {
+            this.Execute();
+
         }
 
     }
@@ -216,11 +301,12 @@ class EditCommand: ICommand
 
     }
 
+
     public class ModelMapper
     {
         public static object[] RowViewToRowList(DataRowView rowView)
         {
-                return  rowView.Row.ItemArray.Clone() as object[];
+            return rowView.Row.ItemArray.Clone() as object[];
         }
 
     }
