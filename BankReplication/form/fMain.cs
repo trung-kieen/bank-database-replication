@@ -64,7 +64,7 @@ namespace BankReplication
         
         private void RbVisible(bool displayState)
         {
-            rbBaoCao.Visible = displayState;
+            rbThongKe.Visible = displayState;
             rbChuyenKhoan.Visible = displayState;
             rbHeThong.Visible = displayState;
             rbNghiepVu.Visible = displayState;

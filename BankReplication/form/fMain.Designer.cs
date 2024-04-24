@@ -37,16 +37,15 @@
             this.btnKhachHang = new DevExpress.XtraBars.BarButtonItem();
             this.btnNhanVien = new DevExpress.XtraBars.BarButtonItem();
             this.btnThongKeGD = new DevExpress.XtraBars.BarButtonItem();
+            this.btnThongKeTKMoi = new DevExpress.XtraBars.BarButtonItem();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.rbHeThong = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.loginManagerPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.addAccountRbPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbQuanLy = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rbPageQuanLy = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbNghiepVu = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.rbMoTaiKhoan = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.rbGuiRut = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.rbBaoCao = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.rbGroupNghiepVu = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rbThongKe = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rbGroupReport = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.MANV = new System.Windows.Forms.ToolStripStatusLabel();
@@ -60,6 +59,10 @@
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnThongKeKH = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMoTK = new DevExpress.XtraBars.BarButtonItem();
+            this.btnGuiRut = new DevExpress.XtraBars.BarButtonItem();
+            this.btnChuyenTien = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -80,18 +83,23 @@
             this.btnAddAccount,
             this.btnKhachHang,
             this.btnNhanVien,
-            this.btnThongKeGD});
+            this.btnThongKeGD,
+            this.btnThongKeTKMoi,
+            this.btnThongKeKH,
+            this.btnMoTK,
+            this.btnGuiRut,
+            this.btnChuyenTien});
             this.rbControl.LargeImages = this.imageCollection1;
             this.rbControl.Location = new System.Drawing.Point(0, 0);
             this.rbControl.Margin = new System.Windows.Forms.Padding(1);
-            this.rbControl.MaxItemId = 12;
+            this.rbControl.MaxItemId = 17;
             this.rbControl.Name = "rbControl";
             this.rbControl.OptionsMenuMinWidth = 200;
             this.rbControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.rbHeThong,
             this.rbQuanLy,
             this.rbNghiepVu,
-            this.rbBaoCao});
+            this.rbThongKe});
             this.rbControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.rbControl.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
             this.rbControl.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.False;
@@ -139,10 +147,18 @@
             // 
             // btnThongKeGD
             // 
-            this.btnThongKeGD.Caption = "Thông kê giao dịch";
+            this.btnThongKeGD.Caption = "Giao dịch";
             this.btnThongKeGD.Id = 11;
+            this.btnThongKeGD.ImageOptions.LargeImageIndex = 5;
             this.btnThongKeGD.Name = "btnThongKeGD";
             this.btnThongKeGD.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThongKeGD_ItemClick);
+            // 
+            // btnThongKeTKMoi
+            // 
+            this.btnThongKeTKMoi.Caption = "Tài khoản mới mở";
+            this.btnThongKeTKMoi.Id = 12;
+            this.btnThongKeTKMoi.ImageOptions.LargeImageIndex = 6;
+            this.btnThongKeTKMoi.Name = "btnThongKeTKMoi";
             // 
             // imageCollection1
             // 
@@ -153,12 +169,16 @@
             this.imageCollection1.Images.SetKeyName(2, "logout.png");
             this.imageCollection1.Images.SetKeyName(3, "employee.png");
             this.imageCollection1.Images.SetKeyName(4, "customer.png");
+            this.imageCollection1.Images.SetKeyName(5, "money_exchange.png");
+            this.imageCollection1.Images.SetKeyName(6, "new_customer.png");
+            this.imageCollection1.Images.SetKeyName(7, "customer_report.png");
+            this.imageCollection1.Images.SetKeyName(8, "money_transfer.png");
+            this.imageCollection1.Images.SetKeyName(9, "withdraw_deposit.png");
             // 
             // rbHeThong
             // 
             this.rbHeThong.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.loginManagerPageGroup,
-            this.addAccountRbPageGroup});
+            this.loginManagerPageGroup});
             this.rbHeThong.Name = "rbHeThong";
             this.rbHeThong.Text = "Hệ thống";
             this.rbHeThong.Visible = false;
@@ -168,12 +188,6 @@
             this.loginManagerPageGroup.ItemLinks.Add(this.btnDangNhap);
             this.loginManagerPageGroup.ItemLinks.Add(this.btnDangXuat, true);
             this.loginManagerPageGroup.Name = "loginManagerPageGroup";
-            // 
-            // addAccountRbPageGroup
-            // 
-            this.addAccountRbPageGroup.ImageOptions.Image = global::BankReplication.Properties.Resources.add_account;
-            this.addAccountRbPageGroup.ItemLinks.Add(this.btnAddAccount);
-            this.addAccountRbPageGroup.Name = "addAccountRbPageGroup";
             // 
             // rbQuanLy
             // 
@@ -192,33 +206,31 @@
             // rbNghiepVu
             // 
             this.rbNghiepVu.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.rbMoTaiKhoan,
-            this.rbGuiRut});
+            this.rbGroupNghiepVu});
             this.rbNghiepVu.Name = "rbNghiepVu";
             this.rbNghiepVu.Text = "Nghiệp vụ";
             this.rbNghiepVu.Visible = false;
             // 
-            // rbMoTaiKhoan
+            // rbGroupNghiepVu
             // 
-            this.rbMoTaiKhoan.Name = "rbMoTaiKhoan";
-            this.rbMoTaiKhoan.Text = "Mở tài khoản";
+            this.rbGroupNghiepVu.ItemLinks.Add(this.btnMoTK);
+            this.rbGroupNghiepVu.ItemLinks.Add(this.btnGuiRut);
+            this.rbGroupNghiepVu.ItemLinks.Add(this.btnChuyenTien);
+            this.rbGroupNghiepVu.Name = "rbGroupNghiepVu";
             // 
-            // rbGuiRut
+            // rbThongKe
             // 
-            this.rbGuiRut.Name = "rbGuiRut";
-            this.rbGuiRut.Text = "Gửi rút";
-            // 
-            // rbBaoCao
-            // 
-            this.rbBaoCao.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.rbThongKe.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.rbGroupReport});
-            this.rbBaoCao.Name = "rbBaoCao";
-            this.rbBaoCao.Text = "Báo cáo";
-            this.rbBaoCao.Visible = false;
+            this.rbThongKe.Name = "rbThongKe";
+            this.rbThongKe.Text = "Thống kê";
+            this.rbThongKe.Visible = false;
             // 
             // rbGroupReport
             // 
             this.rbGroupReport.ItemLinks.Add(this.btnThongKeGD);
+            this.rbGroupReport.ItemLinks.Add(this.btnThongKeTKMoi);
+            this.rbGroupReport.ItemLinks.Add(this.btnThongKeKH);
             this.rbGroupReport.Name = "rbGroupReport";
             // 
             // statusStrip1
@@ -290,6 +302,35 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // btnThongKeKH
+            // 
+            this.btnThongKeKH.Caption = "Khách hàng";
+            this.btnThongKeKH.Id = 13;
+            this.btnThongKeKH.ImageOptions.LargeImageIndex = 7;
+            this.btnThongKeKH.Name = "btnThongKeKH";
+            // 
+            // btnMoTK
+            // 
+            this.btnMoTK.Caption = "Mở tài khoản";
+            this.btnMoTK.CausesValidation = true;
+            this.btnMoTK.Id = 14;
+            this.btnMoTK.ImageOptions.LargeImageIndex = 0;
+            this.btnMoTK.Name = "btnMoTK";
+            // 
+            // btnGuiRut
+            // 
+            this.btnGuiRut.Caption = "Gửi/Rút";
+            this.btnGuiRut.Id = 15;
+            this.btnGuiRut.ImageOptions.LargeImageIndex = 9;
+            this.btnGuiRut.Name = "btnGuiRut";
+            // 
+            // btnChuyenTien
+            // 
+            this.btnChuyenTien.Caption = "Chuyển tiền";
+            this.btnChuyenTien.Id = 16;
+            this.btnChuyenTien.ImageOptions.LargeImageIndex = 8;
+            this.btnChuyenTien.Name = "btnChuyenTien";
+            // 
             // formMain
             // 
             this.Appearance.Options.UseFont = true;
@@ -323,14 +364,13 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage rbHeThong;
         private DevExpress.XtraBars.Ribbon.RibbonPage rbQuanLy;
         private DevExpress.XtraBars.Ribbon.RibbonPage rbNghiepVu;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbMoTaiKhoan;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbGuiRut;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbGroupNghiepVu;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel MANV;
         private System.Windows.Forms.ToolStripStatusLabel HOTEN;
         private System.Windows.Forms.ToolStripStatusLabel NHOM;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.Ribbon.RibbonPage rbBaoCao;
+        private DevExpress.XtraBars.Ribbon.RibbonPage rbThongKe;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbGroupReport;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
         private DevExpress.XtraBars.BarButtonItem btnDangNhap;
@@ -342,13 +382,17 @@
         private DevExpress.XtraBars.Docking2010.DocumentManager documentManager1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
         private DevExpress.XtraBars.BarButtonItem btnAddAccount;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup addAccountRbPageGroup;
         private DevExpress.Utils.ImageCollection imageCollection1;
         private System.Windows.Forms.ImageList imageList1;
         private DevExpress.XtraBars.BarButtonItem btnKhachHang;
         private DevExpress.XtraBars.BarButtonItem btnNhanVien;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbPageQuanLy;
         private DevExpress.XtraBars.BarButtonItem btnThongKeGD;
+        private DevExpress.XtraBars.BarButtonItem btnThongKeTKMoi;
+        private DevExpress.XtraBars.BarButtonItem btnThongKeKH;
+        private DevExpress.XtraBars.BarButtonItem btnMoTK;
+        private DevExpress.XtraBars.BarButtonItem btnGuiRut;
+        private DevExpress.XtraBars.BarButtonItem btnChuyenTien;
     }
 }
 

@@ -121,4 +121,7 @@
   <data name="add_account" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\asset\icon\add_account.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="money_exchange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\asset\icon\money_exchange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

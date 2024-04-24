@@ -40,6 +40,8 @@ namespace BankReplication.form
             System.Windows.Forms.Label pHAILabel1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formNhanVien));
             this.sidePanel = new DevExpress.XtraEditors.PanelControl();
+            this.fBtnHuy = new DevExpress.XtraEditors.SimpleButton();
+            this.fBtnLuu = new DevExpress.XtraEditors.SimpleButton();
             this.PHAIComboBox = new System.Windows.Forms.ComboBox();
             this.nhanVienBds = new BankReplication.utils.BindingSourceExtends(this.components);
             this.nhanVienDS1 = new BankReplication.NhanVienDS();
@@ -97,6 +99,11 @@ namespace BankReplication.form
             this.btnCheDoDonDatHang = new DevExpress.XtraBars.BarButtonItem();
             this.btnCheDoChiTietDonDatHang = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
             mANVLabel = new System.Windows.Forms.Label();
             hOLabel = new System.Windows.Forms.Label();
             tENLabel = new System.Windows.Forms.Label();
@@ -128,6 +135,7 @@ namespace BankReplication.form
             this.toolBoxPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.controlPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // mANVLabel
@@ -207,6 +215,8 @@ namespace BankReplication.form
             this.sidePanel.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.sidePanel.Appearance.BackColor2 = System.Drawing.Color.Transparent;
             this.sidePanel.Appearance.Options.UseBackColor = true;
+            this.sidePanel.Controls.Add(this.fBtnHuy);
+            this.sidePanel.Controls.Add(this.fBtnLuu);
             this.sidePanel.Controls.Add(pHAILabel1);
             this.sidePanel.Controls.Add(this.PHAIComboBox);
             this.sidePanel.Controls.Add(this.trangThaiXoaCheckBox);
@@ -230,6 +240,26 @@ namespace BankReplication.form
             this.sidePanel.Size = new System.Drawing.Size(389, 939);
             this.sidePanel.TabIndex = 0;
             this.sidePanel.Visible = false;
+            // 
+            // fBtnHuy
+            // 
+            this.fBtnHuy.Location = new System.Drawing.Point(216, 529);
+            this.fBtnHuy.Name = "fBtnHuy";
+            this.fBtnHuy.Size = new System.Drawing.Size(112, 48);
+            this.fBtnHuy.TabIndex = 20;
+            this.fBtnHuy.Text = "Hủy";
+            this.fBtnHuy.Click += new System.EventHandler(this.fBtnHuy_Click);
+            // 
+            // fBtnLuu
+            // 
+            this.fBtnLuu.Appearance.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.fBtnLuu.Appearance.Options.UseBackColor = true;
+            this.fBtnLuu.Location = new System.Drawing.Point(70, 529);
+            this.fBtnLuu.Name = "fBtnLuu";
+            this.fBtnLuu.Size = new System.Drawing.Size(112, 48);
+            this.fBtnLuu.TabIndex = 19;
+            this.fBtnLuu.Text = "Lưu";
+            this.fBtnLuu.Click += new System.EventHandler(this.fBtnLuu_Click);
             // 
             // PHAIComboBox
             // 
@@ -502,10 +532,10 @@ namespace BankReplication.form
             this.cmbChiNhanh.DisplayMember = "TENCN";
             this.cmbChiNhanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChiNhanh.FormattingEnabled = true;
-            this.cmbChiNhanh.Location = new System.Drawing.Point(105, 3);
+            this.cmbChiNhanh.Location = new System.Drawing.Point(120, 2);
             this.cmbChiNhanh.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChiNhanh.Name = "cmbChiNhanh";
-            this.cmbChiNhanh.Size = new System.Drawing.Size(177, 27);
+            this.cmbChiNhanh.Size = new System.Drawing.Size(269, 27);
             this.cmbChiNhanh.TabIndex = 1;
             this.cmbChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmbChiNhanh_SelectedIndexChanged);
             // 
@@ -611,7 +641,7 @@ namespace BankReplication.form
             // 
             // btnChuyenCN
             // 
-            this.btnChuyenCN.Caption = "ChuyenChiNhanh";
+            this.btnChuyenCN.Caption = "Chuyển chi nhánh";
             this.btnChuyenCN.Id = 14;
             this.btnChuyenCN.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnChuyenCN.ImageOptions.SvgImage")));
             this.btnChuyenCN.Name = "btnChuyenCN";
@@ -633,6 +663,7 @@ namespace BankReplication.form
             this.btnLuu.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnLuu.ImageOptions.SvgImage")));
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(70, 0);
+            this.btnLuu.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnLuu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLuu_ItemClick);
             // 
             // btnReload
@@ -650,6 +681,7 @@ namespace BankReplication.form
             this.btnHuy.Id = 13;
             this.btnHuy.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnHuy.ImageOptions.SvgImage")));
             this.btnHuy.Name = "btnHuy";
+            this.btnHuy.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnHuy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnHuy_ItemClick);
             // 
             // btnUndo
@@ -771,6 +803,46 @@ namespace BankReplication.form
             this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
             this.barButtonItem1.Name = "barButtonItem1";
             // 
+            // barManager1
+            // 
+            this.barManager1.DockControls.Add(this.barDockControl1);
+            this.barManager1.DockControls.Add(this.barDockControl2);
+            this.barManager1.DockControls.Add(this.barDockControl3);
+            this.barManager1.DockControls.Add(this.barDockControl4);
+            this.barManager1.Form = this;
+            // 
+            // barDockControl1
+            // 
+            this.barDockControl1.CausesValidation = false;
+            this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControl1.Location = new System.Drawing.Point(0, 0);
+            this.barDockControl1.Manager = this.barManager1;
+            this.barDockControl1.Size = new System.Drawing.Size(1918, 0);
+            // 
+            // barDockControl2
+            // 
+            this.barDockControl2.CausesValidation = false;
+            this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControl2.Location = new System.Drawing.Point(0, 1033);
+            this.barDockControl2.Manager = this.barManager1;
+            this.barDockControl2.Size = new System.Drawing.Size(1918, 0);
+            // 
+            // barDockControl3
+            // 
+            this.barDockControl3.CausesValidation = false;
+            this.barDockControl3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControl3.Location = new System.Drawing.Point(0, 0);
+            this.barDockControl3.Manager = this.barManager1;
+            this.barDockControl3.Size = new System.Drawing.Size(0, 1033);
+            // 
+            // barDockControl4
+            // 
+            this.barDockControl4.CausesValidation = false;
+            this.barDockControl4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControl4.Location = new System.Drawing.Point(1918, 0);
+            this.barDockControl4.Manager = this.barManager1;
+            this.barDockControl4.Size = new System.Drawing.Size(0, 1033);
+            // 
             // formNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -783,6 +855,10 @@ namespace BankReplication.form
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Controls.Add(this.barDockControl3);
+            this.Controls.Add(this.barDockControl4);
+            this.Controls.Add(this.barDockControl2);
+            this.Controls.Add(this.barDockControl1);
             this.Name = "formNhanVien";
             this.Text = "Nhân Viên";
             this.Load += new System.EventHandler(this.formNhanVien_Load);
@@ -812,6 +888,7 @@ namespace BankReplication.form
             this.toolBoxPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.controlPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -880,5 +957,12 @@ namespace BankReplication.form
         private DevExpress.XtraBars.BarButtonItem btnHuy;
         private DevExpress.XtraBars.BarButtonItem btnChuyenCN;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarDockControl barDockControl3;
+        private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraBars.BarDockControl barDockControl1;
+        private DevExpress.XtraBars.BarDockControl barDockControl2;
+        private DevExpress.XtraBars.BarDockControl barDockControl4;
+        private DevExpress.XtraEditors.SimpleButton fBtnHuy;
+        private DevExpress.XtraEditors.SimpleButton fBtnLuu;
     }
 }

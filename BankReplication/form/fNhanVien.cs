@@ -77,6 +77,7 @@ namespace BankReplication.form
             trangThaiXoaCheckBox.Checked = false;
             if (macn.ToString().Trim() == "") return;
         }
+        // TODO : use DTO instead???
         public void SaveViewRowToBindingSource()
         {
             // Make sure data display in side bar form apply to actual row in binding source
@@ -96,13 +97,11 @@ namespace BankReplication.form
         private String LayMaCN()
         {
             String macn = "";
-            //            macn = nhanVienDS1.NhanVien.Rows[0]["MACN"].ToString();
             try
             {
                 macn = ((DataRowView)nhanVienBds[0])["MACN"].ToString();
                 if (macn.ToString().Trim() == "")
                 {
-                    // Khi khong co hang nao de lay ma chi nhanh => tu sinh ra loi
                     throw new Exception("MACN not allow to null");
                 }
             }
@@ -292,7 +291,6 @@ namespace BankReplication.form
             if (Program.mGroup.ToUpper() == "NGANHANG")
             {
                 // Make chi nhanh non editable
-                cmbChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
                 // Can change server to load data 
                 cmbChiNhanh.Enabled = true;
             }
@@ -381,7 +379,7 @@ namespace BankReplication.form
                 try
                 {
                     manv = ((DataRowView)nhanVienBds[nhanVienBds.Position])["MANV"].ToString();
-                    commandController.Execute(new DeleteCommand(nhanVienBds, (DataRowView)nhanVienBds.Current));
+                    commandController.Execute(new DeleteCommand(nhanVienBds, (DataRowView)nhanVienBds.Current, HandleRefresh));
                     CommitChangeNhanVien();
                     SetFormState(FormAction.None);
                 }
@@ -400,6 +398,8 @@ namespace BankReplication.form
             HandleCancel();
             gcNhanVien.Enabled = false;
             HandleRefresh();
+            gcNhanVien.Enabled = true;
+            gvNhanVien.Focus();
 
         }
         public void HandleRefresh()
@@ -413,7 +413,7 @@ namespace BankReplication.form
             if (!InvalidNewEmployee())
             {
                 SaveViewRowToBindingSource();
-                commandController.Execute(new AddCommand(nhanVienBds, (DataRowView)nhanVienBds.Current));
+                commandController.Execute(new AddCommand(nhanVienBds, (DataRowView)nhanVienBds.Current, HandleRefresh));
                 CommitChangeNhanVien();
                 SetFormState(FormAction.None);
                 gvNhanVien.Focus();
@@ -423,7 +423,6 @@ namespace BankReplication.form
         {
             if (formAction == FormAction.Add)
             {
-
                 nhanVienBds.RemoveCurrent();
                 SetFormState(FormAction.None);
                 RevertLastPosition();
@@ -441,7 +440,7 @@ namespace BankReplication.form
         {
             if (!InvalidEditEmployee())
             {
-                commandController.Execute(new EditCommand(nhanVienBds));
+                commandController.Execute(new EditCommand(nhanVienBds,HandleRefresh));
                 CommitChangeNhanVien();
                 SetFormState(FormAction.None);
                 gvNhanVien.Focus();
@@ -451,16 +450,16 @@ namespace BankReplication.form
         {
             HandleCancel();
             commandController.Undo();
-            HandleReload();
-            gvNhanVien.Focus();
+            CommitChangeNhanVien();
+//            HandleReload();
             SetFormState();
         }
         private void HandleRedo()
         {
             HandleCancel();
             commandController.Redo();
-            HandleReload();
-            gvNhanVien.Focus();
+            CommitChangeNhanVien();
+//            HandleReload();
             SetFormState();
         }
         private void HandleSave()
@@ -555,6 +554,7 @@ namespace BankReplication.form
                 btnUndo.Enabled = false;
                 btnRedo.Enabled = false;
                 btnLuu.Enabled = false;
+                btnChuyenCN.Enabled = false;
             }
             else
             {
@@ -603,19 +603,25 @@ namespace BankReplication.form
         // Use for all text edit field in creation new employee or edit employee.
         {
             if (e.KeyCode == Keys.Escape)
-                HandleCancel();
+                if(btnHuy.Enabled)
+                    HandleCancel();
             if (e.KeyCode == Keys.F5)
-                HandleReload();
+                if(btnReload.Enabled)
+                    HandleReload();
             if (e.KeyCode == Keys.Delete)
-                HandleDelete();
+                if(btnXoa.Enabled)
+                    HandleDelete();
             if (e.Control)
             {
                 if (e.KeyCode == Keys.S)
-                    HandleSave();
+                    if(btnLuu.Enabled)
+                        HandleSave();
                 if (e.KeyCode == Keys.Z)
-                    HandleUndo();
+                    if(btnUndo.Enabled)
+                        HandleUndo();
                 if (e.KeyCode == Keys.Y)
-                    HandleRedo();
+                    if(btnRedo.Enabled)
+                        HandleRedo();
             }
         }
 
@@ -624,7 +630,8 @@ namespace BankReplication.form
             // Use for all text edit in form 
             if (e.KeyCode == Keys.Enter)
             {
-                HandleSave();
+                if(btnLuu.Enabled)
+                    HandleSave();
             }
 
         }
@@ -640,7 +647,15 @@ namespace BankReplication.form
             commandController.Execute(new ChuyenCNCommand(Program.connstr, maNVCu, maNVMoi , HandleRefresh));
         }
 
+        private void fBtnLuu_Click(object sender, EventArgs e)
+        {
+            btnLuu.PerformClick(); 
+        }
 
+        private void fBtnHuy_Click(object sender, EventArgs e)
+        {
+            btnHuy.PerformClick(); 
+        }
     }
 
 

@@ -191,7 +191,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="asset\icon\money_exchange.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="asset\icon\add_account.png" />
   </ItemGroup>

@@ -24,18 +24,20 @@ namespace BankReplication.utils
         private DataRowView _rowView;
         private object[] _rows;
         private int originPosition;
-        public AddCommand(BankReplication.utils.BindingSourceExtends bds, object[] rows)
+        private Action _afterAction;
+        public AddCommand(BankReplication.utils.BindingSourceExtends bds, object[] rows, Action afterAction)
         {
             _bds = bds;
             _rows = rows;
             originPosition = _bds.Position;
         }
-        public AddCommand(BankReplication.utils.BindingSourceExtends bds, DataRowView rowView)
+        public AddCommand(BankReplication.utils.BindingSourceExtends bds, DataRowView rowView, Action afterAction)
         {
             _bds = bds;
             _rows = ModelMapper.RowViewToRowList(rowView);
             _rowView = rowView;
             originPosition = _bds.Position;
+            _afterAction = afterAction;
         }
         public void Execute()
         {
@@ -44,6 +46,8 @@ namespace BankReplication.utils
             {
                 _rowView = (DataRowView)_bds.AddNew();
                 _rowView.Row.ItemArray = _rows;
+                if (_afterAction != null)
+                    _afterAction();
                 _bds.Focus(_rowView);
 
             }
@@ -55,6 +59,8 @@ namespace BankReplication.utils
         }
         public void Undo()
         {
+            if (_afterAction != null)
+                _afterAction();
             _bds.Focus(_rowView);
             _bds.Remove(_rowView);
 
@@ -72,17 +78,21 @@ namespace BankReplication.utils
         private DataRowView _rowView;
         private object[] _rows;
         private int originPosition;
-        public DeleteCommand(BankReplication.utils.BindingSourceExtends bds, DataRowView rowView)
+        private Action _afterAction;
+        public DeleteCommand(BankReplication.utils.BindingSourceExtends bds, DataRowView rowView, Action afterAction)
         {
             _rowView = rowView;
             _bds = bds;
             originPosition = _bds.Position;
+            _afterAction = afterAction;
         }
         public void Execute()
         {
             if (_bds.Count > 0)
             {
                 _rows = ModelMapper.RowViewToRowList(_rowView);
+                if (_afterAction != null)
+                    _afterAction();
                 _bds.Focus(_rowView);
                 _bds.Remove((DataRowView)_rowView);
 
@@ -95,10 +105,14 @@ namespace BankReplication.utils
 
             newRow.Row.ItemArray = _rows;
             _rowView = newRow;
+            if (_afterAction != null)
+                _afterAction();
             _bds.Focus(_rowView);
         }
         public void Redo()
         {
+            if (_afterAction != null)
+                _afterAction();
             // Same with execute but not change postion
             int originPosition = _bds.Position;
             this.Execute();
@@ -112,13 +126,15 @@ namespace BankReplication.utils
         private DataRowView _rowView;
         private object[] _before;
         private object[] _after;
-        public EditCommand(BankReplication.utils.BindingSourceExtends bds)
+        private Action _afterAction;
+        public EditCommand(BankReplication.utils.BindingSourceExtends bds, Action afterAction)
         {
             _bds = bds;
             _before = ModelMapper.RowViewToRowList((DataRowView)_bds.Current);
             _bds.EndEdit();
             _after = ModelMapper.RowViewToRowList((DataRowView)_bds.Current);
             _rowView = (DataRowView)_bds.Current;
+            _afterAction = afterAction;
         }
         public void Execute()
         {
@@ -126,6 +142,8 @@ namespace BankReplication.utils
         }
         public void Undo()
         {
+            if (_afterAction != null)
+                _afterAction();
             int position = _bds.IndexOf(_after);
             _bds.Update(position, _before);
 
@@ -133,6 +151,8 @@ namespace BankReplication.utils
         }
         public void Redo()
         {
+            if (_afterAction != null)
+                _afterAction();
             int position = _bds.IndexOf(_before);
             _bds.Update(position, _after);
 
@@ -155,13 +175,13 @@ namespace BankReplication.utils
             _maNVMoi = maNVMoi;
 
         }
-        public ChuyenCNCommand(String connString,  String maNVCu, String maNVMoi)
+        public ChuyenCNCommand(String connString, String maNVCu, String maNVMoi)
         {
             _connString = connString;
             _maNVMoi = maNVMoi;
             _maNVCu = maNVCu;
         }
-        public ChuyenCNCommand(String connString,  String maNVCu, String maNVMoi, Action afterAction)
+        public ChuyenCNCommand(String connString, String maNVCu, String maNVMoi, Action afterAction)
         {
             _connString = connString;
             _maNVMoi = maNVMoi;
@@ -180,18 +200,18 @@ namespace BankReplication.utils
             {
 
                 String SPName = "SP_ChuyenNhanVien";
-                String cmd = "EXEC " + SPName +  " '" + _maNVCu + "', '" + _maNVMoi + "'";
-                
+                String cmd = "EXEC " + SPName + " '" + _maNVCu + "', '" + _maNVMoi + "'";
+
                 Program.ExecSqlNonQuery(cmd);
-                if(_afterAction != null)
+                if (_afterAction != null)
                     _afterAction();
 
                 Msg.Info("Nhân viên đã được chuyển qua chi nhánh mới với mã nhân viên là " + _maNVMoi);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Msg.Error("Lỗi khi chuyển nhân viên\n" + ex.Message , "Thao tác không thành công");
+                Msg.Error("Lỗi khi chuyển nhân viên\n" + ex.Message, "Thao tác không thành công");
 
             }
 
@@ -207,15 +227,15 @@ namespace BankReplication.utils
             try
             {
                 String SPName = "SP_ChuyenNhanVien_Undo";
-                String cmd = "EXEC " + SPName +  " '" + _maNVCu + "', '" + _maNVMoi + "'";
+                String cmd = "EXEC " + SPName + " '" + _maNVCu + "', '" + _maNVMoi + "'";
                 Program.ExecSqlNonQuery(cmd);
-                if(_afterAction != null)
+                if (_afterAction != null)
                     _afterAction();
                 Msg.Info("Nhân viên đã được chuyển quay lại chi nhánh cũ");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Msg.Error("Lỗi khi chuyển nhân viên\n" + ex.Message , "Thao tác không thành công");
+                Msg.Error("Lỗi khi chuyển nhân viên\n" + ex.Message, "Thao tác không thành công");
 
             }
 
@@ -252,7 +272,7 @@ namespace BankReplication.utils
             }
             catch (Exception ex)
             {
-               Msg.Error(ex.Message, "Thao tác không thành công");
+                Msg.Error(ex.Message, "Thao tác không thành công");
             }
         }
 
