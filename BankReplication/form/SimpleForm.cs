@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
+// Template only
 namespace BankReplication.form
 {
     public partial class SimpleForm : DevExpress.XtraEditors.XtraForm

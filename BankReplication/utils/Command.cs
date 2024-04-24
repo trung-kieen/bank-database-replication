@@ -173,7 +173,7 @@ namespace BankReplication.utils
             Program.connstr = _connString;
             if (Program.KetNoi(Database.Connection.NotShowError) == Database.Connection.Fail)
             {
-                MessageBox.Show("Không thể kết nối tới máy chủ", "", MessageBoxButtons.OK);
+                Msg.Error("Không thể kết nối tới máy chủ");
                 return;
             }
             try
@@ -186,11 +186,12 @@ namespace BankReplication.utils
                 if(_afterAction != null)
                     _afterAction();
 
-                MessageBox.Show("Nhân viên đã được chuyển qua chi nhánh mới với mã nhân viên là " + _maNVMoi, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Msg.Info("Nhân viên đã được chuyển qua chi nhánh mới với mã nhân viên là " + _maNVMoi);
+
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Lỗi khi chuyển nhân viên\n" + ex.Message , "Thao tác không thành công", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                Msg.Error("Lỗi khi chuyển nhân viên\n" + ex.Message , "Thao tác không thành công");
 
             }
 
@@ -200,7 +201,7 @@ namespace BankReplication.utils
             Program.connstr = _connString;
             if (Program.KetNoi(Database.Connection.NotShowError) == Database.Connection.Fail)
             {
-                MessageBox.Show("Không thể kết nối tới máy chủ", "", MessageBoxButtons.OK);
+                Msg.Error("Không thể kết nối tới máy chủ");
                 return;
             }
             try
@@ -210,11 +211,11 @@ namespace BankReplication.utils
                 Program.ExecSqlNonQuery(cmd);
                 if(_afterAction != null)
                     _afterAction();
-                MessageBox.Show("Nhân viên đã được chuyển quay lại chi nhánh cũ", "", MessageBoxButtons.OK);
+                Msg.Info("Nhân viên đã được chuyển quay lại chi nhánh cũ");
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Lỗi khi chuyển nhân viên\n" + ex.Message , "Thao tác không thành công", MessageBoxButtons.OK);
+                Msg.Error("Lỗi khi chuyển nhân viên\n" + ex.Message , "Thao tác không thành công");
 
             }
 
@@ -251,7 +252,7 @@ namespace BankReplication.utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Thao tác không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               Msg.Error(ex.Message, "Thao tác không thành công");
             }
         }
 
@@ -269,7 +270,7 @@ namespace BankReplication.utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Thao tác không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Error(ex.Message, "Thao tác không thành công");
             }
         }
 
@@ -286,7 +287,7 @@ namespace BankReplication.utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Thao tác không thành công", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Error(ex.Message, "Thao tác không thành công");
             }
         }
         public Boolean Redoable()

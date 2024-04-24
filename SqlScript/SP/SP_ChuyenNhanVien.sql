@@ -85,6 +85,11 @@ BEGIN
         UPDATE NGANHANG.dbo.NhanVien
 		SET TrangThaiXoa = 1 -- set this employee is deleted
 		WHERE MANV = @ma_nv
+
+		-- Remove user role employee on database
+		-- Not delete login but deny access in login form
+		EXEC sp_droprolemember 'ChiNhanh', @ma_nv
+		
     END
 ELSE
 BEGIN

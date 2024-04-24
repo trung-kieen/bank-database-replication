@@ -30,14 +30,13 @@ namespace BankReplication.form
                 conn_publisher.ConnectionString = Program.connstr_publisher;
                 conn_publisher.Open();
                 // Success
-                return 1;
+                return Database.Connection.Success;
             }
             catch (SqlException e)
             {
-//                MessageBox.Show(e.State);
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n" +  e.Message , "", MessageBoxButtons.OK);
+                Msg.Error("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n" + e.Message + "\n" + e.State);
                 // Error
-                return 0;
+                return Database.Connection.Fail;
             }
         }
 
@@ -65,7 +64,7 @@ namespace BankReplication.form
             catch (Exception e)
             {
                 // Kiểm tra bảng ảo uv_GetSubscribers trong cơ sở dữ liệu
-                MessageBox.Show("Lỗi lấy danh sách các chi nhánh" + e.Message.ToString());
+                Msg.Error("Lỗi lấy danh sách các chi nhánh" + e.Message);
                 conn_publisher.Close();
                 return 0;
             }
@@ -112,7 +111,7 @@ namespace BankReplication.form
             }
             catch
             {
-                MessageBox.Show("Lỗi thiết lập tên server");
+                Msg.Error("Lỗi thiết lập tên server");
             }
 
         }
@@ -126,7 +125,7 @@ namespace BankReplication.form
         {
             if (inputTaiKhoan.Text.Trim() == "" || inputPassword.Text.Trim() == "")
             {
-                MessageBox.Show("Tài khoản và mật khẩu không được để trống");
+                Msg.Warm("Tài khoản và mật khẩu không được để trống");
                 return;
             }
 
@@ -149,7 +148,7 @@ namespace BankReplication.form
             Program.username = Program.myReader.GetString(0);
             if (Convert.IsDBNull(Program.username))
             {
-                MessageBox.Show("Tài khoản không có quyền truy cập dữ liệu. Bạn kiểm tra lại tài khoản và mật khẩu");
+                Msg.Warm("Tài khoản không có quyền truy cập dữ liệu. Bạn kiểm tra lại tài khoản và mật khẩu");
                 return;
             }
             try

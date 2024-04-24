@@ -239,7 +239,7 @@ SELECT MANV, HO, TEN, CMND, DIACHI, PHAI, SODT, MACN, TrangThaiXoa FROM NhanVien
   <xs:element name="NhanVienDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="NhanVienDS" msprop:Generator_UserDSName="NhanVienDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="GD_CHUYENTIEN" msprop:Generator_TableClassName="GD_CHUYENTIENDataTable" msprop:Generator_TableVarName="tableGD_CHUYENTIEN" msprop:Generator_TablePropName="GD_CHUYENTIEN" msprop:Generator_RowDeletingName="GD_CHUYENTIENRowDeleting" msprop:Generator_RowChangingName="GD_CHUYENTIENRowChanging" msprop:Generator_RowEvHandlerName="GD_CHUYENTIENRowChangeEventHandler" msprop:Generator_RowDeletedName="GD_CHUYENTIENRowDeleted" msprop:Generator_UserTableName="GD_CHUYENTIEN" msprop:Generator_RowChangedName="GD_CHUYENTIENRowChanged" msprop:Generator_RowEvArgName="GD_CHUYENTIENRowChangeEvent" msprop:Generator_RowClassName="GD_CHUYENTIENRow">
+        <xs:element name="GD_CHUYENTIEN" msprop:Generator_TableClassName="GD_CHUYENTIENDataTable" msprop:Generator_TableVarName="tableGD_CHUYENTIEN" msprop:Generator_RowChangedName="GD_CHUYENTIENRowChanged" msprop:Generator_TablePropName="GD_CHUYENTIEN" msprop:Generator_RowDeletingName="GD_CHUYENTIENRowDeleting" msprop:Generator_RowChangingName="GD_CHUYENTIENRowChanging" msprop:Generator_RowEvHandlerName="GD_CHUYENTIENRowChangeEventHandler" msprop:Generator_RowDeletedName="GD_CHUYENTIENRowDeleted" msprop:Generator_RowClassName="GD_CHUYENTIENRow" msprop:Generator_UserTableName="GD_CHUYENTIEN" msprop:Generator_RowEvArgName="GD_CHUYENTIENRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MAGD" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnMAGD" msprop:Generator_ColumnPropNameInRow="MAGD" msprop:Generator_ColumnPropNameInTable="MAGDColumn" msprop:Generator_UserColumnName="MAGD" type="xs:int" />
@@ -269,7 +269,7 @@ SELECT MANV, HO, TEN, CMND, DIACHI, PHAI, SODT, MACN, TrangThaiXoa FROM NhanVien
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GD_GOIRUT" msprop:Generator_TableClassName="GD_GOIRUTDataTable" msprop:Generator_TableVarName="tableGD_GOIRUT" msprop:Generator_TablePropName="GD_GOIRUT" msprop:Generator_RowDeletingName="GD_GOIRUTRowDeleting" msprop:Generator_RowChangingName="GD_GOIRUTRowChanging" msprop:Generator_RowEvHandlerName="GD_GOIRUTRowChangeEventHandler" msprop:Generator_RowDeletedName="GD_GOIRUTRowDeleted" msprop:Generator_UserTableName="GD_GOIRUT" msprop:Generator_RowChangedName="GD_GOIRUTRowChanged" msprop:Generator_RowEvArgName="GD_GOIRUTRowChangeEvent" msprop:Generator_RowClassName="GD_GOIRUTRow">
+        <xs:element name="GD_GOIRUT" msprop:Generator_TableClassName="GD_GOIRUTDataTable" msprop:Generator_TableVarName="tableGD_GOIRUT" msprop:Generator_RowChangedName="GD_GOIRUTRowChanged" msprop:Generator_TablePropName="GD_GOIRUT" msprop:Generator_RowDeletingName="GD_GOIRUTRowDeleting" msprop:Generator_RowChangingName="GD_GOIRUTRowChanging" msprop:Generator_RowEvHandlerName="GD_GOIRUTRowChangeEventHandler" msprop:Generator_RowDeletedName="GD_GOIRUTRowDeleted" msprop:Generator_RowClassName="GD_GOIRUTRow" msprop:Generator_UserTableName="GD_GOIRUT" msprop:Generator_RowEvArgName="GD_GOIRUTRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MAGD" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnMAGD" msprop:Generator_ColumnPropNameInRow="MAGD" msprop:Generator_ColumnPropNameInTable="MAGDColumn" msprop:Generator_UserColumnName="MAGD" type="xs:int" />
@@ -299,7 +299,7 @@ SELECT MANV, HO, TEN, CMND, DIACHI, PHAI, SODT, MACN, TrangThaiXoa FROM NhanVien
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NhanVien" msprop:Generator_TableClassName="NhanVienDataTable" msprop:Generator_TableVarName="tableNhanVien" msprop:Generator_TablePropName="NhanVien" msprop:Generator_RowDeletingName="NhanVienRowDeleting" msprop:Generator_RowChangingName="NhanVienRowChanging" msprop:Generator_RowEvHandlerName="NhanVienRowChangeEventHandler" msprop:Generator_RowDeletedName="NhanVienRowDeleted" msprop:Generator_UserTableName="NhanVien" msprop:Generator_RowChangedName="NhanVienRowChanged" msprop:Generator_RowEvArgName="NhanVienRowChangeEvent" msprop:Generator_RowClassName="NhanVienRow">
+        <xs:element name="NhanVien" msprop:Generator_TableClassName="NhanVienDataTable" msprop:Generator_TableVarName="tableNhanVien" msprop:Generator_RowChangedName="NhanVienRowChanged" msprop:Generator_TablePropName="NhanVien" msprop:Generator_RowDeletingName="NhanVienRowDeleting" msprop:Generator_RowChangingName="NhanVienRowChanging" msprop:Generator_RowEvHandlerName="NhanVienRowChangeEventHandler" msprop:Generator_RowDeletedName="NhanVienRowDeleted" msprop:Generator_RowClassName="NhanVienRow" msprop:Generator_UserTableName="NhanVien" msprop:Generator_RowEvArgName="NhanVienRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MANV" msprop:Generator_ColumnVarNameInTable="columnMANV" msprop:Generator_ColumnPropNameInRow="MANV" msprop:Generator_ColumnPropNameInTable="MANVColumn" msprop:Generator_UserColumnName="MANV">
@@ -376,11 +376,11 @@ SELECT MANV, HO, TEN, CMND, DIACHI, PHAI, SODT, MACN, TrangThaiXoa FROM NhanVien
       <xs:selector xpath=".//mstns:NhanVien" />
       <xs:field xpath="mstns:MANV" />
     </xs:unique>
-    <xs:keyref name="FK_GD_GOIRUT_NhanVien" refer="NhanVien_Constraint1" msprop:rel_Generator_UserChildTable="GD_GOIRUT" msprop:rel_Generator_ChildPropName="GetGD_GOIRUTRows" msprop:rel_Generator_UserRelationName="FK_GD_GOIRUT_NhanVien" msprop:rel_Generator_ParentPropName="NhanVienRow" msprop:rel_Generator_RelationVarName="relationFK_GD_GOIRUT_NhanVien" msprop:rel_Generator_UserParentTable="NhanVien" msdata:DeleteRule="None">
+    <xs:keyref name="FK_GD_GOIRUT_NhanVien" refer="NhanVien_Constraint1" msprop:rel_Generator_UserChildTable="GD_GOIRUT" msprop:rel_Generator_ChildPropName="GetGD_GOIRUTRows" msprop:rel_Generator_UserRelationName="FK_GD_GOIRUT_NhanVien" msprop:rel_Generator_RelationVarName="relationFK_GD_GOIRUT_NhanVien" msprop:rel_Generator_UserParentTable="NhanVien" msprop:rel_Generator_ParentPropName="NhanVienRow" msdata:DeleteRule="None">
       <xs:selector xpath=".//mstns:GD_GOIRUT" />
       <xs:field xpath="mstns:MANV" />
     </xs:keyref>
-    <xs:keyref name="FK_GD_CHUYENTIEN_NhanVien" refer="NhanVien_Constraint1" msprop:rel_Generator_UserChildTable="GD_CHUYENTIEN" msprop:rel_Generator_ChildPropName="GetGD_CHUYENTIENRows" msprop:rel_Generator_UserRelationName="FK_GD_CHUYENTIEN_NhanVien" msprop:rel_Generator_ParentPropName="NhanVienRow" msprop:rel_Generator_RelationVarName="relationFK_GD_CHUYENTIEN_NhanVien" msprop:rel_Generator_UserParentTable="NhanVien" msdata:DeleteRule="None">
+    <xs:keyref name="FK_GD_CHUYENTIEN_NhanVien" refer="NhanVien_Constraint1" msprop:rel_Generator_UserChildTable="GD_CHUYENTIEN" msprop:rel_Generator_ChildPropName="GetGD_CHUYENTIENRows" msprop:rel_Generator_UserRelationName="FK_GD_CHUYENTIEN_NhanVien" msprop:rel_Generator_RelationVarName="relationFK_GD_CHUYENTIEN_NhanVien" msprop:rel_Generator_UserParentTable="NhanVien" msprop:rel_Generator_ParentPropName="NhanVienRow" msdata:DeleteRule="None">
       <xs:selector xpath=".//mstns:GD_CHUYENTIEN" />
       <xs:field xpath="mstns:MANV" />
     </xs:keyref>

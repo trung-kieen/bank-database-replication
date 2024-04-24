@@ -13,7 +13,6 @@ enum FormAction { None, Add, Edit };
 namespace BankReplication.form
 {
     public partial class formNhanVien : SimpleForm
-    //    public partial class formNhanVien : DevExpress.XtraEditors.XtraForm
     {
         private Invoker commandController = new Invoker();
         private String macn;
@@ -39,7 +38,6 @@ namespace BankReplication.form
             LoadCmbChiNhanh();
             SetFormState();
             
-
         }
 
 
@@ -60,7 +58,7 @@ namespace BankReplication.form
             }
             if (Program.KetNoi() == Database.Connection.Fail)
             {
-                MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                Msg.Error("Lỗi kết nối về chi nhánh mới");
             }
             else
             {
@@ -117,7 +115,7 @@ namespace BankReplication.form
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi không tìm thấy mã chi nhánh\n" + ex.Message, "", MessageBoxButtons.OK);
+                    Msg.Error("Lỗi không tìm thấy mã chi nhánh\n" + ex.Message);
                 }
             }
             return macn;
@@ -136,7 +134,7 @@ namespace BankReplication.form
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Warm("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ");
                 return true;
             }
             return false;
@@ -151,7 +149,7 @@ namespace BankReplication.form
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Warm("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ");
                 field.Focus();
 
                 return true;
@@ -215,7 +213,7 @@ namespace BankReplication.form
                 String manvCurrentRow = row["MaNV"].ToString();
                 if (cmndCurrentRow == CMNDTextEdit.Text && MANVTextEdit.Text != manvCurrentRow)
                 {
-                    MessageBox.Show("Số CMND không được trùng với nhân viên khác trong cùng chi nhánh", "Dữ liệu nhập không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Msg.Warm("Số CMND không được trùng với nhân viên khác trong cùng chi nhánh", "Dữ liệu nhập không hợp lệ");
                     CMNDTextEdit.Focus();
                     return true;
                 }
@@ -228,13 +226,13 @@ namespace BankReplication.form
             // với mã không bị trùng với mã nhân viên của các nhân viên khác 
             if (Program.KetNoi() == Database.Connection.Fail)
             {
-                MessageBox.Show("Lỗi kết nối với với cơ sở dữ liệu", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Error("Lỗi kết nối với với cơ sở dữ liệu");
                 return true;
             }
 
             if (Program.IsEmployeeExist(field.Text))
             {
-                MessageBox.Show("Mã nhân viên đã tồn tại", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Warm("Mã nhân viên đã tồn tại");
                 field.Focus();
                 return true;
 
@@ -266,7 +264,7 @@ namespace BankReplication.form
             catch (Exception ex)
             {
 
-                MessageBox.Show("Lỗi tải về dữ liệu\n" + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Error("Lỗi tải về dữ liệu\n" + ex.Message, "");
             }
 
         }
@@ -279,7 +277,7 @@ namespace BankReplication.form
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ghi dữ liệu không thành công\n" + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Error("Ghi dữ liệu không thành công\n" + ex.Message);
             }
         }
 
@@ -368,16 +366,17 @@ namespace BankReplication.form
             String manv = "";
             if (gD_CHUYENTIENBds.Count > 0)
             {
-                MessageBox.Show("Không thể xóa nhân viên này vì đã lập giao dịch chuyển tiền", "", MessageBoxButtons.OK);
+                Msg.Warm("Không thể xóa nhân viên này vì đã lập giao dịch chuyển tiền" );
                 return;
             }
             if (gD_GOIRUTBds.Count > 0)
             {
-                MessageBox.Show("Không thể xóa nhân viên này vì đã lập giao dịch gửi rút", "", MessageBoxButtons.OK);
+                Msg.Warm("Không thể xóa nhân viên này vì đã lập giao dịch gửi rút" );
                 return;
             }
 
-            if (MessageBox.Show("Bạn có thực sự muốn xóa nhân viên này?", "Xác nhận", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            
+            if (Msg.InforConfirm("Bạn có thực sự muốn xóa nhân viên này?") == DialogResult.OK)
             {
                 try
                 {
@@ -388,7 +387,7 @@ namespace BankReplication.form
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi không thể xóa nhân viên\n" + ex.Message, "", MessageBoxButtons.OK);
+                    Msg.Error("Lỗi không thể xóa nhân viên\n" + ex.Message);
                     LoadNhanVien(Program.connstr);
                     nhanVienBds.Position = nhanVienBds.Find("MANV", manv);
                 }

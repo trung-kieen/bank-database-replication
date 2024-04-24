@@ -86,6 +86,14 @@
     <Compile Include="form\SimpleForm.Designer.cs">
       <DependentUpon>SimpleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NGANHANGDataSet.cs">
+      <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="NGANHANGDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="NhanVienDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +108,7 @@
     <Compile Include="utils\Command.cs" />
     <Compile Include="QueryHelper.cs" />
     <Compile Include="utils\Constant.cs" />
+    <Compile Include="utils\MessageBox.cs" />
     <Compile Include="utils\Validate.cs" />
     <EmbeddedResource Include="form\fDangNhap.resx">
       <DependentUpon>fDangNhap.cs</DependentUpon>
@@ -127,6 +136,17 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="NGANHANGDataSet.xsc">
+      <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NGANHANGDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NGANHANGDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NGANHANGDataSet.xss">
+      <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>
+    </None>
     <None Include="NhanVienDS.xsc">
       <DependentUpon>NhanVienDS.xsd</DependentUpon>
     </None>
@@ -149,7 +169,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="report\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="asset\icon\add_account.png" />
   </ItemGroup>

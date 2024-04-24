@@ -15,6 +15,10 @@ CREATE OR ALTER PROCEDURE SP_ChuyenNhanVien_Undo(
 AS 
 BEGIN 
 EXEC ('EXEC NGANHANG.dbo.SP_ChuyenNhanVien ?, ?', @dest_id, @source_id) AT [LINK1];
+
+-- recover role on database for this user 
+EXEC sp_addrolemember 'NganHang', @source_id
+
 END
 
 

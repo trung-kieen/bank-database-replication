@@ -46,7 +46,7 @@
             this.rbMoTaiKhoan = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbGuiRut = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbBaoCao = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.rbGroupReport = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.MANV = new System.Windows.Forms.ToolStripStatusLabel();
             this.HOTEN = new System.Windows.Forms.ToolStripStatusLabel();
@@ -59,6 +59,7 @@
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnThongKeGD = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -78,11 +79,12 @@
             this.btnDangXuat,
             this.btnAddAccount,
             this.btnKhachHang,
-            this.btnNhanVien});
+            this.btnNhanVien,
+            this.btnThongKeGD});
             this.rbControl.LargeImages = this.imageCollection1;
             this.rbControl.Location = new System.Drawing.Point(0, 0);
             this.rbControl.Margin = new System.Windows.Forms.Padding(1);
-            this.rbControl.MaxItemId = 11;
+            this.rbControl.MaxItemId = 12;
             this.rbControl.Name = "rbControl";
             this.rbControl.OptionsMenuMinWidth = 200;
             this.rbControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -202,15 +204,15 @@
             // rbBaoCao
             // 
             this.rbBaoCao.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup2});
+            this.rbGroupReport});
             this.rbBaoCao.Name = "rbBaoCao";
             this.rbBaoCao.Text = "Báo cáo";
             this.rbBaoCao.Visible = false;
             // 
-            // ribbonPageGroup2
+            // rbGroupReport
             // 
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "ribbonPageGroup2";
+            this.rbGroupReport.ItemLinks.Add(this.btnThongKeGD);
+            this.rbGroupReport.Name = "rbGroupReport";
             // 
             // statusStrip1
             // 
@@ -281,6 +283,12 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // btnThongKeGD
+            // 
+            this.btnThongKeGD.Caption = "Thông kê giao dịch";
+            this.btnThongKeGD.Id = 11;
+            this.btnThongKeGD.Name = "btnThongKeGD";
+            // 
             // formMain
             // 
             this.Appearance.Options.UseFont = true;
@@ -322,7 +330,7 @@
         private System.Windows.Forms.ToolStripStatusLabel NHOM;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonPage rbBaoCao;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbGroupReport;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
         private DevExpress.XtraBars.BarButtonItem btnDangNhap;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup loginManagerPageGroup;
@@ -339,6 +347,7 @@
         private DevExpress.XtraBars.BarButtonItem btnKhachHang;
         private DevExpress.XtraBars.BarButtonItem btnNhanVien;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rbPageQuanLy;
+        private DevExpress.XtraBars.BarButtonItem btnThongKeGD;
     }
 }
 

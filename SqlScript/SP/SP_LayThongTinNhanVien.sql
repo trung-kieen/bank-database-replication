@@ -3,7 +3,8 @@ GO
 CREATE OR ALTER  PROC [dbo].[SP_LayThongTinNhanVien]
     @TENLOGIN NVARCHAR (50)
 AS
-DECLARE @TENUSER NVARCHAR(50), @UID INT
+DECLARE @TENUSER NVARCHAR(50), @UID INT;
+
 SELECT @UID= UID, @TENUSER=NAME
 FROM sys.sysusers
 WHERE sid = SUSER_SID(@TENLOGIN)
@@ -26,9 +27,9 @@ FROM SYS.SYSMEMBERS
 WHERE MEMBERUID= @UID)
 
 
+-- EXEC SP_LayThongTinNhanVien 'lam'
 
 -- EXEC SP_TAOLOGIN 'PT', 'kc', '001' , 'NganHang'
--- EXEC SP_LayThongTinNhanVien 'lam'
 
  
  -- DROP PROC SP_LayThongTinNhanVien
