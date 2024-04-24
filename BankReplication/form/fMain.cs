@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using BankReplication.form;
+using DevExpress.XtraReports.UI;
+using BankReplication.report;
 
 namespace BankReplication
 {
@@ -133,6 +135,13 @@ namespace BankReplication
 
             }
             Program.frmChinh.btnDangNhap.PerformClick();
+        }
+
+        private void btnThongKeGD_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraReport thongKeTaiKhoan = new rptGiaoDich();
+            IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
+            print.ShowPreviewDialog();
         }
     }
 }

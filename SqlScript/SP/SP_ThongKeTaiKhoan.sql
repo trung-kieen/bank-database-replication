@@ -1,0 +1,19 @@
+USE NGANHANG 
+GO
+CREATE OR ALTER PROCEDURE SP_ThongKeTaiKhoan(
+	@tungay AS DATETIME = '2000-01-01'
+	, @denngay AS DATETIME = '2024-04-25'
+
+	-- TODO
+	, @macn AS NVARCHAR(10) = NULL
+)
+AS
+BEGIN
+
+SELECT * FROM NGANHANG.dbo.TaiKhoan 
+WHERE NGAYMOTK >= @tungay AND NGAYMOTK <= @denngay
+
+END;
+
+GO 
+EXEC SP_ThongKeTaiKhoan

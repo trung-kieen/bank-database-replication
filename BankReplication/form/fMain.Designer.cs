@@ -36,6 +36,7 @@
             this.btnAddAccount = new DevExpress.XtraBars.BarButtonItem();
             this.btnKhachHang = new DevExpress.XtraBars.BarButtonItem();
             this.btnNhanVien = new DevExpress.XtraBars.BarButtonItem();
+            this.btnThongKeGD = new DevExpress.XtraBars.BarButtonItem();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.rbHeThong = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.loginManagerPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -59,7 +60,6 @@
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btnThongKeGD = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -136,6 +136,13 @@
             this.btnNhanVien.ImageOptions.LargeImageIndex = 3;
             this.btnNhanVien.Name = "btnNhanVien";
             this.btnNhanVien.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNhanVien_ItemClick);
+            // 
+            // btnThongKeGD
+            // 
+            this.btnThongKeGD.Caption = "Thông kê giao dịch";
+            this.btnThongKeGD.Id = 11;
+            this.btnThongKeGD.Name = "btnThongKeGD";
+            this.btnThongKeGD.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThongKeGD_ItemClick);
             // 
             // imageCollection1
             // 
@@ -282,12 +289,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // btnThongKeGD
-            // 
-            this.btnThongKeGD.Caption = "Thông kê giao dịch";
-            this.btnThongKeGD.Id = 11;
-            this.btnThongKeGD.Name = "btnThongKeGD";
             // 
             // formMain
             // 
