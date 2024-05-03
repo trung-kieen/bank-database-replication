@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AccountDetails" targetNamespace="http://tempuri.org/NGANHANGDataSet1.xsd" xmlns:mstns="http://tempuri.org/NGANHANGDataSet1.xsd" xmlns="http://tempuri.org/NGANHANGDataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="NGANHANGConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="NGANHANGConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.BankReplication.Properties.Settings.GlobalReference.Default.NGANHANGConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="uv_AccountDetailsTableAdapter" GeneratorDataComponentClassName="uv_AccountDetailsTableAdapter" Name="uv_AccountDetails" UserDataComponentName="uv_AccountDetailsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NGANHANGConnectionString (Settings)" DbObjectName="NGANHANG.dbo.uv_AccountDetails" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT SOTK, CMND, HOTEN FROM dbo.uv_AccountDetails</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="SOTK" DataSetColumn="SOTK" />
+              <Mapping SourceColumn="CMND" DataSetColumn="CMND" />
+              <Mapping SourceColumn="HOTEN" DataSetColumn="HOTEN" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AccountDetails" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="AccountDetails" msprop:Generator_UserDSName="AccountDetails">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="uv_AccountDetails" msprop:Generator_TableClassName="uv_AccountDetailsDataTable" msprop:Generator_TableVarName="tableuv_AccountDetails" msprop:Generator_RowChangedName="uv_AccountDetailsRowChanged" msprop:Generator_TablePropName="uv_AccountDetails" msprop:Generator_RowDeletingName="uv_AccountDetailsRowDeleting" msprop:Generator_RowChangingName="uv_AccountDetailsRowChanging" msprop:Generator_RowEvHandlerName="uv_AccountDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="uv_AccountDetailsRowDeleted" msprop:Generator_RowClassName="uv_AccountDetailsRow" msprop:Generator_UserTableName="uv_AccountDetails" msprop:Generator_RowEvArgName="uv_AccountDetailsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SOTK" msprop:Generator_ColumnVarNameInTable="columnSOTK" msprop:Generator_ColumnPropNameInRow="SOTK" msprop:Generator_ColumnPropNameInTable="SOTKColumn" msprop:Generator_UserColumnName="SOTK">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CMND" msprop:Generator_ColumnVarNameInTable="columnCMND" msprop:Generator_ColumnPropNameInRow="CMND" msprop:Generator_ColumnPropNameInTable="CMNDColumn" msprop:Generator_UserColumnName="CMND">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HOTEN" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnHOTEN" msprop:Generator_ColumnPropNameInRow="HOTEN" msprop:Generator_ColumnPropNameInTable="HOTENColumn" msprop:Generator_UserColumnName="HOTEN" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="61" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:uv_AccountDetails" />
+      <xs:field xpath="mstns:SOTK" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -139,9 +139,24 @@ namespace BankReplication
 
         private void btnThongKeGD_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            XtraReport thongKeTaiKhoan = new rptGiaoDich();
-            IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
-            print.ShowPreviewDialog();
+
+
+            Form fThongKeGD= CheckExist(typeof(formThongKeGD));
+            if(fThongKeGD == null)
+            {
+                fThongKeGD = new formThongKeGD();
+                fThongKeGD.MdiParent = this;
+                fThongKeGD.Show();
+            }
+            else{
+                fThongKeGD.Activate();
+            }
+
+
         }
+
+
+
+
     }
 }

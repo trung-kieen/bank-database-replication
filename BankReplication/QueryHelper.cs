@@ -57,6 +57,7 @@ namespace BankReplication
             {
                 if (Program.KetNoi() == BankReplication.utils.Database.Connection.Success)
                 {
+                    // TODO: change logic to use SP or SP_Helper
                     Program.myReader = Program.ExecSqlDataReader("SELECT MANV FROM LINK1.NGANHANG.dbo.NhanVien WHERE CMND = '" + cmnd + "'");
                     Program.myReader.Read();
                     if (Program.myReader != null)

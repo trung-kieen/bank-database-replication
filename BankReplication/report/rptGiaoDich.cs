@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
+using BankReplication.utils;
 
 namespace BankReplication.report
 {
@@ -12,7 +13,7 @@ namespace BankReplication.report
         {
             InitializeComponent();
         }
-        public rptGiaoDich(String sotk,DateTime tungay, DateTime denngay)
+        public rptGiaoDich(String sotk,DateTime tungay, DateTime denngay, String hoten)
         {
            
             InitializeComponent();
@@ -20,7 +21,13 @@ namespace BankReplication.report
             sqlDataSource1.Queries[0].Parameters[0].Value = sotk;
             sqlDataSource1.Queries[0].Parameters[1].Value = tungay;
             sqlDataSource1.Queries[0].Parameters[2].Value = denngay;
+            xrlbHoten.Text = hoten;
+            xrlbSotk.Text = sotk;
+            xrlbTungay.Text = tungay.ToString("dd/MM/yyyy");
+            xrlbDenngay.Text = denngay.ToString("dd/MM/yyyy");
             sqlDataSource1.Fill();
+
+
             
         }
 
