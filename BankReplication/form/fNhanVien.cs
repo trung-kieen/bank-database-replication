@@ -21,7 +21,7 @@ namespace BankReplication.form
         private int topRowIndex;
         private int focusedRowHandle;
         private FormAction formAction;
-        private object[] rowsData;
+        private object[] checkPointRowsData;
 
         public formNhanVien()
         {
@@ -90,7 +90,8 @@ namespace BankReplication.form
             // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
             try
             {
-                validatePerform(comboBox.SelectedValue.ToString());
+                var gender = comboBox.Text.ToString();
+                validatePerform(gender);
             }
             catch (Exception ex)
             {
@@ -353,7 +354,7 @@ namespace BankReplication.form
             if (!InvalidEditEmployee())
             {
                 object[] dirtyRowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
-                commandController.Execute(new EditCommand(nhanVienBds, rowsData, dirtyRowsData, CommitChangeNhanVien));
+                commandController.Execute(new EditCommand(nhanVienBds, checkPointRowsData, dirtyRowsData, CommitChangeNhanVien));
                 SetFormState(FormAction.None);
                 gvNhanVien.Focus();
             }
@@ -404,11 +405,7 @@ namespace BankReplication.form
         // ================================================> UI Perform <========================================================
         public void OpenEditSideBar()
         {
-            String currentGender = ((DataRowView)nhanVienBds.Current)["PHAI"].ToString() ;
-            // TODO: Set combox base on data in row view 
-
-            int selectedIndex = PHAIComboBox.FindString(currentGender);
-            rowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
+            checkPointRowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
             SavePosition();
             SetFormState(FormAction.Edit);
             ResetSideBar();
@@ -421,10 +418,10 @@ namespace BankReplication.form
             this.PHAIComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             if (cmbIsNotLoadGender)
             {
-                List<string> gioiTinh = new List<string>();
-                String[] x = { "Nam", "Nữ" };
-                gioiTinh.AddRange(x);
-                PHAIComboBox.DataSource = gioiTinh;
+//                List<string> gioiTinh = new List<string>();
+//                String[] x = { "Nam", "Nữ" };
+//                gioiTinh.AddRange(x);
+//                PHAIComboBox.DataSource = gioiTinh;
             }
         }
 
@@ -706,6 +703,11 @@ namespace BankReplication.form
 
             }
             }
+        }
+
+        private void PHAIComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

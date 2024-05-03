@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using BankReplication.utils;
 namespace BankReplication.form
 {
     partial class formNhanVien
@@ -265,10 +266,20 @@ namespace BankReplication.form
             // 
             this.PHAIComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.nhanVienBds, "PHAI", true));
             this.PHAIComboBox.FormattingEnabled = true;
+//            this.PHAIComboBox.Items.AddRange(new object[] {
+//            "Nam",
+//            "Nữ"});
+            this.PHAIComboBox.Items.AddRange(new object[] {
+            new Gender("Nam"),
+            new Gender("Nữ")
+            });
+            this.PHAIComboBox.DisplayMember = "Name";
+            this.PHAIComboBox.ValueMember = "Name";
             this.PHAIComboBox.Location = new System.Drawing.Point(132, 317);
             this.PHAIComboBox.Name = "PHAIComboBox";
             this.PHAIComboBox.Size = new System.Drawing.Size(150, 27);
             this.PHAIComboBox.TabIndex = 10;
+            this.PHAIComboBox.SelectedIndexChanged += new System.EventHandler(this.PHAIComboBox_SelectedIndexChanged);
             // 
             // nhanVienBds
             // 
