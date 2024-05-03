@@ -392,6 +392,7 @@ namespace BankReplication.form
             this.gvNhanVien.GridControl = this.gcNhanVien;
             this.gvNhanVien.Name = "gvNhanVien";
             this.gvNhanVien.OptionsBehavior.Editable = false;
+            this.gvNhanVien.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvNhanVien_FocusedRowChanged);
             // 
             // colMANV
             // 

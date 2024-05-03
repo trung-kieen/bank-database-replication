@@ -10,63 +10,24 @@ using DevExpress.XtraEditors;
 using static BankReplication.utils.Validate;
 enum FormAction { None, Add, Edit };
 
+
 namespace BankReplication.form
 {
     public partial class formNhanVien : SimpleForm
     {
         private Invoker commandController = new Invoker();
         private String macn;
+        private String manv;
         private int topRowIndex;
         private int focusedRowHandle;
         private FormAction formAction;
+        private object[] rowsData;
 
         public formNhanVien()
         {
             InitializeComponent();
         }
 
-        private void formNhanVien_Load(object sender, EventArgs e)
-        {
-
-            this.KeyPreview = true;
-            // Stop checking for foreign key constraint
-            nhanVienDS1.EnforceConstraints = false;
-
-
-            // Load data base on user login connection avoid using login and password in dataset 
-            LoadNhanVien(Program.connstr);
-            LoadCmbChiNhanh();
-            SetFormState();
-            
-        }
-
-
-        private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbChiNhanh.SelectedValue.ToString() == "System.Data.DataRowView") return;
-            Program.servername = cmbChiNhanh.SelectedValue.ToString();
-            if (cmbChiNhanh.SelectedIndex != Program.mChiNhanh)
-            {
-                // Get data with remote login HTKN
-                Program.mlogin = Program.remotelogin;
-                Program.password = Program.remotepassword;
-            }
-            else
-            {
-                Program.mlogin = Program.mloginDN;
-                Program.password = Program.passwordDN;
-            }
-            if (Program.KetNoi() == Database.Connection.Fail)
-            {
-                Msg.Error("Lỗi kết nối về chi nhánh mới");
-            }
-            else
-            {
-                // Load data
-                LoadNhanVien(Program.connstr);
-            }
-
-        }
 
         // ========================> Utils method <========================
 
@@ -277,6 +238,7 @@ namespace BankReplication.form
             catch (Exception ex)
             {
                 Msg.Error("Ghi dữ liệu không thành công\n" + ex.Message);
+                HandleRefresh();
             }
         }
 
@@ -302,56 +264,6 @@ namespace BankReplication.form
         }
         // ===============================> End load data <================================
 
-        #region event_region
-
-
-        private void btnHuy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            HandleCancel();
-        }
-
-        private void btnRedo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            HandleRedo();
-        }
-
-        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            HandleReload();
-        }
-
-        private void btnExit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            this.Close();
-        }
-
-
-        private void btnUndo_ItemClick(object sender, EventArgs e)
-        {
-            HandleUndo();
-        }
-
-
-        private void btnLuu_ItemClick(object sender, EventArgs e)
-        {
-            HandleSave();
-        }
-        private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            HandleDelete();
-            // Not reset form state avoid case invalid field input 
-        }
-        #endregion
-
-        private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            OpenCreationSideBar();
-        }
-
-        private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            OpenEditSideBar();
-        }
 
 
 
@@ -361,33 +273,31 @@ namespace BankReplication.form
             if (formAction != FormAction.None) return;
             if (nhanVienBds.Position < 0)
                 return;
-            String manv = "";
+            SavePosition();
             if (gD_CHUYENTIENBds.Count > 0)
             {
-                Msg.Warm("Không thể xóa nhân viên này vì đã lập giao dịch chuyển tiền" );
+                Msg.Warm("Không thể xóa nhân viên này vì đã lập giao dịch chuyển tiền");
                 return;
             }
             if (gD_GOIRUTBds.Count > 0)
             {
-                Msg.Warm("Không thể xóa nhân viên này vì đã lập giao dịch gửi rút" );
+                Msg.Warm("Không thể xóa nhân viên này vì đã lập giao dịch gửi rút");
                 return;
             }
 
-            
+
             if (Msg.InforConfirm("Bạn có thực sự muốn xóa nhân viên này?") == DialogResult.OK)
             {
                 try
                 {
-                    manv = ((DataRowView)nhanVienBds[nhanVienBds.Position])["MANV"].ToString();
-                    commandController.Execute(new DeleteCommand(nhanVienBds, (DataRowView)nhanVienBds.Current, HandleRefresh));
-                    CommitChangeNhanVien();
+                    commandController.Execute(new DeleteCommand(nhanVienBds, (DataRowView)nhanVienBds.Current, HandleRefresh, CommitChangeNhanVien));
                     SetFormState(FormAction.None);
                 }
                 catch (Exception ex)
                 {
                     Msg.Error("Lỗi không thể xóa nhân viên\n" + ex.Message);
                     LoadNhanVien(Program.connstr);
-                    nhanVienBds.Position = nhanVienBds.Find("MANV", manv);
+                    RevertLastPosition();
                 }
             }
         }
@@ -404,17 +314,19 @@ namespace BankReplication.form
         }
         public void HandleRefresh()
         {
-            SavePosition();
+            SavePositionByMa();
             LoadNhanVien(Program.connstr);
-            RevertLastPosition();
+            RevertLastPositionByMa();
         }
         public override void HandleAdd()
         {
             if (!InvalidNewEmployee())
             {
                 SaveViewRowToBindingSource();
-                commandController.Execute(new AddCommand(nhanVienBds, (DataRowView)nhanVienBds.Current, HandleRefresh));
-                CommitChangeNhanVien();
+                nhanVienBds.EndEdit();
+                commandController.Execute(new AddCommand(nhanVienBds, (DataRowView)nhanVienBds.Current, HandleRefresh, CommitChangeNhanVien));
+                //                CommitChangeNhanVien();
+                //                HandleReload();
                 SetFormState(FormAction.None);
                 gvNhanVien.Focus();
             }
@@ -440,8 +352,8 @@ namespace BankReplication.form
         {
             if (!InvalidEditEmployee())
             {
-                commandController.Execute(new EditCommand(nhanVienBds,HandleRefresh));
-                CommitChangeNhanVien();
+                object[] dirtyRowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
+                commandController.Execute(new EditCommand(nhanVienBds, rowsData, dirtyRowsData, CommitChangeNhanVien));
                 SetFormState(FormAction.None);
                 gvNhanVien.Focus();
             }
@@ -450,16 +362,14 @@ namespace BankReplication.form
         {
             HandleCancel();
             commandController.Undo();
-            CommitChangeNhanVien();
-//            HandleReload();
+            //            HandleSave();
             SetFormState();
         }
         private void HandleRedo()
         {
             HandleCancel();
             commandController.Redo();
-            CommitChangeNhanVien();
-//            HandleReload();
+            //            HandleSave();
             SetFormState();
         }
         private void HandleSave()
@@ -477,9 +387,28 @@ namespace BankReplication.form
 
         }
 
+        private void HandleChuyenCN()
+        {
+            String maNVCu = ((DataRowView)nhanVienBds[nhanVienBds.Position]).Row["MANV"].ToString();
+            String cmnd = ((DataRowView)nhanVienBds[nhanVienBds.Position]).Row["CMND"].ToString();
+            String maNVMoi = Program.layMaNVChiNhanhKhac(cmnd);
+            // Use while loop until input is validate not exist in other branch 
+            if (maNVMoi == null)
+                maNVMoi = XtraInputBox.Show("Nhập mã nhân viên mới", "Mã nhân viên mới", "");
+            commandController.Execute(new ChuyenCNCommand(Program.connstr, maNVCu, maNVMoi, HandleRefresh));
+            SetFormState();
+        }
+
+
+
         // ================================================> UI Perform <========================================================
         public void OpenEditSideBar()
         {
+            String currentGender = ((DataRowView)nhanVienBds.Current)["PHAI"].ToString() ;
+            // TODO: Set combox base on data in row view 
+
+            int selectedIndex = PHAIComboBox.FindString(currentGender);
+            rowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
             SavePosition();
             SetFormState(FormAction.Edit);
             ResetSideBar();
@@ -502,9 +431,21 @@ namespace BankReplication.form
 
         private void SavePosition()
         {
+
             topRowIndex = gvNhanVien.TopRowIndex;
             focusedRowHandle = gvNhanVien.FocusedRowHandle;
 
+        }
+        private void SavePositionByMa()
+        {
+            manv = ((DataRowView)nhanVienBds[nhanVienBds.Position])["MANV"].ToString(); ;
+            topRowIndex = gvNhanVien.TopRowIndex;
+        }
+        private void RevertLastPositionByMa()
+        {
+            // Revert position from SavePositionByMa();
+            nhanVienBds.Position = nhanVienBds.Find("MANV", manv);
+            gvNhanVien.TopRowIndex = topRowIndex;
         }
         private void RevertLastPosition()
         {
@@ -594,35 +535,111 @@ namespace BankReplication.form
                     btnRedo.Enabled = true;
                 if (commandController.Undoable())
                     btnUndo.Enabled = true;
+                if (((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1")
+                {
+                    btnChuyenCN.Enabled = false;
+                    btnXoa.Enabled = false;
+                }
 
 
             }
         }
 
-        private void formNhanVien_KeyDown(object sender, KeyEventArgs e)
-        // Use for all text edit field in creation new employee or edit employee.
+        // ----------------------------- Event ------------------------------
+        private void formNhanVien_Load(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-                if(btnHuy.Enabled)
-                    HandleCancel();
-            if (e.KeyCode == Keys.F5)
-                if(btnReload.Enabled)
-                    HandleReload();
-            if (e.KeyCode == Keys.Delete)
-                if(btnXoa.Enabled)
-                    HandleDelete();
-            if (e.Control)
+
+            this.KeyPreview = true;
+            // Stop checking for foreign key constraint
+            nhanVienDS1.EnforceConstraints = false;
+
+
+            // Load data base on user login connection avoid using login and password in dataset 
+            LoadNhanVien(Program.connstr);
+            LoadCmbChiNhanh();
+            SetFormState();
+
+        }
+
+
+        private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbChiNhanh.SelectedValue.ToString() == "System.Data.DataRowView") return;
+            Program.servername = cmbChiNhanh.SelectedValue.ToString();
+            if (cmbChiNhanh.SelectedIndex != Program.mChiNhanh)
             {
-                if (e.KeyCode == Keys.S)
-                    if(btnLuu.Enabled)
-                        HandleSave();
-                if (e.KeyCode == Keys.Z)
-                    if(btnUndo.Enabled)
-                        HandleUndo();
-                if (e.KeyCode == Keys.Y)
-                    if(btnRedo.Enabled)
-                        HandleRedo();
+                // Get data with remote login HTKN
+                Program.mlogin = Program.remotelogin;
+                Program.password = Program.remotepassword;
             }
+            else
+            {
+                Program.mlogin = Program.mloginDN;
+                Program.password = Program.passwordDN;
+            }
+            if (Program.KetNoi() == Database.Connection.Fail)
+            {
+                Msg.Error("Lỗi kết nối về chi nhánh mới");
+            }
+            else
+            {
+                // Load data
+                LoadNhanVien(Program.connstr);
+            }
+
+        }
+
+
+        private void btnHuy_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            HandleCancel();
+        }
+
+        private void btnRedo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            HandleRedo();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            HandleReload();
+        }
+
+        private void btnExit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            this.Close();
+        }
+
+
+        private void btnUndo_ItemClick(object sender, EventArgs e)
+        {
+            HandleUndo();
+        }
+
+
+        private void btnLuu_ItemClick(object sender, EventArgs e)
+        {
+            HandleSave();
+        }
+        private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            HandleDelete();
+            // Not reset form state avoid case invalid field input 
+        }
+
+        private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OpenCreationSideBar();
+        }
+
+        private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OpenEditSideBar();
+        }
+
+        private void btnChuyenCN_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            HandleChuyenCN();
         }
 
         private void InputFields_KeyDown(object sender, KeyEventArgs e)
@@ -630,31 +647,65 @@ namespace BankReplication.form
             // Use for all text edit in form 
             if (e.KeyCode == Keys.Enter)
             {
-                if(btnLuu.Enabled)
+                if (btnLuu.Enabled)
                     HandleSave();
             }
 
         }
 
-        private void btnChuyenCN_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void formNhanVien_KeyDown(object sender, KeyEventArgs e)
+        // Use for all text edit field in creation new employee or edit employee.
         {
-            String maNVCu = ((DataRowView)nhanVienBds[nhanVienBds.Position]).Row["MANV"].ToString();
-            String cmnd= ((DataRowView)nhanVienBds[nhanVienBds.Position]).Row["CMND"].ToString();
-            String maNVMoi = Program.layMaNVChiNhanhKhac(cmnd);
-            // Use while loop until input is validate not exist in other branch 
-            if(maNVMoi == null)
-                maNVMoi= XtraInputBox.Show("Nhập mã nhân viên mới", "Mã nhân viên mới", ""); 
-            commandController.Execute(new ChuyenCNCommand(Program.connstr, maNVCu, maNVMoi , HandleRefresh));
+            if (e.KeyCode == Keys.Escape)
+                if (btnHuy.Enabled)
+                    HandleCancel();
+            if (e.KeyCode == Keys.F5)
+                if (btnReload.Enabled)
+                    HandleReload();
+            if (e.KeyCode == Keys.Delete)
+                if (btnXoa.Enabled)
+                    HandleDelete();
+            if (e.Control)
+            {
+                if (e.KeyCode == Keys.S)
+                    if (btnLuu.Enabled)
+                        HandleSave();
+                if (e.KeyCode == Keys.Z)
+                    if (btnUndo.Enabled)
+                        HandleUndo();
+                if (e.KeyCode == Keys.Y)
+                    if (btnRedo.Enabled)
+                        HandleRedo();
+            }
         }
 
         private void fBtnLuu_Click(object sender, EventArgs e)
         {
-            btnLuu.PerformClick(); 
+            btnLuu.PerformClick();
         }
 
         private void fBtnHuy_Click(object sender, EventArgs e)
         {
-            btnHuy.PerformClick(); 
+            btnHuy.PerformClick();
+        }
+
+        private void gvNhanVien_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            if(nhanVienBds.Position >= 0)
+            {
+
+            if (((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1")
+            {
+                btnChuyenCN.Enabled = false;
+                btnXoa.Enabled = false;
+            }
+            else
+            {
+                btnChuyenCN.Enabled = true;
+                btnXoa.Enabled = true;
+
+            }
+            }
         }
     }
 
