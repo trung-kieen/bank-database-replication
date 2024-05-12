@@ -34,11 +34,15 @@ namespace BankReplication.form
         public void InitNewRowData()
         {
             macn = LayMaCN();
+            if(macn == null )
+            {
+                Msg.Error("Lỗi tải mã chi nhánh");
+                return;
+            }
+            if (macn.ToString().Trim() == "") return;
             MACNTextEdit.Text = macn;
             trangThaiXoaCheckBox.Checked = false;
-            if (macn.ToString().Trim() == "") return;
         }
-        // TODO : use DTO instead???
         public void SaveViewRowToBindingSource()
         {
             // Make sure data display in side bar form apply to actual row in binding source
@@ -50,35 +54,21 @@ namespace BankReplication.form
             current.Row["TEN"] = TENTextEdit.Text;
             current.Row["DIACHI"] = DIACHITextEdit.Text;
             current.Row["CMND"] = CMNDTextEdit.Text;
-            current.Row["PHAI"] = PHAIComboBox.SelectedValue;
+            current.Row["PHAI"] = PHAIComboBox.Text.ToString();
             current.Row["SODT"] = SODTTextEdit.Text;
             current.Row["MACN"] = MACNTextEdit.Text;
             current.Row["TrangThaiXoa"] = trangThaiXoaCheckBox.Checked;
         }
         private String LayMaCN()
         {
-            String macn = "";
+            if (Program.KetNoi() == Database.Connection.Fail) return null;
             try
             {
-                macn = ((DataRowView)nhanVienBds[0])["MACN"].ToString();
-                if (macn.ToString().Trim() == "")
-                {
-                    throw new Exception("MACN not allow to null");
-                }
-            }
-            catch
+                return Program.ExecSqlScalar("SELECT MACN FROM NGANHANG.dbo.NHANVIEN");
+            }catch
             {
-                if (Program.KetNoi() == Database.Connection.Fail) return "";
-                try
-                {
-                    macn = Program.FetchMACNFromDB();
-                }
-                catch (Exception ex)
-                {
-                    Msg.Error("Lỗi không tìm thấy mã chi nhánh\n" + ex.Message);
-                }
+                return null;
             }
-            return macn;
         }
 
 
@@ -165,14 +155,13 @@ namespace BankReplication.form
 
         private Boolean InvalidDuplicateCMND()
         {
-
             // Search for row in current bds to avoid dataRowView have same value of CMND
             // If two row have same CMND (when edit) they must have same MaNV
             foreach (DataRowView row in nhanVienBds)
             {
                 String cmndCurrentRow = row["CMND"].ToString();
                 String manvCurrentRow = row["MaNV"].ToString();
-                if (cmndCurrentRow == CMNDTextEdit.Text && MANVTextEdit.Text != manvCurrentRow)
+                if (cmndCurrentRow.Trim() == CMNDTextEdit.Text.Trim() && MANVTextEdit.Text.Trim() != manvCurrentRow.Trim())
                 {
                     Msg.Warm("Số CMND không được trùng với nhân viên khác trong cùng chi nhánh", "Dữ liệu nhập không hợp lệ");
                     CMNDTextEdit.Focus();
@@ -213,7 +202,6 @@ namespace BankReplication.form
                 gD_GOIRUTTableAdapter.Connection.ConnectionString = connstr;
                 gD_CHUYENTIENTableAdapter.Connection.ConnectionString = connstr;
 
-                // TODO: Add filter to deleted employee
 
 
                 nhanVienTableAdapter1.Fill(nhanVienDS1.NhanVien);
@@ -392,12 +380,37 @@ namespace BankReplication.form
         {
             String maNVCu = ((DataRowView)nhanVienBds[nhanVienBds.Position]).Row["MANV"].ToString();
             String cmnd = ((DataRowView)nhanVienBds[nhanVienBds.Position]).Row["CMND"].ToString();
-            String maNVMoi = Program.layMaNVChiNhanhKhac(cmnd);
-            // Use while loop until input is validate not exist in other branch 
-            if (maNVMoi == null)
-                maNVMoi = XtraInputBox.Show("Nhập mã nhân viên mới", "Mã nhân viên mới", "");
-            commandController.Execute(new ChuyenCNCommand(Program.connstr, maNVCu, maNVMoi, HandleRefresh));
-            SetFormState();
+
+            if (Program.KetNoi() == Database.Connection.Fail) return;
+
+            try
+            {
+                formChuyenNhanVien fChuyenCN = new formChuyenNhanVien(cmnd);
+                fChuyenCN.ShowDialog();
+                fChuyenCN.BringToFront();
+                fChuyenCN.Focus();
+
+
+                // Rebulid connection string
+                Program.mlogin = Program.mloginDN;
+                Program.password = Program.passwordDN;
+                // Server name will change so make sure connect to the right server 
+                Program.servername = cmbChiNhanh.SelectedValue.ToString();
+                Program.connstr = Program.GetConnString();
+                if (!fChuyenCN.submit)
+                {
+                    return;
+                }
+
+                macn = LayMaCN();
+                commandController.Execute(new ChuyenCNCommand(nhanVienBds, Program.connstr, fChuyenCN.remote_connstr, maNVCu, fChuyenCN.manv_moi, macn, fChuyenCN.macn_moi, HandleRefresh));
+                SetFormState();
+
+            }
+            catch (Exception ex)
+            {
+                Msg.Error(ex.Message);
+            }
         }
 
 
@@ -416,13 +429,6 @@ namespace BankReplication.form
 
             Boolean cmbIsNotLoadGender = PHAIComboBox.DisplayMember == "";
             this.PHAIComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            if (cmbIsNotLoadGender)
-            {
-//                List<string> gioiTinh = new List<string>();
-//                String[] x = { "Nam", "Nữ" };
-//                gioiTinh.AddRange(x);
-//                PHAIComboBox.DataSource = gioiTinh;
-            }
         }
 
 
@@ -688,27 +694,29 @@ namespace BankReplication.form
 
         private void gvNhanVien_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            if(nhanVienBds.Position >= 0)
+            if (nhanVienBds.Position >= 0)
             {
 
-            if (((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1")
-            {
-                btnChuyenCN.Enabled = false;
-                btnXoa.Enabled = false;
-            }
-            else
-            {
-                btnChuyenCN.Enabled = true;
-                btnXoa.Enabled = true;
+                if (((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1")
+                {
+                    btnChuyenCN.Enabled = false;
+                    btnXoa.Enabled = false;
+                }
+                else if (Program.mGroup.ToUpper() != "CHINHANH")
+                {
+                    btnChuyenCN.Enabled = false;
+                    btnXoa.Enabled = false;
 
-            }
+                }
+                else
+                {
+                    btnChuyenCN.Enabled = true;
+                    btnXoa.Enabled = true;
+
+                }
             }
         }
 
-        private void PHAIComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 
 

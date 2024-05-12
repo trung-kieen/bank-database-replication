@@ -23,7 +23,10 @@ USE NGANHANG
 GO
 CREATE OR ALTER  PROCEDURE SP_ChuyenNhanVien(
     @ma_nv AS NVARCHAR(10),
-    @ma_nv_moi AS NVARCHAR(10)
+    @ma_nv_moi AS NVARCHAR(10),
+	@ma_cn AS NCHAR(10)  = NULL,
+	@ma_cn_moi AS NCHAR(10)
+
 )
 AS
 BEGIN
@@ -33,44 +36,47 @@ BEGIN DISTRIBUTED TRANSACTION
 -- Code 
       
 
-    DECLARE @cmnd AS NCHAR(10),
-	@ma_cn AS NCHAR(10)
+    DECLARE @cmnd AS NCHAR(10)
 	
-	SELECT TOP 1 @ma_cn =  MACN FROM LINK1.NGANHANG.dbo.ChiNhanh;
+	IF(@ma_cn IS NULL)
+	BEGIN
+		SELECT TOP 1 @ma_cn =  MACN FROM NGANHANG.dbo.ChiNhanh;
+	END 
+
+
 
     SELECT @cmnd = CMND
     FROM NGANHANG.dbo.NhanVien
     WHERE MANV = @ma_nv
     -- If this employee exist in other branch with same personal id
     IF (EXISTS(SELECT MANV
-    FROM LINK1.NGANHANG.dbo.NhanVien
-    WHERE CMND = @cmnd
+    FROM LINK0.NGANHANG.dbo.NhanVien
+    WHERE CMND = @cmnd AND MACN = @ma_cn_moi
 	))
-
 -- Create/Update employee in new branch
 	BEGIN
         -- Just change state to not deleted 
-        UPDATE LINK1.NGANHANG.dbo.NhanVien
+        UPDATE LINK0.NGANHANG.dbo.NhanVien
 		SET TrangThaiXoa = 0 -- set this employee is not deleted
-		WHERE CMND = @cmnd
+		WHERE CMND = @cmnd AND MACN = @ma_cn_moi
     END
 	ELSE
 	BEGIN
         -- Make sure new employe id is not exist before 
-		IF(EXISTS(SELECT * FROM LINK0.NGANHANG.dbo.NhanVien WHERE MANV = @ma_nv_moi))
-		BEGIN
-			RAISERROR('Ma nhan vien moi bi trung', 16, 1)
-		END 
+	--	IF(EXISTS(SELECT * FROM LINK0.NGANHANG.dbo.NhanVien WHERE MANV = @ma_nv_moi))
+	--	BEGIN
+	--		RAISERROR('Ma nhan vien moi bi trung', 16, 1)
+	--	END 
 
         -- Create new one with same information with existed data  
-        INSERT INTO LINK1.NGANHANG.dbo.NhanVien
+        INSERT INTO LINK0.NGANHANG.dbo.NhanVien
             (MANV, HO, TEN, DIACHI, CMND, PHAI, SODT, MACN, TrangThaiXoa)
-        SELECT  @ma_nv_moi, HO, TEN, DIACHI, CMND, PHAI, SODT, @ma_cn,  0
+        SELECT  @ma_nv_moi, HO, TEN, DIACHI, CMND, PHAI, SODT, @ma_cn_moi,  0
         FROM NGANHANG.dbo.NhanVien
-        WHERE CMND = @cmnd
+        WHERE CMND = @cmnd AND MACN = @ma_cn
     END;
 
-    -- Delete old employee in old branch
+-- Delete old employee in old branch
 
     -- Check if exist as foreign key  
     IF (EXISTS(SELECT *
@@ -80,7 +86,7 @@ BEGIN DISTRIBUTED TRANSACTION
         FROM NGANHANG.dbo.GD_CHUYENTIEN
         WHERE NGANHANG.dbo.GD_CHUYENTIEN.MANV= @ma_nv)
 )
-BEGIN
+	BEGIN
         -- Soft delete 
         UPDATE NGANHANG.dbo.NhanVien
 		SET TrangThaiXoa = 1 -- set this employee is deleted
@@ -88,20 +94,28 @@ BEGIN
 
 		-- Remove user role employee on database
 		-- Not delete login but deny access in login form
-		EXEC sp_droprolemember 'ChiNhanh', @ma_nv
+
+/*	-- TODO: DROP ROLE 	
+	IF  EXISTS (SELECT name
+		FROM master.sys.server_principals
+		WHERE name = @ma_nv)
+		BEGIN
+--			EXEC sp_droprolemember 'ChiNhanh', @ma_nv
+		END
 		
+*/
     END
-ELSE
-BEGIN
+	ELSE
+	BEGIN
         -- Hard delete
-    DELETE FROM NGANHANG.dbo.NhanVien
-	WHERE MANV = @ma_nv
+		DELETE FROM NGANHANG.dbo.NhanVien
+		WHERE MANV = @ma_nv
     END
 
     -- Return new employee id as result 
     SELECT MANV
-    FROM LINK1.NGANHANG.dbo.NhanVien
-    WHERE CMND = @cmnd
+    FROM LINK0.NGANHANG.dbo.NhanVien
+    WHERE CMND = @cmnd AND MACN = @ma_cn_moi
 COMMIT TRANSACTION
 
 END;

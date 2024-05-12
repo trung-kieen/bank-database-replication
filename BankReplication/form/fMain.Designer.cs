@@ -38,6 +38,10 @@
             this.btnNhanVien = new DevExpress.XtraBars.BarButtonItem();
             this.btnThongKeGD = new DevExpress.XtraBars.BarButtonItem();
             this.btnThongKeTKMoi = new DevExpress.XtraBars.BarButtonItem();
+            this.btnThongKeKH = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMoTK = new DevExpress.XtraBars.BarButtonItem();
+            this.btnGuiRut = new DevExpress.XtraBars.BarButtonItem();
+            this.btnChuyenTien = new DevExpress.XtraBars.BarButtonItem();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.rbHeThong = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.loginManagerPageGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -59,10 +63,6 @@
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btnThongKeKH = new DevExpress.XtraBars.BarButtonItem();
-            this.btnMoTK = new DevExpress.XtraBars.BarButtonItem();
-            this.btnGuiRut = new DevExpress.XtraBars.BarButtonItem();
-            this.btnChuyenTien = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -159,6 +159,36 @@
             this.btnThongKeTKMoi.Id = 12;
             this.btnThongKeTKMoi.ImageOptions.LargeImageIndex = 6;
             this.btnThongKeTKMoi.Name = "btnThongKeTKMoi";
+            // 
+            // btnThongKeKH
+            // 
+            this.btnThongKeKH.Caption = "Khách hàng";
+            this.btnThongKeKH.Id = 13;
+            this.btnThongKeKH.ImageOptions.LargeImageIndex = 7;
+            this.btnThongKeKH.Name = "btnThongKeKH";
+            // 
+            // btnMoTK
+            // 
+            this.btnMoTK.Caption = "Mở tài khoản";
+            this.btnMoTK.CausesValidation = true;
+            this.btnMoTK.Id = 14;
+            this.btnMoTK.ImageOptions.LargeImageIndex = 0;
+            this.btnMoTK.Name = "btnMoTK";
+            // 
+            // btnGuiRut
+            // 
+            this.btnGuiRut.Caption = "Gửi/Rút";
+            this.btnGuiRut.Id = 15;
+            this.btnGuiRut.ImageOptions.LargeImageIndex = 9;
+            this.btnGuiRut.Name = "btnGuiRut";
+            this.btnGuiRut.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGuiRut_ItemClick);
+            // 
+            // btnChuyenTien
+            // 
+            this.btnChuyenTien.Caption = "Chuyển tiền";
+            this.btnChuyenTien.Id = 16;
+            this.btnChuyenTien.ImageOptions.LargeImageIndex = 8;
+            this.btnChuyenTien.Name = "btnChuyenTien";
             // 
             // imageCollection1
             // 
@@ -301,35 +331,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // btnThongKeKH
-            // 
-            this.btnThongKeKH.Caption = "Khách hàng";
-            this.btnThongKeKH.Id = 13;
-            this.btnThongKeKH.ImageOptions.LargeImageIndex = 7;
-            this.btnThongKeKH.Name = "btnThongKeKH";
-            // 
-            // btnMoTK
-            // 
-            this.btnMoTK.Caption = "Mở tài khoản";
-            this.btnMoTK.CausesValidation = true;
-            this.btnMoTK.Id = 14;
-            this.btnMoTK.ImageOptions.LargeImageIndex = 0;
-            this.btnMoTK.Name = "btnMoTK";
-            // 
-            // btnGuiRut
-            // 
-            this.btnGuiRut.Caption = "Gửi/Rút";
-            this.btnGuiRut.Id = 15;
-            this.btnGuiRut.ImageOptions.LargeImageIndex = 9;
-            this.btnGuiRut.Name = "btnGuiRut";
-            // 
-            // btnChuyenTien
-            // 
-            this.btnChuyenTien.Caption = "Chuyển tiền";
-            this.btnChuyenTien.Id = 16;
-            this.btnChuyenTien.ImageOptions.LargeImageIndex = 8;
-            this.btnChuyenTien.Name = "btnChuyenTien";
             // 
             // formMain
             // 

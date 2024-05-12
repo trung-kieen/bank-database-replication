@@ -19,7 +19,7 @@ namespace BankReplication.utils
             MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        public static void Error(string msg, String title = "Thông báo")
+        public static void Error(string msg, String title = "Lỗi")
         {
             MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

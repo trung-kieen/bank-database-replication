@@ -26,9 +26,6 @@ namespace BankReplication.report
             xrlbTungay.Text = tungay.ToString("dd/MM/yyyy");
             xrlbDenngay.Text = denngay.ToString("dd/MM/yyyy");
             sqlDataSource1.Fill();
-
-
-            
         }
 
     }

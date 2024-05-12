@@ -76,11 +76,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="form\fChuyenNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\fChuyenNhanVien.Designer.cs">
+      <DependentUpon>fChuyenNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\fDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form\fDangNhap.Designer.cs">
       <DependentUpon>fDangNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\fGuiRut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\fGuiRut.Designer.cs">
+      <DependentUpon>fGuiRut.cs</DependentUpon>
     </Compile>
     <Compile Include="form\fMain.cs">
       <SubType>Form</SubType>
@@ -107,6 +119,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="NGANHANGDataSet1.cs">
+      <DependentUpon>NGANHANGDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="NGANHANGDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -139,11 +154,17 @@
     <Compile Include="utils\Command.cs" />
     <Compile Include="QueryHelper.cs" />
     <Compile Include="utils\Constant.cs" />
-    <Compile Include="utils\Gender.cs" />
+    <Compile Include="utils\ComboBoxItem.cs" />
     <Compile Include="utils\MessageBox.cs" />
     <Compile Include="utils\Validate.cs" />
+    <EmbeddedResource Include="form\fChuyenNhanVien.resx">
+      <DependentUpon>fChuyenNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\fDangNhap.resx">
       <DependentUpon>fDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\fGuiRut.resx">
+      <DependentUpon>fGuiRut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>

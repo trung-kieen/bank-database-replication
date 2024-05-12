@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formThongKeGD));
             this.tungayDateEdit = new DevExpress.XtraEditors.DateEdit();
-            this.denngay = new DevExpress.XtraEditors.DateEdit();
+            this.denngayDateEdit = new DevExpress.XtraEditors.DateEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -49,8 +49,8 @@
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.tungayDateEdit.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tungayDateEdit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.denngay.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.denngay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.denngayDateEdit.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.denngayDateEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetailsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uv_AccountDetailsBindingSource)).BeginInit();
@@ -72,21 +72,21 @@
             this.tungayDateEdit.Properties.Mask.EditMask = "dd/MM/yyyy";
             this.tungayDateEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.tungayDateEdit.Size = new System.Drawing.Size(227, 28);
-            this.tungayDateEdit.TabIndex = 0;
+            this.tungayDateEdit.TabIndex = 2;
             // 
-            // denngay
+            // denngayDateEdit
             // 
-            this.denngay.EditValue = null;
-            this.denngay.Location = new System.Drawing.Point(503, 376);
-            this.denngay.Name = "denngay";
-            this.denngay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.denngayDateEdit.EditValue = null;
+            this.denngayDateEdit.Location = new System.Drawing.Point(503, 376);
+            this.denngayDateEdit.Name = "denngayDateEdit";
+            this.denngayDateEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.denngay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.denngayDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.denngay.Properties.Mask.EditMask = "dd/MM/yyyy";
-            this.denngay.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.denngay.Size = new System.Drawing.Size(227, 28);
-            this.denngay.TabIndex = 1;
+            this.denngayDateEdit.Properties.Mask.EditMask = "dd/MM/yyyy";
+            this.denngayDateEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.denngayDateEdit.Size = new System.Drawing.Size(227, 28);
+            this.denngayDateEdit.TabIndex = 3;
             // 
             // labelControl1
             // 
@@ -119,7 +119,7 @@
             this.tkCmb.Location = new System.Drawing.Point(502, 255);
             this.tkCmb.Name = "tkCmb";
             this.tkCmb.Size = new System.Drawing.Size(228, 27);
-            this.tkCmb.TabIndex = 6;
+            this.tkCmb.TabIndex = 1;
             // 
             // accountDetailsBindingSource
             // 
@@ -196,7 +196,7 @@
             this.panelControl1.Controls.Add(this.tkCmb);
             this.panelControl1.Controls.Add(this.button1);
             this.panelControl1.Controls.Add(this.tungayDateEdit);
-            this.panelControl1.Controls.Add(this.denngay);
+            this.panelControl1.Controls.Add(this.denngayDateEdit);
             this.panelControl1.Controls.Add(this.labelControl3);
             this.panelControl1.Controls.Add(this.labelControl1);
             this.panelControl1.Controls.Add(this.labelControl2);
@@ -229,8 +229,8 @@
             this.Load += new System.EventHandler(this.formThongKeGD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tungayDateEdit.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tungayDateEdit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.denngay.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.denngay.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.denngayDateEdit.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.denngayDateEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetailsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uv_AccountDetailsBindingSource)).EndInit();
@@ -246,7 +246,7 @@
         #endregion
 
         private DevExpress.XtraEditors.DateEdit tungayDateEdit;
-        private DevExpress.XtraEditors.DateEdit denngay;
+        private DevExpress.XtraEditors.DateEdit denngayDateEdit;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl3;

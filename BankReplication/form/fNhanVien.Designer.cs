@@ -265,21 +265,13 @@ namespace BankReplication.form
             // PHAIComboBox
             // 
             this.PHAIComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.nhanVienBds, "PHAI", true));
-            this.PHAIComboBox.FormattingEnabled = true;
-//            this.PHAIComboBox.Items.AddRange(new object[] {
-//            "Nam",
-//            "Nữ"});
-            this.PHAIComboBox.Items.AddRange(new object[] {
-            new Gender("Nam"),
-            new Gender("Nữ")
-            });
             this.PHAIComboBox.DisplayMember = "Name";
-            this.PHAIComboBox.ValueMember = "Name";
+            this.PHAIComboBox.FormattingEnabled = true;
             this.PHAIComboBox.Location = new System.Drawing.Point(132, 317);
             this.PHAIComboBox.Name = "PHAIComboBox";
             this.PHAIComboBox.Size = new System.Drawing.Size(150, 27);
             this.PHAIComboBox.TabIndex = 10;
-            this.PHAIComboBox.SelectedIndexChanged += new System.EventHandler(this.PHAIComboBox_SelectedIndexChanged);
+            this.PHAIComboBox.ValueMember = "Name";
             // 
             // nhanVienBds
             // 
@@ -859,7 +851,6 @@ namespace BankReplication.form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1918, 1033);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.toolBoxPanel);

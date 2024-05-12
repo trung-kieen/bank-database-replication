@@ -382,3 +382,6 @@ D:\BankReplication\BankReplication\bin\Debug\es\DevExpress.XtraScheduler.v19.2.C
 D:\BankReplication\BankReplication\bin\Debug\ja\DevExpress.XtraScheduler.v19.2.Core.resources.dll
 D:\BankReplication\BankReplication\bin\Debug\ru\DevExpress.XtraScheduler.v19.2.Core.resources.dll
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.report.formThongKeGD.resources
+E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formGuiRut.resources
+D:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formGuiRut.resources
+E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formChuyenNhanVien.resources

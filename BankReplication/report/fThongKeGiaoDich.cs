@@ -18,14 +18,20 @@ namespace BankReplication.report
         public formThongKeGD()
         {
             InitializeComponent();
-            
+
         }
 
         private void formThongKeGD_Load(object sender, EventArgs e)
         {
-            loadAccountDetails(Program.connstr);
+            LoadAccountDetails(Program.connstr);
             LoadCmbChiNhanh();
             CenterMdiScreen();
+            SetDefaultInputValue();
+        }
+        private void SetDefaultInputValue()
+        {
+            tungayDateEdit.EditValue = DateTime.Now;
+            denngayDateEdit.EditValue = DateTime.Now;
         }
         private void CenterMdiScreen()
         {
@@ -57,14 +63,18 @@ namespace BankReplication.report
             }
 
         }
-        private void loadAccountDetails(String connstr)
+        private void LoadAccountDetails(String connstr)
         {
             uv_AccountDetailsTableAdapter.Connection.ConnectionString = connstr;
             // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
             this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
+
             tkCmb.DataSource = accountDetails.Tables["uv_AccountDetails"];
             tkCmb.DisplayMember = "SOTK";
             tkCmb.ValueMember = "SOTK";
+            tkCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            tkCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+
 
         }
 
@@ -110,7 +120,7 @@ namespace BankReplication.report
             else
             {
                 // Load data
-                loadAccountDetails(Program.connstr);
+                LoadAccountDetails(Program.connstr);
             }
 
         }
@@ -120,14 +130,16 @@ namespace BankReplication.report
             // TODO validate input match sotk, begin date, end date is inputed
             try
             {
-            String sotk = tkCmb.Text.ToString();
+                String sotk = tkCmb.Text.ToString();
                 String searchExpression = "SOTK = " + sotk;
                 DataRow matchAccount = accountDetails.Tables["uv_AccountDetails"].Select(searchExpression)[0];
                 String hoten = matchAccount["HOTEN"].ToString();
-            XtraReport thongKeTaiKhoan = new rptGiaoDich(sotk, tungayDateEdit.DateTime, denngay.DateTime, hoten);
-             
-            IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
-            print.ShowPreviewDialog();
+                // NOTE: grant permission for NGANHANG, Chi Nhanh to perform this action 
+                XtraReport thongKeTaiKhoan = new rptGiaoDich(sotk, tungayDateEdit.DateTime, denngayDateEdit.DateTime, hoten);
+
+
+                IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
+                print.ShowPreviewDialog();
             }
             catch
             {

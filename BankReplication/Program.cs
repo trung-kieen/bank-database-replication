@@ -13,8 +13,8 @@ using BankReplication.Properties;
 
 namespace BankReplication
 {
-    public static partial  class Program
-    
+    public static partial class Program
+
     {
         /// <summary>
         /// The main entry point for the application.
@@ -56,13 +56,20 @@ namespace BankReplication
             //Application.Run(new formDangNhap());
         }
 
+        public static String  GetConnString()
+        {
+                return Program.connstr = "Data Source=" + Program.servername
+                                + ";Initial Catalog=" + Program.database
+                                + ";User ID=" + Program.mlogin
+                                + ";password=" + Program.password;
+        }
 
         public static int KetNoi(Boolean showError = true)
         {
             // Close old connection avoid system close connection time out 
-            if(Program.conn !=null && Program.conn.State == System.Data.ConnectionState.Open)
+            if (Program.conn != null && Program.conn.State == System.Data.ConnectionState.Open)
             {
-                Program.conn.Close(); 
+                Program.conn.Close();
             }
             try
             {
@@ -78,8 +85,8 @@ namespace BankReplication
             {
                 if (showError)
                 {
-                String errorMessage = "Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n ";
-                MessageBox.Show(errorMessage + e.Message, "", MessageBoxButtons.OK);
+                    String errorMessage = "Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n ";
+                    MessageBox.Show(errorMessage + e.Message, "", MessageBoxButtons.OK);
                 }
                 return Database.Connection.Fail;
             }
@@ -98,7 +105,7 @@ namespace BankReplication
             SqlDataReader myReader;
             SqlCommand sqlcmd = new SqlCommand(cmd, Program.conn);
             sqlcmd.CommandType = CommandType.Text;
-            if(Program.conn.State == ConnectionState.Closed)
+            if (Program.conn.State == ConnectionState.Closed)
             {
                 Program.conn.Open();
             }
@@ -112,7 +119,7 @@ namespace BankReplication
             {
                 if (!forceNoMessageBox)
                 {
-                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + ex.Message, "", MessageBoxButtons.OK);
+                    MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + ex.Message, "", MessageBoxButtons.OK);
                 }
                 Program.conn.Close();
                 return null;
@@ -130,7 +137,7 @@ namespace BankReplication
             sqlcmd.CommandType = CommandType.Text;
             const int oneMinute = 60;
             sqlcmd.CommandTimeout = 10 * oneMinute;
-            if(Program.conn.State == ConnectionState.Closed)
+            if (Program.conn.State == ConnectionState.Closed)
             {
                 Program.conn.Open();
             }
@@ -150,6 +157,37 @@ namespace BankReplication
                 return e.State;
             }
         }
+        public static String ExecSqlScalar(String cmd)
+        ///<summary>
+        ///<para>command string</para>
+        /// Return value 0 if command run success else return error code from sql server
+        ///</summary>
+        {
+            String result = null;
+            SqlCommand sqlcmd = new SqlCommand(cmd, Program.conn);
+            sqlcmd.CommandType = CommandType.Text;
+            const int oneMinute = 60;
+            sqlcmd.CommandTimeout = 10 * oneMinute;
+            if (Program.conn.State == ConnectionState.Closed)
+            {
+                Program.conn.Open();
+            }
+
+            try
+            {
+                result = sqlcmd.ExecuteScalar().ToString();
+                conn.Close();
+            }
+            catch (SqlException e)
+            {
+                result = null;
+//                MessageBox.Show(e.Message);
+                conn.Close();
+                // Return error code from sql 
+            }
+            return result;
+        }
+
 
         public static DataTable ExecSqlDataTable(String cmd)
         ///<summary>
@@ -158,7 +196,7 @@ namespace BankReplication
         ///</summary>
         {
             DataTable dataTable = new DataTable();
-            if(Program.conn.State == ConnectionState.Closed)
+            if (Program.conn.State == ConnectionState.Closed)
             {
                 Program.conn.Open();
             }

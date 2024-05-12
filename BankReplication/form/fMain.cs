@@ -155,8 +155,18 @@ namespace BankReplication
 
         }
 
-
-
-
+        private void btnGuiRut_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form fGuiRut= CheckExist(typeof(formGuiRut));
+            if(fGuiRut == null)
+            {
+                fGuiRut = new formGuiRut();
+                fGuiRut.MdiParent = this;
+                fGuiRut.Show();
+            }
+            else{
+                fGuiRut.Activate();
+            }
+        }
     }
 }

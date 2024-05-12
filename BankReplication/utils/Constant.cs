@@ -8,6 +8,12 @@ namespace BankReplication.utils
 {
    public static class Database
     {
+        public static class CheckExist
+        {
+            public static int FoundSameSite = 1;
+            public static int FoundOtherSite = 2;
+            public static int NotFound = 0;
+        }
         public static class NoQuery
         {
             public static int Success = 0;

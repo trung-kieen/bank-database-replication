@@ -1,0 +1,4 @@
+EXEC SP_Helper_ExistEmployee '3742578502'
+
+SELECT * FROM LINK0.NGANHANG.dbo.NhanVien
+SELECT * FROM NGANHANG.dbo.ChiNhanh

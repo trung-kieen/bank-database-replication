@@ -1,4 +1,6 @@
-﻿INSERT [dbo].[NhanVien] ([MANV], [HO], [TEN], [DIACHI], [PHAI], [SODT], [MACN], [TrangThaiXoa], [CMND]) VALUES (N'0000000000', N'Phạm', N'Tuấn', N'123 ABC', N'Nam', N'0902322333', N'TANDINH   ', 0, 3742578498)
+﻿USE NGANHANG
+GO
+INSERT [dbo].[NhanVien] ([MANV], [HO], [TEN], [DIACHI], [PHAI], [SODT], [MACN], [TrangThaiXoa], [CMND]) VALUES (N'0000000000', N'Phạm', N'Tuấn', N'123 ABC', N'Nam', N'0902322333', N'TANDINH   ', 0, 3742578498)
 INSERT [dbo].[NhanVien] ([MANV], [HO], [TEN], [DIACHI], [PHAI], [SODT], [MACN], [TrangThaiXoa], [CMND]) VALUES (N'0000000001', N'Huỳnh', N'Trung', N'324 Lý Tự Trọng', N'Nam', N'0706363823', N'TANDINH   ', 0, 3742578499)
 INSERT [dbo].[NhanVien] ([MANV], [HO], [TEN], [DIACHI], [PHAI], [SODT], [MACN], [TrangThaiXoa], [CMND]) VALUES (N'0000000003', N'Nguyễn Phương', N'Thảo', N'783 Phan Châu Trinh', N'Nữ', N'0382727633', N'TANDINH   ', 0, 3742578500)
 INSERT [dbo].[NhanVien] ([MANV], [HO], [TEN], [DIACHI], [PHAI], [SODT], [MACN], [TrangThaiXoa], [CMND]) VALUES (N'0000000004', N'Nguyễn Thiện', N'Lành', N'012 Phan Đình Phùng', N'Nữ', N'0908383238', N'TANDINH   ', 0, 3742578501)

@@ -177,30 +177,27 @@ namespace BankReplication.utils
     {
         private BindingSourceExtends _bds;
         private String _connString;
+        private String _remote_connString;
         private String _maNVCu;
         private String _maNVMoi;
+        private String _maCNCu;
+        private String _maCNMoi;
         private Action _reload;
-        public ChuyenCNCommand(BindingSourceExtends bds, String connString, String maNVMoi, Action reload)
+        public ChuyenCNCommand(BindingSourceExtends bds, String connString, String remote_connString, String maNVCu , String maNVMoi,String maCNCu, String maCNMoi,  Action reload)
         {
             _bds = bds;
             _connString = connString;
-            _maNVCu = ((DataRowView)bds[bds.Position]).Row["MANV"].ToString();
+            _remote_connString = remote_connString;
+            _maNVCu = maNVCu;
             _maNVMoi = maNVMoi;
+            _maCNCu = maCNCu;
+            _maCNMoi = maCNMoi;
             _reload = reload;
 
         }
-        public ChuyenCNCommand(String connString, String maNVCu, String maNVMoi, Action reload)
-        {
-            //            _bds = bds;
-            _connString = connString;
-            _maNVMoi = maNVMoi;
-            _maNVCu = maNVCu;
-            _reload = reload;
-        }
         public void Execute()
         {
-            //            int position = _bds.Position;
-            Program.connstr = _connString;
+            Program.conn.ConnectionString = _connString;
             if (Program.KetNoi(Database.Connection.NotShowError) == Database.Connection.Fail)
             {
                 Msg.Error("Không thể kết nối tới máy chủ");
@@ -208,10 +205,12 @@ namespace BankReplication.utils
             }
             try
             {
-
-
                 String SPName = "SP_ChuyenNhanVien";
-                String cmd = "EXEC " + SPName + " '" + _maNVCu + "', '" + _maNVMoi + "'";
+                String cmd = $"EXEC {SPName} "
+                    + $"  '{_maNVCu}' "
+                    + $", '{_maNVMoi}' "
+                    + $", '{_maCNCu}' "
+                    + $", '{_maCNMoi}' ";
 
                 Program.ExecSqlNonQuery(cmd);
                 _reload();
@@ -229,20 +228,22 @@ namespace BankReplication.utils
         }
         public void Undo()
         {
-            Program.connstr = _connString;
-            if (Program.KetNoi(Database.Connection.NotShowError) == Database.Connection.Fail)
-            {
-                Msg.Error("Không thể kết nối tới máy chủ");
-                return;
-            }
+            Program.conn.ConnectionString = _remote_connString;
             try
             {
-                String SPName = "SP_ChuyenNhanVien_Undo";
-                String cmd = "EXEC " + SPName + " '" + _maNVCu + "', '" + _maNVMoi + "'";
+
+                String SPName = "SP_ChuyenNhanVien";
+                String cmd = $"EXEC {SPName} "
+                    + $"  '{_maNVMoi}' "
+                    + $", '{_maNVCu}' "
+                    + $", '{_maCNMoi}' "
+                    + $", '{_maCNCu}' ";
+
                 Program.ExecSqlNonQuery(cmd);
                 _reload();
-                Msg.Info("Nhân viên đã được chuyển quay lại chi nhánh cũ");
-                //                _bds.Position = _bds.Find("MANV", _maNVCu);
+
+                Msg.Info("Nhân viên đã được chuyển lại chi nhánh ban đầu");
+
             }
             catch (Exception ex)
             {
