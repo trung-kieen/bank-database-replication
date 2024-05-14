@@ -42,10 +42,11 @@ CREATE TABLE ##gd (
 			AND NGAYGD >= @tungay;
 
 
-
+		
 		INSERT INTO ##gd
 		SELECT SODU_TRUOC = 0,  NGAYGD, SOTIEN, LOAIGD, SODU_SAU = 0
-		FROM NGANHANG.dbo.GD_GOIRUT
+		-- Cho phép tài khoản của chi nhánh này thực hiện gửi rút tiền ở chi nhánh khác => tra cứu về site chủ
+		FROM LINK0.NGANHANG.dbo.GD_GOIRUT
 		WHERE SOTK = @sotk
 			-- Vì cần tính số dư lùi từ hiện tại nên chỉ lọc bỏ các record trước ngày được xét 
 			AND NGAYGD >= @tungay;

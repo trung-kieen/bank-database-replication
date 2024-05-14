@@ -427,8 +427,6 @@ namespace BankReplication.form
         {
             MANVTextEdit.Focus();
 
-            Boolean cmbIsNotLoadGender = PHAIComboBox.DisplayMember == "";
-            this.PHAIComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
 
@@ -486,7 +484,7 @@ namespace BankReplication.form
             btnHuy.Enabled = false;
             btnReload.Enabled = true;
 
-            btnLuu.Enabled = false;
+            btnLuu.Enabled = true;
             sidePanel.Visible = false;
             gcNhanVien.Enabled = true;
 
@@ -505,10 +503,10 @@ namespace BankReplication.form
 
                 if (formAction == FormAction.Add)
                 {
-
                     sidePanel.Visible = true;
                     gcNhanVien.Enabled = false;
-
+                    MANVTextEdit.Enabled = true;
+                    CMNDTextEdit.Enabled = true;
 
                     btnHuy.Enabled = true;
                     btnXoa.Enabled = false;
@@ -521,6 +519,10 @@ namespace BankReplication.form
                 if (formAction == FormAction.Edit)
                 {
                     gcNhanVien.Enabled = false;
+
+                    MANVTextEdit.Enabled = false;
+                    CMNDTextEdit.Enabled = false;
+
                     btnHuy.Enabled = true;
                     sidePanel.Visible = true;
                     btnXoa.Enabled = false;
@@ -562,6 +564,8 @@ namespace BankReplication.form
             LoadCmbChiNhanh();
             SetFormState();
 
+            PHAIComboBox.Items.AddRange(new object[] {  new Gender("Nam"), new Gender("Nữ")});
+            PHAIComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
 

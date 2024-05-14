@@ -142,29 +142,29 @@ namespace BankReplication.form
             // mANVLabel
             // 
             mANVLabel.AutoSize = true;
-            mANVLabel.Location = new System.Drawing.Point(66, 79);
+            mANVLabel.Location = new System.Drawing.Point(16, 80);
             mANVLabel.Name = "mANVLabel";
-            mANVLabel.Size = new System.Drawing.Size(59, 19);
+            mANVLabel.Size = new System.Drawing.Size(109, 19);
             mANVLabel.TabIndex = 0;
-            mANVLabel.Text = "MANV:";
+            mANVLabel.Text = "Mã nhân viên:";
             // 
             // hOLabel
             // 
             hOLabel.AutoSize = true;
             hOLabel.Location = new System.Drawing.Point(87, 129);
             hOLabel.Name = "hOLabel";
-            hOLabel.Size = new System.Drawing.Size(38, 19);
+            hOLabel.Size = new System.Drawing.Size(35, 19);
             hOLabel.TabIndex = 2;
-            hOLabel.Text = "HO:";
+            hOLabel.Text = "Họ:";
             // 
             // tENLabel
             // 
             tENLabel.AutoSize = true;
             tENLabel.Location = new System.Drawing.Point(81, 175);
             tENLabel.Name = "tENLabel";
-            tENLabel.Size = new System.Drawing.Size(45, 19);
+            tENLabel.Size = new System.Drawing.Size(42, 19);
             tENLabel.TabIndex = 4;
-            tENLabel.Text = "TEN:";
+            tENLabel.Text = "Tên:";
             // 
             // cMNDLabel
             // 
@@ -178,38 +178,38 @@ namespace BankReplication.form
             // dIACHILabel
             // 
             dIACHILabel.AutoSize = true;
-            dIACHILabel.Location = new System.Drawing.Point(56, 273);
+            dIACHILabel.Location = new System.Drawing.Point(62, 274);
             dIACHILabel.Name = "dIACHILabel";
-            dIACHILabel.Size = new System.Drawing.Size(70, 19);
+            dIACHILabel.Size = new System.Drawing.Size(63, 19);
             dIACHILabel.TabIndex = 8;
-            dIACHILabel.Text = "DIACHI:";
+            dIACHILabel.Text = "Địa chỉ:";
             // 
             // sODTLabel
             // 
             sODTLabel.AutoSize = true;
-            sODTLabel.Location = new System.Drawing.Point(69, 367);
+            sODTLabel.Location = new System.Drawing.Point(17, 368);
             sODTLabel.Name = "sODTLabel";
-            sODTLabel.Size = new System.Drawing.Size(57, 19);
+            sODTLabel.Size = new System.Drawing.Size(108, 19);
             sODTLabel.TabIndex = 12;
-            sODTLabel.Text = "SODT:";
+            sODTLabel.Text = "Số điện thoại:";
             // 
             // mACNLabel
             // 
             mACNLabel.AutoSize = true;
-            mACNLabel.Location = new System.Drawing.Point(66, 415);
+            mACNLabel.Location = new System.Drawing.Point(16, 416);
             mACNLabel.Name = "mACNLabel";
-            mACNLabel.Size = new System.Drawing.Size(59, 19);
+            mACNLabel.Size = new System.Drawing.Size(109, 19);
             mACNLabel.TabIndex = 14;
-            mACNLabel.Text = "MACN:";
+            mACNLabel.Text = "Mã chi nhánh:";
             // 
             // pHAILabel1
             // 
             pHAILabel1.AutoSize = true;
-            pHAILabel1.Location = new System.Drawing.Point(73, 320);
+            pHAILabel1.Location = new System.Drawing.Point(79, 320);
             pHAILabel1.Name = "pHAILabel1";
-            pHAILabel1.Size = new System.Drawing.Size(52, 19);
+            pHAILabel1.Size = new System.Drawing.Size(45, 19);
             pHAILabel1.TabIndex = 18;
-            pHAILabel1.Text = "PHAI:";
+            pHAILabel1.Text = "Phái:";
             // 
             // sidePanel
             // 
@@ -238,7 +238,7 @@ namespace BankReplication.form
             this.sidePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidePanel.Location = new System.Drawing.Point(2, 2);
             this.sidePanel.Name = "sidePanel";
-            this.sidePanel.Size = new System.Drawing.Size(389, 939);
+            this.sidePanel.Size = new System.Drawing.Size(389, 929);
             this.sidePanel.TabIndex = 0;
             this.sidePanel.Visible = false;
             // 
@@ -373,7 +373,7 @@ namespace BankReplication.form
             this.gcNhanVien.Location = new System.Drawing.Point(2, 2);
             this.gcNhanVien.MainView = this.gvNhanVien;
             this.gcNhanVien.Name = "gcNhanVien";
-            this.gcNhanVien.Size = new System.Drawing.Size(1914, 939);
+            this.gcNhanVien.Size = new System.Drawing.Size(1914, 929);
             this.gcNhanVien.TabIndex = 2;
             this.gcNhanVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvNhanVien});
@@ -514,9 +514,9 @@ namespace BankReplication.form
             this.panelControl1.Controls.Add(this.sidePanel);
             this.panelControl1.Controls.Add(this.gcNhanVien);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 70);
+            this.panelControl1.Location = new System.Drawing.Point(0, 80);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1918, 943);
+            this.panelControl1.Size = new System.Drawing.Size(1918, 933);
             this.panelControl1.TabIndex = 3;
             // 
             // panelControl3
@@ -528,7 +528,7 @@ namespace BankReplication.form
             this.panelControl3.Location = new System.Drawing.Point(2, 2);
             this.panelControl3.Margin = new System.Windows.Forms.Padding(4);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1914, 32);
+            this.panelControl3.Size = new System.Drawing.Size(1914, 42);
             this.panelControl3.TabIndex = 2;
             // 
             // cmbChiNhanh
@@ -536,7 +536,7 @@ namespace BankReplication.form
             this.cmbChiNhanh.DisplayMember = "TENCN";
             this.cmbChiNhanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChiNhanh.FormattingEnabled = true;
-            this.cmbChiNhanh.Location = new System.Drawing.Point(120, 2);
+            this.cmbChiNhanh.Location = new System.Drawing.Point(120, 8);
             this.cmbChiNhanh.Margin = new System.Windows.Forms.Padding(4);
             this.cmbChiNhanh.Name = "cmbChiNhanh";
             this.cmbChiNhanh.Size = new System.Drawing.Size(269, 27);
@@ -545,7 +545,7 @@ namespace BankReplication.form
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(23, 8);
+            this.labelControl1.Location = new System.Drawing.Point(38, 11);
             this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(74, 19);
@@ -559,7 +559,7 @@ namespace BankReplication.form
             this.toolBoxPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.toolBoxPanel.Location = new System.Drawing.Point(0, 34);
             this.toolBoxPanel.Name = "toolBoxPanel";
-            this.toolBoxPanel.Size = new System.Drawing.Size(1918, 36);
+            this.toolBoxPanel.Size = new System.Drawing.Size(1918, 46);
             this.toolBoxPanel.TabIndex = 1;
             // 
             // controlPanel
@@ -568,7 +568,7 @@ namespace BankReplication.form
             this.controlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.controlPanel.Location = new System.Drawing.Point(2, 2);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(1914, 32);
+            this.controlPanel.Size = new System.Drawing.Size(1914, 42);
             this.controlPanel.TabIndex = 3;
             // 
             // toolBarManager
@@ -667,7 +667,6 @@ namespace BankReplication.form
             this.btnLuu.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnLuu.ImageOptions.SvgImage")));
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(70, 0);
-            this.btnLuu.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnLuu.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLuu_ItemClick);
             // 
             // btnReload

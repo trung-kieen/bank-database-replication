@@ -31,7 +31,7 @@ namespace BankReplication.report
         private void SetDefaultInputValue()
         {
             tungayDateEdit.EditValue = DateTime.Now;
-            denngayDateEdit.EditValue = DateTime.Now;
+            denngayDateEdit.EditValue = DateTime.Now ;
         }
         private void CenterMdiScreen()
         {
@@ -141,9 +141,9 @@ namespace BankReplication.report
                 IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
                 print.ShowPreviewDialog();
             }
-            catch
+            catch(Exception ex)
             {
-                Msg.Error("Không thể tải báo cáo");
+                Msg.Error("Không thể tải báo cáo\n" +  ex.Message);
 
             }
 

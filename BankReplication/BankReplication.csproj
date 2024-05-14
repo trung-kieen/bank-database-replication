@@ -82,6 +82,12 @@
     <Compile Include="form\fChuyenNhanVien.Designer.cs">
       <DependentUpon>fChuyenNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\fChuyenTien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\fChuyenTien.Designer.cs">
+      <DependentUpon>fChuyenTien.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\fDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     <Compile Include="utils\Validate.cs" />
     <EmbeddedResource Include="form\fChuyenNhanVien.resx">
       <DependentUpon>fChuyenNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\fChuyenTien.resx">
+      <DependentUpon>fChuyenTien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\fDangNhap.resx">
       <DependentUpon>fDangNhap.cs</DependentUpon>

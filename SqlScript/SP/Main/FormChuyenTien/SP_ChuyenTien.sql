@@ -1,0 +1,40 @@
+USE NGANHANG
+GO
+CREATE OR ALTER PROCEDURE SP_ChuyenTien(
+	@sotk_nguon AS NCHAR(9),
+	@sotk_nhan AS NCHAR(9),
+	@sotien AS MONEY,
+	@manv AS NCHAR(10)
+)
+AS
+BEGIN
+
+
+
+IF (NOT EXISTS(SELECT  SOTK FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = @sotk_nhan) 
+OR NOT EXISTS(SELECT  SOTK FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = @sotk_nguon) )
+BEGIN
+RAISERROR ( 'Tai khoan khong ton tai', 16, 1) 
+RETURN;
+END
+
+			
+SET XACT_ABORT ON;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
+
+BEGIN TRANSACTION;
+UPDATE NGANHANG.dbo.TaiKhoan
+SET SODU = SODU - @sotien
+WHERE SOTK = @sotk_nguon
+
+UPDATE NGANHANG.dbo.TaiKhoan
+SET SODU = SODU + @sotien
+WHERE SOTK = @sotk_nhan
+
+INSERT INTO NGANHANG.dbo.GD_CHUYENTIEN(SOTK_CHUYEN,NGAYGD, SOTIEN, SOTK_NHAN, MANV)
+VALUES (@sotk_nguon, GETDATE(), @sotien, @sotk_nhan, @manv);
+COMMIT;
+END
+
+
+		

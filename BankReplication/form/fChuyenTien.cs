@@ -12,9 +12,9 @@ using DevExpress.XtraEditors;
 
 namespace BankReplication.form
 {
-    public partial class formGuiRut : SimpleForm
+    public partial class formChuyenTien : SimpleForm
     {
-        public formGuiRut()
+        public formChuyenTien()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace BankReplication.form
                 this.ClientSize.Height / 2 - panelContainer.Size.Height / 2);
             panelContainer.Anchor = AnchorStyles.None;
         }
-        private void fGuiRut_Load(object sender, EventArgs e)
+        private void fChuyenTienLoad(object sender, EventArgs e)
         {
             txtSoDu.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             txtSoDu.Properties.Mask.EditMask = "n0";
@@ -40,33 +40,44 @@ namespace BankReplication.form
             CenterMdiScreen();
 
 
-            loaiGDCmb.Items.AddRange(new object[] {
-            new KeyValue("Gửi tiền", "GT"),
-            new KeyValue("Rút tiền", "RT")
-            });
-            this.loaiGDCmb.DisplayMember = "Text";
-            this.loaiGDCmb.ValueMember = "Value";
-            loaiGDCmb.SelectedIndex = 0;
             uv_AccountDetailsTableAdapter.Connection.ConnectionString = Program.connstr;
             if (Program.KetNoi() == Database.Connection.Fail) return;
 
             // TODO: Query only this branch 
-            DataTable dstk = Program.ExecSqlDataTable("SELECT * FROM uv_SoDuTaiKhoanTheoChiNhanh");
+            DataTable dstk_nguon = Program.ExecSqlDataTable("SELECT * FROM uv_SoDuTaiKhoanTheoChiNhanh");
 
-            if (dstk != null)
+            if (dstk_nguon != null)
             {
-                tkCmb.DataSource = dstk;
-                tkCmb.DisplayMember = "SOTK";
-                tkCmb.ValueMember = "SODU";
-                tkCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                tkCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
-                txtSoDu.DataBindings.Add(new System.Windows.Forms.Binding("Text", dstk, "SODU", true));
+                tkNguonCmb.DataSource = dstk_nguon;
+                tkNguonCmb.DisplayMember = "SOTK";
+                tkNguonCmb.ValueMember = "SODU";
+                tkNguonCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                tkNguonCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+                txtSoDu.DataBindings.Add(new System.Windows.Forms.Binding("Text", dstk_nguon, "SODU", true));
             }
             txtSoDu.Enabled = false;
             txtSoDu.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("id-ID"), "{0:#,##0.00}", double.Parse(txtSoDu.Text));
-            // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
-            //            this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
 
+            DataTable dstk_nhan = (dstk_nguon).Clone();
+
+            for (int i = 0; i < dstk_nguon.Rows.Count; i++)
+            {
+                // Lay danh sach phan manh khac chi nhanh hien tai 
+                if (i != Program.mChiNhanh)
+                {
+                    dstk_nhan.ImportRow(dstk_nguon.Rows[i]);
+                }
+            }
+
+            if (dstk_nhan != null)
+            {
+
+                tkNhanCmb.DataSource = dstk_nhan;
+                tkNhanCmb.DisplayMember = "SOTK";
+                tkNhanCmb.ValueMember = "SODU";
+                tkNhanCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                tkNhanCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+            }
         }
 
         private void btnGuiRut_Click(object sender, EventArgs e)
@@ -95,11 +106,11 @@ namespace BankReplication.form
                 if (Program.KetNoi() == Database.Connection.Fail) return;
 
                 String manv = Program.username;
-                String sotk = tkCmb.Text.ToString();
-                KeyValue loaigd = (KeyValue)loaiGDCmb.SelectedItem;
-                String cmd = $"EXEC SP_GuiRut '{sotk}', '{txtSoTien.Text}', '{loaigd.Value}', '{manv}' ";
+                String sotk_nguon = tkNguonCmb.Text.ToString();
+                String sotk_nhan = tkNhanCmb.Text.ToString();
+                String cmd = $"EXEC SP_ChuyenTien '{sotk_nguon}', '{sotk_nhan}', '{txtSoTien.Text}', '{manv}' ";
                 int rtnCode = Program.ExecSqlNonQuery(cmd);
-                String sodu_moi = Program.ExecSqlScalar($"SELECT SODU FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = '{sotk}'");
+                String sodu_moi = Program.ExecSqlScalar($"SELECT SODU FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = '{sotk_nguon}'");
                 txtSoDu.Text = sodu_moi;
                 txtSoTien.Text = "";
                 if (rtnCode != 0) return;
@@ -110,20 +121,6 @@ namespace BankReplication.form
                 Msg.Info("Lỗi thực thi giao dịch\n" + ex.Message);
                 return;
             }
-        }
-
-        private void txtSoTien_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSoTien_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnGuiRut.PerformClick();
-            }
-
         }
     }
 }

@@ -168,5 +168,20 @@ namespace BankReplication
                 fGuiRut.Activate();
             }
         }
+
+        private void btnChuyenTien_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+            Form fChuyenTien= CheckExist(typeof(formChuyenTien));
+            if(fChuyenTien == null)
+            {
+                fChuyenTien = new formChuyenTien();
+                fChuyenTien.MdiParent = this;
+                fChuyenTien.Show();
+            }
+            else{
+                fChuyenTien.Activate();
+            }
+        }
     }
 }

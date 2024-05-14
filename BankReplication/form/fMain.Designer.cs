@@ -189,6 +189,7 @@
             this.btnChuyenTien.Id = 16;
             this.btnChuyenTien.ImageOptions.LargeImageIndex = 8;
             this.btnChuyenTien.Name = "btnChuyenTien";
+            this.btnChuyenTien.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChuyenTien_ItemClick);
             // 
             // imageCollection1
             // 

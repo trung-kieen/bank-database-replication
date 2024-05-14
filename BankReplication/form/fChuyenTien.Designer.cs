@@ -1,6 +1,6 @@
 ﻿namespace BankReplication.form
 {
-    partial class formGuiRut
+    partial class formChuyenTien
     {
         /// <summary>
         /// Required designer variable.
@@ -30,37 +30,37 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelContainer = new DevExpress.XtraEditors.PanelControl();
+            this.tkNhanCmb = new System.Windows.Forms.ComboBox();
+            this.uv_AccountDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.accountDetails = new BankReplication.AccountDetails();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtSoDu = new DevExpress.XtraEditors.TextEdit();
             this.txtSoTien = new DevExpress.XtraEditors.TextEdit();
             this.label4 = new System.Windows.Forms.Label();
             this.btnGuiRut = new System.Windows.Forms.Button();
-            this.loaiGDCmb = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tkCmb = new System.Windows.Forms.ComboBox();
-            this.uv_AccountDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.accountDetails = new BankReplication.AccountDetails();
+            this.tkNguonCmb = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.uv_AccountDetailsTableAdapter = new BankReplication.AccountDetailsTableAdapters.uv_AccountDetailsTableAdapter();
             this.tableAdapterManager = new BankReplication.AccountDetailsTableAdapters.TableAdapterManager();
             ((System.ComponentModel.ISupportInitialize)(this.panelContainer)).BeginInit();
             this.panelContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSoDu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSoTien.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uv_AccountDetailsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoDu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoTien.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelContainer
             // 
             this.panelContainer.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelContainer.Controls.Add(this.tkNhanCmb);
+            this.panelContainer.Controls.Add(this.label5);
             this.panelContainer.Controls.Add(this.txtSoDu);
             this.panelContainer.Controls.Add(this.txtSoTien);
             this.panelContainer.Controls.Add(this.label4);
             this.panelContainer.Controls.Add(this.btnGuiRut);
-            this.panelContainer.Controls.Add(this.loaiGDCmb);
-            this.panelContainer.Controls.Add(this.label3);
-            this.panelContainer.Controls.Add(this.tkCmb);
+            this.panelContainer.Controls.Add(this.tkNguonCmb);
             this.panelContainer.Controls.Add(this.label2);
             this.panelContainer.Controls.Add(this.label1);
             this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -69,24 +69,49 @@
             this.panelContainer.Size = new System.Drawing.Size(798, 553);
             this.panelContainer.TabIndex = 0;
             // 
+            // tkNhanCmb
+            // 
+            this.tkNhanCmb.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.uv_AccountDetailsBindingSource, "SOTK", true));
+            this.tkNhanCmb.FormattingEnabled = true;
+            this.tkNhanCmb.Location = new System.Drawing.Point(316, 238);
+            this.tkNhanCmb.Name = "tkNhanCmb";
+            this.tkNhanCmb.Size = new System.Drawing.Size(217, 27);
+            this.tkNhanCmb.TabIndex = 13;
+            // 
+            // uv_AccountDetailsBindingSource
+            // 
+            this.uv_AccountDetailsBindingSource.DataMember = "uv_AccountDetails";
+            this.uv_AccountDetailsBindingSource.DataSource = this.accountDetails;
+            // 
+            // accountDetails
+            // 
+            this.accountDetails.DataSetName = "AccountDetails";
+            this.accountDetails.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(170, 240);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(119, 19);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Tài khoản nhận";
+            // 
             // txtSoDu
             // 
-            this.txtSoDu.Location = new System.Drawing.Point(298, 145);
+            this.txtSoDu.Location = new System.Drawing.Point(316, 146);
             this.txtSoDu.Name = "txtSoDu";
             this.txtSoDu.Size = new System.Drawing.Size(217, 28);
-            this.txtSoDu.TabIndex = 2;
-            this.txtSoDu.TabStop = false;
+            this.txtSoDu.TabIndex = 11;
             // 
             // txtSoTien
             // 
-            this.txtSoTien.Location = new System.Drawing.Point(298, 187);
+            this.txtSoTien.Location = new System.Drawing.Point(316, 188);
             this.txtSoTien.Name = "txtSoTien";
             this.txtSoTien.Properties.EditFormat.FormatString = "n0";
             this.txtSoTien.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtSoTien.Size = new System.Drawing.Size(217, 28);
-            this.txtSoTien.TabIndex = 3;
-            this.txtSoTien.EditValueChanged += new System.EventHandler(this.txtSoTien_EditValueChanged);
-            this.txtSoTien.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSoTien_KeyDown);
+            this.txtSoTien.TabIndex = 10;
             // 
             // label4
             // 
@@ -99,50 +124,22 @@
             // 
             // btnGuiRut
             // 
-            this.btnGuiRut.Location = new System.Drawing.Point(318, 318);
+            this.btnGuiRut.Location = new System.Drawing.Point(340, 300);
             this.btnGuiRut.Name = "btnGuiRut";
             this.btnGuiRut.Size = new System.Drawing.Size(124, 41);
             this.btnGuiRut.TabIndex = 7;
-            this.btnGuiRut.Text = "Gửi/Rút";
+            this.btnGuiRut.Text = "Chuyển tiền";
             this.btnGuiRut.UseVisualStyleBackColor = true;
             this.btnGuiRut.Click += new System.EventHandler(this.btnGuiRut_Click);
             // 
-            // loaiGDCmb
+            // tkNguonCmb
             // 
-            this.loaiGDCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.loaiGDCmb.FormattingEnabled = true;
-            this.loaiGDCmb.Location = new System.Drawing.Point(298, 236);
-            this.loaiGDCmb.Name = "loaiGDCmb";
-            this.loaiGDCmb.Size = new System.Drawing.Size(217, 27);
-            this.loaiGDCmb.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(170, 236);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 19);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Loại giao dịch";
-            // 
-            // tkCmb
-            // 
-            this.tkCmb.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.uv_AccountDetailsBindingSource, "SOTK", true));
-            this.tkCmb.FormattingEnabled = true;
-            this.tkCmb.Location = new System.Drawing.Point(298, 102);
-            this.tkCmb.Name = "tkCmb";
-            this.tkCmb.Size = new System.Drawing.Size(217, 27);
-            this.tkCmb.TabIndex = 1;
-            // 
-            // uv_AccountDetailsBindingSource
-            // 
-            this.uv_AccountDetailsBindingSource.DataMember = "uv_AccountDetails";
-            this.uv_AccountDetailsBindingSource.DataSource = this.accountDetails;
-            // 
-            // accountDetails
-            // 
-            this.accountDetails.DataSetName = "AccountDetails";
-            this.accountDetails.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.tkNguonCmb.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.uv_AccountDetailsBindingSource, "SOTK", true));
+            this.tkNguonCmb.FormattingEnabled = true;
+            this.tkNguonCmb.Location = new System.Drawing.Point(316, 103);
+            this.tkNguonCmb.Name = "tkNguonCmb";
+            this.tkNguonCmb.Size = new System.Drawing.Size(217, 27);
+            this.tkNguonCmb.TabIndex = 4;
             // 
             // label2
             // 
@@ -158,9 +155,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(170, 106);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 19);
+            this.label1.Size = new System.Drawing.Size(129, 19);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Số tài khoản";
+            this.label1.Text = "Tài khoản nguồn";
             // 
             // uv_AccountDetailsTableAdapter
             // 
@@ -172,22 +169,22 @@
             this.tableAdapterManager.Connection = null;
             this.tableAdapterManager.UpdateOrder = BankReplication.AccountDetailsTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // formGuiRut
+            // formChuyenTien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 553);
             this.Controls.Add(this.panelContainer);
-            this.Name = "formGuiRut";
-            this.Text = "Giao dịch gửi/rút tiền";
-            this.Load += new System.EventHandler(this.fGuiRut_Load);
+            this.Name = "formChuyenTien";
+            this.Text = "Giao dịch chuyển tiền";
+            this.Load += new System.EventHandler(this.fChuyenTienLoad);
             ((System.ComponentModel.ISupportInitialize)(this.panelContainer)).EndInit();
             this.panelContainer.ResumeLayout(false);
             this.panelContainer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSoDu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSoTien.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uv_AccountDetailsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoDu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSoTien.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -201,12 +198,12 @@
         private System.Windows.Forms.BindingSource uv_AccountDetailsBindingSource;
         private AccountDetailsTableAdapters.uv_AccountDetailsTableAdapter uv_AccountDetailsTableAdapter;
         private AccountDetailsTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.ComboBox tkCmb;
-        private System.Windows.Forms.ComboBox loaiGDCmb;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox tkNguonCmb;
         private System.Windows.Forms.Button btnGuiRut;
         private System.Windows.Forms.Label label4;
         private DevExpress.XtraEditors.TextEdit txtSoTien;
         private DevExpress.XtraEditors.TextEdit txtSoDu;
+        private System.Windows.Forms.ComboBox tkNhanCmb;
+        private System.Windows.Forms.Label label5;
     }
 }
