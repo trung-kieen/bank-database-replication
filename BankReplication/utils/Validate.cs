@@ -24,6 +24,16 @@ namespace BankReplication.utils
 
         }
 
+        public static void validateSoTK(String sotk)
+        {
+            notNull(sotk);
+            validateDigit(sotk);
+        }
+        public static void validateSoTien(String sotk)
+        {
+            notNull(sotk);
+            validateDigit(sotk);
+        }
         public static void validateHo(String ho)
         {
             notNull(ho);

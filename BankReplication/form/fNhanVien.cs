@@ -33,7 +33,8 @@ namespace BankReplication.form
 
         public void InitNewRowData()
         {
-            macn = LayMaCN();
+            if (macn == null)
+                macn = Program.LayMaCN();
             if(macn == null )
             {
                 Msg.Error("Lỗi tải mã chi nhánh");
@@ -58,17 +59,6 @@ namespace BankReplication.form
             current.Row["SODT"] = SODTTextEdit.Text;
             current.Row["MACN"] = MACNTextEdit.Text;
             current.Row["TrangThaiXoa"] = trangThaiXoaCheckBox.Checked;
-        }
-        private String LayMaCN()
-        {
-            if (Program.KetNoi() == Database.Connection.Fail) return null;
-            try
-            {
-                return Program.ExecSqlScalar("SELECT MACN FROM NGANHANG.dbo.NHANVIEN");
-            }catch
-            {
-                return null;
-            }
         }
 
 
@@ -257,7 +247,7 @@ namespace BankReplication.form
 
 
         // =================> Handle function for perform action details for event call <======================
-        public override void HandleDelete()
+        public void HandleDelete()
         {
             if (formAction != FormAction.None) return;
             if (nhanVienBds.Position < 0)
@@ -307,7 +297,7 @@ namespace BankReplication.form
             LoadNhanVien(Program.connstr);
             RevertLastPositionByMa();
         }
-        public override void HandleAdd()
+        public void HandleAdd()
         {
             if (!InvalidNewEmployee())
             {
@@ -402,7 +392,7 @@ namespace BankReplication.form
                     return;
                 }
 
-                macn = LayMaCN();
+                macn = Program.LayMaCN();
                 commandController.Execute(new ChuyenCNCommand(nhanVienBds, Program.connstr, fChuyenCN.remote_connstr, maNVCu, fChuyenCN.manv_moi, macn, fChuyenCN.macn_moi, HandleRefresh));
                 SetFormState();
 
@@ -535,6 +525,7 @@ namespace BankReplication.form
                 {
                     btnXoa.Enabled = false;
                     btnChuyenCN.Enabled = false;
+                    btnSua.Enabled = false;
                 }
                 if (commandController.Redoable())
                     btnRedo.Enabled = true;
@@ -696,6 +687,14 @@ namespace BankReplication.form
             btnHuy.PerformClick();
         }
 
+        private void gvNhanVien_DoubleClick(object sender, EventArgs e)
+        {
+            if(gcNhanVien.Enabled)
+            {
+                btnSua.PerformClick();
+            }
+
+        }
         private void gvNhanVien_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             if (nhanVienBds.Position >= 0)

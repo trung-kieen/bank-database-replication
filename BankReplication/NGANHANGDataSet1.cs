@@ -1,1 +1,7 @@
-﻿
+﻿namespace BankReplication
+{
+}
+
+namespace BankReplication
+{
+}

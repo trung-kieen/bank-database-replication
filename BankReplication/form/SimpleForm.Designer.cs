@@ -22,6 +22,13 @@
 
         private void InitializeComponent()
         {
+            this.SuspendLayout();
+            // 
+            // SimpleForm
+            // 
+            this.ClientSize = new System.Drawing.Size(798, 553);
+            this.Name = "SimpleForm";
+            this.ResumeLayout(false);
 
         }
     }

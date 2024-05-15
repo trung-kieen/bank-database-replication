@@ -106,6 +106,12 @@
     <Compile Include="form\fMain.Designer.cs">
       <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\fMoTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\fMoTaiKhoan.Designer.cs">
+      <DependentUpon>fMoTaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\fNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,11 @@
     </Compile>
     <Compile Include="form\SimpleForm.Designer.cs">
       <DependentUpon>SimpleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoTKDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MoTKDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="NGANHANGDataSet.cs">
       <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>
@@ -178,6 +189,9 @@
     <EmbeddedResource Include="form\fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\fMoTaiKhoan.resx">
+      <DependentUpon>fMoTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\fNhanVien.resx">
       <DependentUpon>fNhanVien.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,6 +217,17 @@
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="MoTKDS.xsc">
+      <DependentUpon>MoTKDS.xsd</DependentUpon>
+    </None>
+    <None Include="MoTKDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MoTKDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MoTKDS.xss">
+      <DependentUpon>MoTKDS.xsd</DependentUpon>
     </None>
     <None Include="NGANHANGDataSet.xsc">
       <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>

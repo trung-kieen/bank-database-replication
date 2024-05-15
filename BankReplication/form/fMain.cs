@@ -183,5 +183,20 @@ namespace BankReplication
                 fChuyenTien.Activate();
             }
         }
+
+        private void btnMoTK_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form fMoTaiKhoan= CheckExist(typeof(formMoTaiKhoan));
+            if(fMoTaiKhoan == null)
+            {
+                fMoTaiKhoan = new formMoTaiKhoan();
+                fMoTaiKhoan.MdiParent = this;
+                fMoTaiKhoan.Show();
+            }
+            else{
+                fMoTaiKhoan.Activate();
+            }
+
+        }
     }
 }

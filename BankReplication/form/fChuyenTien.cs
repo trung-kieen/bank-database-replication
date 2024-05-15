@@ -44,7 +44,7 @@ namespace BankReplication.form
             if (Program.KetNoi() == Database.Connection.Fail) return;
 
             // TODO: Query only this branch 
-            DataTable dstk_nguon = Program.ExecSqlDataTable("SELECT * FROM uv_SoDuTaiKhoanTheoChiNhanh");
+            DataTable dstk_nguon = Program.ExecSqlDataTable("SELECT * FROM uv_SoDuTaiKhoan");
 
             if (dstk_nguon != null)
             {

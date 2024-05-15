@@ -14,8 +14,8 @@ namespace BankReplication.form
 {
     public partial class SimpleForm : DevExpress.XtraEditors.XtraForm
     {
-        public virtual void HandleAdd() { }
-        public virtual void HandleDelete() { }
+//        public virtual void HandleAdd() { }
+//        public virtual void HandleDelete() { }
         public SimpleForm()
         {
             InitializeComponent();

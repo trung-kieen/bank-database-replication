@@ -386,3 +386,4 @@ E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formGuiRut.res
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formGuiRut.resources
 E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formChuyenNhanVien.resources
 E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formChuyenTien.resources
+E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formMoTaiKhoan.resources

@@ -396,6 +396,7 @@ namespace BankReplication.form
             this.gvNhanVien.Name = "gvNhanVien";
             this.gvNhanVien.OptionsBehavior.Editable = false;
             this.gvNhanVien.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvNhanVien_FocusedRowChanged);
+            this.gvNhanVien.DoubleClick += new System.EventHandler(this.gvNhanVien_DoubleClick);
             // 
             // colMANV
             // 
@@ -607,7 +608,7 @@ namespace BankReplication.form
             this.toolBar.DockCol = 0;
             this.toolBar.DockRow = 0;
             this.toolBar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.toolBar.FloatLocation = new System.Drawing.Point(40, 296);
+            this.toolBar.FloatLocation = new System.Drawing.Point(70, 255);
             this.toolBar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),

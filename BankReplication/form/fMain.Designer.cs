@@ -174,6 +174,7 @@
             this.btnMoTK.Id = 14;
             this.btnMoTK.ImageOptions.LargeImageIndex = 0;
             this.btnMoTK.Name = "btnMoTK";
+            this.btnMoTK.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMoTK_ItemClick);
             // 
             // btnGuiRut
             // 

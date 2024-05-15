@@ -33,8 +33,20 @@ namespace BankReplication
                 Program.conn.Close();
                 return false;
             }
+
         }
 
+        public static String LayMaCN()
+        {
+            if (Program.KetNoi() == Database.Connection.Fail) return null;
+            try
+            {
+                return Program.ExecSqlScalar("SELECT MACN FROM NGANHANG.dbo.NHANVIEN");
+            }catch
+            {
+                return null;
+            }
+        }
 
     }
 }

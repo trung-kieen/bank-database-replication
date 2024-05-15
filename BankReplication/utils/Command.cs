@@ -55,6 +55,7 @@ namespace BankReplication.utils
                 _rowView.EndEdit();
 
             }
+            _bds.EndEdit();
             _save();
             _bds.Focus(_rows);
 
@@ -63,6 +64,7 @@ namespace BankReplication.utils
         {
             _bds.Focus(_rows);
             _bds.RemoveRow(_rows);
+            _bds.EndEdit();
             _save();
         }
         public void Redo()
@@ -95,6 +97,7 @@ namespace BankReplication.utils
                 _rows = ModelMapper.RowViewToRowList(_rowView);
                 _bds.Focus(_rows);
                 _bds.RemoveCurrent();
+                _bds.EndEdit();
                 _save();
 
 
@@ -111,6 +114,7 @@ namespace BankReplication.utils
                 _rowView.EndEdit();
 
             }
+            _bds.EndEdit();
             _save();
             _bds.Focus(_rows);
 
@@ -160,15 +164,15 @@ namespace BankReplication.utils
         public void Undo()
         {
             _bds.Update(_after, _before);
-            _bds.EndEdit();
             _bds.Focus(_before);
+            _bds.EndEdit();
             _save();
         }
         public void Redo()
         {
             _bds.Update(_before, _after);
-            _bds.EndEdit();
             _bds.Focus(_after);
+            _bds.EndEdit();
             _save();
         }
 
@@ -183,7 +187,7 @@ namespace BankReplication.utils
         private String _maCNCu;
         private String _maCNMoi;
         private Action _reload;
-        public ChuyenCNCommand(BindingSourceExtends bds, String connString, String remote_connString, String maNVCu , String maNVMoi,String maCNCu, String maCNMoi,  Action reload)
+        public ChuyenCNCommand(BindingSourceExtends bds, String connString, String remote_connString, String maNVCu, String maNVMoi, String maCNCu, String maCNMoi, Action reload)
         {
             _bds = bds;
             _connString = connString;
