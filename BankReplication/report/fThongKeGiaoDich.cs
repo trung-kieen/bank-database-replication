@@ -65,6 +65,7 @@ namespace BankReplication.report
         }
         private void LoadAccountDetails(String connstr)
         {
+            
             uv_AccountDetailsTableAdapter.Connection.ConnectionString = connstr;
             // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
             this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
