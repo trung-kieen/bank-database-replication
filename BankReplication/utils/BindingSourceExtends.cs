@@ -57,6 +57,7 @@ namespace BankReplication.utils
         {
             if (this.Count == 0) return;
 
+            if (this.Count == 1) return;
             // Keep row display because action clone rows will cause row is clone not display 
             this.Position--;
             this.Position++;
@@ -112,6 +113,12 @@ namespace BankReplication.utils
                     if (a[i].GetType() == typeof(System.String))
                     {
                         if (!(a[i].ToString().Trim() == (b[i]).ToString().Trim())) return false;
+                    }
+                    else if(a[i].GetType() == typeof(System.DateTime))
+                    {
+                        string str1 = ((System.DateTime)a[i]).ToString("yyyy/MM/dd");
+                        string str2 = ((System.DateTime)b[i]).ToString("yyyy/MM/dd");
+                        if (!(str1 == str2)) return false;
                     }
                     else
                     {

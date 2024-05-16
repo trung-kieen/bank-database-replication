@@ -148,6 +148,8 @@ namespace BankReplication.form
         {
             SavePosition();
             LoadTaiKhoan(Program.connstr);
+            RevertLastPosition();
+
         }
         public void HandleDelete()
         {
@@ -476,10 +478,16 @@ namespace BankReplication.form
         }
         private void gvTaiKhoan_DoubleClick(object sender, EventArgs e)
         {
-            if(gcTaiKhoan.Enabled )
-            {
-                btnSua.PerformClick();
-            }
+            if (gcTaiKhoan.Enabled)
+                OpenEditSideBar();
+        }
+        private void gvTaiKhoan_LostFocus(object sender, EventArgs e)
+        {
+            SetFormState();
+        }
+        private void gvTaiKhoan_GotFocus(object sender, EventArgs e)
+        {
+            SetFormState();
 
         }
     }

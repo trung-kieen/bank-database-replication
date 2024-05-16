@@ -731,6 +731,8 @@ namespace BankReplication.form
             this.gvTaiKhoan.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colNGAYMOTK, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvTaiKhoan.DoubleClick += new System.EventHandler(this.gvTaiKhoan_DoubleClick);
+            this.gvTaiKhoan.LostFocus += new System.EventHandler(this.gvTaiKhoan_LostFocus);
+            this.gvTaiKhoan.GotFocus += new System.EventHandler(this.gvTaiKhoan_GotFocus);
             // 
             // colSOTK
             // 

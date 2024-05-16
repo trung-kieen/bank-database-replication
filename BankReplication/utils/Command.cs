@@ -57,6 +57,7 @@ namespace BankReplication.utils
             }
             _bds.EndEdit();
             _save();
+            _reload();
             _bds.Focus(_rows);
 
         }

@@ -114,7 +114,6 @@ namespace BankReplication.form
             mACNLabel = new System.Windows.Forms.Label();
             pHAILabel1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sidePanel)).BeginInit();
-            this.sidePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nhanVienBds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nhanVienDS1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MACNTextEdit.Properties)).BeginInit();
@@ -129,11 +128,8 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.gD_CHUYENTIENBds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD_GOIRUTBds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
-            this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolBoxPanel)).BeginInit();
-            this.toolBoxPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.controlPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -311,6 +307,9 @@ namespace BankReplication.form
             this.SODTTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.nhanVienBds, "SODT", true));
             this.SODTTextEdit.Location = new System.Drawing.Point(132, 364);
             this.SODTTextEdit.Name = "SODTTextEdit";
+            // 
+            // 
+            // 
             this.SODTTextEdit.Properties.MaxLength = 15;
             this.SODTTextEdit.Size = new System.Drawing.Size(150, 28);
             this.SODTTextEdit.TabIndex = 11;
@@ -321,6 +320,9 @@ namespace BankReplication.form
             this.DIACHITextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.nhanVienBds, "DIACHI", true));
             this.DIACHITextEdit.Location = new System.Drawing.Point(132, 270);
             this.DIACHITextEdit.Name = "DIACHITextEdit";
+            // 
+            // 
+            // 
             this.DIACHITextEdit.Properties.MaxLength = 100;
             this.DIACHITextEdit.Size = new System.Drawing.Size(150, 28);
             this.DIACHITextEdit.TabIndex = 9;
@@ -331,6 +333,9 @@ namespace BankReplication.form
             this.CMNDTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.nhanVienBds, "CMND", true));
             this.CMNDTextEdit.Location = new System.Drawing.Point(132, 219);
             this.CMNDTextEdit.Name = "CMNDTextEdit";
+            // 
+            // 
+            // 
             this.CMNDTextEdit.Properties.MaxLength = 10;
             this.CMNDTextEdit.Size = new System.Drawing.Size(150, 28);
             this.CMNDTextEdit.TabIndex = 7;
@@ -341,6 +346,9 @@ namespace BankReplication.form
             this.TENTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.nhanVienBds, "TEN", true));
             this.TENTextEdit.Location = new System.Drawing.Point(132, 172);
             this.TENTextEdit.Name = "TENTextEdit";
+            // 
+            // 
+            // 
             this.TENTextEdit.Properties.MaxLength = 10;
             this.TENTextEdit.Size = new System.Drawing.Size(150, 28);
             this.TENTextEdit.TabIndex = 5;
@@ -351,6 +359,9 @@ namespace BankReplication.form
             this.HOTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.nhanVienBds, "HO", true));
             this.HOTextEdit.Location = new System.Drawing.Point(132, 126);
             this.HOTextEdit.Name = "HOTextEdit";
+            // 
+            // 
+            // 
             this.HOTextEdit.Properties.MaxLength = 50;
             this.HOTextEdit.Size = new System.Drawing.Size(150, 28);
             this.HOTextEdit.TabIndex = 3;
@@ -361,6 +372,9 @@ namespace BankReplication.form
             this.MANVTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.nhanVienBds, "MANV", true));
             this.MANVTextEdit.Location = new System.Drawing.Point(132, 76);
             this.MANVTextEdit.Name = "MANVTextEdit";
+            // 
+            // 
+            // 
             this.MANVTextEdit.Properties.MaxLength = 10;
             this.MANVTextEdit.Size = new System.Drawing.Size(150, 28);
             this.MANVTextEdit.TabIndex = 1;
@@ -373,7 +387,7 @@ namespace BankReplication.form
             this.gcNhanVien.Location = new System.Drawing.Point(2, 2);
             this.gcNhanVien.MainView = this.gvNhanVien;
             this.gcNhanVien.Name = "gcNhanVien";
-            this.gcNhanVien.Size = new System.Drawing.Size(1914, 929);
+            this.gcNhanVien.Size = new System.Drawing.Size(1914, 983);
             this.gcNhanVien.TabIndex = 2;
             this.gcNhanVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvNhanVien});
@@ -515,9 +529,9 @@ namespace BankReplication.form
             this.panelControl1.Controls.Add(this.sidePanel);
             this.panelControl1.Controls.Add(this.gcNhanVien);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 80);
+            this.panelControl1.Location = new System.Drawing.Point(0, 46);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1918, 933);
+            this.panelControl1.Size = new System.Drawing.Size(1918, 987);
             this.panelControl1.TabIndex = 3;
             // 
             // panelControl3
@@ -558,7 +572,7 @@ namespace BankReplication.form
             this.toolBoxPanel.Controls.Add(this.panelControl3);
             this.toolBoxPanel.Controls.Add(this.controlPanel);
             this.toolBoxPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolBoxPanel.Location = new System.Drawing.Point(0, 34);
+            this.toolBoxPanel.Location = new System.Drawing.Point(0, 0);
             this.toolBoxPanel.Name = "toolBoxPanel";
             this.toolBoxPanel.Size = new System.Drawing.Size(1918, 46);
             this.toolBoxPanel.TabIndex = 1;
@@ -732,34 +746,34 @@ namespace BankReplication.form
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.toolBarManager;
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.barDockControlTop.Size = new System.Drawing.Size(1918, 34);
+            this.barDockControlTop.Size = new System.Drawing.Size(1918, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 1013);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 1033);
             this.barDockControlBottom.Manager = this.toolBarManager;
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1918, 20);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1918, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 34);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             this.barDockControlLeft.Manager = this.toolBarManager;
             this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 979);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 1033);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1918, 34);
+            this.barDockControlRight.Location = new System.Drawing.Point(1918, 0);
             this.barDockControlRight.Manager = this.toolBarManager;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 979);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 1033);
             // 
             // btnCHUYENCHINHANH
             // 
@@ -867,8 +881,6 @@ namespace BankReplication.form
             this.Load += new System.EventHandler(this.formNhanVien_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.formNhanVien_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.sidePanel)).EndInit();
-            this.sidePanel.ResumeLayout(false);
-            this.sidePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nhanVienBds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nhanVienDS1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MACNTextEdit.Properties)).EndInit();
@@ -883,12 +895,8 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.gD_CHUYENTIENBds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD_GOIRUTBds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
-            this.panelControl3.ResumeLayout(false);
-            this.panelControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolBoxPanel)).EndInit();
-            this.toolBoxPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.controlPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();

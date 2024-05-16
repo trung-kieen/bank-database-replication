@@ -81,12 +81,11 @@ namespace BankReplication
                 Program.conn.Open();
                 return Database.Connection.Success;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 if (showError)
                 {
-                    String errorMessage = "Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n ";
-                    MessageBox.Show(errorMessage + e.Message, "", MessageBoxButtons.OK);
+                    Msg.Error("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n" + ex.Message);
                 }
                 return Database.Connection.Fail;
             }
@@ -119,7 +118,7 @@ namespace BankReplication
             {
                 if (!forceNoMessageBox)
                 {
-                    MessageBox.Show("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + ex.Message, "", MessageBoxButtons.OK);
+                    Msg.Error("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + ex.Message);
                 }
                 Program.conn.Close();
                 return null;
@@ -151,7 +150,7 @@ namespace BankReplication
             }
             catch (SqlException e)
             {
-                MessageBox.Show(e.Message);
+                Msg.Error(e.Message);
                 conn.Close();
                 // Return error code from sql 
                 return e.State;
@@ -181,7 +180,6 @@ namespace BankReplication
             catch (SqlException e)
             {
                 result = null;
-//                MessageBox.Show(e.Message);
                 conn.Close();
                 // Return error code from sql 
             }
@@ -210,7 +208,7 @@ namespace BankReplication
             catch (SqlException e)
             {
                 Program.conn.Close();
-                MessageBox.Show(e.Message);
+                Msg.Error(e.Message);
                 return null;
             }
 
