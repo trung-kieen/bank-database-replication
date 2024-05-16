@@ -11,6 +11,40 @@ namespace BankReplication.utils
     class Validate
     {
 
+        public static Boolean InvalidField(System.Windows.Forms.ComboBox comboBox, String fieldName, Action<String> validatePerform)
+        {
+            // Hiển thị thông báo lỗi cho dữ liệu nhập từ ComboBox  lên màn hình, trả về giá trị True
+            // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
+            try
+            {
+                var gender = comboBox.Text.ToString();
+                validatePerform(gender);
+            }
+            catch (Exception ex)
+            {
+                Msg.Warm("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ");
+                return true;
+            }
+            return false;
+        }
+        public static  Boolean InvalidField(DevExpress.XtraEditors.TextEdit field, String fieldName, Action<String> validatePerform)
+        // Hiển thị thông báo lỗi cho dữ liệu nhập từ Field TextEdit lên màn hình, trả về giá trị True
+        // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
+        {
+            try
+            {
+                validatePerform(field.Text);
+            }
+            catch (Exception ex)
+            {
+                Msg.Warm("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ");
+                field.Focus();
+
+                return true;
+            }
+            return false;
+        }
+
         /*
          * All validate method will not return any result if have error it will throw exception
          * The exception message will use in display error
@@ -32,7 +66,7 @@ namespace BankReplication.utils
         public static void validateSoTien(String sotk)
         {
             notNull(sotk);
-            validateDigit(sotk);
+            PositiveDouble(sotk);
         }
         public static void validateHo(String ho)
         {
@@ -167,6 +201,11 @@ namespace BankReplication.utils
                 if (string.IsNullOrEmpty(s))
                     return false;
                 return s == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s);
+
+        }
+        public static void PositiveDouble(String s)
+        {
+            if (Double.Parse(s) < 0) throw new Exception("Giá trị không được âm");
 
         }
     }

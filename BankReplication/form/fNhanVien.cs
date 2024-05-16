@@ -64,39 +64,6 @@ namespace BankReplication.form
 
 
 
-        private Boolean InvalidField(System.Windows.Forms.ComboBox comboBox, String fieldName, Action<String> validatePerform)
-        {
-            // Hiển thị thông báo lỗi cho dữ liệu nhập từ ComboBox  lên màn hình, trả về giá trị True
-            // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
-            try
-            {
-                var gender = comboBox.Text.ToString();
-                validatePerform(gender);
-            }
-            catch (Exception ex)
-            {
-                Msg.Warm("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ");
-                return true;
-            }
-            return false;
-        }
-        private Boolean InvalidField(DevExpress.XtraEditors.TextEdit field, String fieldName, Action<String> validatePerform)
-        // Hiển thị thông báo lỗi cho dữ liệu nhập từ Field TextEdit lên màn hình, trả về giá trị True
-        // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
-        {
-            try
-            {
-                validatePerform(field.Text);
-            }
-            catch (Exception ex)
-            {
-                Msg.Warm("Trường lỗi: " + fieldName + "\nLỗi: " + ex.Message, "Dữ liệu được nhập không hợp lệ");
-                field.Focus();
-
-                return true;
-            }
-            return false;
-        }
 
         private Boolean InvalidNewEmployee()
         {
