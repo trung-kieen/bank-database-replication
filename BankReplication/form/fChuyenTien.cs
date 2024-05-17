@@ -80,22 +80,40 @@ namespace BankReplication.form
             }
         }
 
-        private void btnGuiRut_Click(object sender, EventArgs e)
+        private void btnChuyenTien_Click(object sender, EventArgs e)
         {
             // Validate input 
 
+            String sotk_nguon = tkNguonCmb.Text.ToString().Trim();
+            String sotk_nhan = tkNhanCmb.Text.ToString().Trim();
             try
             {
                 if (txtSoTien.Text.ToString() == "")
+                {
+                    txtSoTien.Focus();
                     throw new Exception("Số tiền không được để trống");
+                }
                 if (Double.Parse(txtSoTien.Text) < 0)
+                {
+                    txtSoTien.Focus();
                     throw new Exception("Số tiền không thể là số âm");
+                }
+                if (Double.Parse(txtSoTien.Text) > Double.Parse(txtSoDu.Text))
+                {
+                    txtSoTien.Focus();
+                    throw new Exception("Số tiền trong tài khoản không đủ để thực hiện giao dịch");
+                }
+
+                if (sotk_nguon == sotk_nhan)
+                {
+                    tkNguonCmb.Focus();
+                    throw new Exception("Tài khoản nguồn và tải khoản nhận không được trùng nhau");
+                }
 
             }
             catch (Exception ex)
             {
-                txtSoTien.Focus();
-                Msg.Warm("Số tiền không hợp lệ\n" + ex.Message);
+                Msg.Warm(ex.Message, "Giao dịch không hợp lệ");
                 return;
 
             }
@@ -106,13 +124,12 @@ namespace BankReplication.form
                 if (Program.KetNoi() == Database.Connection.Fail) return;
 
                 String manv = Program.username;
-                String sotk_nguon = tkNguonCmb.Text.ToString();
-                String sotk_nhan = tkNhanCmb.Text.ToString();
                 String cmd = $"EXEC SP_ChuyenTien '{sotk_nguon}', '{sotk_nhan}', '{txtSoTien.Text}', '{manv}' ";
                 int rtnCode = Program.ExecSqlNonQuery(cmd);
                 String sodu_moi = Program.ExecSqlScalar($"SELECT SODU FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = '{sotk_nguon}'");
                 txtSoDu.Text = sodu_moi;
                 txtSoTien.Text = "";
+                if (rtnCode == Database.SqlException.ViolateConstraint) Msg.Error("Số dư tài khoản không đủ để thực hiện giao dịch", "Giao dịch không thành công");
                 if (rtnCode != 0) return;
                 Msg.Info("Giao dịch thành công \nSố dư mới là " + sodu_moi);
             }
@@ -121,6 +138,16 @@ namespace BankReplication.form
                 Msg.Info("Lỗi thực thi giao dịch\n" + ex.Message);
                 return;
             }
+        }
+
+        private void txtSoTien_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnChuyenTien.PerformClick();
+            }
+
         }
     }
 }

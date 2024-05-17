@@ -148,12 +148,12 @@ namespace BankReplication
 
                 return Database.NoQuery.Success;
             }
-            catch (SqlException e)
+            catch (SqlException ex)
             {
-                Msg.Error(e.Message);
+                Msg.Error(ex.Message);
                 conn.Close();
-                // Return error code from sql 
-                return e.State;
+                //                return ex.State;
+                return ex.Number;
             }
         }
         public static String ExecSqlScalar(String cmd)

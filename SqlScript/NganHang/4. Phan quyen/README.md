@@ -1,0 +1,1 @@
+Tao cac phan quyen: ngan hang, chi nhanh, khach hang tren server1 va server2

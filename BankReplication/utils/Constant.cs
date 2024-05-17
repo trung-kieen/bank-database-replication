@@ -25,6 +25,10 @@ namespace BankReplication.utils
             public static int Fail = 0;
             public static Boolean NotShowError = false;
         }
+        public static class SqlException
+        {
+            public static int ViolateConstraint = 547;
+        }
 
     } 
 }

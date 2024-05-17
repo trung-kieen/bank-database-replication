@@ -8,7 +8,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE OR  ALTER   PROCEDURE [dbo].[View_AddToPublication](
+CREATE OR  ALTER   PROCEDURE [dbo].[SP_AddViewArticle](
 	@view_name AS NVARCHAR(100)
 )
 AS

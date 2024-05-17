@@ -37,7 +37,7 @@
             this.txtSoDu = new DevExpress.XtraEditors.TextEdit();
             this.txtSoTien = new DevExpress.XtraEditors.TextEdit();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnGuiRut = new System.Windows.Forms.Button();
+            this.btnChuyenTien = new System.Windows.Forms.Button();
             this.tkNguonCmb = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,7 +59,7 @@
             this.panelContainer.Controls.Add(this.txtSoDu);
             this.panelContainer.Controls.Add(this.txtSoTien);
             this.panelContainer.Controls.Add(this.label4);
-            this.panelContainer.Controls.Add(this.btnGuiRut);
+            this.panelContainer.Controls.Add(this.btnChuyenTien);
             this.panelContainer.Controls.Add(this.tkNguonCmb);
             this.panelContainer.Controls.Add(this.label2);
             this.panelContainer.Controls.Add(this.label1);
@@ -76,7 +76,7 @@
             this.tkNhanCmb.Location = new System.Drawing.Point(316, 238);
             this.tkNhanCmb.Name = "tkNhanCmb";
             this.tkNhanCmb.Size = new System.Drawing.Size(217, 27);
-            this.tkNhanCmb.TabIndex = 13;
+            this.tkNhanCmb.TabIndex = 4;
             // 
             // uv_AccountDetailsBindingSource
             // 
@@ -102,7 +102,7 @@
             this.txtSoDu.Location = new System.Drawing.Point(316, 146);
             this.txtSoDu.Name = "txtSoDu";
             this.txtSoDu.Size = new System.Drawing.Size(217, 28);
-            this.txtSoDu.TabIndex = 11;
+            this.txtSoDu.TabIndex = 2;
             // 
             // txtSoTien
             // 
@@ -111,7 +111,10 @@
             this.txtSoTien.Properties.EditFormat.FormatString = "n0";
             this.txtSoTien.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.txtSoTien.Size = new System.Drawing.Size(217, 28);
-            this.txtSoTien.TabIndex = 10;
+            this.txtSoTien.TabIndex = 3;
+            this.txtSoTien.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSoTien_KeyDown);
+            this.tkNguonCmb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSoTien_KeyDown);
+            this.tkNhanCmb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSoTien_KeyDown);
             // 
             // label4
             // 
@@ -124,13 +127,13 @@
             // 
             // btnGuiRut
             // 
-            this.btnGuiRut.Location = new System.Drawing.Point(340, 300);
-            this.btnGuiRut.Name = "btnGuiRut";
-            this.btnGuiRut.Size = new System.Drawing.Size(124, 41);
-            this.btnGuiRut.TabIndex = 7;
-            this.btnGuiRut.Text = "Chuyển tiền";
-            this.btnGuiRut.UseVisualStyleBackColor = true;
-            this.btnGuiRut.Click += new System.EventHandler(this.btnGuiRut_Click);
+            this.btnChuyenTien.Location = new System.Drawing.Point(340, 300);
+            this.btnChuyenTien.Name = "btnGuiRut";
+            this.btnChuyenTien.Size = new System.Drawing.Size(124, 41);
+            this.btnChuyenTien.TabIndex = 7;
+            this.btnChuyenTien.Text = "Chuyển tiền";
+            this.btnChuyenTien.UseVisualStyleBackColor = true;
+            this.btnChuyenTien.Click += new System.EventHandler(this.btnChuyenTien_Click);
             // 
             // tkNguonCmb
             // 
@@ -139,7 +142,7 @@
             this.tkNguonCmb.Location = new System.Drawing.Point(316, 103);
             this.tkNguonCmb.Name = "tkNguonCmb";
             this.tkNguonCmb.Size = new System.Drawing.Size(217, 27);
-            this.tkNguonCmb.TabIndex = 4;
+            this.tkNguonCmb.TabIndex = 1;
             // 
             // label2
             // 
@@ -199,7 +202,7 @@
         private AccountDetailsTableAdapters.uv_AccountDetailsTableAdapter uv_AccountDetailsTableAdapter;
         private AccountDetailsTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.ComboBox tkNguonCmb;
-        private System.Windows.Forms.Button btnGuiRut;
+        private System.Windows.Forms.Button btnChuyenTien;
         private System.Windows.Forms.Label label4;
         private DevExpress.XtraEditors.TextEdit txtSoTien;
         private DevExpress.XtraEditors.TextEdit txtSoDu;

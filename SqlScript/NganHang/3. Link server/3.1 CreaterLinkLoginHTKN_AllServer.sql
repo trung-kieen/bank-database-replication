@@ -2,7 +2,7 @@ USE [master]
 GO
 
 /****** Object:  Login [HTKN]    Script Date: 3/1/2024 7:10:25 PM ******/
-DROP LOGIN [HTKN]
+DROP  LOGIN [HTKN]
 GO
 
 /* For security reasons the login is created disabled and with a random password. */

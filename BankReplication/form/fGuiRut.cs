@@ -51,7 +51,7 @@ namespace BankReplication.form
             if (Program.KetNoi() == Database.Connection.Fail) return;
 
             // TODO: Query only this branch 
-            DataTable dstk = Program.ExecSqlDataTable("SELECT * FROM uv_SoDuTaiKhoanTheoChiNhanh");
+            DataTable dstk = Program.ExecSqlDataTable("SELECT * FROM uv_SoDuTaiKhoan");
 
             if (dstk != null)
             {
@@ -97,13 +97,14 @@ namespace BankReplication.form
                 String manv = Program.username;
                 String sotk = tkCmb.Text.ToString();
                 KeyValue loaigd = (KeyValue)loaiGDCmb.SelectedItem;
-                String cmd = $"EXEC SP_GuiRut '{sotk}', '{txtSoTien.Text}', '{loaigd.Value}', '{manv}' ";
-                int rtnCode = Program.ExecSqlNonQuery(cmd);
-                String sodu_moi = Program.ExecSqlScalar($"SELECT SODU FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = '{sotk}'");
-                txtSoDu.Text = sodu_moi;
-                txtSoTien.Text = "";
-                if (rtnCode != 0) return;
-                Msg.Info("Giao dịch thành công \nSố dư mới là " + sodu_moi);
+                    String cmd = $"EXEC SP_GuiRut '{sotk}', '{txtSoTien.Text}', '{loaigd.Value}', '{manv}' ";
+                    int rtnCode = Program.ExecSqlNonQuery(cmd);
+                    String sodu_moi = Program.ExecSqlScalar($"SELECT SODU FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = '{sotk}'");
+                    txtSoDu.Text = sodu_moi;
+                    txtSoTien.Text = "";
+                    if (rtnCode == Database.SqlException.ViolateConstraint) Msg.Error("Hạn mức tối thiểu của giao dịch gửi rút là 100,000 VND", "Giao dịch không thành công");
+                    if (rtnCode != 0) return;
+                    Msg.Info("Giao dịch thành công \nSố dư mới là " + sodu_moi);
             }
             catch (Exception ex)
             {
