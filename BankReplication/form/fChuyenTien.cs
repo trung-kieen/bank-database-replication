@@ -54,6 +54,7 @@ namespace BankReplication.form
                 tkNguonCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 tkNguonCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
                 txtSoDu.DataBindings.Add(new System.Windows.Forms.Binding("Text", dstk_nguon, "SODU", true));
+                txtHoTenChuyen.DataBindings.Add(new System.Windows.Forms.Binding("Text", dstk_nguon, "HOTEN", true));
             }
             txtSoDu.Enabled = false;
             txtSoDu.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("id-ID"), "{0:#,##0.00}", double.Parse(txtSoDu.Text));
@@ -77,6 +78,7 @@ namespace BankReplication.form
                 tkNhanCmb.ValueMember = "SODU";
                 tkNhanCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 tkNhanCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
+                txtHoTenNhan.DataBindings.Add(new System.Windows.Forms.Binding("Text", dstk_nhan, "HOTEN", true));
             }
         }
 
@@ -93,10 +95,10 @@ namespace BankReplication.form
                     txtSoTien.Focus();
                     throw new Exception("Số tiền không được để trống");
                 }
-                if (Double.Parse(txtSoTien.Text) < 0)
+                if (!(Double.Parse(txtSoTien.Text) > 0))
                 {
                     txtSoTien.Focus();
-                    throw new Exception("Số tiền không thể là số âm");
+                    throw new Exception("Số tiền phải lớn hơn 0");
                 }
                 if (Double.Parse(txtSoTien.Text) > Double.Parse(txtSoDu.Text))
                 {

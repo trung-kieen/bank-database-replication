@@ -390,3 +390,5 @@ E:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formMoTaiKhoan
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formChuyenNhanVien.resources
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formChuyenTien.resources
 D:\BankReplication\BankReplication\obj\Debug\BankReplication.form.formMoTaiKhoan.resources
+E:\BankReplication\BankReplication\obj\Debug\BankReplication.report.formThongKeKH.resources
+E:\BankReplication\BankReplication\obj\Debug\BankReplication.report.rptKhachHang.resources

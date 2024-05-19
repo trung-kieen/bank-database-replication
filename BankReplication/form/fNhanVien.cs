@@ -375,6 +375,7 @@ namespace BankReplication.form
         // ================================================> UI Perform <========================================================
         public void OpenEditSideBar()
         {
+            if (Program.mGroup.ToUpper() != "CHINHANH") return;
             checkPointRowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
             SavePosition();
             SetFormState(FormAction.Edit);
@@ -382,7 +383,16 @@ namespace BankReplication.form
         }
         private void ResetSideBar()
         {
-            MANVTextEdit.Focus();
+            if(formAction  == FormAction.Edit)
+            {
+                HOTextEdit.Focus();
+                trangThaiXoaCheckBox.Enabled = true;
+            }
+            else if(formAction  == FormAction.Add)
+            {
+                MANVTextEdit.Focus();
+                trangThaiXoaCheckBox.Enabled = false;
+            }
 
         }
 
@@ -475,13 +485,13 @@ namespace BankReplication.form
 
                 if (formAction == FormAction.Edit)
                 {
+                    sidePanel.Visible = true;
                     gcNhanVien.Enabled = false;
 
                     MANVTextEdit.Enabled = false;
                     CMNDTextEdit.Enabled = false;
 
                     btnHuy.Enabled = true;
-                    sidePanel.Visible = true;
                     btnXoa.Enabled = false;
                     btnLuu.Enabled = true;
                     btnThem.Enabled = false;
@@ -599,7 +609,7 @@ namespace BankReplication.form
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            OpenEditSideBar();
+                OpenEditSideBar();
         }
 
         private void btnChuyenCN_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

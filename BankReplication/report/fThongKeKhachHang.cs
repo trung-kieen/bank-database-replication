@@ -13,9 +13,9 @@ using DevExpress.XtraEditors;
 
 namespace BankReplication.report
 {
-    public partial class formThongKeGD : DevExpress.XtraEditors.XtraForm
+    public partial class formThongKeKH : DevExpress.XtraEditors.XtraForm
     {
-        public formThongKeGD()
+        public formThongKeKH()
         {
             InitializeComponent();
 
@@ -27,11 +27,14 @@ namespace BankReplication.report
             LoadCmbChiNhanh();
             CenterMdiScreen();
             SetDefaultInputValue();
+
+            if (Program.mGroup.ToUpper() == "NGANHANG")
+                controlAllSiteCheck.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            else
+                controlAllSiteCheck.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
         }
         private void SetDefaultInputValue()
         {
-            tungayDateEdit.EditValue = DateTime.Now;
-            denngayDateEdit.EditValue = DateTime.Now ;
         }
         private void CenterMdiScreen()
         {
@@ -43,38 +46,12 @@ namespace BankReplication.report
             panelContainer.Anchor = AnchorStyles.None;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                //                String tk = tkCmb.SelectedValue.ToString();
-                String tk = tkCmb.Text.ToString();
-                string searchExpression = "SOTK = " + tk;
-                DataRow matchAccount = accountDetails.Tables["uv_AccountDetails"].Select(searchExpression)[0];
-                String msg = $"Số tài khoản: {matchAccount["SOTK"]}\n"
-                    + $"Chủ tài khoản: {matchAccount["HOTEN"]}\n"
-                    + $"CMND: {matchAccount["CMND"]}\n";
-                Msg.Info(msg, "Thông tin tài khoản");
-            }
-            catch
-            {
-                Msg.Warm("Không tìm thấy tài khoản");
-            }
-
-        }
         private void LoadAccountDetails(String connstr)
         {
             
             uv_AccountDetailsTableAdapter.Connection.ConnectionString = connstr;
             // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
             this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
-
-            tkCmb.DataSource = accountDetails.Tables["uv_AccountDetails"];
-            tkCmb.DisplayMember = "SOTK";
-            tkCmb.ValueMember = "SOTK";
-            tkCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            tkCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void LoadCmbChiNhanh()
@@ -128,12 +105,12 @@ namespace BankReplication.report
         {
             try
             {
-                String sotk = tkCmb.Text.ToString();
-                String searchExpression = "SOTK = " + sotk;
-                DataRow matchAccount = accountDetails.Tables["uv_AccountDetails"].Select(searchExpression)[0];
-                String hoten = matchAccount["HOTEN"].ToString();
+                //                String sotk = tkCmb.Text.ToString();
+                //                String searchExpression = "SOTK = " + sotk;
+                //                DataRow matchAccount = accountDetails.Tables["uv_AccountDetails"].Select(searchExpression)[0];
+                //                String hoten = matchAccount["HOTEN"].ToString();
                 // NOTE: grant permission for NGANHANG, Chi Nhanh to perform this action 
-                XtraReport thongKeTaiKhoan = new rptGiaoDich(sotk, tungayDateEdit.DateTime, denngayDateEdit.DateTime, hoten);
+                XtraReport thongKeTaiKhoan = new rptKhachHang();
 
 
                 IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
@@ -145,6 +122,16 @@ namespace BankReplication.report
 
             }
 
+        }
+
+        private void panelContainer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void checkAllSite_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbChiNhanh.Enabled = !checkAllSite.Checked;
         }
     }
 }

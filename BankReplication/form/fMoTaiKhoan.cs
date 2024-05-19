@@ -142,6 +142,7 @@ namespace BankReplication.form
             khachHangTableAdapter.Connection.ConnectionString = Program.connstr;
             this.khachHangTableAdapter.Fill(this.moTKDS.KhachHang);
             LoadTaiKhoan(Program.connstr);
+            SetFormState(FormAction.None);
 
         }
         public void HandleRefresh()

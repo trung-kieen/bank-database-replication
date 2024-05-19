@@ -2584,7 +2584,7 @@ namespace BankReplication.MoTKDSTableAdapters {
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [LINK0].[NGANHANG].[dbo].[TaiKhoan] ([SOTK], [CMND], [SODU], [MACN], [NGAYMOTK]) VALUES " +
                 "(@SOTK, @CMND, @SODU, @MACN, @NGAYMOTK);\r\nSELECT SOTK, CMND, SODU, MACN, NGAYMOT" +
-                "K FROM TaiKhoan WHERE (SOTK = @SOTK)";
+                "K FROM TaiKhoan WHERE (SOTK = @SOTK) ORDER BY MACN";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SOTK", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SOTK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CMND", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CMND", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2594,7 +2594,7 @@ namespace BankReplication.MoTKDSTableAdapters {
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [LINK0].[NGANHANG].[dbo].[TaiKhoan] SET [SOTK] = @SOTK, [CMND] = @CMND, [SODU] = @SODU, [MACN] = @MACN, [NGAYMOTK] = @NGAYMOTK WHERE (([SOTK] = @Original_SOTK) AND ([CMND] = @Original_CMND) AND ((@IsNull_SODU = 1 AND [SODU] IS NULL) OR ([SODU] = @Original_SODU)) AND ((@IsNull_MACN = 1 AND [MACN] IS NULL) OR ([MACN] = @Original_MACN)) AND ([NGAYMOTK] = @Original_NGAYMOTK));
-SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM LINK0.NGANHANG.dbo.TaiKhoan WHERE (SOTK = @SOTK)";
+SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM LINK0.NGANHANG.dbo.TaiKhoan WHERE (SOTK = @SOTK) ORDER BY MACN";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SOTK", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SOTK", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CMND", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CMND", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -2623,7 +2623,7 @@ SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM LINK0.NGANHANG.dbo.TaiKhoan WHERE (
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM LINK0.NGANHANG.dbo.TaiKhoan";
+            this._commandCollection[0].CommandText = "SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM LINK0.NGANHANG.dbo.TaiKhoan ORDER BY MACN";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

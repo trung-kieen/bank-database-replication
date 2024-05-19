@@ -177,7 +177,7 @@ namespace BankReplication
                 result = sqlcmd.ExecuteScalar().ToString();
                 conn.Close();
             }
-            catch (SqlException e)
+            catch (SqlException )
             {
                 result = null;
                 conn.Close();

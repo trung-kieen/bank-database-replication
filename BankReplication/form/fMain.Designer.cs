@@ -166,6 +166,7 @@
             this.btnThongKeKH.Id = 13;
             this.btnThongKeKH.ImageOptions.LargeImageIndex = 7;
             this.btnThongKeKH.Name = "btnThongKeKH";
+            this.btnThongKeKH.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThongKeKH_ItemClick);
             // 
             // btnMoTK
             // 
