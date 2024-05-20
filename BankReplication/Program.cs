@@ -63,6 +63,21 @@ namespace BankReplication
                                 + ";User ID=" + Program.mlogin
                                 + ";password=" + Program.password;
         }
+        public static String  GetConnString(String login, String password)
+        {
+                return Program.connstr = "Data Source=" + Program.servername
+                                + ";Initial Catalog=" + Program.database
+                                + ";User ID=" + login
+                                + ";password=" + password;
+        }
+        public static String  GetConnString(String login, String password, String servername)
+        {
+                return Program.connstr = "Data Source=" + servername
+                                + ";Initial Catalog=" + Program.database
+                                + ";User ID=" + login
+                                + ";password=" + password;
+        }
+
 
         public static int KetNoi(Boolean showError = true)
         {

@@ -269,7 +269,7 @@
             this.label1.Name = "label1";
             this.label1.SizeF = new System.Drawing.SizeF(619F, 24.19433F);
             this.label1.StyleName = "Title";
-            this.label1.Text = "Thông kê giao dịch tài khoản";
+            this.label1.Text = "Thống kê giao dịch tài khoản";
             // 
             // GroupHeader1
             // 

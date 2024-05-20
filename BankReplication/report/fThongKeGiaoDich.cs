@@ -31,7 +31,7 @@ namespace BankReplication.report
         private void SetDefaultInputValue()
         {
             tungayDateEdit.EditValue = DateTime.Now;
-            denngayDateEdit.EditValue = DateTime.Now ;
+            denngayDateEdit.EditValue = DateTime.Now;
         }
         private void CenterMdiScreen()
         {
@@ -65,11 +65,18 @@ namespace BankReplication.report
         }
         private void LoadAccountDetails(String connstr)
         {
-            
-            uv_AccountDetailsTableAdapter.Connection.ConnectionString = connstr;
-            // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
-            this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
 
+            try
+            {
+                uv_AccountDetailsTableAdapter.Connection.ConnectionString = connstr;
+                // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
+                this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
+            }
+            catch (Exception ex)
+            {
+                Msg.Error("Lỗi tải dữ liệu\n" + ex.Message);
+                this.Close();
+            }
             tkCmb.DataSource = accountDetails.Tables["uv_AccountDetails"];
             tkCmb.DisplayMember = "SOTK";
             tkCmb.ValueMember = "SOTK";
@@ -139,9 +146,9 @@ namespace BankReplication.report
                 IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
                 print.ShowPreviewDialog();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Msg.Error("Không thể tải báo cáo\n" +  ex.Message);
+                Msg.Error("Không thể tải báo cáo\n" + ex.Message);
 
             }
 

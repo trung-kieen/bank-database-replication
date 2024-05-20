@@ -21,9 +21,8 @@ namespace BankReplication.report
 
         }
 
-        private void formThongKeGD_Load(object sender, EventArgs e)
+        private void thongKeKH_Load(object sender, EventArgs e)
         {
-            LoadAccountDetails(Program.connstr);
             LoadCmbChiNhanh();
             CenterMdiScreen();
             SetDefaultInputValue();
@@ -46,13 +45,6 @@ namespace BankReplication.report
             panelContainer.Anchor = AnchorStyles.None;
         }
 
-        private void LoadAccountDetails(String connstr)
-        {
-            
-            uv_AccountDetailsTableAdapter.Connection.ConnectionString = connstr;
-            // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
-            this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
-        }
 
         private void LoadCmbChiNhanh()
         {
@@ -95,8 +87,6 @@ namespace BankReplication.report
             }
             else
             {
-                // Load data
-                LoadAccountDetails(Program.connstr);
             }
 
         }
@@ -105,29 +95,30 @@ namespace BankReplication.report
         {
             try
             {
-                //                String sotk = tkCmb.Text.ToString();
-                //                String searchExpression = "SOTK = " + sotk;
-                //                DataRow matchAccount = accountDetails.Tables["uv_AccountDetails"].Select(searchExpression)[0];
-                //                String hoten = matchAccount["HOTEN"].ToString();
-                // NOTE: grant permission for NGANHANG, Chi Nhanh to perform this action 
-                XtraReport thongKeTaiKhoan = new rptKhachHang();
-
-
-                IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
-                print.ShowPreviewDialog();
+                String QueryAllSite = "SP_ThongKeKhachHang_SongSong";
+                if (checkAllSite.Checked)
+                {
+                    XtraReport thongKeKhachHang = new rptKhachHang(Connstr: Program.GetConnString(
+                        Program.remotelogin, Program.remotepassword, Program.servername),
+                        SP_Name: QueryAllSite);
+                    IReportPrintTool print = new ReportPrintTool(thongKeKhachHang);
+                    print.ShowPreviewDialog();
+                }
+                else
+                {
+                    XtraReport thongKeKhachHang = new rptKhachHang(Program.connstr);
+                    IReportPrintTool print = new ReportPrintTool(thongKeKhachHang);
+                    print.ShowPreviewDialog();
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Msg.Error("Không thể tải báo cáo\n" +  ex.Message);
+                Msg.Error("Không thể tải báo cáo\n" + ex.Message);
 
             }
 
         }
 
-        private void panelContainer_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void checkAllSite_CheckedChanged(object sender, EventArgs e)
         {

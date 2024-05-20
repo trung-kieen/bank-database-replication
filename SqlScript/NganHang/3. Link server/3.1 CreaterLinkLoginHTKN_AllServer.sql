@@ -21,3 +21,5 @@ GO
 CREATE USER [HTKN] FOR LOGIN [HTKN]
 
 ALTER ROLE  db_owner ADD MEMBER HTKN;
+--  For run job 
+EXEC sp_addsrvrolemember 'HTKN', 'sysadmin'

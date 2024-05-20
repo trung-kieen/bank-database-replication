@@ -106,7 +106,6 @@
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(798, 553);
             this.panelContainer.TabIndex = 11;
-            this.panelContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panelContainer_Paint);
             // 
             // panelControl1
             // 
@@ -205,7 +204,7 @@
             this.Controls.Add(this.panelContainer);
             this.Name = "formThongKeKH";
             this.Text = "Thống kê khách hàng";
-            this.Load += new System.EventHandler(this.formThongKeGD_Load);
+            this.Load += new System.EventHandler(this.thongKeKH_Load);
             ((System.ComponentModel.ISupportInitialize)(this.accountDetailsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uv_AccountDetailsBindingSource)).EndInit();
