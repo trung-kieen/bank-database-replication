@@ -33,7 +33,7 @@
             this.rbControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnDangNhap = new DevExpress.XtraBars.BarButtonItem();
             this.btnDangXuat = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddAccount = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddLoginAccount = new DevExpress.XtraBars.BarButtonItem();
             this.btnKhachHang = new DevExpress.XtraBars.BarButtonItem();
             this.btnNhanVien = new DevExpress.XtraBars.BarButtonItem();
             this.btnThongKeGD = new DevExpress.XtraBars.BarButtonItem();
@@ -63,6 +63,7 @@
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.rbControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -80,7 +81,7 @@
             this.rbControl.SearchEditItem,
             this.btnDangNhap,
             this.btnDangXuat,
-            this.btnAddAccount,
+            this.btnAddLoginAccount,
             this.btnKhachHang,
             this.btnNhanVien,
             this.btnThongKeGD,
@@ -123,12 +124,13 @@
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDangXuat_ItemClick);
             // 
-            // btnAddAccount
+            // btnAddLoginAccount
             // 
-            this.btnAddAccount.Caption = "Tạo tài khoản";
-            this.btnAddAccount.Id = 7;
-            this.btnAddAccount.ImageOptions.LargeImageIndex = 0;
-            this.btnAddAccount.Name = "btnAddAccount";
+            this.btnAddLoginAccount.Caption = "Tạo tài khoản đăng nhập";
+            this.btnAddLoginAccount.Id = 7;
+            this.btnAddLoginAccount.ImageOptions.LargeImageIndex = 10;
+            this.btnAddLoginAccount.Name = "btnAddLoginAccount";
+            this.btnAddLoginAccount.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddLoginAccount_ItemClick);
             // 
             // btnKhachHang
             // 
@@ -208,6 +210,7 @@
             this.imageCollection1.Images.SetKeyName(7, "customer_report.png");
             this.imageCollection1.Images.SetKeyName(8, "money_transfer.png");
             this.imageCollection1.Images.SetKeyName(9, "withdraw_deposit.png");
+            this.imageCollection1.Images.SetKeyName(10, "add_login.png");
             // 
             // rbHeThong
             // 
@@ -221,6 +224,7 @@
             // 
             this.loginManagerPageGroup.ItemLinks.Add(this.btnDangNhap);
             this.loginManagerPageGroup.ItemLinks.Add(this.btnDangXuat, true);
+            this.loginManagerPageGroup.ItemLinks.Add(this.btnAddLoginAccount);
             this.loginManagerPageGroup.Name = "loginManagerPageGroup";
             // 
             // rbQuanLy
@@ -336,6 +340,13 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Đăng xuất";
+            this.barButtonItem1.Id = 5;
+            this.barButtonItem1.ImageOptions.LargeImageIndex = 2;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
             // formMain
             // 
             this.Appearance.Options.UseFont = true;
@@ -386,7 +397,7 @@
         private DevExpress.XtraBars.BarButtonItem btnDangXuat;
         private DevExpress.XtraBars.Docking2010.DocumentManager documentManager1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
-        private DevExpress.XtraBars.BarButtonItem btnAddAccount;
+        private DevExpress.XtraBars.BarButtonItem btnAddLoginAccount;
         private DevExpress.Utils.ImageCollection imageCollection1;
         private System.Windows.Forms.ImageList imageList1;
         private DevExpress.XtraBars.BarButtonItem btnKhachHang;
@@ -398,6 +409,7 @@
         private DevExpress.XtraBars.BarButtonItem btnMoTK;
         private DevExpress.XtraBars.BarButtonItem btnGuiRut;
         private DevExpress.XtraBars.BarButtonItem btnChuyenTien;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }
 

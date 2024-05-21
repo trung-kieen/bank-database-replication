@@ -146,7 +146,7 @@ namespace BankReplication.form
             Program.myReader.Read();
 
             Program.username = Program.myReader.GetString(0);
-            if (Convert.IsDBNull(Program.username))
+            if (Convert.IsDBNull(Program.username)|| Convert.IsDBNull(Program.mGroup))
             {
                 Msg.Warm("Tài khoản không có quyền truy cập dữ liệu. Bạn kiểm tra lại tài khoản và mật khẩu");
                 return;
@@ -154,9 +154,14 @@ namespace BankReplication.form
             try
             {
 
-                // TODO: remove this for security reason? 
                 Program.mHoTen = Program.myReader.GetString(1) == null ? "" : Program.myReader.GetString(1);
                 Program.mGroup = Program.myReader.GetString(2) == null ? "" : Program.myReader.GetString(2);
+                String group = Program.mGroup.ToUpper();
+                if(!(group == "NGANHANG" || group == "CHINHANH"|| group == "KHACHHANG"))
+                {
+                    Msg.Warm($"Tài khoản thuộc nhóm {Program.mGroup} không có quyền truy cập dữ liệu");
+                    return;
+                }
             }
             catch
             {
