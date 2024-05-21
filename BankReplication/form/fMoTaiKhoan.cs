@@ -220,7 +220,7 @@ namespace BankReplication.form
         // TODO: 
         private bool InvalidNewAccount()
         {
-            
+
             if (InvalidField(soTKTxt, "Số tài khoản", validateSoTK)) return true;
             if (InvalidField(soDuTxt, "Số dư", validateSoTien)) return true;
             return false;
@@ -306,8 +306,15 @@ namespace BankReplication.form
             current.Row["SODU"] = soDuTxt.Text;
             current.Row["MACN"] = maCNTxt.Text;
             current.Row["CMND"] = CMNDTxt.Text;
-            current.Row["NGAYMOTK"] = DateTime.Parse(ngayMoTKTxt.Text);
-            
+            try
+            {
+                current.Row["NGAYMOTK"] =  DateTime.ParseExact(ngayMoTKTxt.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                current.Row["NGAYMOTK"] = ngayMoTKTxt.Text;
+            }
+
         }
 
         private void LoadTaiKhoan(String connstr)
@@ -329,7 +336,7 @@ namespace BankReplication.form
             try
             {
                 taiKhoanTableAdapter.Connection.ConnectionString = Program.connstr;
-//                moTKDS.AcceptChanges();
+                //                moTKDS.AcceptChanges();
                 taiKhoanTableAdapter.Update(moTKDS.TaiKhoan);
             }
             catch (Exception ex)
@@ -430,13 +437,13 @@ namespace BankReplication.form
         {
             if (taiKhoanBds.Count > 0)
             {
-                    btnXoa.Enabled = true;
-                    btnSua.Enabled = true;
+                btnXoa.Enabled = true;
+                btnSua.Enabled = true;
             }
             else
             {
-                    btnXoa.Enabled = false;
-                    btnSua.Enabled = false;
+                btnXoa.Enabled = false;
+                btnSua.Enabled = false;
 
             }
 
@@ -454,9 +461,9 @@ namespace BankReplication.form
 
         private void gvKhachHang_DoubleClick(object sender, EventArgs e)
         {
-            if(gcKhachHang.Enabled )
+            if (gcKhachHang.Enabled)
             {
-                gvTaiKhoan.Focus(); 
+                gvTaiKhoan.Focus();
             }
 
         }

@@ -225,7 +225,7 @@
             this.xrlbTungay.Name = "xrlbTungay";
             this.xrlbTungay.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrlbTungay.SizeF = new System.Drawing.SizeF(280.5556F, 20.83334F);
-            this.xrlbTungay.Text = "[tungay]\r\n[tungay]";
+            this.xrlbTungay.Text = "[tungay]\r\n";
             // 
             // xrLabel2
             // 

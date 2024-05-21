@@ -79,8 +79,8 @@ namespace BankReplication.form
             this.gD_GOIRUTBds = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.cmbChiNhanh = new System.Windows.Forms.ComboBox();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.cmbChiNhanh = new System.Windows.Forms.ComboBox();
             this.toolBoxPanel = new DevExpress.XtraEditors.PanelControl();
             this.controlPanel = new DevExpress.XtraEditors.PanelControl();
             this.toolBarManager = new DevExpress.XtraBars.BarManager(this.components);
@@ -486,6 +486,8 @@ namespace BankReplication.form
             this.gvNhanVien.GridControl = this.gcNhanVien;
             this.gvNhanVien.Name = "gvNhanVien";
             this.gvNhanVien.OptionsBehavior.Editable = false;
+            this.gvNhanVien.OptionsClipboard.AllowCopy = DevExpress.Utils.DefaultBoolean.True;
+            this.gvNhanVien.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
             this.gvNhanVien.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvNhanVien_FocusedRowChanged);
             this.gvNhanVien.DoubleClick += new System.EventHandler(this.gvNhanVien_DoubleClick);
             // 
@@ -631,6 +633,15 @@ namespace BankReplication.form
             this.panelControl3.Size = new System.Drawing.Size(1914, 42);
             this.panelControl3.TabIndex = 2;
             // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(21, 11);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(74, 19);
+            this.labelControl1.TabIndex = 0;
+            this.labelControl1.Text = "Chi Nhánh";
+            // 
             // cmbChiNhanh
             // 
             this.cmbChiNhanh.DisplayMember = "TENCN";
@@ -642,15 +653,6 @@ namespace BankReplication.form
             this.cmbChiNhanh.Size = new System.Drawing.Size(240, 27);
             this.cmbChiNhanh.TabIndex = 1;
             this.cmbChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmbChiNhanh_SelectedIndexChanged);
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(21, 11);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(74, 19);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "Chi Nhánh";
             // 
             // toolBoxPanel
             // 

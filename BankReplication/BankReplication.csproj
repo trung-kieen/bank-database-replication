@@ -159,6 +159,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="report\fThongKeTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\fThongKeTaiKhoan.Designer.cs">
+      <DependentUpon>fThongKeTaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="report\fThongKeKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,12 @@
     </Compile>
     <Compile Include="report\rptKhachHang.Designer.cs">
       <DependentUpon>rptKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\rptTaiKhoan.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\rptTaiKhoan.Designer.cs">
+      <DependentUpon>rptTaiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="utils\BindingSourceExtends.cs">
@@ -228,6 +240,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="report\fThongKeTaiKhoan.resx">
+      <DependentUpon>fThongKeTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="report\fThongKeKhachHang.resx">
       <DependentUpon>fThongKeKhachHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="report\rptKhachHang.resx">
       <DependentUpon>rptKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\rptTaiKhoan.resx">
+      <DependentUpon>rptTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

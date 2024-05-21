@@ -15,6 +15,7 @@ namespace BankReplication.report
 {
     public partial class formThongKeGD : DevExpress.XtraEditors.XtraForm
     {
+        private DataTable dstk;
         public formThongKeGD()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace BankReplication.report
         }
         private void SetDefaultInputValue()
         {
-            tungayDateEdit.EditValue = DateTime.Now;
+            tungayDateEdit.EditValue = DateTime.Now.AddYears(-1);
             denngayDateEdit.EditValue = DateTime.Now;
         }
         private void CenterMdiScreen()
@@ -46,15 +47,22 @@ namespace BankReplication.report
         private void button1_Click(object sender, EventArgs e)
         {
 
+            if (Program.KetNoi() == Database.Connection.Fail) return;
             try
             {
-                //                String tk = tkCmb.SelectedValue.ToString();
                 String tk = tkCmb.Text.ToString();
-                string searchExpression = "SOTK = " + tk;
-                DataRow matchAccount = accountDetails.Tables["uv_AccountDetails"].Select(searchExpression)[0];
-                String msg = $"Số tài khoản: {matchAccount["SOTK"]}\n"
-                    + $"Chủ tài khoản: {matchAccount["HOTEN"]}\n"
-                    + $"CMND: {matchAccount["CMND"]}\n";
+                String hoten = "";
+                String cmnd = "";
+                Program.myReader = Program.ExecSqlDataReader("EXEC SP_ThongTinTaiKhoan  '" + tk + "'");
+                while (Program.myReader.Read())
+                {
+                    hoten = Program.myReader["HOTEN"].ToString();
+                    cmnd = Program.myReader["CMND"].ToString();
+                }
+                Program.myReader.Close();
+                String msg = $"Số tài khoản: {tk}\n"
+                    + $"Chủ tài khoản: {hoten}\n"
+                    + $"CMND: {cmnd}\n";
                 Msg.Info(msg, "Thông tin tài khoản");
             }
             catch
@@ -66,22 +74,27 @@ namespace BankReplication.report
         private void LoadAccountDetails(String connstr)
         {
 
+            if (Program.KetNoi() == Database.Connection.Fail) return;
             try
             {
-                uv_AccountDetailsTableAdapter.Connection.ConnectionString = connstr;
-                // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
-                this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
+                dstk = Program.ExecSqlDataTable("SELECT SOTK FROM NGANHANG.dbo.TaiKhoan WHERE MACN =(SELECT TOP 1 MACN FROM NGANHANG.dbo.ChiNhanh)");
+                if(Program.mGroup.ToUpper() == "KHACHHANG")
+                {
+                    return;
+                    // TODO: for login customer only load for account they own
+                    dstk = null;
+                }
+                tkCmb.DataSource = dstk;
+                tkCmb.DisplayMember = "SOTK";
+                tkCmb.ValueMember = "SOTK";
+                tkCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                tkCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
             catch (Exception ex)
             {
                 Msg.Error("Lỗi tải dữ liệu\n" + ex.Message);
                 this.Close();
             }
-            tkCmb.DataSource = accountDetails.Tables["uv_AccountDetails"];
-            tkCmb.DisplayMember = "SOTK";
-            tkCmb.ValueMember = "SOTK";
-            tkCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            tkCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void LoadCmbChiNhanh()
@@ -135,14 +148,23 @@ namespace BankReplication.report
         {
             try
             {
+
                 String sotk = tkCmb.Text.ToString();
-                String searchExpression = "SOTK = " + sotk;
-                DataRow matchAccount = accountDetails.Tables["uv_AccountDetails"].Select(searchExpression)[0];
-                String hoten = matchAccount["HOTEN"].ToString();
+                DataRow[] foundAccounts = dstk.Select("SOTK='" + sotk + "'");
+                if (foundAccounts.Length ==0)
+                {
+                    throw new Exception("Bạn không có quyền xem thông tin thống kế giao dịch của tài khoản này");
+                }
+
+                String hoten = "";
+                Program.myReader = Program.ExecSqlDataReader("EXEC SP_ThongTinTaiKhoan  '" + sotk + "'");
+                while (Program.myReader.Read())
+                {
+                    hoten = Program.myReader["HOTEN"].ToString();
+                }
+                Program.myReader.Close();
                 // NOTE: grant permission for NGANHANG, Chi Nhanh to perform this action 
                 XtraReport thongKeTaiKhoan = new rptGiaoDich(sotk, tungayDateEdit.DateTime, denngayDateEdit.DateTime, hoten);
-
-
                 IReportPrintTool print = new ReportPrintTool(thongKeTaiKhoan);
                 print.ShowPreviewDialog();
             }

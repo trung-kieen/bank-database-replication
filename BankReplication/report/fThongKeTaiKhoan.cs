@@ -13,15 +13,15 @@ using DevExpress.XtraEditors;
 
 namespace BankReplication.report
 {
-    public partial class formThongKeKH : DevExpress.XtraEditors.XtraForm
+    public partial class formThongKeTK : DevExpress.XtraEditors.XtraForm
     {
-        public formThongKeKH()
+        public formThongKeTK()
         {
             InitializeComponent();
 
         }
 
-        private void thongKeKH_Load(object sender, EventArgs e)
+        private void thongKeTK_Load(object sender, EventArgs e)
         {
             LoadCmbChiNhanh();
             CenterMdiScreen();
@@ -34,6 +34,8 @@ namespace BankReplication.report
         }
         private void SetDefaultInputValue()
         {
+            tungayDateEdit.EditValue = DateTime.Now.AddYears(-1);
+            denngayDateEdit.EditValue = DateTime.Now;
         }
         private void CenterMdiScreen()
         {
@@ -93,23 +95,11 @@ namespace BankReplication.report
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            XtraReport thongKeKhachHang;
             try
             {
-                String QueryAllSite = "SP_ThongKeKhachHang_SongSong";
-                if (checkAllSite.Checked)
-                {
-                    // Require to run SP from remote server with serverrole sysadmin to able update and delete job agent
-                    thongKeKhachHang = new rptKhachHang(Connstr: Program.GetConnString(
-                        Program.remotelogin, Program.remotepassword, Program.servername),
-                        SP_Name: QueryAllSite);
-                }
-                else
-                {
-                    thongKeKhachHang = new rptKhachHang(Program.connstr);
-                }
-                IReportPrintTool print = new ReportPrintTool(thongKeKhachHang);
-                print.ShowPreviewDialog();
+                    XtraReport thongKeKhachHang = new rptTaiKhoan(tungayDateEdit.DateTime , denngayDateEdit.DateTime, checkAllSite.Checked);
+                    IReportPrintTool print = new ReportPrintTool(thongKeKhachHang);
+                    print.ShowPreviewDialog();
             }
             catch (Exception ex)
             {

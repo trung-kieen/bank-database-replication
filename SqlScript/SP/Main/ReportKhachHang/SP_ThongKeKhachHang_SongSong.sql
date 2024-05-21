@@ -46,7 +46,7 @@ while (select count(*) from msdb.dbo.sysjobs_view job
 
 		 END 
  
-SELECT * FROM ##temp ORDER BY MACN, HO, TEN
+SELECT * FROM ##temp -- ORDER BY MACN, HO, TEN
 END
 GO 
 EXEC SP_ThongKeKhachHang_SongSong

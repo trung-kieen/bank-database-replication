@@ -1,19 +1,20 @@
-USE NGANHANG 
+USE NGANHANG
 GO
 CREATE OR ALTER PROCEDURE SP_ThongKeTaiKhoan(
-	@tungay AS DATETIME = '2000-01-01'
-	, @denngay AS DATETIME = '2024-04-25'
+	-- param can set default value 
+	@tungay AS DATETIME 
+	,@denngay AS DATETIME 
+	,@all_site BIT = 0
 
-	-- TODO
-	, @macn AS NVARCHAR(10) = NULL
 )
 AS
 BEGIN
-
-SELECT * FROM NGANHANG.dbo.TaiKhoan 
-WHERE NGAYMOTK >= @tungay AND NGAYMOTK <= @denngay
+	
+	SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM NGANHANG.dbo.TaiKhoan 
+	WHERE (@all_site = 1 OR MACN = (SELECT TOP 1 MACN FROM NGANHANG.dbo.ChiNhanh))
+	AND	NGAYMOTK <= @denngay AND NGAYMOTK >= @tungay
+	ORDER BY MACN
 
 END;
-
-GO 
-EXEC SP_ThongKeTaiKhoan
+-- GO 
+-- EXEC SP_ThongKeTaiKhoan @all_site = 1

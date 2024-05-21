@@ -213,5 +213,19 @@ namespace BankReplication
                 fThongKeKH.Activate();
             }
         }
+
+        private void btnThongKeTKMoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form fThongKeTK= CheckExist(typeof(formThongKeTK));
+            if(fThongKeTK == null)
+            {
+                fThongKeTK = new formThongKeTK();
+                fThongKeTK.MdiParent = this;
+                fThongKeTK.Show();
+            }
+            else{
+                fThongKeTK.Activate();
+            }
+        }
     }
 }
