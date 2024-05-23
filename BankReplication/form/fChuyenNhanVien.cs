@@ -19,7 +19,7 @@ namespace BankReplication.form
         public String macn_moi;
         public String remote_connstr;
         private String cmnd;
-        public bool submit = false ;
+        public bool submit = false;
         public formChuyenNhanVien(String cmnd)
         {
             this.cmnd = cmnd;
@@ -38,27 +38,27 @@ namespace BankReplication.form
                 {
                     throw new Exception("Không tìm thấy chi nhánh khác để chuyển nhân viên tới");
                 }
-                for(int i = 0; i < dspm.Rows.Count; i++)
+                for (int i = 0; i < dspm.Rows.Count; i++)
                 {
-                // Lay danh sach phan manh khac chi nhanh hien tai 
-                    if(i!= Program.mChiNhanh)
+                    // Lay danh sach phan manh khac chi nhanh hien tai 
+                    if (i != Program.mChiNhanh)
                     {
                         otherBrarch.ImportRow(dspm.Rows[i]);
                     }
                 }
 
 
-                this.cmbChiNhanh.DataSource = otherBrarch; 
+                this.cmbChiNhanh.DataSource = otherBrarch;
                 this.cmbChiNhanh.DisplayMember = "TENCN";
                 this.cmbChiNhanh.ValueMember = "TENSERVER";
                 this.cmbChiNhanh.SelectedIndex = 0;
-                LoadChiNhanh();
 
             }
-            catch 
+            catch
             {
-//                Msg.Error("Lỗi tải chi nhánh khác\n" + ex.Message);
+                //                Msg.Error("Lỗi tải chi nhánh khác\n" + ex.Message);
             }
+            LoadChiNhanh();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace BankReplication.form
                 return;
             }
 
-            if(txtMaNVMoi.Text.Trim() == "")
+            if (txtMaNVMoi.Text.Trim() == "")
             {
                 Msg.Warm("Mã nhân viên mới không được để trống");
                 txtMaNVMoi.Focus();
@@ -80,7 +80,7 @@ namespace BankReplication.form
             try
             {
                 int existCode = Int32.Parse(Program.ExecSqlScalar("EXEC SP_TimNhanVien '" + txtMaNVMoi.Text + "'"));
-                if(existCode  == Database.CheckExist.NotFound)
+                if (existCode == Database.CheckExist.NotFound)
                 {
                     HandleSubmit();
                 }
@@ -91,9 +91,10 @@ namespace BankReplication.form
                     return;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Msg.Error("Lỗi khi kiểm tra mã nhân viên\n" + ex.Message);
+                SetEmployeeId();
             }
 
 
@@ -109,9 +110,9 @@ namespace BankReplication.form
         {
             if (cmbChiNhanh.SelectedValue.ToString() == "System.Data.DataRowView") return;
             Program.servername = cmbChiNhanh.SelectedValue.ToString();
-                // Get data with remote login HTKN
-                Program.mlogin = Program.remotelogin;
-                Program.password = Program.remotepassword;
+            // Get data with remote login HTKN
+            Program.mlogin = Program.remotelogin;
+            Program.password = Program.remotepassword;
             if (Program.KetNoi() == Database.Connection.Fail)
             {
                 Msg.Error("Lỗi kết nối về chi nhánh mới");
@@ -120,24 +121,25 @@ namespace BankReplication.form
             {
 
                 remote_connstr = Program.connstr;
-                macn_moi = Program.ExecSqlScalar("SELECT MACN FROM NGANHANG.dbo.NhanVien");
-                // NOTE: this command execute on remote server to selected server
-                manv_moi = Program.ExecSqlScalar("SELECT MANV FROM NGANHANG.dbo.NhanVien WHERE CMND = '" + cmnd + "'");
-                if (manv_moi == null)
-                {
-                    txtMaNVMoi.Enabled = true;  
-                    txtMaNVMoi.Text = "";
-                }
-                else
-                {
-                    txtMaNVMoi.Enabled = false;  
-                    txtMaNVMoi.Text = manv_moi;
-
-                }
-                // Load user input
-                 
+                macn_moi = Program.ExecSqlScalar("SELECT TOP 1 MACN FROM NGANHANG.dbo.ChiNhanh");
+                SetEmployeeId();
             }
+        }
+        private void SetEmployeeId()
+        {
+                // NOTE: this command execute on remote server to selected server
+                manv_moi = Program.ExecSqlScalar("SELECT TOP 1 MANV FROM NGANHANG.dbo.NhanVien WHERE CMND = '" + cmnd + "'");
+                if (manv_moi != null) goto LockId;
+                manv_moi = Program.GetNewEmployeeID();
+                if (manv_moi != null) goto LockId;
 
+                if (txtMaNVMoi.Text == "")
+                    txtMaNVMoi.Enabled = true; 
+
+                LockId:
+                    txtMaNVMoi.Enabled = false;
+                    txtMaNVMoi.Text = manv_moi;
+                    return;
 
         }
         private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)

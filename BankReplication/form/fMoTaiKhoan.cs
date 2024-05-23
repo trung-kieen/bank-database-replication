@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using BankReplication.utils;
+using DevExpress.XtraBars;
 using static BankReplication.utils.Validate;
 
 
@@ -17,6 +18,7 @@ namespace BankReplication.form
     public partial class formMoTaiKhoan : SimpleForm
     {
         private Invoker commandController = new Invoker();
+        private Invoker khachHangRowController = new Invoker();
         private object[] checkPointRowsData;
         private String macn;
         private int topRowIndex;
@@ -174,6 +176,7 @@ namespace BankReplication.form
             {
                 try
                 {
+                    khachHangRowController.Execute(new PositionCommand(khachHangBds));
                     commandController.Execute(new DeleteCommand(taiKhoanBds, (DataRowView)taiKhoanBds.Current, HandleRefresh, CommitChangeTK));
                     SetFormState(FormAction.None);
                 }
@@ -237,6 +240,7 @@ namespace BankReplication.form
             if (!InvalidNewAccount())
             {
                 SaveViewRowToBindingSource();
+                khachHangRowController.Execute(new PositionCommand(khachHangBds));
                 commandController.Execute(new AddCommand(taiKhoanBds, (DataRowView)taiKhoanBds.Current, HandleRefresh, CommitChangeTK));
                 SetFormState(FormAction.None);
                 gvTaiKhoan.Focus();
@@ -250,6 +254,7 @@ namespace BankReplication.form
                 SaveViewRowToBindingSource();
                 taiKhoanBds.EndEdit();
                 object[] dirtyRowsData = ModelMapper.RowViewToRowList((DataRowView)taiKhoanBds.Current);
+                khachHangRowController.Execute(new PositionCommand(khachHangBds));
                 commandController.Execute(new EditCommand(taiKhoanBds, checkPointRowsData, dirtyRowsData, CommitChangeTK));
                 SetFormState(FormAction.None);
                 gvTaiKhoan.Focus();
@@ -258,6 +263,7 @@ namespace BankReplication.form
         private void HandleRedo()
         {
             HandleCancel();
+            khachHangRowController.Redo();
             commandController.Redo();
             //            HandleSave();
             SetFormState();
@@ -265,6 +271,7 @@ namespace BankReplication.form
         private void HandleUndo()
         {
             HandleCancel();
+            khachHangRowController.Undo();
             commandController.Undo();
             //            HandleSave();
             SetFormState();
@@ -480,6 +487,19 @@ namespace BankReplication.form
         {
             SetFormState();
 
+        }
+
+        private void officeNavigationBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void gcTaiKhoan_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                popupMenu1.ShowPopup(Control.MousePosition);
+
+            }
         }
     }
 }

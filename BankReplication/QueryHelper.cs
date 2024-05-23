@@ -48,5 +48,12 @@ namespace BankReplication
             }
         }
 
+        public static String GetNewEmployeeID()
+        {
+            if (Program.KetNoi() == Database.Connection.Fail) return null;
+            String newId = Program.ExecSqlScalar("EXEC SP_MaNVMoi");
+            return newId;
+        }
+
     }
 }

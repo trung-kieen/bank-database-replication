@@ -35,7 +35,7 @@ namespace BankReplication.form
         {
             if (macn == null)
                 macn = Program.LayMaCN();
-            if(macn == null )
+            if (macn == null)
             {
                 Msg.Error("Lỗi tải mã chi nhánh");
                 return;
@@ -43,6 +43,7 @@ namespace BankReplication.form
             if (macn.ToString().Trim() == "") return;
             MACNTextEdit.Text = macn;
             trangThaiXoaCheckBox.Checked = false;
+            GenerateNewId();
         }
         public void SaveViewRowToBindingSource()
         {
@@ -67,7 +68,11 @@ namespace BankReplication.form
 
         private Boolean InvalidNewEmployee()
         {
-            if (InvalidField(MANVTextEdit, "Mã nhân viên", validateMANV)) return true;
+            if (InvalidField(MANVTextEdit, "Mã nhân viên", validateMANV))
+            {
+                GenerateNewId();
+                return true;
+            }
             if (InvalidField(HOTextEdit, "Họ", validateHo)) return true;
             if (InvalidField(TENTextEdit, "Tên", validateTen)) return true;
 
@@ -284,7 +289,6 @@ namespace BankReplication.form
                 nhanVienBds.RemoveCurrent();
                 SetFormState(FormAction.None);
                 RevertLastPosition();
-
             }
             if (formAction == FormAction.Edit)
             {
@@ -298,6 +302,7 @@ namespace BankReplication.form
         {
             if (!InvalidEditEmployee())
             {
+                SaveViewRowToBindingSource();
                 object[] dirtyRowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
                 commandController.Execute(new EditCommand(nhanVienBds, checkPointRowsData, dirtyRowsData, CommitChangeNhanVien));
                 SetFormState(FormAction.None);
@@ -383,15 +388,13 @@ namespace BankReplication.form
         }
         private void ResetSideBar()
         {
-            if(formAction  == FormAction.Edit)
+            if (formAction == FormAction.Edit)
             {
                 HOTextEdit.Focus();
-                trangThaiXoaCheckBox.Enabled = true;
             }
-            else if(formAction  == FormAction.Add)
+            else if (formAction == FormAction.Add)
             {
                 MANVTextEdit.Focus();
-                trangThaiXoaCheckBox.Enabled = false;
             }
 
         }
@@ -432,6 +435,23 @@ namespace BankReplication.form
             nhanVienBds.AddNew();
             ResetSideBar();
             InitNewRowData();
+        }
+        private void GenerateNewId()
+        {
+            if (General.AutoAddNewEmployeeID)
+            {
+                String newId = Program.GetNewEmployeeID();
+                if (newId != null && newId.Trim() != "")
+                {
+                    MANVTextEdit.Enabled = false;
+                    MANVTextEdit.Text = newId;
+                    HOTextEdit.Focus();
+                    return;
+                }
+
+            }
+            MANVTextEdit.Enabled = true;
+
         }
 
         private void SetFormState(FormAction state)
@@ -532,7 +552,7 @@ namespace BankReplication.form
             LoadCmbChiNhanh();
             SetFormState();
 
-            PHAIComboBox.Items.AddRange(new object[] {  new Gender("Nam"), new Gender("Nữ")});
+            PHAIComboBox.Items.AddRange(new object[] { new Gender("Nam"), new Gender("Nữ") });
             PHAIComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
@@ -609,7 +629,7 @@ namespace BankReplication.form
 
         private void btnSua_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-                OpenEditSideBar();
+            OpenEditSideBar();
         }
 
         private void btnChuyenCN_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -666,7 +686,7 @@ namespace BankReplication.form
 
         private void gvNhanVien_DoubleClick(object sender, EventArgs e)
         {
-            if(gcNhanVien.Enabled)
+            if (gcNhanVien.Enabled)
             {
                 btnSua.PerformClick();
             }

@@ -56,26 +56,26 @@ namespace BankReplication
             //Application.Run(new formDangNhap());
         }
 
-        public static String  GetConnString()
+        public static String GetConnString()
         {
-                return Program.connstr = "Data Source=" + Program.servername
-                                + ";Initial Catalog=" + Program.database
-                                + ";User ID=" + Program.mlogin
-                                + ";password=" + Program.password;
+            return Program.connstr = "Data Source=" + Program.servername
+                            + ";Initial Catalog=" + Program.database
+                            + ";User ID=" + Program.mlogin
+                            + ";password=" + Program.password;
         }
-        public static String  GetConnString(String login, String password)
+        public static String GetConnString(String login, String password)
         {
-                return Program.connstr = "Data Source=" + Program.servername
-                                + ";Initial Catalog=" + Program.database
-                                + ";User ID=" + login
-                                + ";password=" + password;
+            return Program.connstr = "Data Source=" + Program.servername
+                            + ";Initial Catalog=" + Program.database
+                            + ";User ID=" + login
+                            + ";password=" + password;
         }
-        public static String  GetConnString(String login, String password, String servername)
+        public static String GetConnString(String login, String password, String servername)
         {
-                return Program.connstr = "Data Source=" + servername
-                                + ";Initial Catalog=" + Program.database
-                                + ";User ID=" + login
-                                + ";password=" + password;
+            return Program.connstr = "Data Source=" + servername
+                            + ";Initial Catalog=" + Program.database
+                            + ";User ID=" + login
+                            + ";password=" + password;
         }
 
 
@@ -177,7 +177,6 @@ namespace BankReplication
         /// Return value 0 if command run success else return error code from sql server
         ///</summary>
         {
-            String result = null;
             SqlCommand sqlcmd = new SqlCommand(cmd, Program.conn);
             sqlcmd.CommandType = CommandType.Text;
             const int oneMinute = 60;
@@ -187,18 +186,14 @@ namespace BankReplication
                 Program.conn.Open();
             }
 
-            try
+            var queryResult = sqlcmd.ExecuteScalar();
+            if (queryResult == null)
             {
-                result = sqlcmd.ExecuteScalar().ToString();
                 conn.Close();
+                return null;
             }
-            catch (SqlException )
-            {
-                result = null;
-                conn.Close();
-                // Return error code from sql 
-            }
-            return result;
+            conn.Close();
+            return queryResult.ToString();
         }
 
 

@@ -117,14 +117,14 @@ namespace BankReplication
                     = DevExpress.XtraBars.BarItemVisibility.Never;
 
             }
-            else if(Program.mGroup.ToUpper() == "NHANVIEN")
+            else if(Program.mGroup.ToUpper() == "CHINHANH")
             {
                  btnKhachHang.Visibility = btnNhanVien.Visibility = btnAddLoginAccount.Visibility
                     = btnGuiRut.Visibility = btnChuyenTien.Visibility = btnMoTK.Visibility 
                     = btnThongKeTKMoi.Visibility = btnThongKeKH.Visibility
                     = DevExpress.XtraBars.BarItemVisibility.Always;
             }
-            else if(Program.mGroup.ToUpper() == "CHINHANH")
+            else if(Program.mGroup.ToUpper() == "NGANHANG")
             {
                  btnKhachHang.Visibility = btnNhanVien.Visibility = btnAddLoginAccount.Visibility
                     = btnThongKeTKMoi.Visibility = btnThongKeKH.Visibility
@@ -265,16 +265,16 @@ namespace BankReplication
         {
 
             //  TODO 
-            Form fThongKeTK = CheckExist(typeof(formThongKeTK));
-            if (fThongKeTK == null)
+            Form fAddLogin = CheckExist(typeof(formTaoLogin));
+            if (fAddLogin == null)
             {
-                fThongKeTK = new formThongKeTK();
-                fThongKeTK.MdiParent = this;
-                fThongKeTK.Show();
+                fAddLogin = new formTaoLogin();
+                fAddLogin.MdiParent = this;
+                fAddLogin.Show();
             }
             else
             {
-                fThongKeTK.Activate();
+                fAddLogin.Activate();
             }
         }
     }

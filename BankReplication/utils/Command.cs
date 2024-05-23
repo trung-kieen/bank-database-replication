@@ -178,6 +178,36 @@ namespace BankReplication.utils
         }
 
     }
+    class PositionCommand : ICommand
+    {
+        int pos;
+        BindingSource _bds;
+        public PositionCommand(BindingSource bds)
+            // TODO: Fix this :((
+            // Use in subform and bds is for the main form
+            // Sub window need some way to keep track which record in the main row work with operation 
+            // => Undo and redo is just go back to the position in main form to do undo or redo operation in subform
+        {
+            
+            _bds = bds;
+
+        }
+        
+        public void Execute()
+        {
+            pos = _bds.Position;
+        }
+
+        public void Undo()
+        {
+            _bds.Position = pos;
+        }
+        public void Redo()
+        {
+            _bds.Position = pos;
+
+        }
+    }
     class ChuyenCNCommand : ICommand
     {
         private BindingSourceExtends _bds;

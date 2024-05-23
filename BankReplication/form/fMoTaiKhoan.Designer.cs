@@ -36,11 +36,6 @@ namespace BankReplication.form
             DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
             this.toolBar = new DevExpress.XtraBars.Bar();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
-            this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
-            this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.btnHuy = new DevExpress.XtraBars.BarButtonItem();
             this.btnLuu = new DevExpress.XtraBars.BarButtonItem();
@@ -63,15 +58,24 @@ namespace BankReplication.form
             this.btnMENU = new DevExpress.XtraBars.BarSubItem();
             this.btnCheDoDonDatHang = new DevExpress.XtraBars.BarButtonItem();
             this.btnCheDoChiTietDonDatHang = new DevExpress.XtraBars.BarButtonItem();
+            this.barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.sidePanel = new DevExpress.Utils.Layout.TablePanel();
-            this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
-            this.ngayMoTKTxt = new DevExpress.XtraEditors.DateEdit();
+            this.gcTaiKhoan = new DevExpress.XtraGrid.GridControl();
             this.taiKhoanBds = new BankReplication.utils.BindingSourceExtends(this.components);
             this.khachHangBds = new System.Windows.Forms.BindingSource(this.components);
             this.moTKDS = new BankReplication.MoTKDS();
+            this.gvTaiKhoan = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colSOTK = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSODU = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNGAYMOTK = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            this.ngayMoTKTxt = new DevExpress.XtraEditors.DateEdit();
             this.soTKTxt = new DevExpress.XtraEditors.TextEdit();
             this.maCNTxt = new DevExpress.XtraEditors.TextEdit();
             this.soDuTxt = new DevExpress.XtraEditors.TextEdit();
@@ -86,13 +90,8 @@ namespace BankReplication.form
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcTaiKhoan = new DevExpress.XtraGrid.GridControl();
-            this.gvTaiKhoan = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colSOTK = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSODU = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNGAYMOTK = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.gcKhachHang = new DevExpress.XtraGrid.GridControl();
             this.gvKhachHang = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -113,7 +112,9 @@ namespace BankReplication.form
             this.gDGuiRutBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gDGuiRutTableAdapter = new BankReplication.MoTKDSTableAdapters.GDGuiRutTableAdapter();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            this.uv_AccountDetailsTableAdapter1 = new BankReplication.AccountDetailsTableAdapters.uv_AccountDetailsTableAdapter();
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
@@ -121,13 +122,16 @@ namespace BankReplication.form
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sidePanel)).BeginInit();
             this.sidePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcTaiKhoan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taiKhoanBds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.khachHangBds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moTKDS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvTaiKhoan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
             this.dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ngayMoTKTxt.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ngayMoTKTxt.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.taiKhoanBds)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.khachHangBds)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.moTKDS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.soTKTxt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maCNTxt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.soDuTxt.Properties)).BeginInit();
@@ -140,8 +144,8 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcTaiKhoan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvTaiKhoan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcKhachHang)).BeginInit();
@@ -150,6 +154,7 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.gDChuyenTienBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gDGuiRutBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolBar
@@ -162,46 +167,6 @@ namespace BankReplication.form
             this.toolBar.OptionsBar.MultiLine = true;
             this.toolBar.OptionsBar.UseWholeRow = true;
             this.toolBar.Text = "Main menu";
-            // 
-            // barManager1
-            // 
-            this.barManager1.DockControls.Add(this.barDockControl1);
-            this.barManager1.DockControls.Add(this.barDockControl2);
-            this.barManager1.DockControls.Add(this.barDockControl3);
-            this.barManager1.DockControls.Add(this.barDockControl4);
-            this.barManager1.Form = this;
-            // 
-            // barDockControl1
-            // 
-            this.barDockControl1.CausesValidation = false;
-            this.barDockControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControl1.Location = new System.Drawing.Point(0, 34);
-            this.barDockControl1.Manager = this.barManager1;
-            this.barDockControl1.Size = new System.Drawing.Size(1918, 0);
-            // 
-            // barDockControl2
-            // 
-            this.barDockControl2.CausesValidation = false;
-            this.barDockControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControl2.Location = new System.Drawing.Point(0, 1013);
-            this.barDockControl2.Manager = this.barManager1;
-            this.barDockControl2.Size = new System.Drawing.Size(1918, 0);
-            // 
-            // barDockControl3
-            // 
-            this.barDockControl3.CausesValidation = false;
-            this.barDockControl3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControl3.Location = new System.Drawing.Point(0, 34);
-            this.barDockControl3.Manager = this.barManager1;
-            this.barDockControl3.Size = new System.Drawing.Size(0, 979);
-            // 
-            // barDockControl4
-            // 
-            this.barDockControl4.CausesValidation = false;
-            this.barDockControl4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControl4.Location = new System.Drawing.Point(1918, 34);
-            this.barDockControl4.Manager = this.barManager1;
-            this.barDockControl4.Size = new System.Drawing.Size(0, 979);
             // 
             // bar1
             // 
@@ -234,7 +199,7 @@ namespace BankReplication.form
             // 
             // btnSua
             // 
-            this.btnSua.Caption = "Sửa";
+            this.btnSua.Caption = "Sửa thông tin";
             this.btnSua.Id = 11;
             this.btnSua.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSua.ImageOptions.SvgImage")));
             this.btnSua.Name = "btnSua";
@@ -282,9 +247,10 @@ namespace BankReplication.form
             this.btnCheDoChiTietDonDatHang,
             this.btnSua,
             this.btnRedo,
-            this.btnHuy});
+            this.btnHuy,
+            this.barDockingMenuItem1});
             this.toolBarManager.MainMenu = this.bar2;
-            this.toolBarManager.MaxItemId = 15;
+            this.toolBarManager.MaxItemId = 16;
             this.toolBarManager.StatusBar = this.bar3;
             // 
             // bar2
@@ -293,7 +259,7 @@ namespace BankReplication.form
             this.bar2.DockCol = 0;
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar2.FloatLocation = new System.Drawing.Point(69, 227);
+            this.bar2.FloatLocation = new System.Drawing.Point(-426, 280);
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThem, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnXoa, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -319,6 +285,7 @@ namespace BankReplication.form
             // 
             // btnUndo
             // 
+            this.btnUndo.Caption = "Undo";
             this.btnUndo.Enabled = false;
             this.btnUndo.Id = 3;
             this.btnUndo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnUndo.ImageOptions.SvgImage")));
@@ -410,8 +377,15 @@ namespace BankReplication.form
             this.btnMENU.Id = 8;
             this.btnMENU.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnMENU.ImageOptions.SvgImage")));
             this.btnMENU.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnCheDoDonDatHang),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnCheDoChiTietDonDatHang)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnThem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnXoa),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSua),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnLuu),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnReload),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnHuy),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnUndo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnRedo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnExit)});
             this.btnMENU.Name = "btnMENU";
             // 
             // btnCheDoDonDatHang
@@ -427,6 +401,12 @@ namespace BankReplication.form
             this.btnCheDoChiTietDonDatHang.Id = 10;
             this.btnCheDoChiTietDonDatHang.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCheDoChiTietDonDatHang.ImageOptions.SvgImage")));
             this.btnCheDoChiTietDonDatHang.Name = "btnCheDoChiTietDonDatHang";
+            // 
+            // barDockingMenuItem1
+            // 
+            this.barDockingMenuItem1.Caption = "barDockingMenuItem1";
+            this.barDockingMenuItem1.Id = 15;
+            this.barDockingMenuItem1.Name = "barDockingMenuItem1";
             // 
             // barButtonItem1
             // 
@@ -447,7 +427,7 @@ namespace BankReplication.form
             this.tablePanel1.Location = new System.Drawing.Point(0, 34);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 16.66669F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 37.33335F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel1.Size = new System.Drawing.Size(1918, 979);
             this.tablePanel1.TabIndex = 12;
@@ -457,10 +437,10 @@ namespace BankReplication.form
             this.tablePanel1.SetColumn(this.groupControl2, 1);
             this.groupControl2.Controls.Add(this.sidePanel);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(904, 20);
+            this.groupControl2.Location = new System.Drawing.Point(904, 40);
             this.groupControl2.Name = "groupControl2";
             this.tablePanel1.SetRow(this.groupControl2, 1);
-            this.groupControl2.Size = new System.Drawing.Size(1011, 956);
+            this.groupControl2.Size = new System.Drawing.Size(1011, 936);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "Tài khoản theo khách hàng";
             // 
@@ -468,218 +448,16 @@ namespace BankReplication.form
             // 
             this.sidePanel.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F)});
-            this.sidePanel.Controls.Add(this.dataLayoutControl1);
             this.sidePanel.Controls.Add(this.gcTaiKhoan);
+            this.sidePanel.Controls.Add(this.dataLayoutControl1);
             this.sidePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sidePanel.Location = new System.Drawing.Point(2, 34);
             this.sidePanel.Name = "sidePanel";
             this.sidePanel.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 418F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 380.6677F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.sidePanel.Size = new System.Drawing.Size(1007, 920);
+            this.sidePanel.Size = new System.Drawing.Size(1007, 900);
             this.sidePanel.TabIndex = 0;
-            // 
-            // dataLayoutControl1
-            // 
-            this.sidePanel.SetColumn(this.dataLayoutControl1, 0);
-            this.dataLayoutControl1.Controls.Add(this.ngayMoTKTxt);
-            this.dataLayoutControl1.Controls.Add(this.soTKTxt);
-            this.dataLayoutControl1.Controls.Add(this.maCNTxt);
-            this.dataLayoutControl1.Controls.Add(this.soDuTxt);
-            this.dataLayoutControl1.Controls.Add(this.CMNDTxt);
-            this.dataLayoutControl1.Controls.Add(this.fBtnLuu);
-            this.dataLayoutControl1.Controls.Add(this.fBtnHuy);
-            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataLayoutControl1.Location = new System.Drawing.Point(3, 421);
-            this.dataLayoutControl1.Name = "dataLayoutControl1";
-            this.dataLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(630, 0, 650, 400);
-            this.dataLayoutControl1.Root = this.Root;
-            this.sidePanel.SetRow(this.dataLayoutControl1, 1);
-            this.dataLayoutControl1.Size = new System.Drawing.Size(1001, 496);
-            this.dataLayoutControl1.TabIndex = 1;
-            this.dataLayoutControl1.Text = "dataLayoutControl1";
-            // 
-            // ngayMoTKTxt
-            // 
-            this.ngayMoTKTxt.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanBds, "NGAYMOTK", true));
-            this.ngayMoTKTxt.EditValue = null;
-            this.ngayMoTKTxt.Location = new System.Drawing.Point(115, 140);
-            this.ngayMoTKTxt.MenuManager = this.barManager1;
-            this.ngayMoTKTxt.Name = "ngayMoTKTxt";
-            this.ngayMoTKTxt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.ngayMoTKTxt.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.ngayMoTKTxt.Properties.Mask.EditMask = "dd/MM/yyyy";
-            this.ngayMoTKTxt.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.ngayMoTKTxt.Size = new System.Drawing.Size(874, 28);
-            this.ngayMoTKTxt.StyleController = this.dataLayoutControl1;
-            this.ngayMoTKTxt.TabIndex = 5;
-            // 
-            // taiKhoanBds
-            // 
-            this.taiKhoanBds.DataMember = "FK_TaiKhoan_KhachHang";
-            this.taiKhoanBds.DataSource = this.khachHangBds;
-            // 
-            // khachHangBds
-            // 
-            this.khachHangBds.DataMember = "KhachHang";
-            this.khachHangBds.DataSource = this.moTKDS;
-            // 
-            // moTKDS
-            // 
-            this.moTKDS.DataSetName = "MoTKDS";
-            this.moTKDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // soTKTxt
-            // 
-            this.soTKTxt.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanBds, "SOTK", true));
-            this.soTKTxt.Location = new System.Drawing.Point(115, 12);
-            this.soTKTxt.MenuManager = this.barManager1;
-            this.soTKTxt.Name = "soTKTxt";
-            this.soTKTxt.Properties.MaxLength = 9;
-            this.soTKTxt.Size = new System.Drawing.Size(874, 28);
-            this.soTKTxt.StyleController = this.dataLayoutControl1;
-            this.soTKTxt.TabIndex = 1;
-            this.soTKTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            // 
-            // maCNTxt
-            // 
-            this.maCNTxt.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanBds, "MACN", true));
-            this.maCNTxt.Enabled = false;
-            this.maCNTxt.Location = new System.Drawing.Point(115, 108);
-            this.maCNTxt.MenuManager = this.barManager1;
-            this.maCNTxt.Name = "maCNTxt";
-            this.maCNTxt.Size = new System.Drawing.Size(874, 28);
-            this.maCNTxt.StyleController = this.dataLayoutControl1;
-            this.maCNTxt.TabIndex = 4;
-            // 
-            // soDuTxt
-            // 
-            this.soDuTxt.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanBds, "SODU", true));
-            this.soDuTxt.Location = new System.Drawing.Point(115, 76);
-            this.soDuTxt.MenuManager = this.barManager1;
-            this.soDuTxt.Name = "soDuTxt";
-            this.soDuTxt.Properties.DisplayFormat.FormatString = "n0";
-            this.soDuTxt.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.soDuTxt.Properties.EditFormat.FormatString = "n0";
-            this.soDuTxt.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.soDuTxt.Properties.Mask.UseMaskAsDisplayFormat = true;
-            this.soDuTxt.Size = new System.Drawing.Size(874, 28);
-            this.soDuTxt.StyleController = this.dataLayoutControl1;
-            this.soDuTxt.TabIndex = 3;
-            this.soDuTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            // 
-            // CMNDTxt
-            // 
-            this.CMNDTxt.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.taiKhoanBds, "CMND", true));
-            this.CMNDTxt.Enabled = false;
-            this.CMNDTxt.Location = new System.Drawing.Point(115, 44);
-            this.CMNDTxt.MenuManager = this.barManager1;
-            this.CMNDTxt.Name = "CMNDTxt";
-            this.CMNDTxt.Size = new System.Drawing.Size(874, 28);
-            this.CMNDTxt.StyleController = this.dataLayoutControl1;
-            this.CMNDTxt.TabIndex = 2;
-            this.CMNDTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
-            // 
-            // fBtnLuu
-            // 
-            this.fBtnLuu.Location = new System.Drawing.Point(12, 172);
-            this.fBtnLuu.Name = "fBtnLuu";
-            this.fBtnLuu.Size = new System.Drawing.Size(486, 32);
-            this.fBtnLuu.StyleController = this.dataLayoutControl1;
-            this.fBtnLuu.TabIndex = 6;
-            this.fBtnLuu.Text = "Lưu";
-            this.fBtnLuu.Click += new System.EventHandler(this.fBtnLuu_Click);
-            // 
-            // fBtnHuy
-            // 
-            this.fBtnHuy.Location = new System.Drawing.Point(502, 172);
-            this.fBtnHuy.Name = "fBtnHuy";
-            this.fBtnHuy.Size = new System.Drawing.Size(487, 32);
-            this.fBtnHuy.StyleController = this.dataLayoutControl1;
-            this.fBtnHuy.TabIndex = 7;
-            this.fBtnHuy.Text = "Hủy";
-            this.fBtnHuy.Click += new System.EventHandler(this.fBtnHuy_Click);
-            // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3,
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem2,
-            this.layoutControlItem7,
-            this.layoutControlItem8,
-            this.layoutControlItem6});
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1001, 496);
-            this.Root.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.CMNDTxt;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 32);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(981, 32);
-            this.layoutControlItem3.Text = "CMND:";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(100, 19);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.soDuTxt;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 64);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(981, 32);
-            this.layoutControlItem4.Text = "Số dư:";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(100, 19);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.maCNTxt;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 96);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(981, 32);
-            this.layoutControlItem5.Text = "Mã chi nhánh:";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(100, 19);
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.soTKTxt;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(981, 32);
-            this.layoutControlItem2.Text = "Số tài khoản:";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(100, 19);
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.Control = this.ngayMoTKTxt;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 128);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(981, 32);
-            this.layoutControlItem7.Text = "Ngày mở:";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(100, 19);
-            // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.Control = this.fBtnHuy;
-            this.layoutControlItem8.Location = new System.Drawing.Point(490, 160);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(491, 316);
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem8.TextVisible = false;
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.fBtnLuu;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 160);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(490, 316);
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
             // 
             // gcTaiKhoan
             // 
@@ -695,13 +473,29 @@ namespace BankReplication.form
             gridLevelNode3});
             this.gcTaiKhoan.Location = new System.Drawing.Point(3, 3);
             this.gcTaiKhoan.MainView = this.gvTaiKhoan;
-            this.gcTaiKhoan.MenuManager = this.barManager1;
             this.gcTaiKhoan.Name = "gcTaiKhoan";
             this.sidePanel.SetRow(this.gcTaiKhoan, 0);
-            this.gcTaiKhoan.Size = new System.Drawing.Size(1001, 412);
+            this.gcTaiKhoan.Size = new System.Drawing.Size(1001, 375);
             this.gcTaiKhoan.TabIndex = 0;
             this.gcTaiKhoan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvTaiKhoan});
+            this.gvTaiKhoan,
+            this.gridView1});
+            this.gcTaiKhoan.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gcTaiKhoan_MouseUp);
+            // 
+            // taiKhoanBds
+            // 
+            this.taiKhoanBds.DataMember = "FK_TaiKhoan_KhachHang";
+            this.taiKhoanBds.DataSource = this.khachHangBds;
+            // 
+            // khachHangBds
+            // 
+            this.khachHangBds.DataMember = "KhachHang";
+            this.khachHangBds.DataSource = this.moTKDS;
+            // 
+            // moTKDS
+            // 
+            this.moTKDS.DataSetName = "MoTKDS";
+            this.moTKDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // gvTaiKhoan
             // 
@@ -779,15 +573,220 @@ namespace BankReplication.form
             this.colNGAYMOTK.VisibleIndex = 4;
             this.colNGAYMOTK.Width = 112;
             // 
+            // gridView1
+            // 
+            this.gridView1.GridControl = this.gcTaiKhoan;
+            this.gridView1.Name = "gridView1";
+            // 
+            // dataLayoutControl1
+            // 
+            this.sidePanel.SetColumn(this.dataLayoutControl1, 0);
+            this.dataLayoutControl1.Controls.Add(this.ngayMoTKTxt);
+            this.dataLayoutControl1.Controls.Add(this.soTKTxt);
+            this.dataLayoutControl1.Controls.Add(this.maCNTxt);
+            this.dataLayoutControl1.Controls.Add(this.soDuTxt);
+            this.dataLayoutControl1.Controls.Add(this.CMNDTxt);
+            this.dataLayoutControl1.Controls.Add(this.fBtnLuu);
+            this.dataLayoutControl1.Controls.Add(this.fBtnHuy);
+            this.dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataLayoutControl1.Location = new System.Drawing.Point(3, 384);
+            this.dataLayoutControl1.Name = "dataLayoutControl1";
+            this.dataLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(0, 0, 1942, 1102);
+            this.dataLayoutControl1.Root = this.Root;
+            this.sidePanel.SetRow(this.dataLayoutControl1, 1);
+            this.dataLayoutControl1.Size = new System.Drawing.Size(1001, 513);
+            this.dataLayoutControl1.TabIndex = 1;
+            this.dataLayoutControl1.Text = "dataLayoutControl1";
+            // 
+            // ngayMoTKTxt
+            // 
+            this.ngayMoTKTxt.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanBds, "NGAYMOTK", true));
+            this.ngayMoTKTxt.EditValue = null;
+            this.ngayMoTKTxt.Location = new System.Drawing.Point(115, 427);
+            this.ngayMoTKTxt.Name = "ngayMoTKTxt";
+            this.ngayMoTKTxt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.ngayMoTKTxt.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.ngayMoTKTxt.Properties.Mask.EditMask = "dd/MM/yyyy";
+            this.ngayMoTKTxt.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.ngayMoTKTxt.Size = new System.Drawing.Size(874, 28);
+            this.ngayMoTKTxt.StyleController = this.dataLayoutControl1;
+            this.ngayMoTKTxt.TabIndex = 5;
+            // 
+            // soTKTxt
+            // 
+            this.soTKTxt.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanBds, "SOTK", true));
+            this.soTKTxt.Location = new System.Drawing.Point(115, 299);
+            this.soTKTxt.Name = "soTKTxt";
+            this.soTKTxt.Properties.MaxLength = 9;
+            this.soTKTxt.Size = new System.Drawing.Size(874, 28);
+            this.soTKTxt.StyleController = this.dataLayoutControl1;
+            this.soTKTxt.TabIndex = 1;
+            this.soTKTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
+            // 
+            // maCNTxt
+            // 
+            this.maCNTxt.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanBds, "MACN", true));
+            this.maCNTxt.Enabled = false;
+            this.maCNTxt.Location = new System.Drawing.Point(115, 395);
+            this.maCNTxt.Name = "maCNTxt";
+            this.maCNTxt.Size = new System.Drawing.Size(874, 28);
+            this.maCNTxt.StyleController = this.dataLayoutControl1;
+            this.maCNTxt.TabIndex = 4;
+            // 
+            // soDuTxt
+            // 
+            this.soDuTxt.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.taiKhoanBds, "SODU", true));
+            this.soDuTxt.Location = new System.Drawing.Point(115, 363);
+            this.soDuTxt.Name = "soDuTxt";
+            this.soDuTxt.Properties.DisplayFormat.FormatString = "n0";
+            this.soDuTxt.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.soDuTxt.Properties.EditFormat.FormatString = "n0";
+            this.soDuTxt.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.soDuTxt.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.soDuTxt.Size = new System.Drawing.Size(874, 28);
+            this.soDuTxt.StyleController = this.dataLayoutControl1;
+            this.soDuTxt.TabIndex = 3;
+            this.soDuTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
+            // 
+            // CMNDTxt
+            // 
+            this.CMNDTxt.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.taiKhoanBds, "CMND", true));
+            this.CMNDTxt.Enabled = false;
+            this.CMNDTxt.Location = new System.Drawing.Point(115, 331);
+            this.CMNDTxt.Name = "CMNDTxt";
+            this.CMNDTxt.Size = new System.Drawing.Size(874, 28);
+            this.CMNDTxt.StyleController = this.dataLayoutControl1;
+            this.CMNDTxt.TabIndex = 2;
+            this.CMNDTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
+            // 
+            // fBtnLuu
+            // 
+            this.fBtnLuu.Location = new System.Drawing.Point(12, 459);
+            this.fBtnLuu.Name = "fBtnLuu";
+            this.fBtnLuu.Size = new System.Drawing.Size(486, 32);
+            this.fBtnLuu.StyleController = this.dataLayoutControl1;
+            this.fBtnLuu.TabIndex = 6;
+            this.fBtnLuu.Text = "Lưu";
+            this.fBtnLuu.Click += new System.EventHandler(this.fBtnLuu_Click);
+            // 
+            // fBtnHuy
+            // 
+            this.fBtnHuy.Location = new System.Drawing.Point(502, 459);
+            this.fBtnHuy.Name = "fBtnHuy";
+            this.fBtnHuy.Size = new System.Drawing.Size(487, 32);
+            this.fBtnHuy.StyleController = this.dataLayoutControl1;
+            this.fBtnHuy.TabIndex = 7;
+            this.fBtnHuy.Text = "Hủy";
+            this.fBtnHuy.Click += new System.EventHandler(this.fBtnHuy_Click);
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem3,
+            this.layoutControlItem4,
+            this.layoutControlItem5,
+            this.layoutControlItem2,
+            this.layoutControlItem7,
+            this.layoutControlItem8,
+            this.layoutControlItem6,
+            this.emptySpaceItem1,
+            this.emptySpaceItem2});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(1001, 513);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.CMNDTxt;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 319);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(981, 32);
+            this.layoutControlItem3.Text = "CMND:";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(100, 19);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.soDuTxt;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 351);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(981, 32);
+            this.layoutControlItem4.Text = "Số dư:";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(100, 19);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.maCNTxt;
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 383);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(981, 32);
+            this.layoutControlItem5.Text = "Mã chi nhánh:";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(100, 19);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.soTKTxt;
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 287);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(981, 32);
+            this.layoutControlItem2.Text = "Số tài khoản:";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(100, 19);
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.Control = this.ngayMoTKTxt;
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 415);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(981, 32);
+            this.layoutControlItem7.Text = "Ngày mở:";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(100, 19);
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.Control = this.fBtnHuy;
+            this.layoutControlItem8.Location = new System.Drawing.Point(490, 447);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(491, 36);
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem8.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.fBtnLuu;
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 447);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(490, 46);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 0);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(981, 287);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.Location = new System.Drawing.Point(490, 483);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(491, 10);
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // groupControl1
             // 
             this.tablePanel1.SetColumn(this.groupControl1, 0);
             this.groupControl1.Controls.Add(this.gcKhachHang);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(3, 20);
+            this.groupControl1.Location = new System.Drawing.Point(3, 40);
             this.groupControl1.Name = "groupControl1";
             this.tablePanel1.SetRow(this.groupControl1, 1);
-            this.groupControl1.Size = new System.Drawing.Size(895, 956);
+            this.groupControl1.Size = new System.Drawing.Size(895, 936);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Khách hàng";
             // 
@@ -797,9 +796,8 @@ namespace BankReplication.form
             this.gcKhachHang.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcKhachHang.Location = new System.Drawing.Point(2, 34);
             this.gcKhachHang.MainView = this.gvKhachHang;
-            this.gcKhachHang.MenuManager = this.barManager1;
             this.gcKhachHang.Name = "gcKhachHang";
-            this.gcKhachHang.Size = new System.Drawing.Size(891, 920);
+            this.gcKhachHang.Size = new System.Drawing.Size(891, 900);
             this.gcKhachHang.TabIndex = 0;
             this.gcKhachHang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvKhachHang});
@@ -947,16 +945,38 @@ namespace BankReplication.form
             this.layoutControlItem1.Size = new System.Drawing.Size(994, 25);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(50, 20);
             // 
+            // uv_AccountDetailsTableAdapter1
+            // 
+            this.uv_AccountDetailsTableAdapter1.ClearBeforeFill = true;
+            // 
+            // popupMenu1
+            // 
+            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnThem),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnXoa),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSua),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnLuu),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnReload),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnHuy),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnUndo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnRedo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnExit)});
+            this.popupMenu1.Manager = this.toolBarManager;
+            this.popupMenu1.Name = "popupMenu1";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // formMoTaiKhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1918, 1033);
             this.Controls.Add(this.tablePanel1);
-            this.Controls.Add(this.barDockControl3);
-            this.Controls.Add(this.barDockControl4);
-            this.Controls.Add(this.barDockControl2);
-            this.Controls.Add(this.barDockControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
@@ -965,7 +985,6 @@ namespace BankReplication.form
             this.Text = "Mở tài khoản ngân hàng";
             this.Load += new System.EventHandler(this.formMoTaiKhoan_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.formMoTaiKhoan_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
@@ -973,13 +992,16 @@ namespace BankReplication.form
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sidePanel)).EndInit();
             this.sidePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcTaiKhoan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taiKhoanBds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.khachHangBds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moTKDS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvTaiKhoan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).EndInit();
             this.dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ngayMoTKTxt.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ngayMoTKTxt.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.taiKhoanBds)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.khachHangBds)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.moTKDS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.soTKTxt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maCNTxt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.soDuTxt.Properties)).EndInit();
@@ -992,8 +1014,8 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcTaiKhoan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvTaiKhoan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcKhachHang)).EndInit();
@@ -1002,6 +1024,7 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.gDChuyenTienBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gDGuiRutBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1010,11 +1033,6 @@ namespace BankReplication.form
         #endregion
 
         private DevExpress.XtraBars.Bar toolBar;
-        private DevExpress.XtraBars.BarManager barManager1;
-        private DevExpress.XtraBars.BarDockControl barDockControl1;
-        private DevExpress.XtraBars.BarDockControl barDockControl2;
-        private DevExpress.XtraBars.BarDockControl barDockControl3;
-        private DevExpress.XtraBars.BarDockControl barDockControl4;
         private DevExpress.XtraBars.Bar bar1;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarManager toolBarManager;
@@ -1058,8 +1076,6 @@ namespace BankReplication.form
         private DevExpress.XtraGrid.Columns.GridColumn colSODT;
         private DevExpress.XtraGrid.Columns.GridColumn colMACN;
         private DevExpress.Utils.Layout.TablePanel sidePanel;
-        private DevExpress.XtraGrid.GridControl gcTaiKhoan;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvTaiKhoan;
         private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutControl1;
         private DevExpress.XtraEditors.TextEdit maCNTxt;
         private DevExpress.XtraEditors.TextEdit soDuTxt;
@@ -1075,11 +1091,6 @@ namespace BankReplication.form
         private System.Windows.Forms.BindingSource gDChuyenTienBindingSource1;
         private System.Windows.Forms.BindingSource gDGuiRutBindingSource;
         private MoTKDSTableAdapters.GDGuiRutTableAdapter gDGuiRutTableAdapter;
-        private DevExpress.XtraGrid.Columns.GridColumn colSOTK;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn colSODU;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn colNGAYMOTK;
         private DevExpress.XtraEditors.DateEdit ngayMoTKTxt;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
@@ -1087,5 +1098,19 @@ namespace BankReplication.form
         private DevExpress.XtraEditors.SimpleButton fBtnHuy;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private AccountDetailsTableAdapters.uv_AccountDetailsTableAdapter uv_AccountDetailsTableAdapter1;
+        private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraGrid.GridControl gcTaiKhoan;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvTaiKhoan;
+        private DevExpress.XtraGrid.Columns.GridColumn colSOTK;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn colSODU;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn colNGAYMOTK;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraBars.BarDockingMenuItem barDockingMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

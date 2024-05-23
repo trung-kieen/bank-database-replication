@@ -125,6 +125,12 @@
     <Compile Include="form\fNhanVien.Designer.cs">
       <DependentUpon>fNhanVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\fTaoLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\fTaoLogin.Designer.cs">
+      <DependentUpon>fTaoLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\SimpleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,7 @@
     <Compile Include="QueryHelper.cs" />
     <Compile Include="utils\Constant.cs" />
     <Compile Include="utils\ComboBoxItem.cs" />
+    <Compile Include="utils\General.cs" />
     <Compile Include="utils\MessageBox.cs" />
     <Compile Include="utils\Validate.cs" />
     <EmbeddedResource Include="form\fChuyenNhanVien.resx">
@@ -225,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\fNhanVien.resx">
       <DependentUpon>fNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\fTaoLogin.resx">
+      <DependentUpon>fTaoLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SimpleForm.resx">
       <DependentUpon>SimpleForm.cs</DependentUpon>
