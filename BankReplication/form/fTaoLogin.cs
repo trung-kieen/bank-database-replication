@@ -27,11 +27,20 @@ namespace BankReplication.report
             CenterMdiScreen();
             SetDefaultInputValue();
             LoadListAccounts();
-
+            LoadTargetRoleCmb();
+            LoadLoginAndRole();
         }
         private void SetDefaultInputValue()
         {
         }
+        private void LoadTargetRoleCmb()
+        {
+            roleCmb.DataSource = KeyValue.roles;
+            roleCmb.DisplayMember = "Text";
+            roleCmb.ValueMember = "Value";
+
+        }
+
         private void CenterMdiScreen()
         {
             StartPosition = FormStartPosition.CenterScreen;
@@ -89,32 +98,33 @@ namespace BankReplication.report
 
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private void btnTaoLogin_Click(object sender, EventArgs e)
         {
-            XtraReport thongKeKhachHang;
+            HandleTaoLogin();
+        }
+
+        private void HandleTaoLogin()
+        {
+            if (Program.KetNoi() == Database.Connection.Fail) return;
             try
             {
-                String QueryAllSite = "SP_ThongKeKhachHang_SongSong";
-                // Require to run SP from remote server with serverrole sysadmin to able update and delete job agent
-                thongKeKhachHang = new rptKhachHang(Connstr: Program.GetConnString(
-                    Program.remotelogin, Program.remotepassword, Program.servername),
-                    SP_Name: QueryAllSite);
-                thongKeKhachHang = new rptKhachHang(Program.connstr);
-                IReportPrintTool print = new ReportPrintTool(thongKeKhachHang);
-                print.ShowPreviewDialog();
+                var role = roleCmb.SelectedValue;
+                String roleString = role == null ? "" : role.ToString();
+                String cmd = $"EXEC SP_TaoLogin @login_name= '" + txtLoginName.Text + "' "
+                + $", @pass= '" + txtPassword.Text + "'"
+                + $", @username= '" + txtUserName.Text.Trim() + "'"
+                + $", @role= '" + roleString + "'";
+
+                int IntReturn = Program.ExecSqlNonQuery(cmd);
+                if (IntReturn == 0)
+                    Msg.Info("Tạo tài khoản thành công");
             }
-            catch (Exception ex)
+            catch
             {
-                Msg.Error("Không thể tải báo cáo\n" + ex.Message);
-
             }
-
+            LoadLoginAndRole();
         }
 
-
-        private void checkAllSite_CheckedChanged(object sender, EventArgs e)
-        {
-        }
         private void LoadListAccounts()
         {
             if (!radioNhanVien.Checked && !radioKhachHang.Checked)
@@ -124,31 +134,94 @@ namespace BankReplication.report
                 return;
             }
             String cmd = radioNhanVien.Checked ? "SELECT * FROM uv_DanhSachNhanVien" : "SELECT * FROM uv_DanhSachKhachHang";
-                if (Program.KetNoi() == Database.Connection.Fail) return;
-                try {
+            if (Program.KetNoi() == Database.Connection.Fail) return;
+            try
+            {
                 DataTable dsnv = Program.ExecSqlDataTable(cmd);
                 tkCmb.DataSource = dsnv;
                 tkCmb.DisplayMember = "DisplayMember";
                 tkCmb.ValueMember = "ValueMember"; // Which is user name 
-                }
-                catch
-                {
-                    Msg.Error("Không thể tải được danh sách đối tượng để tạo tài khoản đăng nhập");
-                    return;
-                }
+            }
+            catch
+            {
+                Msg.Error("Không thể tải được danh sách đối tượng để tạo tài khoản đăng nhập");
+                return;
+            }
 
         }
-        private void LoadLogin()
+        private void LoadLoginAndRole()
         {
             try
             {
                 txtUserName.Text = tkCmb.SelectedValue.ToString();
                 txtUserName.Enabled = false;
+                Program.myReader = Program.ExecSqlDataReader("EXEC SP_LayThongTinLogin '" + txtUserName.Text + "'");
+
+                lbTaiKhoan.Text = radioKhachHang.Checked ? "Khách hàng" : "Nhân viên";
+
+                // TH da co tai khoan duoc dang ky
+                if (Program.myReader.HasRows)
+                {
+                    Program.myReader.Read();
+                    txtLoginName.Text = Program.myReader["TENLOGIN"].ToString();
+                    txtLoginName.Enabled = false;
+                    txtPassword.Text = "";
+                    roleCmb.Enabled = false;
+                    roleCmb.SelectedValue = Program.myReader["TENNHOM"].ToString();
+
+                    controlBtnLogin.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    if (roleCmb.SelectedValue.ToString() == Program.mGroup || roleCmb.SelectedValue.ToString() == "KhachHang")
+                    {
+
+                        controlBtnChangePassword.Visibility = controlBtnDelete.Visibility
+                            = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        txtPassword.Enabled = true;
+                    }
+                    else
+                    {
+                        controlBtnChangePassword.Visibility = controlBtnDelete.Visibility
+                            = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        txtPassword.Enabled = false;
+                    }
+
+                }
+                // Cho phep tao login cho nhan vien hoac khach hang
+                else
+                {
+                    txtLoginName.Text = "";
+                    txtPassword.Text = "";
+                    txtPassword.Enabled = true;
+
+                    txtLoginName.Enabled = true;
+                    roleCmb.Enabled = false;
+                    controlBtnLogin.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    controlBtnChangePassword.Visibility = controlBtnDelete.Visibility
+                        = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
+                    if (radioKhachHang.Checked)
+                    {
+                        roleCmb.SelectedValue = "KhachHang";
+                    }
+                    else
+                    {
+                        /* Logic hien tai cho nhanh vien thuoc chi nhanh chi duoc tao login quyen ChiNhanh
+                        Nhan vien thuoc ngan hang chi duoc tao login quyen NganHang
+                        */
+                        roleCmb.SelectedValue = Program.mGroup;
+                    }
+                }
+
+                if (radioKhachHang.Checked)
+                {
+                    roleCmb.SelectedIndex = RoleIndex.KhachHang;
+                }
+
             }
             catch
             {
                 Msg.Error("Không thể tải mã người dùng");
             }
+            Program.myReader.Close();
         }
 
         private void radio_SelectedChange(object sender, EventArgs e)
@@ -159,7 +232,7 @@ namespace BankReplication.report
         private void tkCmb_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tkCmb.SelectedValue.ToString() == "System.Data.DataRowView") return;
-            LoadLogin();
+            LoadLoginAndRole();
         }
     }
 }

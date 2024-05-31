@@ -120,6 +120,13 @@ namespace BankReplication.form
 
             }
 
+            String confirmMessage = "Số tiền: " + txtSoTien.Text + "\n" + 
+                "Bằng chữ: " + MoneyRepersent.So_chu(Double.Parse(txtSoTien.Text));
+            if (Msg.InforConfirm(confirmMessage, "Xác nhận giao dịch") != DialogResult.OK)
+            {
+                return; 
+            }
+
 
             try
             {

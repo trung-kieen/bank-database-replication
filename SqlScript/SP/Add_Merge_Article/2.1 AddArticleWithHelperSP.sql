@@ -12,6 +12,8 @@ EXEC SP_AddSPArticle N'SP_ThongKeKhachHang'
 EXEC SP_AddSPArticle N'SP_ThongKeKhachHang_SongSong'
 EXEC SP_AddSPArticle N'SP_ThongTinTaiKhoan'
 EXEC SP_AddSPArticle N'SP_MaNVMoi'
+EXEC SP_AddSPArticle N'SP_LayThongTinLogin'
+
 
 
 EXEC SP_AddSPArticle N'SP_GuiRut'

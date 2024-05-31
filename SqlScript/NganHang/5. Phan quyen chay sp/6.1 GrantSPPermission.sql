@@ -1,6 +1,13 @@
 -- Run in all subscriber site
-USE NGANHANG
+USE [NGANHANG]
 GO
+GRANT EXECUTE ON [SP_LayThongTinNhanVien] TO NganHang
+
+GRANT EXECUTE ON [SP_LayThongTinNhanVien] TO ChiNhanh
+
+GRANT EXECUTE ON [SP_LayThongTinNhanVien] TO KhachHang
+
+
 GRANT EXECUTE ON [SP_ThongKeGiaoDich] TO NganHang
 GRANT EXECUTE ON [SP_ThongKeGiaoDich] TO KhachHang
 USE [NGANHANG]
@@ -10,3 +17,5 @@ GRANT EXECUTE ON [SP_ThongKeKhachHang_SongSong] TO NganHang
 
 GRANT EXECUTE ON [SP_ThongKeTaiKhoan] TO NganHang
 GRANT EXECUTE ON [SP_ThongTinTaiKhoan] TO NganHang
+GRANT EXECUTE ON [SP_LayThongTinLogin] TO NganHang
+GRANT EXECUTE ON [SP_TaoLogin] TO NganHang

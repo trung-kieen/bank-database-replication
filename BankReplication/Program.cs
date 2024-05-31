@@ -165,6 +165,11 @@ namespace BankReplication
             }
             catch (SqlException ex)
             {
+                if(ex.Number== 15118)
+                {
+                    Msg.Error("Mật khẩu của bạn không thỏa mãn chính sách bảo mật.");
+                    return ex.Number;
+                }
                 Msg.Error(ex.Message);
                 conn.Close();
                 //                return ex.State;

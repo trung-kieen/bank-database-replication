@@ -87,6 +87,16 @@
             // 
             // txtSoTien
             // 
+
+
+            txtSoDu.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            txtSoDu.Properties.Mask.EditMask = "n0";
+            txtSoDu.Properties.Mask.UseMaskAsDisplayFormat = true;
+
+            txtSoTien.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            txtSoTien.Properties.Mask.EditMask = "n0";
+            txtSoTien.Properties.Mask.UseMaskAsDisplayFormat = true;
+
             this.txtSoTien.Location = new System.Drawing.Point(130, 129);
             this.txtSoTien.Name = "txtSoTien";
             this.txtSoTien.Properties.EditFormat.FormatString = "n0";

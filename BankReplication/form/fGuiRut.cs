@@ -30,13 +30,6 @@ namespace BankReplication.form
         }
         private void fGuiRut_Load(object sender, EventArgs e)
         {
-            txtSoDu.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            txtSoDu.Properties.Mask.EditMask = "n0";
-            txtSoDu.Properties.Mask.UseMaskAsDisplayFormat = true;
-
-            txtSoTien.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            txtSoTien.Properties.Mask.EditMask = "n0";
-            txtSoTien.Properties.Mask.UseMaskAsDisplayFormat = true;
             CenterMdiScreen();
 
 
@@ -89,6 +82,13 @@ namespace BankReplication.form
 
             }
 
+            String confirmMessage = "Số tiền: " + txtSoTien.Text + "\n" + 
+                "Bằng chữ: " + MoneyRepersent.So_chu(Double.Parse(txtSoTien.Text));
+            if (Msg.InforConfirm(confirmMessage, "Xác nhận giao dịch") != DialogResult.OK)
+            {
+                return; 
+            }
+
 
             try
             {
@@ -97,14 +97,14 @@ namespace BankReplication.form
                 String manv = Program.username;
                 String sotk = tkCmb.Text.ToString();
                 KeyValue loaigd = (KeyValue)loaiGDCmb.SelectedItem;
-                    String cmd = $"EXEC SP_GuiRut '{sotk}', '{txtSoTien.Text}', '{loaigd.Value}', '{manv}' ";
-                    int rtnCode = Program.ExecSqlNonQuery(cmd);
-                    String sodu_moi = Program.ExecSqlScalar($"SELECT SODU FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = '{sotk}'");
-                    txtSoDu.Text = sodu_moi;
-                    txtSoTien.Text = "";
-                    if (rtnCode == Database.SqlException.ViolateConstraint) Msg.Error("Hạn mức tối thiểu của giao dịch gửi rút là 100,000 VND", "Giao dịch không thành công");
-                    if (rtnCode != 0) return;
-                    Msg.Info("Giao dịch thành công \nSố dư mới là " + sodu_moi);
+                String cmd = $"EXEC SP_GuiRut '{sotk}', '{txtSoTien.Text}', '{loaigd.Value}', '{manv}' ";
+                int rtnCode = Program.ExecSqlNonQuery(cmd);
+                String sodu_moi = Program.ExecSqlScalar($"SELECT SODU FROM NGANHANG.dbo.TaiKhoan WHERE SOTK = '{sotk}'");
+                txtSoDu.Text = sodu_moi;
+                txtSoTien.Text = "";
+                if (rtnCode == Database.SqlException.ViolateConstraint) Msg.Error("Hạn mức tối thiểu của giao dịch gửi rút là 100,000 VND", "Giao dịch không thành công");
+                if (rtnCode != 0) return;
+                Msg.Info("Giao dịch thành công \nSố dư mới là " + sodu_moi);
             }
             catch (Exception ex)
             {
