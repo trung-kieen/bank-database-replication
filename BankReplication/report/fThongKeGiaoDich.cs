@@ -77,13 +77,12 @@ namespace BankReplication.report
             if (Program.KetNoi() == Database.Connection.Fail) return;
             try
             {
-                dstk = Program.ExecSqlDataTable("SELECT SOTK FROM NGANHANG.dbo.TaiKhoan WHERE MACN =(SELECT TOP 1 MACN FROM NGANHANG.dbo.ChiNhanh)");
-                if(Program.mGroup.ToUpper() == "KHACHHANG")
-                {
-                    return;
-                    // TODO: for login customer only load for account they own
-                    dstk = null;
-                }
+                String cmd = "EXEC SP_DSTaiKhoan_ThongKeGD ";
+                if (Program.mGroup == "KhachHang")
+                    // Add query for account own by customer persional id 
+                    cmd += "'" +  Program.username + "'";
+
+                dstk = Program.ExecSqlDataTable(cmd);
                 tkCmb.DataSource = dstk;
                 tkCmb.DisplayMember = "SOTK";
                 tkCmb.ValueMember = "SOTK";

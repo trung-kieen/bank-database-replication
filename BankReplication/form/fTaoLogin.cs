@@ -1,4 +1,5 @@
 ﻿using System;
+using static BankReplication.utils.Validate;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -100,17 +101,38 @@ namespace BankReplication.report
 
         private void btnTaoLogin_Click(object sender, EventArgs e)
         {
-            HandleTaoLogin();
+            HandleAddLogin();
         }
 
-        private void HandleTaoLogin()
+        private void HandleDeleteLogin()
         {
             if (Program.KetNoi() == Database.Connection.Fail) return;
             try
             {
                 var role = roleCmb.SelectedValue;
                 String roleString = role == null ? "" : role.ToString();
-                String cmd = $"EXEC SP_TaoLogin @login_name= '" + txtLoginName.Text + "' "
+                String cmd = $"EXEC SP_XoaLogin " + txtLoginName.Text + ", "
+                     + txtUserName.Text;
+                int IntReturn = Program.ExecSqlNonQuery(cmd);
+                if (IntReturn == 0)
+                    Msg.Info("Tài khoản được xóa thành công");
+            }
+            catch
+            {
+            }
+            LoadLoginAndRole();
+            
+        }
+        private void HandleAddLogin()
+        {
+            if (InvalidLoginAccount()) return;
+
+            if (Program.KetNoi() == Database.Connection.Fail) return;
+            try
+            {
+                var role = roleCmb.SelectedValue;
+                String roleString = role == null ? "" : role.ToString();
+                String cmd = $"EXEC SP_TaoLogin @login_name= '" + txtLoginName.Text.Trim() + "' "
                 + $", @pass= '" + txtPassword.Text + "'"
                 + $", @username= '" + txtUserName.Text.Trim() + "'"
                 + $", @role= '" + roleString + "'";
@@ -170,6 +192,7 @@ namespace BankReplication.report
                     roleCmb.SelectedValue = Program.myReader["TENNHOM"].ToString();
 
                     controlBtnLogin.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    // Chi cho ngan hang va chi nhanh thay doi mat khau, xoa mat khau cho tai khoan cung nhom quyen
                     if (roleCmb.SelectedValue.ToString() == Program.mGroup || roleCmb.SelectedValue.ToString() == "KhachHang")
                     {
 
@@ -233,6 +256,38 @@ namespace BankReplication.report
         {
             if (tkCmb.SelectedValue.ToString() == "System.Data.DataRowView") return;
             LoadLoginAndRole();
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+
+            HandleChangePassword();
+        }
+
+
+        private Boolean InvalidLoginAccount()
+        {
+            if (InvalidField(txtLoginName, "Tên đăng nhập", validateLoginName)) return true;
+            if (InvalidField(txtPassword, "Mật khẩu", validatePassword)) return true;
+            return false;
+        }
+
+        private void HandleChangePassword()
+        {
+            if (InvalidLoginAccount()) return;
+
+            if (Program.KetNoi() == Database.Connection.Fail) return;
+
+            String cmd = $"EXEC NGANHANG.dbo.sp_password @old=NULL, @new= '{txtPassword.Text}', @loginame=  '{txtLoginName.Text}'";
+                int rtnCode = Program.ExecSqlNonQuery(cmd);
+                if (rtnCode == Database.SqlException.ViolateConstraint) Msg.Error("Đổi mật khẩu không thành công");
+                if (rtnCode != 0) return;
+                Msg.Info("Mật khẩu mới đã được cập nhật thành công");
+            }
+
+        private void btnDeleteLogin_Click(object sender, EventArgs e)
+        {
+            HandleDeleteLogin();
         }
     }
 }

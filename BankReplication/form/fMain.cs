@@ -100,9 +100,13 @@ namespace BankReplication
 
         public void HienThiMenu()
         {
-            MANV.Text = "MÃ NV: " + Program.username;
+            if(Program.mGroup == "KhachHang")
+                MANV.Text = "MÃ CMND KH: " + Program.username;
+            else
+                MANV.Text = "MÃ NV: " + Program.username;
             HOTEN.Text = "HỌ TÊN: " + Program.mHoTen;
             NHOM.Text = "NHÓM: " + Program.mGroup;
+            
             RbVisible(true);
 
             // Hide dev express button

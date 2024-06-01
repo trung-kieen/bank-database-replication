@@ -7,13 +7,13 @@ using BankReplication.utils;
 
 namespace BankReplication.form
 {
-//    public partial class formDangNhap : SimpleForm
+    //    public partial class formDangNhap : SimpleForm
     public partial class formDangNhap : DevExpress.XtraEditors.XtraForm
     {
 
 
 
-//        public override void AddHandle() { }
+        //        public override void AddHandle() { }
         // Connection for this login form only 
         private SqlConnection conn_publisher = new SqlConnection();
 
@@ -79,7 +79,7 @@ namespace BankReplication.form
         // Lay danh sach cac phan manh len combo box 
         {
 
-                LoadChiNhanh();
+            LoadChiNhanh();
 
         }
 
@@ -121,7 +121,7 @@ namespace BankReplication.form
             HandleSubmitLogin();
         }
         private void HandleSubmitLogin()
-           
+
         {
             if (inputTaiKhoan.Text.Trim() == "" || inputPassword.Text.Trim() == "")
             {
@@ -145,28 +145,28 @@ namespace BankReplication.form
             if (Program.myReader == null) return;
             Program.myReader.Read();
 
-            Program.username = Program.myReader.GetString(0);
-            if (Convert.IsDBNull(Program.username)|| Convert.IsDBNull(Program.mGroup))
-            {
-                Msg.Warm("Tài khoản không có quyền truy cập dữ liệu. Bạn kiểm tra lại tài khoản và mật khẩu");
-                return;
-            }
+            // Ma nhan vien doi voi nhan vien, CMND doi voi khach hang
             try
             {
-
-                Program.mHoTen = Program.myReader.GetString(1) == null ? "" : Program.myReader.GetString(1);
-                Program.mGroup = Program.myReader.GetString(2) == null ? "" : Program.myReader.GetString(2);
+                Program.username = Program.myReader["MANV"].ToString();
+                Program.mHoTen = Program.myReader["HOTEN"].ToString();
+                Program.mGroup = Program.myReader["TENNHOM"].ToString();
+                if (Program.username == null)
+                    Program.username = "";
+                if (Program.mHoTen == null)
+                    Program.mHoTen = "";
+                if (Program.mGroup == null)
+                    Program.mGroup = "";
                 String group = Program.mGroup.ToUpper();
-                if(!(group == "NGANHANG" || group == "CHINHANH"|| group == "KHACHHANG"))
+                if (!(group == "NGANHANG" || group == "CHINHANH" || group == "KHACHHANG"))
                 {
                     Msg.Warm($"Tài khoản thuộc nhóm {Program.mGroup} không có quyền truy cập dữ liệu");
                     return;
                 }
             }
-            catch
-            {
+            catch { }
 
-            }
+
             Program.myReader.Close();
             Program.conn.Close();
             Program.frmChinh.HienThiMenu();

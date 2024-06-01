@@ -49,8 +49,6 @@
             this.tkCmb = new System.Windows.Forms.ComboBox();
             this.btnTaoLogin = new DevExpress.XtraEditors.SimpleButton();
             this.txtUserName = new DevExpress.XtraEditors.TextEdit();
-            this.controlBtnChangePassword = new DevExpress.XtraLayout.LayoutControlItem();
-            this.controlBtnDelete = new DevExpress.XtraLayout.LayoutControlItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.controlBtnLogin = new DevExpress.XtraLayout.LayoutControlItem();
@@ -61,6 +59,8 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.Nhóm = new DevExpress.XtraLayout.LayoutControlItem();
+            this.controlBtnChangePassword = new DevExpress.XtraLayout.LayoutControlItem();
+            this.controlBtnDelete = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetailsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uv_AccountDetailsBindingSource)).BeginInit();
@@ -75,8 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLoginName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.controlBtnChangePassword)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.controlBtnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlBtnLogin)).BeginInit();
@@ -87,6 +85,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Nhóm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controlBtnChangePassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controlBtnDelete)).BeginInit();
             this.SuspendLayout();
             // 
             // accountDetailsBindingSource
@@ -178,6 +178,7 @@
             this.btnDeleteLogin.StyleController = this.layoutControl1;
             this.btnDeleteLogin.TabIndex = 20;
             this.btnDeleteLogin.Text = "Xóa tài khoản";
+            this.btnDeleteLogin.Click += new System.EventHandler(this.btnDeleteLogin_Click);
             // 
             // roleCmb
             // 
@@ -200,6 +201,7 @@
             this.btnChangePassword.StyleController = this.layoutControl1;
             this.btnChangePassword.TabIndex = 18;
             this.btnChangePassword.Text = "Đổi mật khẩu";
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
             // 
             // groupControl1
             // 
@@ -282,24 +284,6 @@
             this.txtUserName.Size = new System.Drawing.Size(392, 28);
             this.txtUserName.StyleController = this.layoutControl1;
             this.txtUserName.TabIndex = 15;
-            // 
-            // controlBtnChangePassword
-            // 
-            this.controlBtnChangePassword.Control = this.btnChangePassword;
-            this.controlBtnChangePassword.Location = new System.Drawing.Point(0, 472);
-            this.controlBtnChangePassword.Name = "controlBtnChangePassword";
-            this.controlBtnChangePassword.Size = new System.Drawing.Size(263, 36);
-            this.controlBtnChangePassword.TextSize = new System.Drawing.Size(0, 0);
-            this.controlBtnChangePassword.TextVisible = false;
-            // 
-            // controlBtnDelete
-            // 
-            this.controlBtnDelete.Control = this.btnDeleteLogin;
-            this.controlBtnDelete.Location = new System.Drawing.Point(263, 472);
-            this.controlBtnDelete.Name = "controlBtnDelete";
-            this.controlBtnDelete.Size = new System.Drawing.Size(263, 36);
-            this.controlBtnDelete.TextSize = new System.Drawing.Size(0, 0);
-            this.controlBtnDelete.TextVisible = false;
             // 
             // Root
             // 
@@ -407,6 +391,24 @@
             this.Nhóm.Spacing = new DevExpress.XtraLayout.Utils.Padding(10, 10, 10, 10);
             this.Nhóm.TextSize = new System.Drawing.Size(107, 19);
             // 
+            // controlBtnChangePassword
+            // 
+            this.controlBtnChangePassword.Control = this.btnChangePassword;
+            this.controlBtnChangePassword.Location = new System.Drawing.Point(0, 472);
+            this.controlBtnChangePassword.Name = "controlBtnChangePassword";
+            this.controlBtnChangePassword.Size = new System.Drawing.Size(263, 36);
+            this.controlBtnChangePassword.TextSize = new System.Drawing.Size(0, 0);
+            this.controlBtnChangePassword.TextVisible = false;
+            // 
+            // controlBtnDelete
+            // 
+            this.controlBtnDelete.Control = this.btnDeleteLogin;
+            this.controlBtnDelete.Location = new System.Drawing.Point(263, 472);
+            this.controlBtnDelete.Name = "controlBtnDelete";
+            this.controlBtnDelete.Size = new System.Drawing.Size(263, 36);
+            this.controlBtnDelete.TextSize = new System.Drawing.Size(0, 0);
+            this.controlBtnDelete.TextVisible = false;
+            // 
             // formTaoLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -430,8 +432,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLoginName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.controlBtnChangePassword)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.controlBtnDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlBtnLogin)).EndInit();
@@ -442,6 +442,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Nhóm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controlBtnChangePassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.controlBtnDelete)).EndInit();
             this.ResumeLayout(false);
 
         }

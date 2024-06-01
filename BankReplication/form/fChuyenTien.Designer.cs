@@ -172,6 +172,7 @@
             // 
             // txtHoTenChuyen
             // 
+            this.txtHoTenChuyen.Enabled = false;
             this.txtHoTenChuyen.Location = new System.Drawing.Point(123, 157);
             this.txtHoTenChuyen.Name = "txtHoTenChuyen";
             this.txtHoTenChuyen.Size = new System.Drawing.Size(242, 28);
@@ -180,6 +181,7 @@
             // 
             // txtHoTenNhan
             // 
+            this.txtHoTenNhan.Enabled = false;
             this.txtHoTenNhan.Location = new System.Drawing.Point(500, 157);
             this.txtHoTenNhan.Name = "txtHoTenNhan";
             this.txtHoTenNhan.Size = new System.Drawing.Size(226, 28);

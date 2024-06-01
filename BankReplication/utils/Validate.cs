@@ -68,6 +68,18 @@ namespace BankReplication.utils
             notNull(sotk);
             PositiveDouble(sotk);
         }
+        public static void validateLoginName(String login)
+        {
+            notNull(login);
+            minLength(login, 2);
+        }
+        public static void validatePassword(String pass)
+        {
+            notNull(pass);
+            minLength(pass, 2);
+        }
+
+
         public static void validateHo(String ho)
         {
             notNull(ho);
