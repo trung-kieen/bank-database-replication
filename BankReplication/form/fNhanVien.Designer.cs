@@ -48,6 +48,7 @@ namespace BankReplication.form
             this.SODTTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.CMNDTextEdit = new DevExpress.XtraEditors.TextEdit();
             this.DIACHITextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlPhaiTxt = new DevExpress.XtraLayout.LayoutControlItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -62,7 +63,6 @@ namespace BankReplication.form
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.layoutControlPhaiTxt = new DevExpress.XtraLayout.LayoutControlItem();
             this.gcNhanVien = new DevExpress.XtraGrid.GridControl();
             this.gvNhanVien = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colMANV = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -74,6 +74,8 @@ namespace BankReplication.form
             this.colSODT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colMACN = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTrangThaiXoa = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.repositoryItemCheckedComboBoxEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             this.nhanVienTableAdapter1 = new BankReplication.NhanVienDSTableAdapters.NhanVienTableAdapter();
             this.tableAdapterManager = new BankReplication.NhanVienDSTableAdapters.TableAdapterManager();
             this.gD_CHUYENTIENTableAdapter = new BankReplication.NhanVienDSTableAdapters.GD_CHUYENTIENTableAdapter();
@@ -115,6 +117,7 @@ namespace BankReplication.form
             this.barDockControl2 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControl3 = new DevExpress.XtraBars.BarDockControl();
             this.barDockControl4 = new DevExpress.XtraBars.BarDockControl();
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.sidePanel)).BeginInit();
             this.sidePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLayoutControl1)).BeginInit();
@@ -128,6 +131,7 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.SODTTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CMNDTextEdit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DIACHITextEdit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlPhaiTxt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
@@ -142,9 +146,10 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlPhaiTxt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcNhanVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvNhanVien)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD_CHUYENTIENBds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD_GOIRUTBds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -158,6 +163,7 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.controlPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // sidePanel
@@ -340,6 +346,15 @@ namespace BankReplication.form
             this.DIACHITextEdit.TabIndex = 9;
             this.DIACHITextEdit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputFields_KeyDown);
             // 
+            // layoutControlPhaiTxt
+            // 
+            this.layoutControlPhaiTxt.Control = this.txtPhai;
+            this.layoutControlPhaiTxt.Location = new System.Drawing.Point(0, 845);
+            this.layoutControlPhaiTxt.Name = "layoutControlPhaiTxt";
+            this.layoutControlPhaiTxt.Size = new System.Drawing.Size(446, 34);
+            this.layoutControlPhaiTxt.Text = "Phái";
+            this.layoutControlPhaiTxt.TextSize = new System.Drawing.Size(105, 19);
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -487,15 +502,6 @@ namespace BankReplication.form
             this.emptySpaceItem2.Size = new System.Drawing.Size(446, 136);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // layoutControlPhaiTxt
-            // 
-            this.layoutControlPhaiTxt.Control = this.txtPhai;
-            this.layoutControlPhaiTxt.Location = new System.Drawing.Point(0, 845);
-            this.layoutControlPhaiTxt.Name = "layoutControlPhaiTxt";
-            this.layoutControlPhaiTxt.Size = new System.Drawing.Size(446, 34);
-            this.layoutControlPhaiTxt.Text = "Phái";
-            this.layoutControlPhaiTxt.TextSize = new System.Drawing.Size(105, 19);
-            // 
             // gcNhanVien
             // 
             this.tablePanel1.SetColumn(this.gcNhanVien, 0);
@@ -504,6 +510,9 @@ namespace BankReplication.form
             this.gcNhanVien.Location = new System.Drawing.Point(3, 3);
             this.gcNhanVien.MainView = this.gvNhanVien;
             this.gcNhanVien.Name = "gcNhanVien";
+            this.gcNhanVien.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEdit1,
+            this.repositoryItemCheckedComboBoxEdit1});
             this.tablePanel1.SetRow(this.gcNhanVien, 0);
             this.gcNhanVien.Size = new System.Drawing.Size(1412, 923);
             this.gcNhanVien.TabIndex = 2;
@@ -522,6 +531,7 @@ namespace BankReplication.form
             this.colSODT,
             this.colMACN,
             this.colTrangThaiXoa});
+            this.gvNhanVien.CustomizationFormBounds = new System.Drawing.Rectangle(1169, 637, 377, 383);
             this.gvNhanVien.DetailHeight = 349;
             this.gvNhanVien.FixedLineWidth = 1;
             this.gvNhanVien.GridControl = this.gcNhanVien;
@@ -621,6 +631,18 @@ namespace BankReplication.form
             this.colTrangThaiXoa.Visible = true;
             this.colTrangThaiXoa.VisibleIndex = 8;
             this.colTrangThaiXoa.Width = 112;
+            // 
+            // repositoryItemCheckEdit1
+            // 
+            this.repositoryItemCheckEdit1.AutoHeight = false;
+            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            // 
+            // repositoryItemCheckedComboBoxEdit1
+            // 
+            this.repositoryItemCheckedComboBoxEdit1.AutoHeight = false;
+            this.repositoryItemCheckedComboBoxEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemCheckedComboBoxEdit1.Name = "repositoryItemCheckedComboBoxEdit1";
             // 
             // nhanVienTableAdapter1
             // 
@@ -1035,6 +1057,7 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.SODTTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CMNDTextEdit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DIACHITextEdit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlPhaiTxt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
@@ -1049,9 +1072,10 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlPhaiTxt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcNhanVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvNhanVien)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD_CHUYENTIENBds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD_GOIRUTBds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -1066,6 +1090,7 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.controlPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1159,5 +1184,8 @@ namespace BankReplication.form
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private TextBox txtPhai;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlPhaiTxt;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit repositoryItemCheckedComboBoxEdit1;
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }

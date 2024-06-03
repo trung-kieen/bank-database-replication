@@ -26,13 +26,9 @@ namespace BankReplication.report
         {
             LoadCmbChiNhanh();
             CenterMdiScreen();
-            SetDefaultInputValue();
             LoadListAccounts();
             LoadTargetRoleCmb();
             LoadLoginAndRole();
-        }
-        private void SetDefaultInputValue()
-        {
         }
         private void LoadTargetRoleCmb()
         {
@@ -149,6 +145,11 @@ namespace BankReplication.report
 
         private void LoadListAccounts()
         {
+            if(Program.mGroup== "NganHang")
+            {
+                radioKhachHang.Enabled = false;
+                radioNhanVien.Checked = true;
+            }
             if (!radioNhanVien.Checked && !radioKhachHang.Checked)
             {
                 radioKhachHang.Checked = true;

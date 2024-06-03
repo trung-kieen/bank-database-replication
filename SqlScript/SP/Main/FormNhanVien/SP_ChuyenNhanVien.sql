@@ -95,15 +95,6 @@ BEGIN DISTRIBUTED TRANSACTION
 		-- Remove user role employee on database
 		-- Not delete login but deny access in login form
 
-/*	-- TODO: DROP ROLE 	
-	IF  EXISTS (SELECT name
-		FROM master.sys.server_principals
-		WHERE name = @ma_nv)
-		BEGIN
---			EXEC sp_droprolemember 'ChiNhanh', @ma_nv
-		END
-		
-*/
     END
 	ELSE
 	BEGIN
