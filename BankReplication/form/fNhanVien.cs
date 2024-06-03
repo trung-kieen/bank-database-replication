@@ -294,6 +294,7 @@ namespace BankReplication.form
             {
 
                 DataRowView current = (DataRowView)nhanVienBds.Current;
+                nhanVienBds.CancelEdit();
                 SetFormState(FormAction.None);
                 RevertLastPosition();
             }
@@ -302,6 +303,7 @@ namespace BankReplication.form
         {
             if (!InvalidEditEmployee())
             {
+                PHAIComboBox.EndUpdate();
                 SaveViewRowToBindingSource();
                 object[] dirtyRowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
                 commandController.Execute(new EditCommand(nhanVienBds, checkPointRowsData, dirtyRowsData, CommitChangeNhanVien));
@@ -381,6 +383,8 @@ namespace BankReplication.form
         public void OpenEditSideBar()
         {
             if (Program.mGroup.ToUpper() != "CHINHANH") return;
+            DataRowView r = (DataRowView)nhanVienBds.Current;
+            PHAIComboBox.SelectedIndex = PHAIComboBox.FindStringExact(r.Row["PHAI"].ToString());
             checkPointRowsData = ModelMapper.RowViewToRowList((DataRowView)nhanVienBds.Current);
             SavePosition();
             SetFormState(FormAction.Edit);
@@ -470,11 +474,13 @@ namespace BankReplication.form
             btnExit.Enabled = true;
             btnHuy.Enabled = false;
             btnReload.Enabled = true;
+            btnChuyenCN.Enabled = true;
+
 
             btnLuu.Enabled = true;
             sidePanel.Visible = false;
             gcNhanVien.Enabled = true;
-
+            
             if (Program.mGroup.ToUpper() == "NGANHANG")
             {
                 btnThem.Enabled = false;
@@ -491,6 +497,7 @@ namespace BankReplication.form
                 if (formAction == FormAction.Add)
                 {
                     sidePanel.Visible = true;
+                    sidePanel.Enabled = true;
                     gcNhanVien.Enabled = false;
                     MANVTextEdit.Enabled = true;
                     CMNDTextEdit.Enabled = true;
@@ -500,12 +507,14 @@ namespace BankReplication.form
                     btnLuu.Enabled = true;
                     btnThem.Enabled = false;
                     btnSua.Enabled = false;
+                    btnChuyenCN.Enabled = false;
 
                 }
 
                 if (formAction == FormAction.Edit)
                 {
                     sidePanel.Visible = true;
+                    sidePanel.Enabled = true;
                     gcNhanVien.Enabled = false;
 
                     MANVTextEdit.Enabled = false;
@@ -516,6 +525,16 @@ namespace BankReplication.form
                     btnLuu.Enabled = true;
                     btnThem.Enabled = false;
                     btnSua.Enabled = false;
+                    btnChuyenCN.Enabled = false;
+
+                }
+                if(formAction == FormAction.None)
+                {
+                    sidePanel.Visible = true;
+                    sidePanel.Enabled = false;
+
+//                    .Enabled = false;
+                
                 }
                 // Final condition require button to become enable 
                 if (nhanVienBds.Position == -1)
@@ -550,10 +569,14 @@ namespace BankReplication.form
             // Load data base on user login connection avoid using login and password in dataset 
             LoadNhanVien(Program.connstr);
             LoadCmbChiNhanh();
-            SetFormState();
 
-            PHAIComboBox.Items.AddRange(new object[] { new Gender("Nam"), new Gender("Nữ") });
+            PHAIComboBox.Items.AddRange(new object[] {
+            new KeyValue("Nam", "Name"),
+            new KeyValue("Nữ", "Nữ")
+            });
+            PHAIComboBox.SelectedIndex = 0;
             PHAIComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SetFormState(FormAction.None);
         }
 
 
@@ -717,6 +740,10 @@ namespace BankReplication.form
             }
         }
 
+        private void PHAIComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtPhai.Text = PHAIComboBox.Text;        
+        }
     }
 
 

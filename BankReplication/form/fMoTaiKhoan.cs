@@ -125,6 +125,7 @@ namespace BankReplication.form
         }
         public void OpenEditSideBar()
         {
+            
             checkPointRowsData = ModelMapper.RowViewToRowList((DataRowView)taiKhoanBds.Current);
             SavePosition();
             SetFormState(FormAction.Edit);
@@ -498,8 +499,8 @@ namespace BankReplication.form
             if(e.Button == MouseButtons.Right)
             {
                 popupMenu1.ShowPopup(Control.MousePosition);
-
             }
         }
+
     }
 }

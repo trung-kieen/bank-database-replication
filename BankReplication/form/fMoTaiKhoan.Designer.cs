@@ -115,6 +115,8 @@ namespace BankReplication.form
             this.uv_AccountDetailsTableAdapter1 = new BankReplication.AccountDetailsTableAdapters.uv_AccountDetailsTableAdapter();
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStripCopyCell = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyCellTxt = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
@@ -155,6 +157,7 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.gDGuiRutBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
+            this.contextMenuStripCopyCell.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolBar
@@ -971,6 +974,19 @@ namespace BankReplication.form
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // contextMenuStripCopyCell
+            // 
+            this.contextMenuStripCopyCell.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStripCopyCell.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyCellTxt});
+            this.contextMenuStripCopyCell.Name = "contextMenuStripCopyCell";
+            this.contextMenuStripCopyCell.Size = new System.Drawing.Size(161, 37);
+            // 
+            // copyCellTxt
+            // 
+            this.copyCellTxt.Name = "copyCellTxt";
+            this.copyCellTxt.Size = new System.Drawing.Size(100, 31);
+            // 
             // formMoTaiKhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -1025,6 +1041,8 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.gDGuiRutBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
+            this.contextMenuStripCopyCell.ResumeLayout(false);
+            this.contextMenuStripCopyCell.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1112,5 +1130,7 @@ namespace BankReplication.form
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraBars.BarDockingMenuItem barDockingMenuItem1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripCopyCell;
+        private System.Windows.Forms.ToolStripTextBox copyCellTxt;
     }
 }
