@@ -13,3 +13,7 @@ câu lệnh select khi transaction có sự thay đổi dữ liệu.
 
   SELECT * FROM LINK0.NGANHANG.dbo.NhanVien WHERE CMND =
   (SELECT CMND FROM LINK0.NGANHANG.dbo.NhanVien WHERE MANV = 'QA2XUXQO9D')
+
+
+  EXEC SP_ChuyenNhanVien @ma_nv = 'NV00000099',@ma_nv_moi = 'QA2XUXQO9D', @ma_cn =  'TANDINH   ', @ma_cn_moi = 'BENTHANH  '
+  

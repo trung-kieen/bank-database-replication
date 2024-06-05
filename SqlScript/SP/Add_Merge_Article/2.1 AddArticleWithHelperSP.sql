@@ -6,6 +6,7 @@ EXEC SP_AddSPArticle N'SP_LayThongTinNhanVien'
 EXEC SP_AddSPArticle N'SP_TaoLogin'
 EXEC SP_AddSPArticle N'SP_XoaLogin'
 EXEC SP_AddSPArticle N'SP_TimNhanVien'
+EXEC SP_AddSPArticle N'SP_DropEmployeeRole'
 
 EXEC SP_AddSPArticle N'SP_ThongKeGiaoDich'
 EXEC SP_AddSPArticle N'SP_DSTaiKhoan_ThongKeGD'

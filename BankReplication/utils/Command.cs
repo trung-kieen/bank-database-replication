@@ -218,6 +218,7 @@ namespace BankReplication.utils
         private String _maCNCu;
         private String _maCNMoi;
         private Action _reload;
+        private String _role;
         public ChuyenCNCommand(BindingSourceExtends bds, String connString, String remote_connString, String maNVCu, String maNVMoi, String maCNCu, String maCNMoi, Action reload)
         {
             _bds = bds;
@@ -232,12 +233,25 @@ namespace BankReplication.utils
         }
         public void Execute()
         {
+            int position = _bds.Position;
+            Program.conn.Close();
             Program.conn.ConnectionString = _connString;
             if (Program.KetNoi(Database.Connection.NotShowError) == Database.Connection.Fail)
             {
                 Msg.Error("Không thể kết nối tới máy chủ");
                 return;
             }
+
+
+            try
+            {
+                // Not allow old employee access database 
+                _role = Program.ExecSqlScalar("EXEC SP_DropEmployeeRole '" + _maNVCu + "'");
+            }
+            catch
+            {
+            }
+
             try
             {
                 String SPName = "SP_ChuyenNhanVien";
@@ -248,6 +262,7 @@ namespace BankReplication.utils
                     + $", '{_maCNMoi}' ";
 
                 Program.ExecSqlNonQuery(cmd);
+
                 _reload();
 
                 Msg.Info("Nhân viên đã được chuyển qua chi nhánh mới với mã nhân viên là " + _maNVMoi);
@@ -258,15 +273,23 @@ namespace BankReplication.utils
                 Msg.Error("Lỗi khi chuyển nhân viên\n" + ex.Message, "Thao tác không thành công");
 
             }
-            //            _bds.Position = position;
+
+
+            if(_bds.Find("MANV" , _maNVCu) > 0)
+                _bds.Position = _bds.Find("MANV" , _maNVCu);
+            else
+            _bds.Position = position;
 
         }
         public void Undo()
         {
+            Program.conn.Close();
+            Program.conn.ConnectionString = _connString;
             Program.conn.ConnectionString = _remote_connString;
             try
             {
 
+//                Msg.Info(Program.ExecSqlScalar("SELECT MACN FROM NGANHANG.dbo.ChiNhanh"));
                 String SPName = "SP_ChuyenNhanVien";
                 String cmd = $"EXEC {SPName} "
                     + $"  '{_maNVMoi}' "
@@ -278,6 +301,7 @@ namespace BankReplication.utils
                 _reload();
 
                 Msg.Info("Nhân viên đã được chuyển lại chi nhánh ban đầu");
+                _bds.Position = _bds.Find("MANV", _maNVCu);
 
             }
             catch (Exception ex)
@@ -286,6 +310,8 @@ namespace BankReplication.utils
 
             }
 
+            Program.conn.Close();
+            Program.conn.ConnectionString = _connString;
         }
 
         public void Redo()

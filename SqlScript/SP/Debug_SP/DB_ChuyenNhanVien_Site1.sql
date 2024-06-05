@@ -1,0 +1,5 @@
+    EXEC SP_ChuyenNhanVien @ma_nv_moi = 'NV00000099',@ma_nv = 'QA2XUXQO9D', @ma_cn_moi =  'TANDINH   ', @ma_cn = 'BENTHANH  '
+	SELECT * FROM LINK0.NGANHANG.dbo.NhanVien WHERE CMND = '3742578568'
+
+  SELECT * FROM LINK0.NGANHANG.dbo.NhanVien WHERE CMND =
+  (SELECT CMND FROM LINK0.NGANHANG.dbo.NhanVien WHERE MANV = 'QA2XUXQO9D')
