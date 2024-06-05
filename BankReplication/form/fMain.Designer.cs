@@ -126,7 +126,7 @@
             // 
             // btnAddLoginAccount
             // 
-            this.btnAddLoginAccount.Caption = "Tạo tài khoản đăng nhập";
+            this.btnAddLoginAccount.Caption = "Quản lý tài khoản đăng nhập";
             this.btnAddLoginAccount.Id = 7;
             this.btnAddLoginAccount.ImageOptions.LargeImageIndex = 10;
             this.btnAddLoginAccount.Name = "btnAddLoginAccount";

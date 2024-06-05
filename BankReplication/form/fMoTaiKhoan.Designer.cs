@@ -288,7 +288,6 @@ namespace BankReplication.form
             // 
             // btnUndo
             // 
-            this.btnUndo.Caption = "Undo";
             this.btnUndo.Enabled = false;
             this.btnUndo.Id = 3;
             this.btnUndo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnUndo.ImageOptions.SvgImage")));

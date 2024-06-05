@@ -42,6 +42,7 @@ namespace BankReplication.form
             }
             if (macn.ToString().Trim() == "") return;
             MACNTextEdit.Text = macn;
+            PHAIComboBox.SelectedIndex = 0;
             trangThaiXoaCheckBox.Checked = false;
             GenerateNewId();
         }
@@ -117,6 +118,20 @@ namespace BankReplication.form
 
         private Boolean InvalidDuplicateCMND()
         {
+            int ExistsCode= Int32.Parse(Program.ExecSqlScalar("EXEC SP_TimCMNDNhanVien '" + CMNDTextEdit.Text.Trim() + "'"));
+            if( ExistsCode == Database.CheckExist.FoundSameSite)
+            {
+                    Msg.Warm("Số CMND không được trùng với nhân viên cùng chi nhánh", "Dữ liệu nhập không hợp lệ");
+                    CMNDTextEdit.Focus();
+                    return true; 
+            }
+            else if(ExistsCode == Database.CheckExist.FoundOtherSite)
+            {
+                    Msg.Warm("Số CMND không được trùng với nhân viên khác chi nhánh khác", "Dữ liệu nhập không hợp lệ");
+                    CMNDTextEdit.Focus();
+                    return true;
+            }
+            /*
             // Search for row in current bds to avoid dataRowView have same value of CMND
             // If two row have same CMND (when edit) they must have same MaNV
             foreach (DataRowView row in nhanVienBds)
@@ -130,6 +145,7 @@ namespace BankReplication.form
                     return true;
                 }
             }
+            */
             return false;
         }
         private Boolean InvalidDuplicateEmployeeId(DevExpress.XtraEditors.TextEdit field)
