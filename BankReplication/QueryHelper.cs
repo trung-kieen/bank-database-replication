@@ -36,6 +36,29 @@ namespace BankReplication
 
         }
 
+        public static Boolean IsAccountExist(String sotk)
+        {
+            String cmd = "EXEC SP_TimTaiKhoan '" + sotk + "'";
+            if (Program.conn.State == ConnectionState.Closed)
+            {
+                Program.conn.Open();
+            }
+            try
+            {
+                int existCode = Int32.Parse(ExecSqlScalar(cmd));
+                if (existCode == Database.CheckExist.NotFound)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception e)
+            {
+                Msg.Error("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + e.Message);
+                Program.conn.Close();
+                return false;
+            }
+
+        }
         public static String LayMaCN()
         {
             if (Program.KetNoi() == Database.Connection.Fail) return null;

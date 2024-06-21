@@ -54,12 +54,10 @@ namespace BankReplication.form
                 tkCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 tkCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
                 txtSoDu.DataBindings.Add(new System.Windows.Forms.Binding("Text", dstk, "SODU", true));
+                txtChuSoHuu.DataBindings.Add(new System.Windows.Forms.Binding("Text", dstk, "HOTEN", true));
             }
             txtSoDu.Enabled = false;
             txtSoDu.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("id-ID"), "{0:#,##0.00}", double.Parse(txtSoDu.Text));
-            // TODO: This line of code loads data into the 'accountDetails.uv_AccountDetails' table. You can move, or remove it, as needed.
-            //            this.uv_AccountDetailsTableAdapter.Fill(this.accountDetails.uv_AccountDetails);
-
         }
 
         private void btnGuiRut_Click(object sender, EventArgs e)
@@ -104,7 +102,7 @@ namespace BankReplication.form
                 txtSoTien.Text = "";
                 if (rtnCode == Database.SqlException.ViolateConstraint) Msg.Error("Hạn mức tối thiểu của giao dịch gửi rút là 100,000 VND", "Giao dịch không thành công");
                 if (rtnCode != 0) return;
-                Msg.Info("Giao dịch thành công \nSố dư mới là " + sodu_moi);
+                Msg.Info("Giao dịch thành công \nSố dư mới là "  +  Double.Parse(sodu_moi).ToString("n0"));
             }
             catch (Exception ex)
             {

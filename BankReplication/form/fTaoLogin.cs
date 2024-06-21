@@ -164,6 +164,8 @@ namespace BankReplication.report
                 tkCmb.DataSource = dsnv;
                 tkCmb.DisplayMember = "DisplayMember";
                 tkCmb.ValueMember = "ValueMember"; // Which is user name 
+                tkCmb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                tkCmb.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
             catch
             {

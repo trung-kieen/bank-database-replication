@@ -257,7 +257,6 @@
             // tkCmb
             // 
             this.tkCmb.DisplayMember = "TENCN";
-            this.tkCmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tkCmb.FormattingEnabled = true;
             this.tkCmb.Location = new System.Drawing.Point(132, 192);
             this.tkCmb.Margin = new System.Windows.Forms.Padding(4);

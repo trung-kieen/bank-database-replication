@@ -11,6 +11,11 @@ namespace BankReplication.utils
         public static readonly Boolean AutoAddNewEmployeeID = true;
 
 
+        // Cho phep phan nhom khach hang tim kiem du lieu ve cac tai khoan tren phan manh
+        public static readonly Boolean AllowBracnhSeeAccount = true;
+
+        public static readonly Boolean SwitchBranchOnAddNewAccount = false;
+
     }
 
     static class MoneyRepersent

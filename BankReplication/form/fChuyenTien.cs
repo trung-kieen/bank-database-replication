@@ -140,7 +140,7 @@ namespace BankReplication.form
                 txtSoTien.Text = "";
                 if (rtnCode == Database.SqlException.ViolateConstraint) Msg.Error("Số dư tài khoản không đủ để thực hiện giao dịch", "Giao dịch không thành công");
                 if (rtnCode != 0) return;
-                Msg.Info("Giao dịch thành công \nSố dư mới là " + sodu_moi);
+                Msg.Info("Giao dịch thành công \nSố dư mới là "  +  Double.Parse(sodu_moi).ToString("n0"));
             }
             catch (Exception ex)
             {
@@ -158,5 +158,6 @@ namespace BankReplication.form
             }
 
         }
+
     }
 }

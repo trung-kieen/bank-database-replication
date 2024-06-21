@@ -61,6 +61,7 @@ namespace BankReplication.utils
         public static void validateSoTK(String sotk)
         {
             notNull(sotk);
+            exactLength(sotk, 9);
             validateDigit(sotk);
         }
         public static void validateSoTien(String sotk)

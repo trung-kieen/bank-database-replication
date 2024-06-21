@@ -137,6 +137,9 @@
     <Compile Include="form\SimpleForm.Designer.cs">
       <DependentUpon>SimpleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MoTKDS.cs">
+      <DependentUpon>MoTKDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MoTKDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,6 +160,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NGANHANGDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVienDS.cs">
+      <DependentUpon>NhanVienDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="NhanVienDS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -273,6 +279,7 @@
     </None>
     <None Include="MoTKDS.xsc">
       <DependentUpon>MoTKDS.xsd</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="MoTKDS.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -281,6 +288,7 @@
     </None>
     <None Include="MoTKDS.xss">
       <DependentUpon>MoTKDS.xsd</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="NGANHANGDataSet.xsc">
       <DependentUpon>NGANHANGDataSet.xsd</DependentUpon>

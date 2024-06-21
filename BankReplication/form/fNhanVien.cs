@@ -69,11 +69,7 @@ namespace BankReplication.form
 
         private Boolean InvalidNewEmployee()
         {
-            if (InvalidField(MANVTextEdit, "Mã nhân viên", validateMANV))
-            {
-                GenerateNewId();
-                return true;
-            }
+            if (InvalidField(MANVTextEdit, "Mã nhân viên", validateMANV)) return true;
             if (InvalidField(HOTextEdit, "Họ", validateHo)) return true;
             if (InvalidField(TENTextEdit, "Tên", validateTen)) return true;
 
@@ -86,7 +82,19 @@ namespace BankReplication.form
             if (InvalidField(SODTTextEdit, "Số điện thoại", validateSDT)) return true;
             if (InvalidField(MACNTextEdit, "Mã chi nhánh", validateMACN)) return true;
 
-            if (InvalidDuplicateEmployeeId(MANVTextEdit)) return true;
+
+            int maxiumn_regenerate = 5;
+            while (InvalidDuplicateEmployeeId(MANVTextEdit)) 
+            {
+                GenerateNewId();
+                maxiumn_regenerate--;
+                if(maxiumn_regenerate == 0)
+                {
+                    Msg.Warm("Lỗi tải mã nhân viên");
+                    MANVTextEdit.Enabled = true; // Allow user to choose employee id
+                    break;
+                }
+            }
             if (InvalidDuplicateCMND()) return true;
             return false;
         }
@@ -524,6 +532,7 @@ namespace BankReplication.form
                     btnThem.Enabled = false;
                     btnSua.Enabled = false;
                     btnChuyenCN.Enabled = false;
+                    btnReload.Enabled = false;
 
                 }
 
@@ -542,6 +551,7 @@ namespace BankReplication.form
                     btnThem.Enabled = false;
                     btnSua.Enabled = false;
                     btnChuyenCN.Enabled = false;
+                    btnReload.Enabled = false;
 
                 }
                 if(formAction == FormAction.None)
@@ -563,7 +573,7 @@ namespace BankReplication.form
                     btnRedo.Enabled = true;
                 if (commandController.Undoable())
                     btnUndo.Enabled = true;
-                if (((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1")
+                if (((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1" && formAction != FormAction.Add  && formAction != FormAction.Edit)
                 {
                     btnChuyenCN.Enabled = false;
                     btnXoa.Enabled = false;
@@ -681,8 +691,7 @@ namespace BankReplication.form
             // Use for all text edit in form 
             if (e.KeyCode == Keys.Enter)
             {
-                if (btnLuu.Enabled)
-                    HandleSave();
+                fBtnLuu.PerformClick();
             }
 
         }
@@ -761,6 +770,14 @@ namespace BankReplication.form
         private void PHAIComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtPhai.Text = PHAIComboBox.Text;        
+        }
+
+        private void gcNhanVien_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSua.PerformClick();
+            }
         }
     }
 

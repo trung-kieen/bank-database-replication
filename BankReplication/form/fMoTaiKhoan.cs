@@ -63,6 +63,19 @@ namespace BankReplication.form
             btnLuu.Enabled = true;
             fBtnHuy.Visible = fBtnLuu.Visible = false;
 
+
+            if (Program.mGroup.ToUpper() == "NGANHANG")
+            {
+                btnThem.Enabled = false;
+                btnXoa.Enabled = false;
+                btnSua.Enabled = false;
+                btnUndo.Enabled = false;
+                btnRedo.Enabled = false;
+                btnLuu.Enabled = false;
+                return;
+            }
+
+
             if (formAction == FormAction.Add)
             {
                 dataLayoutControl1.Enabled = true;
@@ -72,6 +85,7 @@ namespace BankReplication.form
 
                 btnHuy.Enabled = true;
                 btnXoa.Enabled = false;
+                btnReload.Enabled = false;
                 btnLuu.Enabled = true;
                 btnThem.Enabled = false;
                 btnSua.Enabled = false;
@@ -89,6 +103,7 @@ namespace BankReplication.form
                 sidePanel.Visible = true;
                 btnXoa.Enabled = false;
                 btnLuu.Enabled = true;
+                btnReload.Enabled = false;
                 btnThem.Enabled = false;
                 btnSua.Enabled = false;
 
@@ -131,8 +146,61 @@ namespace BankReplication.form
             SetFormState(FormAction.Edit);
             ResetSideBar();
         }
+
+        private void LoadCmbChiNhanh()
+        {
+            this.cmbChiNhanh.DataSource = Program.bds_dspm;
+            this.cmbChiNhanh.DisplayMember = "TENCN";
+            this.cmbChiNhanh.ValueMember = "TENSERVER";
+            this.cmbChiNhanh.SelectedIndex = Program.mChiNhanh;
+
+            if (Program.mGroup.ToUpper() == "NGANHANG")
+            {
+                // Make chi nhanh non editable
+                // Can change server to load data 
+                cmbChiNhanh.Enabled = true;
+            }
+            else
+            {
+                cmbChiNhanh.Enabled = false;
+            }
+            if (!General.SwitchBranchOnAddNewAccount)
+            {
+                cmbChiNhanh.Dispose();
+                lblChiNhanh.Dispose();
+            }
+
+        }
+        private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbChiNhanh.SelectedValue.ToString() == "System.Data.DataRowView") return;
+            Program.servername = cmbChiNhanh.SelectedValue.ToString();
+            if (cmbChiNhanh.SelectedIndex != Program.mChiNhanh)
+            {
+                // Get data with remote login HTKN
+                Program.mlogin = Program.remotelogin;
+                Program.password = Program.remotepassword;
+            }
+            else
+            {
+                Program.mlogin = Program.mloginDN;
+                Program.password = Program.passwordDN;
+            }
+            if (Program.KetNoi() == Database.Connection.Fail)
+            {
+                Msg.Error("Lỗi kết nối về chi nhánh mới");
+            }
+            else
+            {
+                // Load data
+                LoadTaiKhoan(Program.connstr);
+            }
+
+        }
+
         private void formMoTaiKhoan_Load(object sender, EventArgs e)
         {
+            LoadCmbChiNhanh();
             this.KeyPreview = true;
             // Stop checking for foreign key constraint
             moTKDS.EnforceConstraints = false;
@@ -224,11 +292,31 @@ namespace BankReplication.form
         // TODO: 
         private bool InvalidNewAccount()
         {
-
             if (InvalidField(soTKTxt, "Số tài khoản", validateSoTK)) return true;
             if (InvalidField(soDuTxt, "Số dư", validateSoTien)) return true;
+            if (InvalidNewAccountNum(soTKTxt)) return true;
             return false;
         }
+
+        private Boolean InvalidNewAccountNum(DevExpress.XtraEditors.TextEdit field)
+        {
+            if (Program.KetNoi() == Database.Connection.Fail)
+            {
+                Msg.Error("Lỗi kết nối với với cơ sở dữ liệu");
+                return true;
+            }
+
+            if (Program.IsAccountExist(field.Text))
+            {
+                Msg.Warm("Số tài khoản đã tồn tại");
+                field.Focus();
+                return true;
+            }
+            return false;
+        }
+
+
+
         // TODO:
         private bool InvalidEditAcount()
         {
@@ -411,6 +499,7 @@ namespace BankReplication.form
                     HandleSave();
             }
 
+
         }
 
 
@@ -443,6 +532,7 @@ namespace BankReplication.form
 
         private void gvKhachHang_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+            if (Program.mGroup.ToUpper() == "NGANHANG") return;
             if (taiKhoanBds.Count > 0)
             {
                 btnXoa.Enabled = true;
@@ -500,6 +590,26 @@ namespace BankReplication.form
             {
                 popupMenu1.ShowPopup(Control.MousePosition);
             }
+        }
+
+        private void gcKhachHang_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                gcTaiKhoan.Focus();
+
+
+        }
+        
+
+        private void gcTaiKhoan_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+               btnSua.PerformClick();
+            }
+            if (e.KeyCode == Keys.Escape)
+                gcKhachHang.Focus();
         }
 
     }

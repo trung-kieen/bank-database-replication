@@ -61,6 +61,9 @@ namespace BankReplication.form
             this.barDockingMenuItem1 = new DevExpress.XtraBars.BarDockingMenuItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.lblChiNhanh = new DevExpress.XtraEditors.LabelControl();
+            this.cmbChiNhanh = new System.Windows.Forms.ComboBox();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.sidePanel = new DevExpress.Utils.Layout.TablePanel();
             this.gcTaiKhoan = new DevExpress.XtraGrid.GridControl();
@@ -120,6 +123,8 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
+            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sidePanel)).BeginInit();
@@ -423,6 +428,7 @@ namespace BankReplication.form
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 28.2F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 31.8F)});
+            this.tablePanel1.Controls.Add(this.panelControl1);
             this.tablePanel1.Controls.Add(this.groupControl2);
             this.tablePanel1.Controls.Add(this.groupControl1);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -433,6 +439,38 @@ namespace BankReplication.form
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel1.Size = new System.Drawing.Size(1918, 979);
             this.tablePanel1.TabIndex = 12;
+            // 
+            // panelControl1
+            // 
+            this.tablePanel1.SetColumn(this.panelControl1, 0);
+            this.panelControl1.Controls.Add(this.lblChiNhanh);
+            this.panelControl1.Controls.Add(this.cmbChiNhanh);
+            this.panelControl1.Location = new System.Drawing.Point(3, 3);
+            this.panelControl1.Name = "panelControl1";
+            this.tablePanel1.SetRow(this.panelControl1, 0);
+            this.panelControl1.Size = new System.Drawing.Size(895, 31);
+            this.panelControl1.TabIndex = 2;
+            // 
+            // lblChiNhanh
+            // 
+            this.lblChiNhanh.Location = new System.Drawing.Point(27, 7);
+            this.lblChiNhanh.Margin = new System.Windows.Forms.Padding(4);
+            this.lblChiNhanh.Name = "lblChiNhanh";
+            this.lblChiNhanh.Size = new System.Drawing.Size(74, 19);
+            this.lblChiNhanh.TabIndex = 2;
+            this.lblChiNhanh.Text = "Chi Nhánh";
+            // 
+            // cmbChiNhanh
+            // 
+            this.cmbChiNhanh.DisplayMember = "TENCN";
+            this.cmbChiNhanh.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbChiNhanh.FormattingEnabled = true;
+            this.cmbChiNhanh.Location = new System.Drawing.Point(109, 3);
+            this.cmbChiNhanh.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbChiNhanh.Name = "cmbChiNhanh";
+            this.cmbChiNhanh.Size = new System.Drawing.Size(240, 27);
+            this.cmbChiNhanh.TabIndex = 3;
+            this.cmbChiNhanh.SelectedIndexChanged += new System.EventHandler(this.cmbChiNhanh_SelectedIndexChanged);
             // 
             // groupControl2
             // 
@@ -482,6 +520,7 @@ namespace BankReplication.form
             this.gcTaiKhoan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvTaiKhoan,
             this.gridView1});
+            this.gcTaiKhoan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gcTaiKhoan_KeyDown);
             this.gcTaiKhoan.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gcTaiKhoan_MouseUp);
             // 
             // taiKhoanBds
@@ -803,6 +842,7 @@ namespace BankReplication.form
             this.gcKhachHang.TabIndex = 0;
             this.gcKhachHang.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvKhachHang});
+            this.gcKhachHang.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gcKhachHang_KeyDown);
             // 
             // gvKhachHang
             // 
@@ -1003,6 +1043,9 @@ namespace BankReplication.form
             ((System.ComponentModel.ISupportInitialize)(this.toolBarManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
+            this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sidePanel)).EndInit();
@@ -1131,5 +1174,8 @@ namespace BankReplication.form
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripCopyCell;
         private System.Windows.Forms.ToolStripTextBox copyCellTxt;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.LabelControl lblChiNhanh;
+        private System.Windows.Forms.ComboBox cmbChiNhanh;
     }
 }

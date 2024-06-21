@@ -2,7 +2,7 @@ USE NGANHANG
 GO
 CREATE OR ALTER VIEW uv_DanhSachNhanVien
 AS 
-SELECT DisplayMember =  + HO + ' ' + TEN + ' - ' + MANV
+SELECT DisplayMember =   MANV + ' - ' + HO + ' ' + TEN
 , ValueMember = MANV
 FROM NGANHANG.dbo.NhanVien
 

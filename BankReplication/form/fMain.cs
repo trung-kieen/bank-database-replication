@@ -131,11 +131,17 @@ namespace BankReplication
             else if(Program.mGroup.ToUpper() == "NGANHANG")
             {
                  btnKhachHang.Visibility = btnNhanVien.Visibility = btnAddLoginAccount.Visibility
-                    = btnThongKeTKMoi.Visibility = btnThongKeKH.Visibility
+                    = btnThongKeTKMoi.Visibility = btnThongKeKH.Visibility 
                     = DevExpress.XtraBars.BarItemVisibility.Always;
 
-                btnGuiRut.Visibility = btnChuyenTien.Visibility = btnMoTK.Visibility 
+
+                btnGuiRut.Visibility = btnChuyenTien.Visibility 
                     = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                if (utils.General.AllowBracnhSeeAccount)
+                    btnMoTK.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                else
+                    btnMoTK.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
             }
         }

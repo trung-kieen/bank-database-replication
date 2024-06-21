@@ -518,6 +518,7 @@ namespace BankReplication.form
             this.gcNhanVien.TabIndex = 2;
             this.gcNhanVien.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvNhanVien});
+            this.gcNhanVien.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gcNhanVien_KeyDown);
             // 
             // gvNhanVien
             // 

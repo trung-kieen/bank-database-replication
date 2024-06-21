@@ -8,6 +8,7 @@ EXEC SP_AddSPArticle N'SP_XoaLogin'
 EXEC SP_AddSPArticle N'SP_TimNhanVien'
 EXEC SP_AddSPArticle N'SP_DropEmployeeRole'
 EXEC SP_AddSPArticle N'SP_TimCMNDNhanVien'
+EXEC SP_AddSPArticle N'SP_TimTaiKhoan'
 
 
 EXEC SP_AddSPArticle N'SP_ThongKeGiaoDich'
