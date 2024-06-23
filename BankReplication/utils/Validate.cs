@@ -45,6 +45,11 @@ namespace BankReplication.utils
             return false;
         }
 
+        public static bool InvalidCash(DevExpress.XtraEditors.TextEdit txtSoTien)
+        {
+            if (InvalidField(txtSoTien, "Số dư", validateTransferMoney)) return true;
+            return false;
+        }
         /*
          * All validate method will not return any result if have error it will throw exception
          * The exception message will use in display error
@@ -68,6 +73,14 @@ namespace BankReplication.utils
         {
             notNull(sotk);
             PositiveDouble(sotk);
+            ValidMoney(sotk);
+        }
+        public static void validateTransferMoney(String sotk)
+        {
+            notNull(sotk);
+            PositiveDouble(sotk);
+            ValidMoney(sotk);
+            NonZeroMoney(sotk);
         }
         public static void validateLoginName(String login)
         {
@@ -220,6 +233,21 @@ namespace BankReplication.utils
         {
             if (Double.Parse(s) < 0) throw new Exception("Giá trị không được âm");
 
+        }
+        public static void ValidMoney(String s)
+        {
+            float num;
+            bool isValid = float.TryParse(s,
+            NumberStyles.Currency,
+            CultureInfo.GetCultureInfo("en-US"), // cached
+            out num);
+            if (!isValid) throw new Exception("Giá trị không hợp lệ với kiểu dữ liệu tiền tệ");
+            if( System.Data.SqlTypes.SqlMoney.Parse(s)> System.Data.SqlTypes.SqlMoney.MaxValue)
+            throw new Exception("Giá trị vượt quá giá trị tối đa có thể lưu trữ");
+        }
+        public static void NonZeroMoney(String s)
+        {
+            if (Decimal.Parse(s) == 0) throw new Exception("Số tiền trong giao dịch không thể bằng 0");
         }
     }
 

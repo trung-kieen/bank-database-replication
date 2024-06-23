@@ -289,7 +289,6 @@ namespace BankReplication.form
             }
         }
 
-        // TODO: 
         private bool InvalidNewAccount()
         {
             if (InvalidField(soTKTxt, "Số tài khoản", validateSoTK)) return true;
@@ -398,10 +397,15 @@ namespace BankReplication.form
             fBtnLuu.Focus();
 
 
+            try
+            {
             current.Row["SOTK"] = soTKTxt.Text;
             current.Row["SODU"] = soDuTxt.Text;
             current.Row["MACN"] = maCNTxt.Text;
             current.Row["CMND"] = CMNDTxt.Text;
+            }catch (Exception ex ) {
+                Msg.Error(ex.Message);
+            }
             try
             {
                 current.Row["NGAYMOTK"] =  DateTime.ParseExact(ngayMoTKTxt.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);

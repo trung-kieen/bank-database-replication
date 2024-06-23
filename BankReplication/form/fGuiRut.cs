@@ -7,6 +7,7 @@ using BankReplication.utils;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using static BankReplication.utils.Validate;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
@@ -62,24 +63,20 @@ namespace BankReplication.form
 
         private void btnGuiRut_Click(object sender, EventArgs e)
         {
-            // Validate input 
-
             try
             {
-                if (txtSoTien.Text.ToString() == "")
-                    throw new Exception("Số tiền không được để trống");
-                if (Double.Parse(txtSoTien.Text) < 0)
-                    throw new Exception("Số tiền không thể là số âm");
-
+                if (Double.Parse(txtSoTien.Text) > Double.Parse(txtSoDu.Text) && ((KeyValue)loaiGDCmb.SelectedItem).Value == "RT" )
+                {
+                    txtSoTien.Focus();
+                    throw new Exception("Số tiền trong tài khoản không đủ để thực hiện giao dịch");
+                }
             }
             catch (Exception ex)
             {
-                txtSoTien.Focus();
-                Msg.Warm("Số tiền không hợp lệ\n" + ex.Message);
+                Msg.Warm(ex.Message, "Giao dịch không hợp lệ");
                 return;
-
             }
-
+            if (InvalidCash(txtSoTien)) return;
             String confirmMessage = "Số tiền: " + txtSoTien.Text + "\n" + 
                 "Bằng chữ: " + MoneyRepersent.So_chu(Double.Parse(txtSoTien.Text));
             if (Msg.InforConfirm(confirmMessage, "Xác nhận giao dịch") != DialogResult.OK)

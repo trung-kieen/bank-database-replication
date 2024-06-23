@@ -21,5 +21,8 @@ BEGIN
         RETURN 1;
     -- Tim thay tren site hien tai
     END 
+	-- Khong tim thay
+	SELECT 0;
+    RETURN 0;
 
 END 

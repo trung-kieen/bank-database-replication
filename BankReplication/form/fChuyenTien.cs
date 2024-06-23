@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using static BankReplication.utils.Validate;
 using BankReplication.utils;
 using System.Text;
 using System.Linq;
@@ -88,18 +89,10 @@ namespace BankReplication.form
 
             String sotk_nguon = tkNguonCmb.Text.ToString().Trim();
             String sotk_nhan = tkNhanCmb.Text.ToString().Trim();
+
+            if (InvalidCash(txtSoTien)) return;
             try
             {
-                if (txtSoTien.Text.ToString() == "")
-                {
-                    txtSoTien.Focus();
-                    throw new Exception("Số tiền không được để trống");
-                }
-                if (!(Double.Parse(txtSoTien.Text) > 0))
-                {
-                    txtSoTien.Focus();
-                    throw new Exception("Số tiền phải lớn hơn 0");
-                }
                 if (Double.Parse(txtSoTien.Text) > Double.Parse(txtSoDu.Text))
                 {
                     txtSoTien.Focus();

@@ -183,16 +183,16 @@ namespace BankReplication.utils
         int pos;
         BindingSource _bds;
         public PositionCommand(BindingSource bds)
-            // TODO: Fix this :((
-            // Use in subform and bds is for the main form
-            // Sub window need some way to keep track which record in the main row work with operation 
-            // => Undo and redo is just go back to the position in main form to do undo or redo operation in subform
+        // TODO: Fix this :((
+        // Use in subform and bds is for the main form
+        // Sub window need some way to keep track which record in the main row work with operation 
+        // => Undo and redo is just go back to the position in main form to do undo or redo operation in subform
         {
-            
+
             _bds = bds;
 
         }
-        
+
         public void Execute()
         {
             pos = _bds.Position;
@@ -243,14 +243,16 @@ namespace BankReplication.utils
             }
 
 
-            try
-            {
+            // TODO:
+            /*
+            try {
                 // Not allow old employee access database 
                 _role = Program.ExecSqlScalar("EXEC SP_DropEmployeeRole '" + _maNVCu + "'");
             }
             catch
             {
             }
+            */
 
             try
             {
@@ -275,10 +277,10 @@ namespace BankReplication.utils
             }
 
 
-            if(_bds.Find("MANV" , _maNVCu) > 0)
-                _bds.Position = _bds.Find("MANV" , _maNVCu);
+            if (_bds.Find("MANV", _maNVCu) > 0)
+                _bds.Position = _bds.Find("MANV", _maNVCu);
             else
-            _bds.Position = position;
+                _bds.Position = position;
 
         }
         public void Undo()
@@ -288,8 +290,9 @@ namespace BankReplication.utils
             Program.conn.ConnectionString = _remote_connString;
             try
             {
+                int pos = _bds.Position;
 
-//                Msg.Info(Program.ExecSqlScalar("SELECT MACN FROM NGANHANG.dbo.ChiNhanh"));
+                String oldBranch = Program.ExecSqlScalar("SELECT MACN FROM NGANHANG.dbo.ChiNhanh");
                 String SPName = "SP_ChuyenNhanVien";
                 String cmd = $"EXEC {SPName} "
                     + $"  '{_maNVMoi}' "
@@ -300,8 +303,10 @@ namespace BankReplication.utils
                 Program.ExecSqlNonQuery(cmd);
                 _reload();
 
-                Msg.Info("Nhân viên đã được chuyển lại chi nhánh ban đầu");
-                _bds.Position = _bds.Find("MANV", _maNVCu);
+                Msg.Info($"Nhân viên đã được chuyển từ chi nhánh {oldBranch} về lại chi nhánh ban đầu với mã nhân viên là {_maNVCu}. Vui lòng chờ ít phút để dữ liệu cập nhập đầy đủ");
+                pos = _bds.Position;
+                if (_bds.Find("MANV", _maNVCu) > 0)
+                    pos = _bds.Find("MANV", _maNVCu);
 
             }
             catch (Exception ex)

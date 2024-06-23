@@ -161,7 +161,7 @@
             dIACHILabel.Name = "dIACHILabel";
             dIACHILabel.Size = new System.Drawing.Size(63, 19);
             dIACHILabel.TabIndex = 6;
-            dIACHILabel.Text = "Dịa chỉ:";
+            dIACHILabel.Text = "Địa chỉ:";
             // 
             // nGAYCAPLabel
             // 
@@ -505,6 +505,8 @@
             // 
             // colNGAYCAP
             // 
+            this.colNGAYCAP.DisplayFormat.FormatString = "dd/MM/yyyy";
+            this.colNGAYCAP.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colNGAYCAP.FieldName = "NGAYCAP";
             this.colNGAYCAP.MinWidth = 30;
             this.colNGAYCAP.Name = "colNGAYCAP";
@@ -610,6 +612,7 @@
             this.mACNTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.mACNTextEdit.MenuManager = this.barManagerKH;
             this.mACNTextEdit.Name = "mACNTextEdit";
+            this.mACNTextEdit.Properties.MaxLength = 10;
             this.mACNTextEdit.Size = new System.Drawing.Size(189, 28);
             this.mACNTextEdit.TabIndex = 15;
             // 
@@ -620,6 +623,7 @@
             this.sODTTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.sODTTextEdit.MenuManager = this.barManagerKH;
             this.sODTTextEdit.Name = "sODTTextEdit";
+            this.sODTTextEdit.Properties.MaxLength = 15;
             this.sODTTextEdit.Size = new System.Drawing.Size(189, 28);
             this.sODTTextEdit.TabIndex = 13;
             // 
@@ -635,6 +639,8 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.nGAYCAPDateEdit.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.nGAYCAPDateEdit.Properties.Mask.EditMask = "dd/MM/yyyy";
+            this.nGAYCAPDateEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.nGAYCAPDateEdit.Size = new System.Drawing.Size(189, 28);
             this.nGAYCAPDateEdit.TabIndex = 11;
             // 
@@ -645,6 +651,7 @@
             this.dIACHITextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.dIACHITextEdit.MenuManager = this.barManagerKH;
             this.dIACHITextEdit.Name = "dIACHITextEdit";
+            this.dIACHITextEdit.Properties.MaxLength = 100;
             this.dIACHITextEdit.Size = new System.Drawing.Size(189, 28);
             this.dIACHITextEdit.TabIndex = 7;
             // 
@@ -655,6 +662,7 @@
             this.tENTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.tENTextEdit.MenuManager = this.barManagerKH;
             this.tENTextEdit.Name = "tENTextEdit";
+            this.tENTextEdit.Properties.MaxLength = 10;
             this.tENTextEdit.Size = new System.Drawing.Size(189, 28);
             this.tENTextEdit.TabIndex = 5;
             // 
@@ -665,6 +673,7 @@
             this.hOTextEdit.Margin = new System.Windows.Forms.Padding(4);
             this.hOTextEdit.MenuManager = this.barManagerKH;
             this.hOTextEdit.Name = "hOTextEdit";
+            this.hOTextEdit.Properties.MaxLength = 50;
             this.hOTextEdit.Size = new System.Drawing.Size(189, 28);
             this.hOTextEdit.TabIndex = 3;
             // 

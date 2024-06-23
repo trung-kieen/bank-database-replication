@@ -36,6 +36,7 @@ namespace BankReplication.form
 
         public void InitNewRowData()
         {
+            nGAYCAPDateEdit.EditValue = DateTime.Now;
             if (macn == null)
                 macn = Program.LayMaCN();
             if (macn == null)
@@ -46,12 +47,12 @@ namespace BankReplication.form
             if (macn.ToString().Trim() == "") return;
             mACNTextEdit.Text = macn;
 
-            
+
             pHAIComboBox.SelectedIndex = 0;
         }
         public void SaveViewRowToBindingSource()
         {
-            
+
             //Gán dữ liệu từ text đến gridControl view
             DataRowView current = (DataRowView)khachHangBindingSource.Current;
             current.Row["HO"] = hOTextEdit.Text;
@@ -65,7 +66,8 @@ namespace BankReplication.form
 
         private Boolean InvalidNewCustomer()
         {
-            if (InvalidField(cMNDTextEdit, "Số chứng minh nhân dân", validateCMND)){
+            if (InvalidField(cMNDTextEdit, "Số chứng minh nhân dân", validateCMND))
+            {
                 return true;
             }
             if (InvalidField(hOTextEdit, "Họ", validateHo)) return true;
@@ -79,7 +81,7 @@ namespace BankReplication.form
             // SDT Allow null!!! change db contraint
             if (InvalidField(sODTTextEdit, "Số điện thoại", validateSDT)) return true;
             if (InvalidField(mACNTextEdit, "Mã chi nhánh", validateMACN)) return true;
-            
+
             if (InvalidDuplicateCMND()) return true;
             return false;
         }
@@ -97,7 +99,7 @@ namespace BankReplication.form
             if (InvalidField(sODTTextEdit, "Số điện thoại", validateSDT)) return true;
             if (InvalidField(mACNTextEdit, "Mã chi nhánh", validateMACN)) return true;
 
-            
+
             if (!cMNDTextEdit.OldEditValue.ToString().Trim().Equals(cMNDTextEdit.EditValue.ToString().Trim()))
             {
                 if (InvalidDuplicateCMND()) return true;
@@ -120,7 +122,7 @@ namespace BankReplication.form
                 cMNDTextEdit.Focus();
                 return true;
             }
-            
+
             return false;
         }
 
@@ -393,7 +395,7 @@ namespace BankReplication.form
 
                 if (formAction == FormActionKH.Add)
                 {
-                    
+
                     panelDetailKH.Visible = true;
                     panelDetailKH.Enabled = true;
                     khachHangGridControl.Enabled = false;
@@ -413,7 +415,7 @@ namespace BankReplication.form
                     panelDetailKH.Visible = true;
                     panelDetailKH.Enabled = true;
                     khachHangGridControl.Enabled = false;
-                    
+
                     cMNDTextEdit.Enabled = true;
 
                     btnHuyKH.Enabled = true;
@@ -429,7 +431,7 @@ namespace BankReplication.form
                     panelDetailKH.Enabled = false; //editDang
                     btnHuyKH.Enabled = false;
                     btnLuuKH.Enabled = false;
-                    
+
                 }
                 // Final condition require button to become enable 
                 if (khachHangBindingSource.Position == -1)
@@ -509,7 +511,7 @@ namespace BankReplication.form
             new KeyValue("Nam", "Nam"),
             new KeyValue("Nữ", "Nữ")
             });
-            
+
             pHAIComboBox.SelectedIndex = 0;
             pHAIComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
@@ -597,7 +599,7 @@ namespace BankReplication.form
             HandleReload();
         }
 
-      
+
 
         private void barBtnLuuKH_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
