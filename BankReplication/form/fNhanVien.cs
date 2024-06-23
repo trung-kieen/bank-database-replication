@@ -744,6 +744,12 @@ namespace BankReplication.form
         {
             if (nhanVienBds.Position >= 0)
             {
+                if(formAction != FormAction.None)
+                {
+                    btnChuyenCN.Enabled = false;
+                    btnXoa.Enabled = false;
+                    return;
+                }
 
                 DataRowView r = (DataRowView)nhanVienBds.Current;
                 PHAIComboBox.SelectedIndex = PHAIComboBox.FindStringExact(r.Row["PHAI"].ToString());

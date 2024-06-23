@@ -289,10 +289,10 @@ namespace BankReplication
         }
         private void btnKhachHang_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            Form fKhachHang = CheckExist(typeof(KhachHangForm));
+            Form fKhachHang = CheckExist(typeof(fKhacHang));
             if (fKhachHang == null)
             {
-                fKhachHang = new KhachHangForm();
+                fKhachHang = new fKhacHang();
                 fKhachHang.MdiParent = this;
                 fKhachHang.Show();
             }

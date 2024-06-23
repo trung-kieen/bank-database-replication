@@ -17,7 +17,7 @@ enum FormActionKH { None, Add, Edit };
 
 namespace BankReplication.form
 {
-    public partial class KhachHangForm : DevExpress.XtraEditors.XtraForm
+    public partial class fKhacHang : DevExpress.XtraEditors.XtraForm
     {
         private Invoker commandController = new Invoker();
         private String macn;
@@ -27,7 +27,7 @@ namespace BankReplication.form
         private int focusedRowHandle;
         private FormActionKH formAction;
         private object[] checkPointRowsData;
-        public KhachHangForm()
+        public fKhacHang()
         {
             InitializeComponent();
         }
@@ -183,8 +183,13 @@ namespace BankReplication.form
             if (khachHangBindingSource.Position < 0)
                 return;
             SavePosition();
+            if (taiKhoanBindingSource.Count > 0)
+            {
+                Msg.Warm("Không thể xóa khách hàng này vì đã lập tài khoản giao dịch");
+                return;
+            }
 
-            if (Msg.InforConfirm("Bạn có thực sự muốn xóa nhân viên này?") == DialogResult.OK)
+            if (Msg.InforConfirm("Bạn có thực sự muốn xóa khách hàng này?") == DialogResult.OK)
             {
                 try
                 {
@@ -485,6 +490,8 @@ namespace BankReplication.form
 
         private void KhachHangForm_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'DataSetAll.TaiKhoan' table. You can move, or remove it, as needed.
+            this.taiKhoanTableAdapter.Fill(this.DataSetAll.TaiKhoan);
             // TODO: This line of code loads data into the 'DataSetAll.TaiKhoan' table. You can move, or remove it, as needed.
             this.taiKhoanTableAdapter.Fill(this.DataSetAll.TaiKhoan);
             // TODO: This line of code loads data into the 'DataSetAll.TaiKhoan' table. You can move, or remove it, as needed.

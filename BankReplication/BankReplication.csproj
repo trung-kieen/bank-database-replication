@@ -161,13 +161,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NGANHANGDataSet1.xsd</DependentUpon>
     </Compile>
-
     <Compile Include="NGANHANGDataSetAll.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NGANHANGDataSetAll.xsd</DependentUpon>
     </Compile>
-
     <Compile Include="NhanVienDS.cs">
       <DependentUpon>NhanVienDS.xsd</DependentUpon>
     </Compile>
@@ -211,11 +209,11 @@
     <Compile Include="report\rptTaiKhoan.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="form\KhachHangForm.cs">
+    <Compile Include="form\fKhacHang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\KhachHangForm.designer.cs">
-      <DependentUpon>KhachHangForm.cs</DependentUpon>
+    <Compile Include="form\fKhacHang.designer.cs">
+      <DependentUpon>fKhacHang.cs</DependentUpon>
     </Compile>
     <Compile Include="report\rptTaiKhoan.Designer.cs">
       <DependentUpon>rptTaiKhoan.cs</DependentUpon>
@@ -234,8 +232,8 @@
     <EmbeddedResource Include="form\fChuyenNhanVien.resx">
       <DependentUpon>fChuyenNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\KhachHangForm.resx">
-      <DependentUpon>KhachHangForm.cs</DependentUpon>
+    <EmbeddedResource Include="form\fKhacHang.resx">
+      <DependentUpon>fKhacHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\fChuyenTien.resx">
       <DependentUpon>fChuyenTien.cs</DependentUpon>
@@ -328,7 +326,6 @@
     <None Include="NGANHANGDataSet1.xss">
       <DependentUpon>NGANHANGDataSet1.xsd</DependentUpon>
     </None>
-
     <None Include="NGANHANGDataSetAll.xsc">
       <DependentUpon>NGANHANGDataSetAll.xsd</DependentUpon>
     </None>
@@ -340,7 +337,6 @@
     <None Include="NGANHANGDataSetAll.xss">
       <DependentUpon>NGANHANGDataSetAll.xsd</DependentUpon>
     </None>
-
     <None Include="NhanVienDS.xsc">
       <DependentUpon>NhanVienDS.xsd</DependentUpon>
       <SubType>Designer</SubType>

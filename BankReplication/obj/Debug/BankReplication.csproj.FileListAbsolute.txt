@@ -397,7 +397,6 @@ E:\BankReplication\BankReplication\obj\Debug\BankReplication.report.rptTaiKhoan.
 E:\BankReplication\BankReplication\obj\Debug\BankReplication.report.formTaoLogin.resources
 E:\merge\BankReplication\obj\Debug\BankReplication.csprojAssemblyReference.cache
 E:\merge\BankReplication\obj\Debug\BankReplication.form.formChuyenNhanVien.resources
-E:\merge\BankReplication\obj\Debug\BankReplication.form.KhachHangForm.resources
 E:\merge\BankReplication\obj\Debug\BankReplication.form.formChuyenTien.resources
 E:\merge\BankReplication\obj\Debug\BankReplication.form.formDangNhap.resources
 E:\merge\BankReplication\obj\Debug\BankReplication.form.formGuiRut.resources
@@ -611,3 +610,4 @@ E:\merge\BankReplication\bin\Debug\ja\DevExpress.Diagram.v19.2.Core.resources.dl
 E:\merge\BankReplication\bin\Debug\ru\DevExpress.Diagram.v19.2.Core.resources.dll
 E:\merge\BankReplication\obj\Debug\BankReplication.csproj.CopyComplete
 E:\merge\BankReplication\obj\Debug\BankReplication.pdb
+E:\merge\BankReplication\obj\Debug\BankReplication.form.fKhacHang.resources
