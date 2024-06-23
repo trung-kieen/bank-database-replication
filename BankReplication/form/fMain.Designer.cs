@@ -138,6 +138,8 @@
             this.btnKhachHang.Id = 8;
             this.btnKhachHang.ImageOptions.LargeImageIndex = 4;
             this.btnKhachHang.Name = "btnKhachHang";
+            this.btnKhachHang.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnKhachHang_ItemClick);
+
             // 
             // btnNhanVien
             // 

@@ -287,5 +287,21 @@ namespace BankReplication
                 fAddLogin.Activate();
             }
         }
+        private void btnKhachHang_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form fKhachHang = CheckExist(typeof(KhachHangForm));
+            if (fKhachHang == null)
+            {
+                fKhachHang = new KhachHangForm();
+                fKhachHang.MdiParent = this;
+                fKhachHang.Show();
+            }
+            else
+            {
+                fKhachHang.Activate();
+            }
+
+        }
+
     }
 }
