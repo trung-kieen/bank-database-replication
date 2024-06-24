@@ -66,6 +66,7 @@ namespace BankReplication.form
 
             if (Program.mGroup.ToUpper() == "NGANHANG")
             {
+                dataLayoutControl1.Enabled = false; 
                 btnThem.Enabled = false;
                 btnXoa.Enabled = false;
                 btnSua.Enabled = false;
@@ -571,8 +572,7 @@ namespace BankReplication.form
         }
         private void gvTaiKhoan_DoubleClick(object sender, EventArgs e)
         {
-            if (gcTaiKhoan.Enabled)
-                OpenEditSideBar();
+            btnSua.PerformClick();
         }
         private void gvTaiKhoan_LostFocus(object sender, EventArgs e)
         {

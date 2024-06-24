@@ -61,8 +61,8 @@ SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM TaiKhoan WHERE (SOTK = @SOTK)</Comm
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM dbo.TaiKhoan</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM dbo.TaiKhoan WHERE MACN = (SELECT TOP 1 MACN FROM dbo.ChiNhanh)</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -140,7 +140,7 @@ SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM TaiKhoan WHERE (SOTK = @SOTK)</Comm
   <xs:element name="MoTKDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="MoTKDS" msprop:Generator_UserDSName="MoTKDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="KhachHang" msprop:Generator_TableClassName="KhachHangDataTable" msprop:Generator_TableVarName="tableKhachHang" msprop:Generator_RowChangedName="KhachHangRowChanged" msprop:Generator_TablePropName="KhachHang" msprop:Generator_RowDeletingName="KhachHangRowDeleting" msprop:Generator_RowChangingName="KhachHangRowChanging" msprop:Generator_RowEvHandlerName="KhachHangRowChangeEventHandler" msprop:Generator_RowDeletedName="KhachHangRowDeleted" msprop:Generator_RowClassName="KhachHangRow" msprop:Generator_UserTableName="KhachHang" msprop:Generator_RowEvArgName="KhachHangRowChangeEvent">
+        <xs:element name="KhachHang" msprop:Generator_TableClassName="KhachHangDataTable" msprop:Generator_TableVarName="tableKhachHang" msprop:Generator_TablePropName="KhachHang" msprop:Generator_RowDeletingName="KhachHangRowDeleting" msprop:Generator_RowChangingName="KhachHangRowChanging" msprop:Generator_RowEvHandlerName="KhachHangRowChangeEventHandler" msprop:Generator_RowDeletedName="KhachHangRowDeleted" msprop:Generator_UserTableName="KhachHang" msprop:Generator_RowChangedName="KhachHangRowChanged" msprop:Generator_RowEvArgName="KhachHangRowChangeEvent" msprop:Generator_RowClassName="KhachHangRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CMND" msprop:Generator_ColumnVarNameInTable="columnCMND" msprop:Generator_ColumnPropNameInRow="CMND" msprop:Generator_ColumnPropNameInTable="CMNDColumn" msprop:Generator_UserColumnName="CMND">
@@ -196,7 +196,7 @@ SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM TaiKhoan WHERE (SOTK = @SOTK)</Comm
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TaiKhoan" msprop:Generator_TableClassName="TaiKhoanDataTable" msprop:Generator_TableVarName="tableTaiKhoan" msprop:Generator_RowChangedName="TaiKhoanRowChanged" msprop:Generator_TablePropName="TaiKhoan" msprop:Generator_RowDeletingName="TaiKhoanRowDeleting" msprop:Generator_RowChangingName="TaiKhoanRowChanging" msprop:Generator_RowEvHandlerName="TaiKhoanRowChangeEventHandler" msprop:Generator_RowDeletedName="TaiKhoanRowDeleted" msprop:Generator_RowClassName="TaiKhoanRow" msprop:Generator_UserTableName="TaiKhoan" msprop:Generator_RowEvArgName="TaiKhoanRowChangeEvent">
+        <xs:element name="TaiKhoan" msprop:Generator_TableClassName="TaiKhoanDataTable" msprop:Generator_TableVarName="tableTaiKhoan" msprop:Generator_TablePropName="TaiKhoan" msprop:Generator_RowDeletingName="TaiKhoanRowDeleting" msprop:Generator_RowChangingName="TaiKhoanRowChanging" msprop:Generator_RowEvHandlerName="TaiKhoanRowChangeEventHandler" msprop:Generator_RowDeletedName="TaiKhoanRowDeleted" msprop:Generator_UserTableName="TaiKhoan" msprop:Generator_RowChangedName="TaiKhoanRowChanged" msprop:Generator_RowEvArgName="TaiKhoanRowChangeEvent" msprop:Generator_RowClassName="TaiKhoanRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SOTK" msprop:Generator_ColumnVarNameInTable="columnSOTK" msprop:Generator_ColumnPropNameInRow="SOTK" msprop:Generator_ColumnPropNameInTable="SOTKColumn" msprop:Generator_UserColumnName="SOTK">
@@ -225,7 +225,7 @@ SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM TaiKhoan WHERE (SOTK = @SOTK)</Comm
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GDGuiRut" msprop:Generator_TableClassName="GDGuiRutDataTable" msprop:Generator_TableVarName="tableGDGuiRut" msprop:Generator_TablePropName="GDGuiRut" msprop:Generator_RowDeletingName="GDGuiRutRowDeleting" msprop:Generator_RowChangingName="GDGuiRutRowChanging" msprop:Generator_RowEvHandlerName="GDGuiRutRowChangeEventHandler" msprop:Generator_RowDeletedName="GDGuiRutRowDeleted" msprop:Generator_UserTableName="GDGuiRut" msprop:Generator_RowChangedName="GDGuiRutRowChanged" msprop:Generator_RowEvArgName="GDGuiRutRowChangeEvent" msprop:Generator_RowClassName="GDGuiRutRow">
+        <xs:element name="GDGuiRut" msprop:Generator_TableClassName="GDGuiRutDataTable" msprop:Generator_TableVarName="tableGDGuiRut" msprop:Generator_RowChangedName="GDGuiRutRowChanged" msprop:Generator_TablePropName="GDGuiRut" msprop:Generator_RowDeletingName="GDGuiRutRowDeleting" msprop:Generator_RowChangingName="GDGuiRutRowChanging" msprop:Generator_RowEvHandlerName="GDGuiRutRowChangeEventHandler" msprop:Generator_RowDeletedName="GDGuiRutRowDeleted" msprop:Generator_RowClassName="GDGuiRutRow" msprop:Generator_UserTableName="GDGuiRut" msprop:Generator_RowEvArgName="GDGuiRutRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MAGD" msprop:Generator_ColumnVarNameInTable="columnMAGD" msprop:Generator_ColumnPropNameInRow="MAGD" msprop:Generator_ColumnPropNameInTable="MAGDColumn" msprop:Generator_UserColumnName="MAGD" type="xs:int" />
@@ -239,7 +239,7 @@ SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM TaiKhoan WHERE (SOTK = @SOTK)</Comm
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GDChuyenTien" msprop:Generator_TableClassName="GDChuyenTienDataTable" msprop:Generator_TableVarName="tableGDChuyenTien" msprop:Generator_TablePropName="GDChuyenTien" msprop:Generator_RowDeletingName="GDChuyenTienRowDeleting" msprop:Generator_RowChangingName="GDChuyenTienRowChanging" msprop:Generator_RowEvHandlerName="GDChuyenTienRowChangeEventHandler" msprop:Generator_RowDeletedName="GDChuyenTienRowDeleted" msprop:Generator_UserTableName="GDChuyenTien" msprop:Generator_RowChangedName="GDChuyenTienRowChanged" msprop:Generator_RowEvArgName="GDChuyenTienRowChangeEvent" msprop:Generator_RowClassName="GDChuyenTienRow">
+        <xs:element name="GDChuyenTien" msprop:Generator_TableClassName="GDChuyenTienDataTable" msprop:Generator_TableVarName="tableGDChuyenTien" msprop:Generator_RowChangedName="GDChuyenTienRowChanged" msprop:Generator_TablePropName="GDChuyenTien" msprop:Generator_RowDeletingName="GDChuyenTienRowDeleting" msprop:Generator_RowChangingName="GDChuyenTienRowChanging" msprop:Generator_RowEvHandlerName="GDChuyenTienRowChangeEventHandler" msprop:Generator_RowDeletedName="GDChuyenTienRowDeleted" msprop:Generator_RowClassName="GDChuyenTienRow" msprop:Generator_UserTableName="GDChuyenTien" msprop:Generator_RowEvArgName="GDChuyenTienRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MAGD" msprop:Generator_ColumnVarNameInTable="columnMAGD" msprop:Generator_ColumnPropNameInRow="MAGD" msprop:Generator_ColumnPropNameInTable="MAGDColumn" msprop:Generator_UserColumnName="MAGD" type="xs:int" />
@@ -278,19 +278,19 @@ SELECT SOTK, CMND, SODU, MACN, NGAYMOTK FROM TaiKhoan WHERE (SOTK = @SOTK)</Comm
       <xs:selector xpath=".//mstns:GDChuyenTien" />
       <xs:field xpath="mstns:MAGD" />
     </xs:unique>
-    <xs:keyref name="TaiKhoan_GDChuyenTien" refer="TaiKhoan_Constraint1" msprop:rel_Generator_UserChildTable="GDChuyenTien" msprop:rel_Generator_ChildPropName="GetGDChuyenTienRowsByTaiKhoan_GDChuyenTien" msprop:rel_Generator_UserRelationName="TaiKhoan_GDChuyenTien" msprop:rel_Generator_ParentPropName="TaiKhoanRowByTaiKhoan_GDChuyenTien" msprop:rel_Generator_RelationVarName="relationTaiKhoan_GDChuyenTien" msprop:rel_Generator_UserParentTable="TaiKhoan" msdata:UpdateRule="None" msdata:DeleteRule="None">
-      <xs:selector xpath=".//mstns:GDChuyenTien" />
-      <xs:field xpath="mstns:SOTK_CHUYEN" />
-    </xs:keyref>
-    <xs:keyref name="TaiKhoan_GDNhanTien" refer="TaiKhoan_Constraint1" msprop:rel_Generator_UserChildTable="GDChuyenTien" msprop:rel_Generator_ChildPropName="GetGDChuyenTienRowsByTaiKhoan_GDNhanTien" msprop:rel_Generator_UserRelationName="TaiKhoan_GDNhanTien" msprop:rel_Generator_ParentPropName="TaiKhoanRowByTaiKhoan_GDNhanTien" msprop:rel_Generator_RelationVarName="relationTaiKhoan_GDNhanTien" msprop:rel_Generator_UserParentTable="TaiKhoan">
+    <xs:keyref name="TaiKhoan_GDNhanTien" refer="TaiKhoan_Constraint1" msprop:rel_Generator_UserChildTable="GDChuyenTien" msprop:rel_Generator_ChildPropName="GetGDChuyenTienRowsByTaiKhoan_GDNhanTien" msprop:rel_Generator_UserRelationName="TaiKhoan_GDNhanTien" msprop:rel_Generator_RelationVarName="relationTaiKhoan_GDNhanTien" msprop:rel_Generator_UserParentTable="TaiKhoan" msprop:rel_Generator_ParentPropName="TaiKhoanRowByTaiKhoan_GDNhanTien">
       <xs:selector xpath=".//mstns:GDChuyenTien" />
       <xs:field xpath="mstns:SOTK_NHAN" />
     </xs:keyref>
-    <xs:keyref name="FK_TaiKhoan_GD_GuiRut" refer="TaiKhoan_Constraint1" msprop:rel_Generator_UserChildTable="GDGuiRut" msprop:rel_Generator_ChildPropName="GetGDGuiRutRows" msprop:rel_Generator_UserRelationName="FK_TaiKhoan_GD_GuiRut" msprop:rel_Generator_ParentPropName="TaiKhoanRow" msprop:rel_Generator_RelationVarName="relationFK_TaiKhoan_GD_GuiRut" msprop:rel_Generator_UserParentTable="TaiKhoan">
+    <xs:keyref name="TaiKhoan_GDChuyenTien" refer="TaiKhoan_Constraint1" msprop:rel_Generator_UserChildTable="GDChuyenTien" msprop:rel_Generator_ChildPropName="GetGDChuyenTienRowsByTaiKhoan_GDChuyenTien" msprop:rel_Generator_UserRelationName="TaiKhoan_GDChuyenTien" msprop:rel_Generator_RelationVarName="relationTaiKhoan_GDChuyenTien" msprop:rel_Generator_UserParentTable="TaiKhoan" msprop:rel_Generator_ParentPropName="TaiKhoanRowByTaiKhoan_GDChuyenTien" msdata:UpdateRule="None" msdata:DeleteRule="None">
+      <xs:selector xpath=".//mstns:GDChuyenTien" />
+      <xs:field xpath="mstns:SOTK_CHUYEN" />
+    </xs:keyref>
+    <xs:keyref name="FK_TaiKhoan_GD_GuiRut" refer="TaiKhoan_Constraint1" msprop:rel_Generator_UserChildTable="GDGuiRut" msprop:rel_Generator_ChildPropName="GetGDGuiRutRows" msprop:rel_Generator_UserRelationName="FK_TaiKhoan_GD_GuiRut" msprop:rel_Generator_RelationVarName="relationFK_TaiKhoan_GD_GuiRut" msprop:rel_Generator_UserParentTable="TaiKhoan" msprop:rel_Generator_ParentPropName="TaiKhoanRow">
       <xs:selector xpath=".//mstns:GDGuiRut" />
       <xs:field xpath="mstns:SOTK" />
     </xs:keyref>
-    <xs:keyref name="FK_TaiKhoan_KhachHang" refer="Constraint1" msprop:rel_Generator_UserChildTable="TaiKhoan" msprop:rel_Generator_ChildPropName="GetTaiKhoanRows" msprop:rel_Generator_UserRelationName="FK_TaiKhoan_KhachHang" msprop:rel_Generator_ParentPropName="KhachHangRow" msprop:rel_Generator_RelationVarName="relationFK_TaiKhoan_KhachHang" msprop:rel_Generator_UserParentTable="KhachHang" msdata:DeleteRule="None">
+    <xs:keyref name="FK_TaiKhoan_KhachHang" refer="Constraint1" msprop:rel_Generator_UserChildTable="TaiKhoan" msprop:rel_Generator_ChildPropName="GetTaiKhoanRows" msprop:rel_Generator_UserRelationName="FK_TaiKhoan_KhachHang" msprop:rel_Generator_RelationVarName="relationFK_TaiKhoan_KhachHang" msprop:rel_Generator_UserParentTable="KhachHang" msprop:rel_Generator_ParentPropName="KhachHangRow" msdata:DeleteRule="None">
       <xs:selector xpath=".//mstns:TaiKhoan" />
       <xs:field xpath="mstns:CMND" />
     </xs:keyref>

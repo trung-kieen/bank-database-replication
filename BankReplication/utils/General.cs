@@ -14,7 +14,7 @@ namespace BankReplication.utils
         // Cho phep phan nhom khach hang tim kiem du lieu ve cac tai khoan tren phan manh
         public static readonly Boolean AllowBracnhSeeAccount = true;
 
-        public static readonly Boolean SwitchBranchOnAddNewAccount = false;
+        public static readonly Boolean SwitchBranchOnAddNewAccount = true;
 
     }
 

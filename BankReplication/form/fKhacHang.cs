@@ -606,4 +606,5 @@ namespace BankReplication.form
             OpenCreationSideBar();
         }
     }
+
 }
