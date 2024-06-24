@@ -141,8 +141,8 @@
       <DependentUpon>MoTKDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="MoTKDS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
+      <AutoGen>False</AutoGen>
+      <DesignTime>False</DesignTime>
       <DependentUpon>MoTKDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="NGANHANGDataSet.cs">
