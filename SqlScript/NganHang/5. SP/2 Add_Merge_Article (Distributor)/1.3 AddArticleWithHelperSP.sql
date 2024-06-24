@@ -7,13 +7,16 @@ EXEC SP_AddSPArticle N'SP_TaoLogin'
 EXEC SP_AddSPArticle N'SP_XoaLogin'
 EXEC SP_AddSPArticle N'SP_TimNhanVien'
 EXEC SP_AddSPArticle N'SP_DropEmployeeRole'
+
 EXEC SP_AddSPArticle N'SP_TimCMNDNhanVien'
+EXEC SP_AddSPArticle N'SP_TimCMNDKhachHang'
 EXEC SP_AddSPArticle N'SP_TimTaiKhoan'
 
 
-EXEC SP_AddSPArticle N'SP_ThongKeGiaoDich'
+
 EXEC SP_AddSPArticle N'SP_DSTaiKhoan_ThongKeGD'
 EXEC SP_AddSPArticle N'SP_ThongKeTaiKhoan'
+EXEC SP_AddSPArticle N'SP_ThongKeGiaoDich'
 EXEC SP_AddSPArticle N'SP_ThongKeKhachHang'
 EXEC SP_AddSPArticle N'SP_ThongKeKhachHang_SongSong'
 EXEC SP_AddSPArticle N'SP_ThongTinTaiKhoan'
