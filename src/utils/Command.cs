@@ -15,6 +15,7 @@ namespace BankReplication.utils
         void Execute();
         void Undo();
 
+        Boolean ReadyUndo();
         void Redo();
     }
 
@@ -26,6 +27,10 @@ namespace BankReplication.utils
         private int originPosition;
         private Action _reload;
         private Action _save;
+        public Boolean ReadyUndo()
+        {
+            return true;
+        }
         public AddCommand(BankReplication.utils.BindingSourceExtends bds, object[] rows, Action reload, Action save)
         {
             _bds = bds;
@@ -91,6 +96,10 @@ namespace BankReplication.utils
             _reload = reload;
             _save = save;
         }
+        public Boolean ReadyUndo()
+        {
+            return true;
+        }
         public void Execute()
         {
             if (_bds.Count > 0)
@@ -155,6 +164,10 @@ namespace BankReplication.utils
             _rowView = (DataRowView)_bds.Current;
             _save = save;
         }
+        public Boolean ReadyUndo()
+        {
+            return true;
+        }
         public void Execute()
         {
 
@@ -183,10 +196,6 @@ namespace BankReplication.utils
         int pos;
         BindingSource _bds;
         public PositionCommand(BindingSource bds)
-        // TODO: Fix this :((
-        // Use in subform and bds is for the main form
-        // Sub window need some way to keep track which record in the main row work with operation 
-        // => Undo and redo is just go back to the position in main form to do undo or redo operation in subform
         {
 
             _bds = bds;
@@ -198,6 +207,10 @@ namespace BankReplication.utils
             pos = _bds.Position;
         }
 
+        public Boolean ReadyUndo()
+        {
+            return true;
+        }
         public void Undo()
         {
             _bds.Position = pos;
@@ -283,6 +296,31 @@ namespace BankReplication.utils
                 _bds.Position = position;
 
         }
+        // Avoid error from slow synchronize when use distribute transaction
+        public Boolean ReadyUndo()
+        {
+            Program.conn.Close();
+            Program.conn.ConnectionString = _connString;
+            Program.conn.ConnectionString = _remote_connString;
+            try
+            {
+                String NewEmployeeId= Program.ExecSqlScalar($"SELECT MANV FROM NGANHANG.dbo.NhanVien WHERE MANV = '{_maNVMoi}'" );
+                if (NewEmployeeId.Trim() != _maNVMoi)
+                    throw new Exception("Not match");
+            }
+            catch (Exception ex)
+            {
+                Msg.Error("Chưa thể hoàn tác thao tác chuyển nhân viên do dữ liệu chưa đồng bộ vui lòng chờ ít phút");
+                Program.conn.Close();
+                Program.conn.ConnectionString = _connString;
+                return false;
+
+            }
+
+            Program.conn.Close();
+            Program.conn.ConnectionString = _connString;
+            return true;
+        }
         public void Undo()
         {
             Program.conn.Close();
@@ -362,7 +400,15 @@ namespace BankReplication.utils
                 if (undoStack.Count > 0)
                 {
                     ICommand cmd = undoStack.Pop();
+                    if (cmd.ReadyUndo())
+                    {
                     cmd.Undo();
+                    }
+                    else
+                    {
+                        undoStack.Push(cmd);
+                        return; 
+                    }
                     redoStack.Push(cmd);
                 }
             }
