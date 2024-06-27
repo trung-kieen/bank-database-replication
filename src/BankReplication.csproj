@@ -223,7 +223,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="utils\Command.cs" />
-    <Compile Include="QueryHelper.cs" />
+    <Compile Include="Program.query.cs" />
     <Compile Include="utils\Constant.cs" />
     <Compile Include="utils\ComboBoxItem.cs" />
     <Compile Include="utils\General.cs" />

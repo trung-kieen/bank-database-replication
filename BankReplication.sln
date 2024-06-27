@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.34526.175
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankReplication", "BankReplication\BankReplication.csproj", "{50F7008D-CC01-42EE-9AC8-336C9D620FDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src", "src\BankReplication.csproj", "{50F7008D-CC01-42EE-9AC8-336C9D620FDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
