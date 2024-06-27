@@ -96,7 +96,7 @@ namespace BankReplication.report
             XtraReport thongKeKhachHang;
             try
             {
-                String QueryAllSite = "SP_ThongKeKhachHang_SongSong";
+                String QueryAllSite = "SP_ThongKeKHSS";
                 if (checkAllSite.Checked)
                 {
                     // Require to run SP from remote server with serverrole sysadmin to able update and delete job agent

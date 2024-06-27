@@ -121,6 +121,7 @@
             this.tkCmb.Size = new System.Drawing.Size(407, 27);
             this.tkCmb.TabIndex = 1;
             this.tkCmb.SelectedIndexChanged += new System.EventHandler(this.tkCmb_SelectedIndexChanged);
+            this.tkCmb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tkCmb_KeyDown);
             // 
             // denngayDateEdit
             // 

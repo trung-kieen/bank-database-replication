@@ -17,7 +17,7 @@ GRANT EXECUTE ON [SP_DSTaiKhoan_ThongKeGD] TO KhachHang
 USE [NGANHANG]
 GO
 GRANT EXECUTE ON [SP_ThongKeKhachHang] TO NganHang
-GRANT EXECUTE ON [SP_ThongKeKhachHang_SongSong] TO NganHang
+GRANT EXECUTE ON [SP_ThongKeKHSS] TO NganHang
 
 GRANT EXECUTE ON [SP_ThongKeTaiKhoan] TO NganHang
 GRANT EXECUTE ON [SP_ThongTinTaiKhoan] TO NganHang
