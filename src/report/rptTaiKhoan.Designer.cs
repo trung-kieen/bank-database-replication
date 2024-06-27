@@ -49,6 +49,8 @@
             this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.pageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrlbNguoiLap = new DevExpress.XtraReports.UI.XRLabel();
             this.xrlbDenngay = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrlbTungay = new DevExpress.XtraReports.UI.XRLabel();
@@ -211,53 +213,86 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel1,
+            this.xrlbNguoiLap,
             this.xrlbDenngay,
             this.xrLabel5,
             this.xrlbTungay,
             this.xrLabel3,
             this.label1});
-            this.ReportHeader.HeightF = 128.472F;
+            this.ReportHeader.HeightF = 146.5276F;
             this.ReportHeader.Name = "ReportHeader";
+            // 
+            // xrLabel1
+            // 
+            this.xrLabel1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 39.16668F);
+            this.xrLabel1.Multiline = true;
+            this.xrLabel1.Name = "xrLabel1";
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(126.5893F, 20.83333F);
+            this.xrLabel1.StylePriority.UseFont = false;
+            this.xrLabel1.Text = "Người lập thống kê: ";
+            // 
+            // xrlbNguoiLap
+            // 
+            this.xrlbNguoiLap.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.xrlbNguoiLap.LocationFloat = new DevExpress.Utils.PointFloat(133.8453F, 39.16668F);
+            this.xrlbNguoiLap.Multiline = true;
+            this.xrlbNguoiLap.Name = "xrlbNguoiLap";
+            this.xrlbNguoiLap.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrlbNguoiLap.SizeF = new System.Drawing.SizeF(280.5556F, 20.83333F);
+            this.xrlbNguoiLap.StylePriority.UseFont = false;
+            this.xrlbNguoiLap.Text = "[nguolap]";
             // 
             // xrlbDenngay
             // 
-            this.xrlbDenngay.LocationFloat = new DevExpress.Utils.PointFloat(122.3186F, 93.05539F);
+            this.xrlbDenngay.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.xrlbDenngay.LocationFloat = new DevExpress.Utils.PointFloat(133.8453F, 107.6387F);
             this.xrlbDenngay.Multiline = true;
             this.xrlbDenngay.Name = "xrlbDenngay";
             this.xrlbDenngay.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrlbDenngay.SizeF = new System.Drawing.SizeF(280.5556F, 20.83333F);
+            this.xrlbDenngay.StylePriority.UseFont = false;
             this.xrlbDenngay.Text = "[denngay]";
             // 
             // xrLabel5
             // 
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(9.999996F, 93.05539F);
+            this.xrLabel5.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 107.6387F);
             this.xrLabel5.Multiline = true;
             this.xrLabel5.Name = "xrLabel5";
             this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel5.SizeF = new System.Drawing.SizeF(91.66667F, 20.83333F);
+            this.xrLabel5.StylePriority.UseFont = false;
             this.xrLabel5.Text = "Đến ngày:";
             // 
             // xrlbTungay
             // 
-            this.xrlbTungay.LocationFloat = new DevExpress.Utils.PointFloat(122.3186F, 57.36101F);
+            this.xrlbTungay.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.xrlbTungay.LocationFloat = new DevExpress.Utils.PointFloat(133.8453F, 70.55544F);
             this.xrlbTungay.Multiline = true;
             this.xrlbTungay.Name = "xrlbTungay";
             this.xrlbTungay.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrlbTungay.SizeF = new System.Drawing.SizeF(280.5556F, 20.83334F);
+            this.xrlbTungay.StylePriority.UseFont = false;
             this.xrlbTungay.Text = "[tungay]";
+            this.xrlbTungay.TextFormatString = "{0:d/MM/yyy}";
             // 
             // xrLabel3
             // 
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(9.999996F, 57.36101F);
+            this.xrLabel3.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 70.55545F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel3.SizeF = new System.Drawing.SizeF(91.66667F, 20.83333F);
+            this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.Text = "Từ ngày:";
             // 
             // label1
             // 
-            this.label1.LocationFloat = new DevExpress.Utils.PointFloat(4F, 4F);
+            this.label1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.label1.Name = "label1";
             this.label1.SizeF = new System.Drawing.SizeF(619F, 24.19433F);
             this.label1.StyleName = "Title";
@@ -533,5 +568,7 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel5;
         private DevExpress.XtraReports.UI.XRLabel xrlbTungay;
         private DevExpress.XtraReports.UI.XRLabel xrLabel3;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
+        private DevExpress.XtraReports.UI.XRLabel xrlbNguoiLap;
     }
 }

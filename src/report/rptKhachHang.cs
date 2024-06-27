@@ -20,11 +20,17 @@ namespace BankReplication.report
             this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
             storedProcQuery1});
             sqlDataSource1.Connection.ConnectionString = Connstr;
+            DetailsLoad(); 
+        }
+        private void DetailsLoad()
+        {
+            xrlbNguoiLap.Text = Program.mHoTen;
         }
         public rptKhachHang(String Connstr)
         {
             InitializeComponent();
             sqlDataSource1.Connection.ConnectionString = Connstr;
+            DetailsLoad(); 
         }
 
     }

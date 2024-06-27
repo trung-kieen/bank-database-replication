@@ -44,7 +44,7 @@ namespace BankReplication.report
             panelContainer.Anchor = AnchorStyles.None;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void LoadCustomerDetails()
         {
 
             if (Program.KetNoi() == Database.Connection.Fail) return;
@@ -57,13 +57,11 @@ namespace BankReplication.report
                 while (Program.myReader.Read())
                 {
                     hoten = Program.myReader["HOTEN"].ToString();
+                    txtChuTK.Text = Program.myReader["HOTEN"].ToString();
+                    txtCMND.Text = Program.myReader["CMND"].ToString();
                     cmnd = Program.myReader["CMND"].ToString();
                 }
                 Program.myReader.Close();
-                String msg = $"Số tài khoản: {tk}\n"
-                    + $"Chủ tài khoản: {hoten}\n"
-                    + $"CMND: {cmnd}\n";
-                Msg.Info(msg, "Thông tin tài khoản");
             }
             catch
             {
@@ -139,11 +137,12 @@ namespace BankReplication.report
             {
                 // Load data
                 LoadAccountDetails(Program.connstr);
+                LoadCustomerDetails();
             }
 
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private void SubmitButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -174,5 +173,11 @@ namespace BankReplication.report
             }
 
         }
+
+        private void tkCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadCustomerDetails();
+        }
+
     }
 }

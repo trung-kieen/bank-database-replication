@@ -688,7 +688,7 @@ namespace BankReplication.form
             // 
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 44.45F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 15.55F)});
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.AutoSize, 15.55F)});
             this.tablePanel1.Controls.Add(this.gcNhanVien);
             this.tablePanel1.Controls.Add(this.sidePanel);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;

@@ -514,6 +514,8 @@ namespace BankReplication.form
                 btnRedo.Enabled = false;
                 btnLuu.Enabled = false;
                 btnChuyenCN.Enabled = false;
+                sidePanel.Visible = false;
+                sidePanel.Hide();
             }
             else
             {

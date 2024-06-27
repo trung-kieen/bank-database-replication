@@ -218,7 +218,7 @@ namespace BankReplication.utils
         private String _maCNCu;
         private String _maCNMoi;
         private Action _reload;
-        private String _role;
+//        private String _role;
         public ChuyenCNCommand(BindingSourceExtends bds, String connString, String remote_connString, String maNVCu, String maNVMoi, String maCNCu, String maCNMoi, Action reload)
         {
             _bds = bds;

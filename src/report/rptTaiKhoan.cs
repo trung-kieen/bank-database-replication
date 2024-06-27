@@ -17,6 +17,7 @@ namespace BankReplication.report
             sqlDataSource1.Queries[0].Parameters[2].ValueInfo= allSite  ? "True" : "False";
             xrlbTungay.Text = tungay.ToString("dd/MM/yyyy");
             xrlbDenngay.Text = denngay.ToString("dd/MM/yyyy");
+            xrlbNguoiLap.Text = Program.mHoTen;
             
         }
 
