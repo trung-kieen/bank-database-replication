@@ -51,15 +51,13 @@ namespace BankReplication.report
             try
             {
                 String tk = tkCmb.Text.ToString();
-                String hoten = "";
-                String cmnd = "";
+                txtChuTK.Text = "";
+                txtCMND.Text = "";
                 Program.myReader = Program.ExecSqlDataReader("EXEC SP_ThongTinTaiKhoan  '" + tk + "'");
                 while (Program.myReader.Read())
                 {
-                    hoten = Program.myReader["HOTEN"].ToString();
                     txtChuTK.Text = Program.myReader["HOTEN"].ToString();
                     txtCMND.Text = Program.myReader["CMND"].ToString();
-                    cmnd = Program.myReader["CMND"].ToString();
                 }
                 Program.myReader.Close();
             }
@@ -179,5 +177,12 @@ namespace BankReplication.report
             LoadCustomerDetails();
         }
 
+        private void tkCmb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadCustomerDetails();
+            }
+        }
     }
 }
