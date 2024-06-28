@@ -1,8 +1,0 @@
-# Environment
-[Applications needed](https://drive.google.com/drive/u/1/folders/1mjPyGTe_6Xss2VcwbZpafX74tmE4Waae)
-# Danh sach phan manh
-Tao view table de xem danh sach phan manh tu file `SqlScript/SP/GetSubscribers.sql`.
-
-
-Sao chép file `Settings.example.cs` thành file `Settings.cs`  rồi đổi các giá trị tên biến cho phù hợp với máy đang sử dụng
-![Setting-demo](https://github.com/trung-kieen/bank-replication/blob/main/Docs/Media/setup-setting-file.png)
