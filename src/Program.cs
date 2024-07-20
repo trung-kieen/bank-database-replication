@@ -25,12 +25,12 @@ namespace BankReplication
         public static String connstr;
         public static String connstr_publisher = "Data Source=" + Settings.servername + ";Initial Catalog=" + Settings.databasename + " ;Integrated Security=True";
         public static SqlDataReader myReader;
-        public static String servername = Settings.servername;
+        public static String servername = System.Environment.MachineName +  "\\NGANHANG";
         public static String username = "sa";
         public static String mlogin = "sa";
         public static String password = Settings.sa_password;
 
-        public static String database = Settings.databasename;
+        public static String database = "NGANHANG";
         public static String remotelogin = "htkn";
         public static String remotepassword = Settings.htkn_password;
 
@@ -44,7 +44,7 @@ namespace BankReplication
 
         public static formMain frmChinh;
 
-        public static BindingSource bds_dspm = new BindingSource(); // giữa bdsPM khi đăng nhập 
+        public static BindingSource bds_dspm = new BindingSource(); // giữa bdsPM khi đăng nhập
 
 
         [STAThread]
@@ -83,7 +83,7 @@ namespace BankReplication
 
         public static int KetNoi(Boolean showError = true)
         {
-            // Close old connection avoid system close connection time out 
+            // Close old connection avoid system close connection time out
             if (Program.conn != null && Program.conn.State == System.Data.ConnectionState.Open)
             {
                 Program.conn.Close();
@@ -115,7 +115,7 @@ namespace BankReplication
         /// Use for read data only command
         ///<para>command string</para>
         /// Return value is SqlDataReader object (same with Program.myReader)
-        /// Return null if catch error 
+        /// Return null if catch error
         ///</summary>
         {
             SqlDataReader myReader;

@@ -2060,8 +2060,7 @@ copyCellTxt	src/form/fMoTaiKhoan.Designer.cs	/^        private System.Windows.Fo
 dIACHITextEdit	src/form/fKhacHang.designer.cs	/^        private DevExpress.XtraEditors.TextEdit dIACHITextEdit;$/;"	f	class:BankReplication.form.fKhacHang	file:
 dataLayoutControl1	src/form/fMoTaiKhoan.Designer.cs	/^        private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutControl1;$/;"	f	class:BankReplication.form.formMoTaiKhoan	file:
 dataLayoutControl1	src/form/fNhanVien.Designer.cs	/^        private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutControl1;$/;"	f	class:BankReplication.form.formNhanVien	file:
-database	src/Program.cs	/^        public static String database = Settings.databasename;$/;"	f	class:BankReplication.Program
-databasename	src/Settings.example.cs	/^        public static readonly String databasename = "NGANHANG";$/;"	f	class:BankReplication.Settings
+database	src/Program.cs	/^        public static String database = "NGANHANG";$/;"	f	class:BankReplication.Program
 defaultInstance	src/Properties/Settings.Designer.cs	/^        private static Settings defaultInstance = ((Settings)(global::System.Configuration.Appli/;"	f	class:BankReplication.Properties.Settings	file:
 denngayDateEdit	src/report/fThongKeGiaoDich.Designer.cs	/^        private DevExpress.XtraEditors.DateEdit denngayDateEdit;$/;"	f	class:BankReplication.report.formThongKeGD	file:
 denngayDateEdit	src/report/fThongKeTaiKhoan.Designer.cs	/^        private DevExpress.XtraEditors.DateEdit denngayDateEdit;$/;"	f	class:BankReplication.report.formThongKeTK	file:
@@ -2407,8 +2406,7 @@ rptTaiKhoan	src/report/rptTaiKhoan.cs	/^        public rptTaiKhoan(DateTime tung
 rptTaiKhoan	src/report/rptTaiKhoan.cs	/^    public partial class rptTaiKhoan : DevExpress.XtraReports.UI.XtraReport$/;"	c	namespace:BankReplication.report
 sODTTextEdit	src/form/fKhacHang.designer.cs	/^        private DevExpress.XtraEditors.TextEdit sODTTextEdit;$/;"	f	class:BankReplication.form.fKhacHang	file:
 sa_password	src/Settings.example.cs	/^        public static readonly String sa_password = "kc";$/;"	f	class:BankReplication.Settings
-servername	src/Program.cs	/^        public static String servername = Settings.servername;$/;"	f	class:BankReplication.Program
-servername	src/Settings.example.cs	/^        public static readonly String servername = "TM\\\\NGANHANG";$/;"	f	class:BankReplication.Settings
+servername	src/Program.cs	/^        public static String servername = System.Environment.MachineName +  "\\\\NGANHANG";$/;"	f	class:BankReplication.Program
 sidePanel	src/form/fMoTaiKhoan.Designer.cs	/^        private DevExpress.Utils.Layout.TablePanel sidePanel;$/;"	f	class:BankReplication.form.formMoTaiKhoan	file:
 sidePanel	src/form/fNhanVien.Designer.cs	/^        private DevExpress.XtraEditors.PanelControl sidePanel;$/;"	f	class:BankReplication.form.formNhanVien	file:
 simpleButton1	src/report/fThongKeKhachHang.Designer.cs	/^        private DevExpress.XtraEditors.SimpleButton simpleButton1;$/;"	f	class:BankReplication.report.formThongKeKH	file:
