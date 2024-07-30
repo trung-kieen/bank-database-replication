@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 
-// Template only
+/* 
+ * DEPRECATE!!!
+ * Original this file is create desire to a template ui for all class 
+ * but i have a lot a struggle becase dropdown ui design for component in winform form
+ */
 namespace BankReplication.form
 {
     public partial class SimpleForm : DevExpress.XtraEditors.XtraForm

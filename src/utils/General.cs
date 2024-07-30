@@ -21,10 +21,12 @@ namespace BankReplication.utils
     static class MoneyRepersent
     {
 
-    private static string Chu(string gNumber)
+
+
+    private static string NumberToWord(string number)
     {
         string result = "";
-        switch (gNumber)
+        switch (number)
         {
             case "0":
                 result = "không";
@@ -91,36 +93,36 @@ namespace BankReplication.utils
             string ch = tach3.Trim().Substring(1, 1).ToString().Trim();
             string dv = tach3.Trim().Substring(2, 1).ToString().Trim();
             if (tr.Equals("0") && ch.Equals("0"))
-                Ktach = " không trăm lẻ " + Chu(dv.ToString().Trim()) + " ";
+                Ktach = " không trăm lẻ " + NumberToWord(dv.ToString().Trim()) + " ";
             if (!tr.Equals("0") && ch.Equals("0") && dv.Equals("0"))
-                Ktach = Chu(tr.ToString().Trim()).Trim() + " trăm ";
+                Ktach = NumberToWord(tr.ToString().Trim()).Trim() + " trăm ";
             if (!tr.Equals("0") && ch.Equals("0") && !dv.Equals("0"))
-                Ktach = Chu(tr.ToString().Trim()).Trim() + " trăm lẻ " + Chu(dv.Trim()).Trim() + " ";
+                Ktach = NumberToWord(tr.ToString().Trim()).Trim() + " trăm lẻ " + NumberToWord(dv.Trim()).Trim() + " ";
             if (tr.Equals("0") && Convert.ToInt32(ch) > 1 && Convert.ToInt32(dv) > 0 && !dv.Equals("5"))
-                Ktach = " không trăm " + Chu(ch.Trim()).Trim() + " mươi " + Chu(dv.Trim()).Trim() + " ";
+                Ktach = " không trăm " + NumberToWord(ch.Trim()).Trim() + " mươi " + NumberToWord(dv.Trim()).Trim() + " ";
             if (tr.Equals("0") && Convert.ToInt32(ch) > 1 && dv.Equals("0"))
-                Ktach = " không trăm " + Chu(ch.Trim()).Trim() + " mươi ";
+                Ktach = " không trăm " + NumberToWord(ch.Trim()).Trim() + " mươi ";
             if (tr.Equals("0") && Convert.ToInt32(ch) > 1 && dv.Equals("5"))
-                Ktach = " không trăm " + Chu(ch.Trim()).Trim() + " mươi lăm ";
+                Ktach = " không trăm " + NumberToWord(ch.Trim()).Trim() + " mươi lăm ";
             if (tr.Equals("0") && ch.Equals("1") && Convert.ToInt32(dv) > 0 && !dv.Equals("5"))
-                Ktach = " không trăm mười " + Chu(dv.Trim()).Trim() + " ";
+                Ktach = " không trăm mười " + NumberToWord(dv.Trim()).Trim() + " ";
             if (tr.Equals("0") && ch.Equals("1") && dv.Equals("0"))
                 Ktach = " không trăm mười ";
             if (tr.Equals("0") && ch.Equals("1") && dv.Equals("5"))
                 Ktach = " không trăm mười lăm ";
             if (Convert.ToInt32(tr) > 0 && Convert.ToInt32(ch) > 1 && Convert.ToInt32(dv) > 0 && !dv.Equals("5"))
-                Ktach = Chu(tr.Trim()).Trim() + " trăm " + Chu(ch.Trim()).Trim() + " mươi " + Chu(dv.Trim()).Trim() + " ";
+                Ktach = NumberToWord(tr.Trim()).Trim() + " trăm " + NumberToWord(ch.Trim()).Trim() + " mươi " + NumberToWord(dv.Trim()).Trim() + " ";
             if (Convert.ToInt32(tr) > 0 && Convert.ToInt32(ch) > 1 && dv.Equals("0"))
-                Ktach = Chu(tr.Trim()).Trim() + " trăm " + Chu(ch.Trim()).Trim() + " mươi ";
+                Ktach = NumberToWord(tr.Trim()).Trim() + " trăm " + NumberToWord(ch.Trim()).Trim() + " mươi ";
             if (Convert.ToInt32(tr) > 0 && Convert.ToInt32(ch) > 1 && dv.Equals("5"))
-                Ktach = Chu(tr.Trim()).Trim() + " trăm " + Chu(ch.Trim()).Trim() + " mươi lăm ";
+                Ktach = NumberToWord(tr.Trim()).Trim() + " trăm " + NumberToWord(ch.Trim()).Trim() + " mươi lăm ";
             if (Convert.ToInt32(tr) > 0 && ch.Equals("1") && Convert.ToInt32(dv) > 0 && !dv.Equals("5"))
-                Ktach = Chu(tr.Trim()).Trim() + " trăm mười " + Chu(dv.Trim()).Trim() + " ";
+                Ktach = NumberToWord(tr.Trim()).Trim() + " trăm mười " + NumberToWord(dv.Trim()).Trim() + " ";
 
             if (Convert.ToInt32(tr) > 0 && ch.Equals("1") && dv.Equals("0"))
-                Ktach = Chu(tr.Trim()).Trim() + " trăm mười ";
+                Ktach = NumberToWord(tr.Trim()).Trim() + " trăm mười ";
             if (Convert.ToInt32(tr) > 0 && ch.Equals("1") && dv.Equals("5"))
-                Ktach = Chu(tr.Trim()).Trim() + " trăm mười lăm ";
+                Ktach = NumberToWord(tr.Trim()).Trim() + " trăm mười lăm ";
 
         }
 

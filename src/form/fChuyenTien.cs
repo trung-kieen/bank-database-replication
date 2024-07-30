@@ -10,7 +10,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+// Author: trung-kieen
 
+/*
+ * Form perform action when employee a transfer money for user
+ */
 namespace BankReplication.form
 {
     public partial class formChuyenTien : SimpleForm
@@ -31,20 +35,14 @@ namespace BankReplication.form
         }
         private void fChuyenTienLoad(object sender, EventArgs e)
         {
-            txtSoDu.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            txtSoDu.Properties.Mask.EditMask = "n0";
-            txtSoDu.Properties.Mask.UseMaskAsDisplayFormat = true;
-
-            txtSoTien.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            txtSoTien.Properties.Mask.EditMask = "n0";
-            txtSoTien.Properties.Mask.UseMaskAsDisplayFormat = true;
+            formatDisplayAsMoney(txtSoDu);
+            formatDisplayAsMoney(txtSoTien);
             CenterMdiScreen();
 
 
             uv_AccountDetailsTableAdapter.Connection.ConnectionString = Program.connstr;
             if (Program.KetNoi() == Database.Connection.Fail) return;
 
-            // TODO: Query only this branch 
             DataTable dstk_nguon = Program.ExecSqlDataTable("SELECT * FROM uv_SoDuTaiKhoan");
 
             if (dstk_nguon != null)
@@ -83,6 +81,12 @@ namespace BankReplication.form
             }
         }
 
+        private void  formatDisplayAsMoney(TextEdit field)
+        {
+            field.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            field.Properties.Mask.EditMask = "n0";
+            field.Properties.Mask.UseMaskAsDisplayFormat = true;
+        }
         private void btnChuyenTien_Click(object sender, EventArgs e)
         {
             // Validate input 

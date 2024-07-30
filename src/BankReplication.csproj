@@ -83,58 +83,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="form\fChuyenNhanVien.cs">
+    <Compile Include="Form\fChuyenNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fChuyenNhanVien.Designer.cs">
+    <Compile Include="Form\fChuyenNhanVien.Designer.cs">
       <DependentUpon>fChuyenNhanVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\fChuyenTien.cs">
+    <Compile Include="Form\fChuyenTien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fChuyenTien.Designer.cs">
+    <Compile Include="Form\fChuyenTien.Designer.cs">
       <DependentUpon>fChuyenTien.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\fDangNhap.cs">
+    <Compile Include="Form\fDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fDangNhap.Designer.cs">
+    <Compile Include="Form\fDangNhap.Designer.cs">
       <DependentUpon>fDangNhap.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\fGuiRut.cs">
+    <Compile Include="Form\fGuiRut.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fGuiRut.Designer.cs">
+    <Compile Include="Form\fGuiRut.Designer.cs">
       <DependentUpon>fGuiRut.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\fMain.cs">
+    <Compile Include="Form\fMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fMain.Designer.cs">
+    <Compile Include="Form\fMain.Designer.cs">
       <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\fMoTaiKhoan.cs">
+    <Compile Include="Form\fMoTaiKhoan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fMoTaiKhoan.Designer.cs">
+    <Compile Include="Form\fMoTaiKhoan.Designer.cs">
       <DependentUpon>fMoTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\fNhanVien.cs">
+    <Compile Include="Form\fNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fNhanVien.Designer.cs">
+    <Compile Include="Form\fNhanVien.Designer.cs">
       <DependentUpon>fNhanVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\fTaoLogin.cs">
+    <Compile Include="Form\fTaoLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fTaoLogin.Designer.cs">
+    <Compile Include="Form\fTaoLogin.Designer.cs">
       <DependentUpon>fTaoLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\SimpleForm.cs">
+    <Compile Include="Form\SimpleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\SimpleForm.Designer.cs">
+    <Compile Include="Form\SimpleForm.Designer.cs">
       <DependentUpon>SimpleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MoTKDS.cs">
@@ -176,87 +176,86 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="report\fThongKeTaiKhoan.cs">
+    <Compile Include="Report\fThongKeTaiKhoan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="report\fThongKeTaiKhoan.Designer.cs">
+    <Compile Include="Report\fThongKeTaiKhoan.Designer.cs">
       <DependentUpon>fThongKeTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="report\fThongKeKhachHang.cs">
+    <Compile Include="Report\fThongKeKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="report\fThongKeKhachHang.Designer.cs">
+    <Compile Include="Report\fThongKeKhachHang.Designer.cs">
       <DependentUpon>fThongKeKhachHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="report\fThongKeGiaoDich.cs">
+    <Compile Include="Report\fThongKeGiaoDich.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="report\fThongKeGiaoDich.Designer.cs">
+    <Compile Include="Report\fThongKeGiaoDich.Designer.cs">
       <DependentUpon>fThongKeGiaoDich.cs</DependentUpon>
     </Compile>
-    <Compile Include="report\rptGiaoDich.cs">
+    <Compile Include="Report\rptGiaoDich.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="report\rptGiaoDich.Designer.cs">
+    <Compile Include="Report\rptGiaoDich.Designer.cs">
       <DependentUpon>rptGiaoDich.cs</DependentUpon>
     </Compile>
-    <Compile Include="report\rptKhachHang.cs">
+    <Compile Include="Report\rptKhachHang.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="report\rptKhachHang.Designer.cs">
+    <Compile Include="Report\rptKhachHang.Designer.cs">
       <DependentUpon>rptKhachHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="report\rptTaiKhoan.cs">
+    <Compile Include="Report\rptTaiKhoan.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="form\fKhacHang.cs">
+    <Compile Include="Form\fKhacHang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\fKhacHang.designer.cs">
+    <Compile Include="Form\fKhacHang.designer.cs">
       <DependentUpon>fKhacHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="report\rptTaiKhoan.Designer.cs">
+    <Compile Include="Report\rptTaiKhoan.Designer.cs">
       <DependentUpon>rptTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
-    <Compile Include="utils\BindingSourceExtends.cs">
+    <Compile Include="Utils\BindingSourceExtends.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="utils\Command.cs" />
-    <Compile Include="Program.query.cs" />
-    <Compile Include="utils\Constant.cs" />
-    <Compile Include="utils\ComboBoxItem.cs" />
-    <Compile Include="utils\General.cs" />
-    <Compile Include="utils\MessageBox.cs" />
-    <Compile Include="utils\Validate.cs" />
-    <EmbeddedResource Include="form\fChuyenNhanVien.resx">
+    <Compile Include="Utils\Command.cs" />
+    <Compile Include="Program.GlobalQuery.cs" />
+    <Compile Include="Utils\Constant.cs" />
+    <Compile Include="Utils\ComboBoxItem.cs" />
+    <Compile Include="Utils\General.cs" />
+    <Compile Include="Utils\MessageBox.cs" />
+    <Compile Include="Utils\Validate.cs" />
+    <EmbeddedResource Include="Form\fChuyenNhanVien.resx">
       <DependentUpon>fChuyenNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\fKhacHang.resx">
+    <EmbeddedResource Include="Form\fKhacHang.resx">
       <DependentUpon>fKhacHang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\fChuyenTien.resx">
+    <EmbeddedResource Include="Form\fChuyenTien.resx">
       <DependentUpon>fChuyenTien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\fDangNhap.resx">
+    <EmbeddedResource Include="Form\fDangNhap.resx">
       <DependentUpon>fDangNhap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\fGuiRut.resx">
+    <EmbeddedResource Include="Form\fGuiRut.resx">
       <DependentUpon>fGuiRut.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\fMain.resx">
+    <EmbeddedResource Include="Form\fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\fMoTaiKhoan.resx">
+    <EmbeddedResource Include="Form\fMoTaiKhoan.resx">
       <DependentUpon>fMoTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\fNhanVien.resx">
+    <EmbeddedResource Include="Form\fNhanVien.resx">
       <DependentUpon>fNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\fTaoLogin.resx">
+    <EmbeddedResource Include="Form\fTaoLogin.resx">
       <DependentUpon>fTaoLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\SimpleForm.resx">
+    <EmbeddedResource Include="Form\SimpleForm.resx">
       <DependentUpon>SimpleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -270,22 +269,22 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="report\fThongKeTaiKhoan.resx">
+    <EmbeddedResource Include="Report\fThongKeTaiKhoan.resx">
       <DependentUpon>fThongKeTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="report\fThongKeKhachHang.resx">
+    <EmbeddedResource Include="Report\fThongKeKhachHang.resx">
       <DependentUpon>fThongKeKhachHang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="report\fThongKeGiaoDich.resx">
+    <EmbeddedResource Include="Report\fThongKeGiaoDich.resx">
       <DependentUpon>fThongKeGiaoDich.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="report\rptGiaoDich.resx">
+    <EmbeddedResource Include="Report\rptGiaoDich.resx">
       <DependentUpon>rptGiaoDich.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="report\rptKhachHang.resx">
+    <EmbeddedResource Include="Report\rptKhachHang.resx">
       <DependentUpon>rptKhachHang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="report\rptTaiKhoan.resx">
+    <EmbeddedResource Include="Report\rptTaiKhoan.resx">
       <DependentUpon>rptTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
@@ -361,10 +360,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="asset\icon\money_exchange.png" />
+    <None Include="Asset\icon\money_exchange.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="asset\icon\add_account.png" />
+    <None Include="Asset\icon\add_account.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

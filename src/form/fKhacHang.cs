@@ -13,6 +13,7 @@ using DevExpress.XtraGrid.Columns;
 using BankReplication.utils;
 using static BankReplication.utils.Validate;
 using System.Security.Cryptography;
+// Author: Hoaidang3264
 enum FormActionKH { None, Add, Edit };
 
 namespace BankReplication.form

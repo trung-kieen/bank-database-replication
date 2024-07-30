@@ -4,20 +4,36 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using BankReplication.utils;
+// Author: trung-kieen
 
+
+/* 
+ * Application have a pulisher connection to connect and query for mapping of bracnches 
+ * Each branch have a instance to sql server we gane servername from mapping before
+ * Use login via username and password to connect to specific sql server instance
+ * Authentication with base on sql server authetication login and password not base on table on a databse 
+ * Application will regconize which priviledge of user base on user name
+ * Base on role we grant user to access specific form and action on form
+ * After user login program will save some information about login 
+ * into Program.cs like username, servername, password, login,  ...
+ */
 namespace BankReplication.form
 {
-    //    public partial class formDangNhap : SimpleForm
     public partial class formDangNhap : DevExpress.XtraEditors.XtraForm
     {
 
 
 
-        //        public override void AddHandle() { }
-        // Connection for this login form only 
+        // Connection for this login form only for query mapping of branches and 
         private SqlConnection conn_publisher = new SqlConnection();
 
 
+        /// <summary>
+        /// Build pulisher connection string this a hidden connection that allow full access to database 
+        /// and full of permission to know how many branches instance and servername for connect 
+        /// to their sql server base on servername
+        /// </summary>
+        /// <returns></returns>
         public int KetNoiCSDLGoc()
         {
             // Close old connection avoid system close connection time out 
@@ -41,6 +57,11 @@ namespace BankReplication.form
         }
 
 
+        /// <summary>
+        /// Execute query in hidden publisher connection base on command to gain mapping 
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
         private int LayDSPM(String cmd)
         {
             DataTable dataTable = new DataTable();
@@ -53,6 +74,9 @@ namespace BankReplication.form
             {
 
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd, conn_publisher);
+
+
+                // Fill mapping to a datatable for display in combobox 
                 dataAdapter.Fill(dataTable);
                 Program.bds_dspm.DataSource = dataTable;
                 cmbChiNhanh.DataSource = dataTable;
@@ -98,15 +122,15 @@ namespace BankReplication.form
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            // Thoat chuong trinh khi nguoi dung chon nut thoat trong form dang nhap
+            // Class global form => end program
             MdiParent.Close();
         }
 
         private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Luu lai chi nhanh duoc chon vao bien toan cuc
             try
             {
+                // Use to future build connection string base on user login and password 
                 Program.servername = cmbChiNhanh.SelectedValue.ToString();
             }
             catch
@@ -120,13 +144,29 @@ namespace BankReplication.form
         {
             HandleSubmitLogin();
         }
+
         private void HandleSubmitLogin()
 
         {
+            if(!IsValidLogin())
+                return;
+
+            Program.frmChinh.HienThiMenu();
+
+
+            // Close login tab leave mdi screen blank
+            this.Close();
+
+        }
+
+
+        private Boolean IsValidLogin()
+        {
+            // Validate 
             if (inputTaiKhoan.Text.Trim() == "" || inputPassword.Text.Trim() == "")
             {
                 Msg.Warm("Tài khoản và mật khẩu không được để trống");
-                return;
+                return false;
             }
 
             Program.mlogin = inputTaiKhoan.Text;
@@ -134,7 +174,7 @@ namespace BankReplication.form
 
             if (Program.KetNoi() == Database.Connection.Fail)
             {
-                return;
+                return false;
             }
             Program.mChiNhanh = cmbChiNhanh.SelectedIndex;
             Program.mloginDN = Program.mlogin;
@@ -142,7 +182,7 @@ namespace BankReplication.form
 
             String cmd = "EXEC SP_LayThongTinNhanVien '" + inputTaiKhoan.Text + "'";
             Program.myReader = Program.ExecSqlDataReader(cmd);
-            if (Program.myReader == null) return;
+            if (Program.myReader == null) return false;
             Program.myReader.Read();
 
             // Ma nhan vien doi voi nhan vien, CMND doi voi khach hang
@@ -161,31 +201,19 @@ namespace BankReplication.form
                 if (!(group == "NGANHANG" || group == "CHINHANH" || group == "KHACHHANG"))
                 {
                     Msg.Warm($"Tài khoản thuộc nhóm {Program.mGroup} không có quyền truy cập dữ liệu");
-                    return;
+                    return false;
                 }
             }
             catch { }
 
-
             Program.myReader.Close();
             Program.conn.Close();
-            Program.frmChinh.HienThiMenu();
-
-
-
-            // Close login tab leave mdi screen blank
-            this.Close();
-
+            return true;
         }
 
 
 
-        // ==================> Ultis method <===================
-
-
-
-        // Improve form movement 
-
+        // Improve form movement by handle key event
         private void inputPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -227,7 +255,7 @@ namespace BankReplication.form
         private void CustomLoad()
         {
 
-            // Make chi nhanh non editable
+            // Make chi nhanh combox  non editable just able to select specfic define row
             cmbChiNhanh.DropDownStyle = ComboBoxStyle.DropDownList;
             this.btnDangNhap.Appearance.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnDangNhap.Appearance.Options.UseBackColor = true;

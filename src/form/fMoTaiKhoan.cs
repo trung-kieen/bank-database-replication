@@ -11,7 +11,18 @@ using DevExpress.XtraEditors;
 using BankReplication.utils;
 using DevExpress.XtraBars;
 using static BankReplication.utils.Validate;
+// Author: trung-kieen
 
+
+/*
+ * Form display user provide some feature for create user bank account
+ * For provide update UI application need to change FormAction and display button base on each state
+ * To provide undo and redo action any action work with data will perform on a Command (see Command.cs)
+ * Each action change data: add, edit, delete,... will write change directly to database 
+ * not base on default strategy of GridView
+ * Same with fNhanVien.cs but provide a sub view to show account tie with user
+ * When create new bank account we will base on current select user infromation to add foreign key (CMND)
+ */
 
 namespace BankReplication.form
 {
@@ -52,29 +63,10 @@ namespace BankReplication.form
         }
         private void SetFormState()
         {
-            btnThem.Enabled = true;
-            btnXoa.Enabled = true;
-            btnSua.Enabled = true;
-            btnUndo.Enabled = false;
-            btnRedo.Enabled = false;
-            btnExit.Enabled = true;
-            btnHuy.Enabled = false;
-            btnReload.Enabled = true;
-            btnLuu.Enabled = true;
-            fBtnHuy.Visible = fBtnLuu.Visible = false;
+            SetDefaultButtonVisible();
 
-
-            if (Program.mGroup.ToUpper() == "NGANHANG")
-            {
-                dataLayoutControl1.Enabled = false; 
-                btnThem.Enabled = false;
-                btnXoa.Enabled = false;
-                btnSua.Enabled = false;
-                btnUndo.Enabled = false;
-                btnRedo.Enabled = false;
-                btnLuu.Enabled = false;
-                return;
-            }
+            bool userAllowModifyForm = Program.mGroup.ToUpper() == "NGANHANG";
+            EnableModifyForm(userAllowModifyForm);
 
 
             if (formAction == FormAction.Add)
@@ -83,15 +75,8 @@ namespace BankReplication.form
                 gcKhachHang.Enabled = gcTaiKhoan.Enabled = false;
                 soTKTxt.Enabled = true;
                 ngayMoTKTxt.Enabled = false;
+                DisableButtonOnSidePanelActive();
 
-                btnHuy.Enabled = true;
-                btnXoa.Enabled = false;
-                btnReload.Enabled = false;
-                btnLuu.Enabled = true;
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-
-                fBtnHuy.Visible = fBtnLuu.Visible = true;
             }
             else if (formAction == FormAction.Edit)
             {
@@ -100,15 +85,7 @@ namespace BankReplication.form
                 ngayMoTKTxt.Enabled = true;
                 soTKTxt.Enabled = false;
 
-                btnHuy.Enabled = true;
-                sidePanel.Visible = true;
-                btnXoa.Enabled = false;
-                btnLuu.Enabled = true;
-                btnReload.Enabled = false;
-                btnThem.Enabled = false;
-                btnSua.Enabled = false;
-
-                fBtnHuy.Visible = fBtnLuu.Visible = true;
+                DisableButtonOnSidePanelActive();
             }
             else
             {
@@ -126,6 +103,47 @@ namespace BankReplication.form
                 btnUndo.Enabled = true;
 
         }
+
+        private void DisableButtonOnSidePanelActive()
+        {
+                btnHuy.Enabled = true;
+                btnXoa.Enabled = false;
+                btnReload.Enabled = false;
+                btnLuu.Enabled = true;
+                btnThem.Enabled = false;
+                btnSua.Enabled = false;
+
+                fBtnHuy.Visible = fBtnLuu.Visible = true;
+        }
+        private void EnableModifyForm(bool allowModify)
+        {
+
+
+                dataLayoutControl1.Enabled =
+                btnThem.Enabled = 
+                btnXoa.Enabled = 
+                btnSua.Enabled =
+                btnUndo.Enabled = 
+                btnRedo.Enabled =
+                btnLuu.Enabled = false;
+                return;
+
+        }
+        private void SetDefaultButtonVisible()
+        {
+            btnThem.Enabled = true;
+            btnXoa.Enabled = true;
+            btnSua.Enabled = true;
+            btnUndo.Enabled = false;
+            btnRedo.Enabled = false;
+            btnExit.Enabled = true;
+            btnHuy.Enabled = false;
+            btnReload.Enabled = true;
+            btnLuu.Enabled = true;
+            fBtnHuy.Visible = fBtnLuu.Visible = false;
+
+        }
+
         private void ResetSideBar()
         {
             soTKTxt.Focus();
@@ -317,7 +335,6 @@ namespace BankReplication.form
 
 
 
-        // TODO:
         private bool InvalidEditAcount()
         {
             if (InvalidField(soTKTxt, "Số tài khoản", validateSoTK)) return true;
@@ -354,7 +371,6 @@ namespace BankReplication.form
             HandleCancel();
             khachHangRowController.Redo();
             commandController.Redo();
-            //            HandleSave();
             SetFormState();
         }
         private void HandleUndo()
@@ -362,7 +378,6 @@ namespace BankReplication.form
             HandleCancel();
             khachHangRowController.Undo();
             commandController.Undo();
-            //            HandleSave();
             SetFormState();
         }
         public void HandleReload()

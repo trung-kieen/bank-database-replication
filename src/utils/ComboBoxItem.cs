@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// Author: trung-kieen
 
+/*
+ * Provide key - value for load default data in combobox 
+ */
 namespace BankReplication.utils
 {
     public class Gender

@@ -532,7 +532,7 @@ namespace BankReplication.form
             this.colSODT,
             this.colMACN,
             this.colTrangThaiXoa});
-            this.gvNhanVien.CustomizationFormBounds = new System.Drawing.Rectangle(1169, 637, 377, 383);
+            this.gvNhanVien.CustomizationFormBounds = new System.Drawing.Rectangle(1169, 254, 377, 383);
             this.gvNhanVien.DetailHeight = 349;
             this.gvNhanVien.FixedLineWidth = 1;
             this.gvNhanVien.GridControl = this.gcNhanVien;

@@ -5,7 +5,14 @@ using System.Data;
 using System.Windows.Forms;
 using BankReplication;
 using BankReplication.utils;
+// Author: trung-kieen
 
+/*
+ * Help to perform undo and redo action on gridview by perform data change on BindingSource object
+ * Most of command is flexible to reuse in any data load from BindingSource to gridview
+ * But all command here use BindingSourceExtends, an extends from BindingSource class 
+ * with helper method to reduce boilerplate code
+ */
 namespace BankReplication.utils
 {
 
@@ -256,7 +263,7 @@ namespace BankReplication.utils
             }
 
 
-            // TODO:
+            // TODO: manager role 
             /*
             try {
                 // Not allow old employee access database 

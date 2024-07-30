@@ -9,7 +9,15 @@ using System.Windows.Forms;
 using BankReplication.form;
 using DevExpress.XtraReports.UI;
 using BankReplication.report;
+// Author: trung-kieen
 
+/*
+ * This form is the start entry point for program to able access other form
+ * Other feature form will access by create instance and assign as mid children of this form
+ * Main Form will be parrent mdi and display ribborn so user select specific button will create 
+ * feature form instance window and display feature form inside Main Form (see mdi manager devexpress details)
+ * Base on user priviledge form will display specific button base on their permission
+ */
 namespace BankReplication
 {
     public partial class formMain : DevExpress.XtraBars.Ribbon.RibbonForm
@@ -26,6 +34,10 @@ namespace BankReplication
         private void CustomLoad()
         {
             StartPosition = FormStartPosition.CenterScreen;
+            /* Open login form on startup 
+             * fDangNhap.cs is require to run before any other feature form
+             * because we need to authenticate user before any action on database
+             */
             btnDangNhap.PerformClick();
         }
 
@@ -45,6 +57,8 @@ namespace BankReplication
         private Form CheckExist(Type formType)
         /// <summary>
         /// Use for get form object orginize in formMain property MdiChildren
+        /// All check for exists of class (Type)  of form in list of children
+        /// This action is require because we want to each form build as singleton
         /// <para>typeof(formClassName)</para>
         /// Return: class instance match this type or null if there no mdiForm match this type
         /// </summary>
@@ -98,6 +112,9 @@ namespace BankReplication
 
 
 
+        /// <summary>
+        /// Display user information after user login success
+        /// </summary>
         public void HienThiMenu()
         {
             if(Program.mGroup == "KhachHang")
@@ -112,6 +129,10 @@ namespace BankReplication
             // Hide dev express button
             btnDangNhap.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
+            DisplayButtonBaseOnUserGroup();
+        }
+        private void  DisplayButtonBaseOnUserGroup()
+        {
             rbControl.SelectPage(this.rbHeThong);
             if (Program.mGroup.ToUpper() == "KHACHHANG")
             {
@@ -144,8 +165,10 @@ namespace BankReplication
                     btnMoTK.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
             }
+
         }
 
+        // If not form class instance of this form type we create new form instance and display 
         private void btnNhanVien_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Form fNhanVien = CheckExist(typeof(formNhanVien));
