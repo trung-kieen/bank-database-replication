@@ -10,7 +10,16 @@ using BankReplication.utils;
 using System.Data.SqlClient;
 using BankReplication.form;
 using BankReplication.Properties;
+// Author: trung-kieen
 
+/* 
+ * Class itself is static and can access in any part of application (yeah i know singleton)
+ * Main entrypoint of application 
+ * Contain all static variable as global variable
+ * call something like Program.servername for access servername global variable
+ * Contain configuration and method to communicate with database 
+ * All method for database accessing store in Program.GlobalQuery.cs (partial of this class)
+ */
 
 namespace BankReplication
 {
@@ -23,17 +32,25 @@ namespace BankReplication
 
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
-        public static String connstr_publisher = "Data Source=" + Settings.servername + ";Initial Catalog=" + Settings.databasename + " ;Integrated Security=True";
+        public static String connstr_publisher = "Data Source=" + servername + ";Initial Catalog=" + database + " ;Integrated Security=True";
         public static SqlDataReader myReader;
         public static String servername = System.Environment.MachineName +  "\\NGANHANG";
         public static String username = "sa";
         public static String mlogin = "sa";
-        public static String password = Settings.sa_password;
 
         public static String database = "NGANHANG";
         public static String remotelogin = "htkn";
-        public static String remotepassword = Settings.htkn_password;
+        public static String remotepassword = htkn_password;
 
+        // NOTE: change 2 sql server password base on your machine!!!
+        public static String password = "kc";
+        public static readonly String htkn_password = "123456";
+       
+        /* 
+         * Information from user save on login for build connection, log username in report 
+         * Any action with data will use with those login for authorization because specific group 
+         * have permission perform action on specific type of query 
+         */
         public static String mloginDN = "";
         public static String passwordDN = "";
         public static String mGroup = "";
@@ -53,182 +70,10 @@ namespace BankReplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Main winform class to manager 
             frmChinh = new formMain();
             Application.Run(frmChinh);
-            //Application.Run(new formDangNhap());
-        }
-
-        public static String GetConnString()
-        {
-            return Program.connstr = "Data Source=" + Program.servername
-                            + ";Initial Catalog=" + Program.database
-                            + ";User ID=" + Program.mlogin
-                            + ";password=" + Program.password;
-        }
-        public static String GetConnString(String login, String password)
-        {
-            return Program.connstr = "Data Source=" + Program.servername
-                            + ";Initial Catalog=" + Program.database
-                            + ";User ID=" + login
-                            + ";password=" + password;
-        }
-        public static String GetConnString(String login, String password, String servername)
-        {
-            return Program.connstr = "Data Source=" + servername
-                            + ";Initial Catalog=" + Program.database
-                            + ";User ID=" + login
-                            + ";password=" + password;
-        }
-
-
-        public static int KetNoi(Boolean showError = true)
-        {
-            // Close old connection avoid system close connection time out
-            if (Program.conn != null && Program.conn.State == System.Data.ConnectionState.Open)
-            {
-                Program.conn.Close();
-            }
-            try
-            {
-                Program.connstr = "Data Source=" + Program.servername
-                                + ";Initial Catalog=" + Program.database
-                                + ";User ID=" + Program.mlogin
-                                + ";password=" + Program.password;
-                Program.conn.ConnectionString = Program.connstr;
-                Program.conn.Open();
-                return Database.Connection.Success;
-            }
-            catch (Exception ex)
-            {
-                if (showError)
-                {
-                    Msg.Error("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n" + ex.Message);
-                }
-                return Database.Connection.Fail;
-            }
-        }
-
-
-
-        public static SqlDataReader ExecSqlDataReader(String cmd, Boolean forceNoMessageBox = false)
-        ///<summary>
-        /// Use for read data only command
-        ///<para>command string</para>
-        /// Return value is SqlDataReader object (same with Program.myReader)
-        /// Return null if catch error
-        ///</summary>
-        {
-            SqlDataReader myReader;
-            SqlCommand sqlcmd = new SqlCommand(cmd, Program.conn);
-            sqlcmd.CommandType = CommandType.Text;
-            if (Program.conn.State == ConnectionState.Closed)
-            {
-                Program.conn.Open();
-            }
-            try
-            {
-                myReader = sqlcmd.ExecuteReader();
-                // Do not close connection here, it cause myReader unable to read
-                return myReader;
-            }
-            catch (Exception ex)
-            {
-                if (!forceNoMessageBox)
-                {
-                    Msg.Error("Lỗi kết nối cơ sở dữ liệu.\nBạn xem lại user name và password.\n " + ex.Message);
-                }
-                Program.conn.Close();
-                return null;
-            }
-        }
-
-
-        public static int ExecSqlNonQuery(String cmd)
-        ///<summary>
-        ///<para>command string</para>
-        /// Return value 0 if command run success else return error code from sql server
-        ///</summary>
-        {
-            SqlCommand sqlcmd = new SqlCommand(cmd, Program.conn);
-            sqlcmd.CommandType = CommandType.Text;
-            const int oneMinute = 60;
-            sqlcmd.CommandTimeout = 10 * oneMinute;
-            if (Program.conn.State == ConnectionState.Closed)
-            {
-                Program.conn.Open();
-            }
-
-            try
-            {
-                sqlcmd.ExecuteNonQuery();
-                conn.Close();
-
-                return Database.NoQuery.Success;
-            }
-            catch (SqlException ex)
-            {
-                if(ex.Number== 15118)
-                {
-                    Msg.Error("Mật khẩu của bạn không thỏa mãn chính sách bảo mật.");
-                    return ex.Number;
-                }
-                Msg.Error(ex.Message);
-                conn.Close();
-                //                return ex.State;
-                return ex.Number;
-            }
-        }
-        public static String ExecSqlScalar(String cmd)
-        ///<summary>
-        ///<para>command string</para>
-        /// Return value 0 if command run success else return error code from sql server
-        ///</summary>
-        {
-            SqlCommand sqlcmd = new SqlCommand(cmd, Program.conn);
-            sqlcmd.CommandType = CommandType.Text;
-            const int oneMinute = 60;
-            sqlcmd.CommandTimeout = 10 * oneMinute;
-            if (Program.conn.State == ConnectionState.Closed)
-            {
-                Program.conn.Open();
-            }
-
-            var queryResult = sqlcmd.ExecuteScalar();
-            if (queryResult == null)
-            {
-                conn.Close();
-                return null;
-            }
-            conn.Close();
-            return queryResult.ToString();
-        }
-
-
-        public static DataTable ExecSqlDataTable(String cmd)
-        ///<summary>
-        ///<para>command string</para>
-        /// Return DataTable object or null if catch error
-        ///</summary>
-        {
-            DataTable dataTable = new DataTable();
-            if (Program.conn.State == ConnectionState.Closed)
-            {
-                Program.conn.Open();
-            }
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd, Program.conn);
-            try
-            {
-                dataAdapter.Fill(dataTable);
-                Program.conn.Close();
-                return dataTable;
-            }
-            catch (SqlException e)
-            {
-                Program.conn.Close();
-                Msg.Error(e.Message);
-                return null;
-            }
-
         }
 
 

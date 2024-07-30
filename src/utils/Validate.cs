@@ -6,15 +6,21 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Globalization;
 
+/*
+ * Perform validation user input and display error
+ */
 namespace BankReplication.utils
 {
     class Validate
     {
 
+        
+        /*
+         * Any validateForm function will throw an exception it user input is violation constaint
+         * If catch => Display error for user and return true (not valid input) 
+         */
         public static Boolean InvalidField(System.Windows.Forms.ComboBox comboBox, String fieldName, Action<String> validatePerform)
         {
-            // Hiển thị thông báo lỗi cho dữ liệu nhập từ ComboBox  lên màn hình, trả về giá trị True
-            // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
             try
             {
                 var gender = comboBox.Text.ToString();
@@ -27,9 +33,12 @@ namespace BankReplication.utils
             }
             return false;
         }
+
+        /*
+         * Any validateForm function will throw an exception it user input is violation constaint
+         * If catch => Display error for user and return true (not valid input) 
+         */
         public static  Boolean InvalidField(DevExpress.XtraEditors.TextEdit field, String fieldName, Action<String> validatePerform)
-        // Hiển thị thông báo lỗi cho dữ liệu nhập từ Field TextEdit lên màn hình, trả về giá trị True
-        // để chương trình biết là giá trị của người dùng đang nhập là không hợp lệ
         {
             try
             {

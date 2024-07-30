@@ -10,7 +10,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+// Author: trung-kieen
 
+/*
+ * Form perform to get user input to provide report from rptTaiKhoan.cs
+ */
 namespace BankReplication.report
 {
     public partial class formThongKeTK : DevExpress.XtraEditors.XtraForm

@@ -4,6 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using BankReplication.utils;
+// Author: trung-kieen
 
 namespace BankReplication.report
 {

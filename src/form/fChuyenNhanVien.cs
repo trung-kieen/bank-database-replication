@@ -9,12 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BankReplication.utils;
 using DevExpress.XtraEditors;
+// Author: trung-kieen
 
+/*
+ * Form perform list of branch to user to select which branch employee need to transfer to
+ * Form should call from fNhanVien.cs
+ */
 namespace BankReplication.form
 {
     public partial class formChuyenNhanVien : SimpleForm
     {
-        private DataTable otherBrarch;
+        private DataTable otherBranches;
         public String manv_moi;
         public String macn_moi;
         public String remote_connstr;
@@ -31,32 +36,37 @@ namespace BankReplication.form
             try
             {
 
+                // Copy mapping of other branches from global static mapping
                 DataTable dspm = (DataTable)Program.bds_dspm.DataSource;
-                otherBrarch = new DataTable();
-                otherBrarch = (dspm).Clone();
+                otherBranches = new DataTable();
+                otherBranches = (dspm).Clone();
                 if (dspm.Rows.Count == 1)
                 {
                     throw new Exception("Không tìm thấy chi nhánh khác để chuyển nhân viên tới");
+                   
                 }
                 for (int i = 0; i < dspm.Rows.Count; i++)
                 {
-                    // Lay danh sach phan manh khac chi nhanh hien tai 
+                    // Copy all branch - servername except branch of employee
                     if (i != Program.mChiNhanh)
                     {
-                        otherBrarch.ImportRow(dspm.Rows[i]);
+                        otherBranches.ImportRow(dspm.Rows[i]);
                     }
                 }
 
 
-                this.cmbChiNhanh.DataSource = otherBrarch;
+                this.cmbChiNhanh.DataSource = otherBranches;
                 this.cmbChiNhanh.DisplayMember = "TENCN";
                 this.cmbChiNhanh.ValueMember = "TENSERVER";
+
+                // Default select first branch in list
                 this.cmbChiNhanh.SelectedIndex = 0;
 
             }
-            catch
+            catch(Exception ex)
             {
-                //                Msg.Error("Lỗi tải chi nhánh khác\n" + ex.Message);
+                Msg.Error("Lỗi tải chi nhánh khác\n" + ex.Message);
+                this.Close();
             }
             LoadChiNhanh();
         }

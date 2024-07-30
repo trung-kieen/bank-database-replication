@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace BankReplication.utils
 {
+    
     class Msg
     {
         public static void Info(string msg, String title = "Thông báo")

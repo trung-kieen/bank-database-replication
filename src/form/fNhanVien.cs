@@ -9,6 +9,15 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using static BankReplication.utils.Validate;
 enum FormAction { None, Add, Edit };
+// Author: trung-kieen
+
+/*
+ * Form display data of employee provide some feature for user to work with data
+ * For provide update UI application need to change FormAction and display button base on each state
+ * To provide undo and redo action any action work with data will perform on a Command (see Command.cs)
+ * Each action change data: add, edit, delete, transfer employee,... will write change directly to database 
+ * not base on default strategy of GridView
+ */
 
 
 namespace BankReplication.form
@@ -83,12 +92,16 @@ namespace BankReplication.form
             if (InvalidField(MACNTextEdit, "Mã chi nhánh", validateMACN)) return true;
 
 
+            /*
+             * Handle with case when auto generate id for new user is not valid because
+             * of other user create employee with this id 
+             */
             int maxiumn_regenerate = 5;
-            while (InvalidDuplicateEmployeeId(MANVTextEdit)) 
+            while (InvalidDuplicateEmployeeId(MANVTextEdit))
             {
                 GenerateNewId();
                 maxiumn_regenerate--;
-                if(maxiumn_regenerate == 0)
+                if (maxiumn_regenerate == 0)
                 {
                     Msg.Warm("Lỗi tải mã nhân viên");
                     MANVTextEdit.Enabled = true; // Allow user to choose employee id
@@ -126,19 +139,26 @@ namespace BankReplication.form
 
         private Boolean InvalidDuplicateCMND()
         {
-            int ExistsCode= Int32.Parse(Program.ExecSqlScalar("EXEC SP_TimCMNDNhanVien '" + CMNDTextEdit.Text.Trim() + "'"));
-            if( ExistsCode == Database.CheckExist.FoundSameSite)
+            int ExistsCode = Int32.Parse(Program.ExecSqlScalar("EXEC SP_TimCMNDNhanVien '" + CMNDTextEdit.Text.Trim() + "'"));
+            if (ExistsCode == Database.CheckExist.FoundSameSite)
             {
-                    Msg.Warm("Số CMND không được trùng với nhân viên cùng chi nhánh", "Dữ liệu nhập không hợp lệ");
-                    CMNDTextEdit.Focus();
-                    return true; 
+                Msg.Warm("Số CMND không được trùng với nhân viên cùng chi nhánh", "Dữ liệu nhập không hợp lệ");
+                CMNDTextEdit.Focus();
+                return true;
             }
-            else if(ExistsCode == Database.CheckExist.FoundOtherSite)
+            else if (ExistsCode == Database.CheckExist.FoundOtherSite)
             {
-                    Msg.Warm("Số CMND không được trùng với nhân viên khác chi nhánh khác", "Dữ liệu nhập không hợp lệ");
-                    CMNDTextEdit.Focus();
-                    return true;
+                Msg.Warm("Số CMND không được trùng với nhân viên khác chi nhánh khác", "Dữ liệu nhập không hợp lệ");
+                CMNDTextEdit.Focus();
+                return true;
             }
+
+
+            /*
+             * This handle is deprecate because we lock modify for primary key (MANV) 
+             * and foreignkey (CMND) 
+             */
+
             /*
             // Search for row in current bds to avoid dataRowView have same value of CMND
             // If two row have same CMND (when edit) they must have same MaNV
@@ -187,8 +207,6 @@ namespace BankReplication.form
                 nhanVienTableAdapter1.Connection.ConnectionString = connstr;
                 gD_GOIRUTTableAdapter.Connection.ConnectionString = connstr;
                 gD_CHUYENTIENTableAdapter.Connection.ConnectionString = connstr;
-
-
 
                 nhanVienTableAdapter1.Fill(nhanVienDS1.NhanVien);
 
@@ -339,14 +357,12 @@ namespace BankReplication.form
         {
             HandleCancel();
             commandController.Undo();
-            //            HandleSave();
             SetFormState();
         }
         private void HandleRedo()
         {
             HandleCancel();
             commandController.Redo();
-            //            HandleSave();
             SetFormState();
         }
         private void HandleSave()
@@ -379,7 +395,7 @@ namespace BankReplication.form
                 fChuyenCN.Focus();
 
 
-                // Rebulid connection string
+                // Rebuild  connection string
                 Program.mlogin = Program.mloginDN;
                 Program.password = Program.passwordDN;
                 // Server name will change so make sure connect to the right server 
@@ -427,6 +443,10 @@ namespace BankReplication.form
 
         }
 
+        /* 
+         * Save position on index is not stable when user change filter, sort  so index will not persitence
+         * Other wise we can save position base on manv 
+         */
 
         private void SavePosition()
         {
@@ -455,8 +475,10 @@ namespace BankReplication.form
             gcNhanVien.Enabled = true;
             gvNhanVien.Focus();
         }
+        /*  Init new row, allow user to edit new row data
+         *  New row is only save if execute method HandleSave
+         */
         public void OpenCreationSideBar()
-        // Mở form thêm dữ liệu chưa lưu lại
         {
             SavePosition();
             SetFormState(FormAction.Add);
@@ -464,6 +486,9 @@ namespace BankReplication.form
             ResetSideBar();
             InitNewRowData();
         }
+        /// <summary>
+        /// Generate user id for employee when user want to add an new employee or change employee branch
+        /// </summary>
         private void GenerateNewId()
         {
             if (General.AutoAddNewEmployeeID)
@@ -482,6 +507,12 @@ namespace BankReplication.form
 
         }
 
+
+
+        /*
+         * Manager ui for form base on state of form (enum FormState) and user priviledge
+         * Some button only enable for specific state 
+         */
         private void SetFormState(FormAction state)
         {
             formAction = state;
@@ -490,6 +521,59 @@ namespace BankReplication.form
         private void SetFormState()
         {
             // Reset state 
+            SetDefaultButtonVisible();
+            // User of group NGANHANG not allow to change data in branch
+            bool userAllowModifyForm = Program.mGroup.ToUpper() == "NGANHANG";
+            EnableModifyForm(userAllowModifyForm);
+
+            if (formAction == FormAction.Add)
+            {
+                FocusSidePanel(true);
+                MANVTextEdit.Enabled =
+                CMNDTextEdit.Enabled = true;
+            }
+
+            if (formAction == FormAction.Edit)
+            {
+                FocusSidePanel(true);
+                MANVTextEdit.Enabled =
+                CMNDTextEdit.Enabled = false;
+            }
+            if (formAction == FormAction.None)
+            {
+                FocusSidePanel(false);
+
+            }
+            // Final condition require button to become enable 
+            if (commandController.Redoable())
+                btnRedo.Enabled = true;
+            if (commandController.Undoable())
+                btnUndo.Enabled = true;
+
+
+            if (IsCurrentRowLock())
+            {
+                LockModifyRow();
+            }
+
+
+        }
+
+        private bool IsCurrentRowLock()
+        {
+            bool hasFocusRow = nhanVienBds.Position != -1;
+            bool isDeletedEmployee = ((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1";
+            bool userGroupAllowModifyRow = Program.mGroup.ToUpper() != "NGANHANG";
+
+            return (!hasFocusRow
+                || isDeletedEmployee
+                || !userGroupAllowModifyRow
+                || formAction == FormAction.Add
+                || formAction == FormAction.Edit);
+        }
+
+        private void SetDefaultButtonVisible()
+        {
             btnThem.Enabled = true;
             btnXoa.Enabled = true;
             btnSua.Enabled = true;
@@ -500,91 +584,53 @@ namespace BankReplication.form
             btnReload.Enabled = true;
             btnChuyenCN.Enabled = true;
 
-
             btnLuu.Enabled = true;
+            // Not allow to edit data directly user need to press Enter, Double click, ... as trigger
             sidePanel.Visible = false;
             gcNhanVien.Enabled = true;
-            
-            if (Program.mGroup.ToUpper() == "NGANHANG")
-            {
-                btnThem.Enabled = false;
-                btnXoa.Enabled = false;
-                btnSua.Enabled = false;
-                btnUndo.Enabled = false;
-                btnRedo.Enabled = false;
-                btnLuu.Enabled = false;
-                btnChuyenCN.Enabled = false;
-                sidePanel.Visible = false;
-                sidePanel.Hide();
-            }
-            else
-            {
-
-                if (formAction == FormAction.Add)
-                {
-                    sidePanel.Visible = true;
-                    sidePanel.Enabled = true;
-                    gcNhanVien.Enabled = false;
-                    MANVTextEdit.Enabled = true;
-                    CMNDTextEdit.Enabled = true;
-
-                    btnHuy.Enabled = true;
-                    btnXoa.Enabled = false;
-                    btnLuu.Enabled = true;
-                    btnThem.Enabled = false;
-                    btnSua.Enabled = false;
-                    btnChuyenCN.Enabled = false;
-                    btnReload.Enabled = false;
-
-                }
-
-                if (formAction == FormAction.Edit)
-                {
-                    sidePanel.Visible = true;
-                    sidePanel.Enabled = true;
-                    gcNhanVien.Enabled = false;
-
-                    MANVTextEdit.Enabled = false;
-                    CMNDTextEdit.Enabled = false;
-
-                    btnHuy.Enabled = true;
-                    btnXoa.Enabled = false;
-                    btnLuu.Enabled = true;
-                    btnThem.Enabled = false;
-                    btnSua.Enabled = false;
-                    btnChuyenCN.Enabled = false;
-                    btnReload.Enabled = false;
-
-                }
-                if(formAction == FormAction.None)
-                {
-                    sidePanel.Visible = true;
-                    sidePanel.Enabled = false;
-
-//                    .Enabled = false;
-                
-                }
-                // Final condition require button to become enable 
-                if (nhanVienBds.Position == -1)
-                {
-                    btnXoa.Enabled = false;
-                    btnChuyenCN.Enabled = false;
-                    btnSua.Enabled = false;
-                }
-                if (commandController.Redoable())
-                    btnRedo.Enabled = true;
-                if (commandController.Undoable())
-                    btnUndo.Enabled = true;
-                if (((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1" && formAction != FormAction.Add  && formAction != FormAction.Edit)
-                {
-                    btnChuyenCN.Enabled = false;
-                    btnXoa.Enabled = false;
-                }
-
-
-            }
         }
+        private void EnableModifyForm(bool allowModify)
+        {
+            btnThem.Enabled =
+            btnXoa.Enabled =
+            btnSua.Enabled =
+            btnUndo.Enabled =
+            btnRedo.Enabled =
+            btnChuyenCN.Enabled =
+            sidePanel.Visible =
+            btnLuu.Enabled = allowModify;
+        }
+        private void FocusSidePanel(bool isFocus)
+        {
+            sidePanel.Visible =
+            sidePanel.Enabled = isFocus;
+            if (isFocus)
+            {
+                DisableButtonOnSidePanelActive();
+            }
+            /* We should not EnableButtonOnSidePanel if SidePanel is not focus 
+            *  because side panel focus => all feature button is diable (Always True) 
+            *  side panel not focus != all feature button is enable (becaues not all case) 
+            */
+        }
+        private void DisableButtonOnSidePanelActive()
+        {
+            btnHuy.Enabled =
+            btnLuu.Enabled = true;
 
+            btnXoa.Enabled =
+            btnThem.Enabled =
+            btnSua.Enabled =
+            btnChuyenCN.Enabled =
+            btnReload.Enabled =
+            gcNhanVien.Enabled = false;
+        }
+        private void LockModifyRow()
+        {
+            btnXoa.Enabled = false;
+            btnChuyenCN.Enabled = false;
+            btnSua.Enabled = false;
+        }
         // ----------------------------- Event ------------------------------
         private void formNhanVien_Load(object sender, EventArgs e)
         {
@@ -598,6 +644,7 @@ namespace BankReplication.form
             LoadNhanVien(Program.connstr);
             LoadCmbChiNhanh();
 
+            // Init value for gener
             PHAIComboBox.Items.AddRange(new object[] {
             new KeyValue("Nam", "Name"),
             new KeyValue("Nữ", "Nữ")
@@ -608,6 +655,11 @@ namespace BankReplication.form
         }
 
 
+        /*
+         * Trigger when user is change seleted branch program need to rebuild remote connection 
+         * This connection build from a remote login with severname (base on selected branch) 
+         * After build connection program need to fetch data to grid view again
+         */
         private void cmbChiNhanh_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbChiNhanh.SelectedValue.ToString() == "System.Data.DataRowView") return;
@@ -629,7 +681,7 @@ namespace BankReplication.form
             }
             else
             {
-                // Load data
+                // Fetch data when build connection success
                 LoadNhanVien(Program.connstr);
             }
 
@@ -744,40 +796,15 @@ namespace BankReplication.form
         }
         private void gvNhanVien_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            if (nhanVienBds.Position >= 0)
+            if (IsCurrentRowLock())
             {
-                if(formAction != FormAction.None)
-                {
-                    btnChuyenCN.Enabled = false;
-                    btnXoa.Enabled = false;
-                    return;
-                }
-
-                DataRowView r = (DataRowView)nhanVienBds.Current;
-                PHAIComboBox.SelectedIndex = PHAIComboBox.FindStringExact(r.Row["PHAI"].ToString());
-                if (((DataRowView)nhanVienBds.Current)["TrangThaiXoa"].ToString() == "1")
-                {
-                    btnChuyenCN.Enabled = false;
-                    btnXoa.Enabled = false;
-                }
-                else if (Program.mGroup.ToUpper() != "CHINHANH")
-                {
-                    btnChuyenCN.Enabled = false;
-                    btnXoa.Enabled = false;
-
-                }
-                else
-                {
-                    btnChuyenCN.Enabled = true;
-                    btnXoa.Enabled = true;
-
-                }
+                LockModifyRow();
             }
         }
 
         private void PHAIComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtPhai.Text = PHAIComboBox.Text;        
+            txtPhai.Text = PHAIComboBox.Text;
         }
 
         private void gcNhanVien_KeyDown(object sender, KeyEventArgs e)
@@ -788,8 +815,6 @@ namespace BankReplication.form
             }
         }
     }
-
-
 
 
 

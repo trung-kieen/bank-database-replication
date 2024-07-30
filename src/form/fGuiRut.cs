@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using static BankReplication.utils.Validate;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+// Author: trung-kieen
 
 namespace BankReplication.form
 {
@@ -34,6 +35,7 @@ namespace BankReplication.form
             CenterMdiScreen();
 
 
+            // Add default value to select for combobox 
             loaiGDCmb.Items.AddRange(new object[] {
             new KeyValue("Gửi tiền", "GT"),
             new KeyValue("Rút tiền", "RT")
@@ -41,10 +43,10 @@ namespace BankReplication.form
             this.loaiGDCmb.DisplayMember = "Text";
             this.loaiGDCmb.ValueMember = "Value";
             loaiGDCmb.SelectedIndex = 0;
+
             uv_AccountDetailsTableAdapter.Connection.ConnectionString = Program.connstr;
             if (Program.KetNoi() == Database.Connection.Fail) return;
 
-            // TODO: Query only this branch 
             DataTable dstk = Program.ExecSqlDataTable("SELECT * FROM uv_SoDuTaiKhoan");
 
             if (dstk != null)
