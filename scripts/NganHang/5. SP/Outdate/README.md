@@ -1,1 +1,0 @@
-Các SP không còn được sử dụng nữa.
