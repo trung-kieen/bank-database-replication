@@ -43,8 +43,8 @@ ___
 
 # Historical problem 
 - Boilerplate code on data access, handle exception
-- SQL injection vulnerabilities 🫣
-- No Dockerization
+- SQL injection vulnerabilities 🫣 (my techical debt)
+- No Dockerization: binding ip address among computers are not trival when create docker compose 
 
 # Installation
 
